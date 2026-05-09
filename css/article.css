@@ -1,0 +1,927 @@
+/* ================================================================
+   article.css — أنماط صفحات المقالات المشتركة
+   يُحمَّل بعد: cairo.css + shared.css + tailwind.min.css
+   ================================================================ */
+
+/* ── هيكل المحتوى الرئيسي ── */
+.article-layout {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .article-layout {
+    grid-template-columns: 1fr 300px;
+  }
+}
+
+/* ── جسم المقال (class legacy) ── */
+.article-body {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .article-body {
+    padding: 2.5rem;
+  }
+}
+
+/* ── prose-article: المكافئ الحديث لـ article-body ── */
+.prose-article {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .prose-article {
+    padding: 2.5rem;
+  }
+}
+
+/* ── h2 مشتركة بين article-body و prose-article ── */
+.article-body h2,
+.prose-article h2 {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  margin: 2.5rem 0 1rem;
+  padding-right: 1rem;
+  border-right: 5px solid #2563eb;
+  line-height: 1.4;
+}
+
+.article-body h3,
+.prose-article h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 2rem 0 0.75rem;
+}
+
+.article-body p,
+.prose-article p {
+  line-height: 2;
+  color: #374151;
+  margin-bottom: 1.25rem;
+  font-size: 1.05rem;
+}
+
+.article-body ul,
+.article-body ol,
+.prose-article ul,
+.prose-article ol {
+  margin: 1rem 0 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.article-body li,
+.prose-article li {
+  line-height: 2;
+  color: #374151;
+  margin-bottom: 0.4rem;
+  font-size: 1.02rem;
+}
+
+.article-body strong,
+.prose-article strong {
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+/* ── النصوص داخل الـ CTA الداكن تبقى بيضاء دائماً ── */
+.prose-article .bg-blue-900 h3,
+.prose-article .bg-blue-900 p,
+.article-body .bg-blue-900 h3,
+.article-body .bg-blue-900 p {
+  color: #ffffff !important;
+}
+
+/* ── H1 ضيق للمقالات ── */
+.article-h1-tight {
+  line-height: 1.25 !important;
+}
+
+/* ── الجداول العامة ── */
+.article-body table,
+.prose-article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.article-body th,
+.prose-article th {
+  background: #1e3a8a;
+  color: #ffffff;
+  padding: 12px 16px;
+  font-weight: 700;
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.article-body td,
+.prose-article td {
+  padding: 11px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.article-body tr:nth-child(even) td,
+.prose-article tr:nth-child(even) td {
+  background: #f1f5f9;
+}
+
+.article-body tr:hover td,
+.prose-article tr:hover td {
+  background: #e0f2fe;
+  transition: background 0.15s;
+}
+
+.article-body caption,
+.prose-article caption {
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 8px;
+  color: #1e3a8a;
+}
+
+/* ── article-table: جدول بتنسيق مخصص ── */
+.article-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.article-table thead tr {
+  background: #1e3a8a;
+}
+
+.article-table th {
+  background: #1e3a8a;
+  color: #ffffff;
+  padding: 12px 16px;
+  font-weight: 700;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.article-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #374151;
+  text-align: right;
+}
+
+.article-table tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.article-table tbody tr:hover td {
+  background: #e0f2fe;
+  transition: background 0.15s;
+}
+
+/* ── specs-grid: شبكة المواصفات ── */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .specs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.spec-cell {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.875rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.spec-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.spec-value {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #1e3a8a;
+  line-height: 1.2;
+}
+
+.spec-unit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* ── صناديق التنبيه ── */
+.callout {
+  display: flex;
+  gap: 0.875rem;
+  align-items: flex-start;
+  border-right: 5px solid;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.callout p {
+  margin: 0;
+}
+
+.callout-icon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 900;
+  margin-top: 0.1rem;
+}
+
+.callout-body {
+  flex: 1;
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: #374151;
+}
+
+.callout-body strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.callout-tip {
+  background: #f0fdf4;
+  border-color: #16a34a;
+}
+
+.callout-tip .callout-icon {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.callout-tip .callout-body strong {
+  color: #15803d;
+}
+
+.callout-warn {
+  background: #fffbeb;
+  border-color: #d97706;
+}
+
+.callout-warn .callout-icon {
+  background: #d97706;
+  color: #ffffff;
+}
+
+.callout-warn .callout-body strong {
+  color: #b45309;
+}
+
+.callout-danger {
+  background: #fef2f2;
+  border-color: #dc2626;
+}
+
+.callout-danger .callout-icon {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.callout-danger .callout-body strong {
+  color: #b91c1c;
+}
+
+.callout-info {
+  background: #eff6ff;
+  border-color: #2563eb;
+}
+
+.callout-info .callout-icon {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.callout-info .callout-body strong {
+  color: #1d4ed8;
+}
+
+.callout-success {
+  background: #f0fdf4;
+  border-color: #16a34a;
+}
+
+/* ── قائمة check-list ── */
+.checklist {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 1.5rem 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #374151;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+}
+
+.check-box {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.2rem;
+}
+
+.check-box svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  stroke: #ffffff;
+}
+
+/* ── badges للصيانة ── */
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+.badge-red {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-orange {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.badge-green {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* ── الشريط الجانبي اللاصق ── */
+.sidebar-sticky {
+  position: sticky;
+  top: 6rem;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── quick-row: صف مرجعي سريع ── */
+.quick-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.quick-row:last-child {
+  border-bottom: none;
+}
+
+/* ── font-mono-tech: خط أحادي تقني ── */
+.font-mono-tech {
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  letter-spacing: -0.01em;
+}
+
+/* ── جدول المحتويات ── */
+.toc {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.toc h2 {
+  font-size: 1rem !important;
+  font-weight: 900 !important;
+  color: #0c4a6e !important;
+  margin: 0 0 1rem !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.toc ol {
+  margin: 0;
+  padding-right: 1.25rem;
+  list-style-type: decimal;
+}
+
+.toc li {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.toc a {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.toc a:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}
+
+/* ── صندوق المعادلات ── */
+.formula-box {
+  background: #0f172a;
+  color: #6ee7b7;
+  font-family: 'Courier New', monospace;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  line-height: 2;
+  border-right: 5px solid #059669;
+  direction: ltr;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.formula-box .comment {
+  color: #64748b;
+  font-style: italic;
+}
+
+/* ── article-sidebar (legacy) ── */
+.article-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .article-sidebar {
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+  }
+}
+
+.sidebar-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+}
+
+/* ── blog-card ── */
+.blog-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── وسوم المقال ── */
+.article-tags {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.article-tag {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+}
+
+/* ── مقالات ذات صلة ── */
+.related-articles {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.related-card {
+  display: block;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+
+.related-card:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+/* ── تعديل ألوان h2 حسب تصنيف المقال ── */
+.article-body.theme-green h2,
+.prose-article.theme-green h2      { border-color: #059669; }
+.article-body.theme-green .toc a,
+.prose-article.theme-green .toc a  { color: #059669; }
+.article-body.theme-purple h2,
+.prose-article.theme-purple h2     { border-color: #7c3aed; }
+.article-body.theme-purple .toc a,
+.prose-article.theme-purple .toc a { color: #7c3aed; }
+.article-body.theme-red h2,
+.prose-article.theme-red h2        { border-color: #dc2626; }
+.article-body.theme-red .toc a,
+.prose-article.theme-red .toc a    { color: #dc2626; }
+
+/* ══════════════════════════════════════════════════════
+   LTR overrides — English articles (dir="ltr")
+   ══════════════════════════════════════════════════════ */
+[dir="ltr"] .article-body h2,
+[dir="ltr"] .prose-article h2 {
+  padding-right: 0;
+  padding-left:  1rem;
+  border-right:  none;
+  border-left:   5px solid #2563eb;
+  text-align:    left;
+}
+
+[dir="ltr"] .article-body ul,
+[dir="ltr"] .article-body ol,
+[dir="ltr"] .prose-article ul,
+[dir="ltr"] .prose-article ol {
+  padding-right: 0;
+  padding-left:  1.5rem;
+}
+
+[dir="ltr"] .article-body th,
+[dir="ltr"] .prose-article th,
+[dir="ltr"] .article-table th {
+  text-align: left;
+}
+
+[dir="ltr"] .article-table td {
+  text-align: left;
+}
+
+[dir="ltr"] .callout {
+  border-right: none;
+  border-left:  5px solid;
+}
+
+[dir="ltr"] .toc ol {
+  padding-right: 0;
+  padding-left:  1.25rem;
+}
+
+[dir="ltr"] .formula-box {
+  border-right: none;
+  border-left:  5px solid #059669;
+}
+
+[dir="ltr"] .article-body.theme-green h2,
+[dir="ltr"] .prose-article.theme-green h2 {
+  border-left-color: #059669;
+  border-right: none;
+}
+[dir="ltr"] .article-body.theme-purple h2,
+[dir="ltr"] .prose-article.theme-purple h2 {
+  border-left-color: #7c3aed;
+  border-right: none;
+}
+[dir="ltr"] .article-body.theme-red h2,
+[dir="ltr"] .prose-article.theme-red h2 {
+  border-left-color: #dc2626;
+  border-right: none;
+}
+
+[dir="ltr"] .sidebar-card {
+  text-align: left;
+}
+
+/* ── Stat badges ── */
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+}
+
+/* ── FAQ accordion ── */
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.875rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  transition: background 0.2s, border-color 0.2s;
+  user-select: none;
+}
+
+.faq-question:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+.faq-question i {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+  color: #64748b;
+}
+
+.faq-answer {
+  display: none;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 0 0.875rem 0.875rem;
+  padding: 1rem 1.25rem 1.25rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.75rem;
+  animation: faqSlideIn 0.25s ease;
+}
+
+.faq-answer p {
+  margin: 0;
+  color: #374151;
+  line-height: 1.85;
+  font-size: 1rem;
+}
+
+@keyframes faqSlideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── WhatsApp floating button ── */
+.wa-float-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+  text-decoration: none;
+  z-index: 9999;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.wa-float-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.65);
+}
+
+.wa-float-btn:focus-visible {
+  outline: 3px solid #25d366;
+  outline-offset: 4px;
+}
+
+[dir="rtl"] .wa-float-btn {
+  right: 24px;
+  left: auto;
+}
+
+[dir="ltr"] .wa-float-btn {
+  right: auto;
+  left: 24px;
+}
+
+/* ── Reading progress bar ── */
+.reading-progress {
+  position: fixed;
+  top:    0;
+  left:   0;
+  width:  0%;
+  height: 4px;
+  background: linear-gradient(90deg, #2563eb, #dc2626);
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ── figcaption ── */
+figcaption {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 0.6rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════════════════
+   Article page header contrast fixes
+   ══════════════════════════════════════════════════════ */
+.article-page-header .meta-item {
+  color: #cbd5e1;
+}
+
+.article-page-header h1 {
+  color: #ffffff;
+}
+
+.article-cta-block > p {
+  color: #cbd5e1;
+}
+
+/* ── article-layout without sidebar: single-column full-width ── */
+.article-layout--no-sidebar {
+  grid-template-columns: 1fr !important;
+  max-width: 56rem;
+}
+
+.article-layout .col-span-full {
+  grid-column: 1 / -1;
+}
+
+/* ══════════════════════════════════════════════════════
+   Tailwind utility supplement — article scope
+   ══════════════════════════════════════════════════════ */
+.from-sky-900 {
+  --tw-gradient-from: #0c4a6e var(--tw-gradient-from-position);
+  --tw-gradient-to:   rgba(12, 74, 110, 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.via-sky-950 {
+  --tw-gradient-to:   rgba(8, 47, 73, 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #082f49 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+.to-sky-900  { --tw-gradient-to: #0c4a6e var(--tw-gradient-to-position); }
+.to-sky-950  { --tw-gradient-to: #082f49 var(--tw-gradient-to-position); }
+
+.bg-sky-600              { background-color: #0284c7; }
+.hover\:bg-sky-500:hover { background-color: #0ea5e9; }
+.text-sky-300            { color: #7dd3fc; }
+.text-sky-400            { color: #38bdf8; }
+.text-sky-500            { color: #0ea5e9; }
+.text-emerald-500        { color: #10b981; }
+.text-teal-500           { color: #14b8a6; }
+
+.bg-yellow-400           { background-color: #facc15; }
+.text-yellow-200         { color: #fef08a; }
+.text-yellow-300         { color: #fde047; }
+.border-none             { border-style: none; }
+
+/* ══════════════════════════════════════════════════════
+   Hardened article CTA component
+   ══════════════════════════════════════════════════════ */
+.article-cta {
+  position: relative;
+  margin-top: 3rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #0c4a6e 0%, #0f172a 100%);
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.35);
+}
+
+.article-cta h2 {
+  color: #ffffff !important;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.4;
+  margin: 0 0 0.75rem;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.article-cta p {
+  color: #cbd5e1 !important;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin: 0 auto 1.5rem;
+  max-width: 38rem;
+}
+
+.article-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.article-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.25);
+}
+
+.article-cta__btn--primary {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.article-cta__btn--primary:hover {
+  background: #0ea5e9;
+  transform: translateY(-2px);
+}
+
+.article-cta__btn--whatsapp {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+.article-cta__btn--whatsapp:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
+
+/* ── LTR overrides: checklist alignment ── */
+[dir="ltr"] .checklist {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+[dir="ltr"] .checklist li {
+  flex-direction: row;
+}
+
+/* ── LTR overrides: quick-row label/value order ── */
+[dir="ltr"] .quick-row {
+  flex-direction: row;
+}
+
+/* ── LTR overrides: spec-grid text alignment ── */
+[dir="ltr"] .spec-label,
+[dir="ltr"] .spec-value {
+  text-align: left;
+}
+
+/* ── LTR overrides: article-table text alignment ── */
+[dir="ltr"] .article-table th,
+[dir="ltr"] .article-table td {
+  text-align: left;
+}
+
+/* ── Additional hover utilities ── */
+.hover\:bg-yellow-300:hover  { background-color: #fde047; }
+.hover\:bg-emerald-500:hover { background-color: #10b981; }
+.hover\:text-red-600:hover   { color: #dc2626; }

@@ -1,0 +1,43 @@
+<!--
+  ============================================================
+  partials/header.html — Canonical Arabic Header (RTL)
+  Source-of-truth structural template; the runtime renderer
+  in /js/site-shell.js produces equivalent markup at runtime.
+
+  Standards:
+    - HTML5 semantic <header role="banner"> + <nav aria-label>
+    - aria-current="page" must be set on the active link
+    - Logo image uses width/height to prevent CLS
+    - Mobile toggle controls #site-mobile-menu via aria-controls
+    - hreflang on language switch link
+  ============================================================
+-->
+<header class="site-header" id="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="/" aria-label="الفريدة آيس">
+      <img class="site-header__logo"
+           src="assets/ace-logos/elfaridaice.webp"
+           alt="الفريدة آيس للتبريد الصناعي"
+           width="80" height="80" loading="eager" decoding="async" fetchpriority="high">
+      <span class="site-header__brand-text">
+        <span class="site-header__brand-name">الفريدة آيس</span>
+        <span class="site-header__brand-tag">للتبريد والتجميد الصناعي</span>
+      </span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="القائمة الرئيسية">
+      <ul class="site-header__nav-list">
+        <li><a class="site-header__link" href="/"               aria-current="page">الرئيسية</a></li>
+        <li><a class="site-header__link" href="services.html">خدماتنا</a></li>
+        <li><a class="site-header__link" href="projects.html">مشاريعنا</a></li>
+        <li><a class="site-header__link" href="brands.html">شركاؤنا</a></li>
+        <li><a class="site-header__link" href="about.html">من نحن</a></li>
+        <li><a class="site-header__link" href="blog.html">المدونة</a></li>
+      </ul>
+      <a class="site-header__cta" href="contact.html">لطلب عرض سعر</a>
+      <a class="site-header__lang" href="index-en.html" aria-label="English version" hreflang="en">EN</a>
+    </nav>
+
+</div>
+
+</header>

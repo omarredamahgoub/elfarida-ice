@@ -1,0 +1,52 @@
+/* ================================================================
+   projects.css — أنماط خاصة بصفحة projects (عربي RTL)
+   ================================================================ */
+
+/* ── خلفية الصفحة ── */
+body {
+  background-color: #f8fafc;
+}
+
+/* ── هيرو — خلفية صورة متدرجة ── */
+.hero-bg {
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)),
+    url('../assets/gallery/0.webp') center / cover no-repeat;
+}
+
+/* ── بطاقات المشاريع ── */
+.project-card {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.25);
+}
+
+/* ── تأثير تكبير الصورة عند تحريك المؤشر ── */
+.image-zoom {
+  transition: transform 0.8s ease;
+}
+
+.project-card:hover .image-zoom {
+  transform: scale(1.1);
+}
+
+/* ── أزرار الفلترة ── */
+.filter-btn {
+  transition: background-color 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.filter-btn.active {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.39);
+}

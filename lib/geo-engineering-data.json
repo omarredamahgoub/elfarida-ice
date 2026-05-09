@@ -1,0 +1,298 @@
+{
+  "$schema": "Engineering knowledge base — drives uniqueness modules in /scripts/generate-geo-pages.js",
+  "version": "1.0.0",
+  "lastUpdated": "2026-05-06",
+
+  "climateProfilePriority": ["mountainous_cold", "extreme_hot", "coastal_humid", "continental_desert", "moderate_desert"],
+
+  "climateProfiles": {
+    "coastal_humid": {
+      "matchKeywords": ["ساحلي", "بخار البحر", "humid coastal", "Gulf"],
+      "title": { "ar": "اعتبارات هندسية لمناخ {city} الساحلي الرطب", "en": "Engineering considerations for {city}'s humid coastal climate" },
+      "lead": {
+        "ar": "الرطوبة العالية وبخار البحر في {city} يتطلبان مواصفات مادية وهندسية محددة لضمان عمر افتراضي طويل لغرفة التبريد:",
+        "en": "High humidity and salt-laden air in {city} demand specific material and engineering specifications to ensure a long service life for the cold room:"
+      },
+      "items": {
+        "ar": [
+          "طلاء Heresite® المقاوم للتآكل على جميع المبخرات والمكثفات الخارجية",
+          "هياكل ستانلس ستيل 304 أو 316 للأبواب والقواعد بدلاً من الصاج المجلفن",
+          "بانلات بصاج مطلي PVDF/PE لمقاومة الأكسدة من الأملاح المحمولة جواً",
+          "زيادة سعة المكثف بمعامل 1.20 لتعويض كفاءة التكثيف في الرطوبة العالية",
+          "نظام تصريف معزول مزدوج لمنع التكاثف المرئي على الأنابيب"
+        ],
+        "en": [
+          "Heresite® anti-corrosion coating on all evaporators and outdoor condensers",
+          "Stainless steel 304 or 316 frames for doors and bases instead of galvanised steel",
+          "PVDF/PE pre-coated steel panels to resist oxidation from airborne salts",
+          "Condenser capacity upsized by a 1.20 factor to compensate condensation efficiency in high humidity",
+          "Double-insulated drainage system to prevent visible condensation on piping"
+        ]
+      }
+    },
+    "extreme_hot": {
+      "matchKeywords": ["47°م", "أحر مدن", "world's hottest", "very hot desert"],
+      "title": { "ar": "تكييف هندسي لدرجات حرارة {city} المرتفعة", "en": "Engineering adaptation for {city}'s extreme heat" },
+      "lead": {
+        "ar": "تجاوز درجات الحرارة المحيطة 47°م في {city} يفرض رفع كفاءة منظومة التكثيف وتوسيع حدود الأمان:",
+        "en": "Ambient temperatures exceeding 47°C in {city} require enhanced condensing efficiency and wider safety margins:"
+      },
+      "items": {
+        "ar": [
+          "حساب أحمال حرارية بمعامل أمان 1.40 (مقابل 1.25 في المناطق المعتدلة)",
+          "اعتماد مكثفات Evaporative بدلاً من Air-cooled لرفع كفاءة التكثيف 30-40%",
+          "ضواغط Bitzer Screw أو Discus عالية المتانة لاستيعاب نسب الضغط المرتفعة",
+          "Liquid sub-cooler إجباري لتفادي flash-gas في خطوط السائل الطويلة",
+          "تظليل الكوندنسر الخارجي وتوفير تهوية مفتوحة بسرعة 3 م/ث على الأقل"
+        ],
+        "en": [
+          "Thermal-load calculation with a 1.40 safety factor (vs 1.25 in moderate climates)",
+          "Evaporative condensers instead of air-cooled to raise condensing efficiency by 30-40%",
+          "High-durability Bitzer Screw or Discus compressors to handle elevated compression ratios",
+          "Mandatory liquid sub-cooler to prevent flash-gas in long liquid lines",
+          "External condenser shading with open ventilation at minimum 3 m/s airflow"
+        ]
+      }
+    },
+    "mountainous_cold": {
+      "matchKeywords": ["جبلي", "ثلوج", "شتاء قارس", "mountainous", "snow", "harsh winter"],
+      "title": { "ar": "تعديلات هندسية للمناخ الجبلي في {city}", "en": "Engineering adjustments for {city}'s mountain climate" },
+      "lead": {
+        "ar": "البرودة الشديدة شتاءً وارتفاع {city} عن سطح البحر يستدعيان تعديلات هندسية لاستقرار الأداء طوال السنة:",
+        "en": "Sub-zero winters and {city}'s elevation above sea level require engineering adjustments for year-round performance stability:"
+      },
+      "items": {
+        "ar": [
+          "نظام Head-pressure Control موسمي لمنع انخفاض ضغط التكثيف شتاءً",
+          "Crankcase heater للضواغط لمنع تكثّف غاز التبريد في الزيت",
+          "Liquid receiver معزول حرارياً ضد التجمد في الفصل البارد",
+          "ضواغط Copeland Scroll EVI الموصى بها لرفع كفاءة التشغيل في الارتفاعات الجبلية",
+          "تعديل ضبط Expansion Valve لمراعاة كثافة الهواء المنخفضة على الارتفاعات"
+        ],
+        "en": [
+          "Seasonal head-pressure control to prevent condensing-pressure drop in winter",
+          "Compressor crankcase heaters to prevent refrigerant migration into oil",
+          "Thermally insulated liquid receiver protected against winter freezing",
+          "Copeland Scroll EVI compressors recommended to raise operating efficiency at altitude",
+          "Expansion-valve recalibration for the lower air density at elevation"
+        ]
+      }
+    },
+    "continental_desert": {
+      "matchKeywords": ["قاري", "اختلاف موسمي", "صحراوي قاري", "continental desert", "seasonal variation"],
+      "title": { "ar": "متطلبات هندسية لمناخ {city} القاري المتقلب", "en": "Engineering requirements for {city}'s continental climate" },
+      "lead": {
+        "ar": "التباين الكبير بين فصول السنة في {city} يفرض منظومة تبريد متكيّفة مع الأحمال المتغيرة:",
+        "en": "{city}'s wide seasonal swings demand a refrigeration system that adapts to variable loads:"
+      },
+      "items": {
+        "ar": [
+          "ضواغط Bitzer/Copeland بنظام Inverter لتعديل السعة حسب الحمل الموسمي",
+          "Floating head-pressure للاستفادة من برودة الشتاء وخفض استهلاك الكهرباء",
+          "متحكمات Danfoss/CAREL ذكية بمعايرة موسمية تلقائية",
+          "Insulation بسماكة 100-150mm لتعويض تذبذب درجة الحرارة الخارجية",
+          "Defrost cycle قابل للبرمجة الموسمية لتفادي التشغيل الزائد شتاءً"
+        ],
+        "en": [
+          "Bitzer/Copeland inverter compressors to modulate capacity with seasonal load",
+          "Floating head-pressure to leverage winter cold and reduce electricity consumption",
+          "Smart Danfoss/CAREL controllers with automatic seasonal recalibration",
+          "100-150mm insulation thickness to absorb outdoor temperature swings",
+          "Programmable seasonal defrost cycle to avoid over-running in winter"
+        ]
+      }
+    },
+    "moderate_desert": {
+      "matchKeywords": ["معتدل", "صحراوي معتدل", "moderate desert"],
+      "title": { "ar": "مواصفات هندسية لمناخ {city}", "en": "Engineering specifications for {city}'s climate" },
+      "lead": {
+        "ar": "مناخ {city} المعتدل يسمح بتصميم منظومات تبريد عالية الكفاءة مع الحفاظ على متانة طويلة الأمد:",
+        "en": "{city}'s moderate climate enables highly efficient refrigeration system design while maintaining long-term durability:"
+      },
+      "items": {
+        "ar": [
+          "حساب أحمال حرارية بمعامل أمان 1.25 وفق ASHRAE",
+          "مكثفات Air-cooled قياسية بكفاءة عالية واستهلاك كهرباء منخفض",
+          "ضواغط Inverter للحفاظ على كفاءة الجزئي الحمل (Part-load efficiency)",
+          "بانلات PIR بسماكة 80-100mm كافية لمعدلات نقل الحرارة المتوقعة",
+          "نظام Defrost كهربائي قياسي مع متحكم زمني بسيط"
+        ],
+        "en": [
+          "Thermal-load calculation with a 1.25 ASHRAE safety factor",
+          "Standard high-efficiency air-cooled condensers with low energy draw",
+          "Inverter compressors to maintain part-load efficiency",
+          "80-100mm PIR panels sufficient for the expected heat-transfer rates",
+          "Standard electric defrost system with a simple time-based controller"
+        ]
+      }
+    }
+  },
+
+  "industrySpecs": {
+    "تمور": {
+      "key": "dates",
+      "title": { "ar": "غرف تبريد التمور", "en": "Date cold storage" },
+      "specAr": "0°م، رطوبة 65-70%، عزل 100mm، حفظ يصل لـ24 شهر مع الحفاظ على القوام واللون",
+      "specEn": "0°C, 65-70% RH, 100mm insulation, up to 24-month storage preserving texture and color"
+    },
+    "أسماك": {
+      "key": "fish",
+      "title": { "ar": "غرف تبريد الأسماك الطازجة", "en": "Fresh fish cold storage" },
+      "specAr": "−1°م، رطوبة 95%، مبخرات Heresite، أرضيات Epoxy غير منزلقة، تصريف ستانلس",
+      "specEn": "−1°C, 95% RH, Heresite-coated evaporators, non-slip epoxy floors, stainless drainage"
+    },
+    "لحوم": {
+      "key": "meat",
+      "title": { "ar": "غرف تبريد وتجميد اللحوم", "en": "Meat refrigeration and freezing" },
+      "specAr": "0°م للتبريد و−25°م للتجميد، عزل 150mm، ضواغط Copeland Discus، سكك تعليق Hooks",
+      "specEn": "0°C chilling and −25°C freezing, 150mm insulation, Copeland Discus compressors, hook rails"
+    },
+    "دواجن": {
+      "key": "poultry",
+      "title": { "ar": "غرف تبريد الدواجن", "en": "Poultry cold storage" },
+      "specAr": "0 إلى −2°م للتبريد، −18°م للتجميد، نظام IQF للقطع، مبخرات سهلة التنظيف",
+      "specEn": "0 to −2°C chilling, −18°C freezing, IQF system for cuts, easy-clean evaporators"
+    },
+    "ألبان": {
+      "key": "dairy",
+      "title": { "ar": "غرف تبريد الألبان والأجبان", "en": "Dairy and cheese cold storage" },
+      "specAr": "+2 إلى +4°م، رطوبة 85%، أسطح ستانلس صحية، تحكم رطوبة دقيق",
+      "specEn": "+2 to +4°C, 85% RH, hygienic stainless surfaces, precise humidity control"
+    },
+    "فواكه": {
+      "key": "fruits",
+      "title": { "ar": "غرف تبريد الفواكه والخضروات", "en": "Fruit and vegetable cold storage" },
+      "specAr": "+4 إلى +12°م حسب الصنف، رطوبة 85-90%، تهوية متجددة لتفادي تراكم الإيثيلين",
+      "specEn": "+4 to +12°C by produce type, 85-90% RH, fresh-air exchange to flush ethylene"
+    },
+    "خضروات": {
+      "key": "vegetables",
+      "title": { "ar": "غرف تبريد الخضروات", "en": "Vegetable cold storage" },
+      "specAr": "+4 إلى +8°م، رطوبة 90%، مبخرات منخفضة السرعة لتجنب فقدان الرطوبة من المنتج",
+      "specEn": "+4 to +8°C, 90% RH, low-velocity evaporators to prevent product moisture loss"
+    },
+    "مطاعم": {
+      "key": "restaurants",
+      "title": { "ar": "غرف تبريد المطابخ المركزية", "en": "Central kitchen cold rooms" },
+      "specAr": "تقسيم لمناطق متعددة (لحوم، خضار، ألبان)، أبواب سريعة الإغلاق، مراقبة عن بُعد",
+      "specEn": "Multi-zone partitioning (meat, produce, dairy), high-speed doors, remote monitoring"
+    },
+    "فنادق": {
+      "key": "hotels",
+      "title": { "ar": "غرف تبريد الفنادق والإطعام الفاخر", "en": "Hotel and luxury catering cold rooms" },
+      "specAr": "تشطيبات صحية فاخرة، تحكم CAREL ذكي، إنذارات مدمجة مع BMS الفندق",
+      "specEn": "Premium hygienic finishes, smart CAREL control, alarms integrated with hotel BMS"
+    },
+    "مستودعات": {
+      "key": "logistics",
+      "title": { "ar": "المستودعات اللوجستية المبردة", "en": "Cold logistics warehouses" },
+      "specAr": "أنظمة Rack مركزية، أبواب سريعة، أرصفة تحميل معزولة، Docks بحواجز عزل هوائي",
+      "specEn": "Central rack systems, high-speed doors, insulated loading bays, air-curtain docks"
+    },
+    "سوبرماركت": {
+      "key": "supermarkets",
+      "title": { "ar": "غرف تبريد المتاجر والسوبرماركت", "en": "Retail and supermarket cold rooms" },
+      "specAr": "غرف تبريد خلفية للمنتجات الطازجة، اتصال مع ثلاجات العرض، ضواغط هادئة",
+      "specEn": "Back-of-house cold rooms for fresh produce, integration with display cases, low-noise compressors"
+    },
+    "مخابز": {
+      "key": "bakeries",
+      "title": { "ar": "غرف تبريد وتجميد المخابز", "en": "Bakery cold and freezing rooms" },
+      "specAr": "غرف تبريد العجائن +2°م، تجميد المنتجات النهائية −18°م، رطوبة منضبطة",
+      "specEn": "Dough cold rooms at +2°C, finished-product freezing at −18°C, regulated humidity"
+    },
+    "صيد": {
+      "key": "fishing-port",
+      "title": { "ar": "غرف تبريد موانئ الصيد", "en": "Fishing port cold storage" },
+      "specAr": "−1°م ورطوبة 95%، مبخرات بطلاء Heresite، تصريف مياه مالحة معزول",
+      "specEn": "−1°C and 95% RH, Heresite-coated evaporators, insulated saline drainage"
+    },
+    "مسالخ": {
+      "key": "slaughterhouses",
+      "title": { "ar": "غرف تبريد المسالخ", "en": "Slaughterhouse cold rooms" },
+      "specAr": "تبريد سريع للذبائح من 38°م إلى 4°م خلال 18 ساعة، تصاميم Hygienic Class",
+      "specEn": "Rapid carcass chilling from 38°C to 4°C within 18 hours, hygienic-class design"
+    },
+    "بن": {
+      "key": "coffee",
+      "title": { "ar": "غرف تبريد البن العربي", "en": "Arabic coffee bean cold storage" },
+      "specAr": "+10 إلى +15°م، رطوبة 60-65%، حماية من تذبذب الحرارة لحفظ النكهة",
+      "specEn": "+10 to +15°C, 60-65% RH, protected from temperature swings to preserve aroma"
+    },
+    "ورود": {
+      "key": "roses",
+      "title": { "ar": "غرف تبريد الورود والزهور", "en": "Rose and cut-flower cold storage" },
+      "specAr": "+2 إلى +5°م، رطوبة 90-95%، تهوية لطيفة لمنع كدمات البتلات",
+      "specEn": "+2 to +5°C, 90-95% RH, gentle airflow to prevent petal bruising"
+    },
+    "زيتون": {
+      "key": "olives",
+      "title": { "ar": "غرف تبريد منتجات الزيتون", "en": "Olive product cold storage" },
+      "specAr": "+5 إلى +10°م، رطوبة 80%، حماية من الضوء المباشر للحفاظ على الجودة",
+      "specEn": "+5 to +10°C, 80% RH, protection from direct light to preserve quality"
+    },
+    "حجاج": {
+      "key": "pilgrim-catering",
+      "title": { "ar": "تبريد تموين الحجاج والمعتمرين", "en": "Pilgrim catering refrigeration" },
+      "specAr": "غرف ضخمة بسعة آلاف الوجبات/ساعة، أنظمة IQF، موثوقية 99.9% في موسم الذروة",
+      "specEn": "Large-capacity rooms for thousands of meals per hour, IQF systems, 99.9% reliability at peak season"
+    },
+    "بتروكيماويات": {
+      "key": "petrochemicals",
+      "title": { "ar": "تبريد مرافق البتروكيماويات", "en": "Petrochemical facility refrigeration" },
+      "specAr": "أنظمة أمونيا NH3 صناعية، التزام كامل بمعايير الهيئة الملكية والدفاع المدني",
+      "specEn": "Industrial NH3 ammonia systems, full compliance with Royal Commission and Civil Defence standards"
+    },
+    "موانئ": {
+      "key": "ports",
+      "title": { "ar": "تبريد المستودعات اللوجستية بالموانئ", "en": "Port-side logistics cold storage" },
+      "specAr": "أنظمة Rack مركزية بضواغط Bitzer Screw، أرصفة تحميل سريعة، عزل بحري",
+      "specEn": "Central rack systems with Bitzer Screw compressors, fast loading bays, marine-grade insulation"
+    },
+    "مستشفيات": {
+      "key": "hospitals",
+      "title": { "ar": "غرف تبريد المستشفيات والصيدليات", "en": "Hospital and pharmacy cold rooms" },
+      "specAr": "+2 إلى +8°م مع نسبة تذبذب أقل من 1°م، إنذارات مزدوجة، مولد احتياطي إجباري",
+      "specEn": "+2 to +8°C with less than 1°C deviation, redundant alarms, mandatory backup generator"
+    },
+    "صيدليات": {
+      "key": "pharmacies",
+      "title": { "ar": "غرف تبريد الصيدليات", "en": "Pharmacy cold rooms" },
+      "specAr": "+2 إلى +8°م، تسجيل مستمر لدرجة الحرارة، توافق مع SFDA",
+      "specEn": "+2 to +8°C, continuous temperature logging, SFDA compliance"
+    },
+    "صناعات": {
+      "key": "food-industries",
+      "title": { "ar": "تبريد الصناعات الغذائية", "en": "Food industry refrigeration" },
+      "specAr": "حلول مخصصة حسب نوع المنتج، تكامل مع خط الإنتاج، توافق HACCP",
+      "specEn": "Custom solutions per product type, production-line integration, HACCP compliance"
+    },
+    "نيوم": {
+      "key": "neom",
+      "title": { "ar": "تبريد مشاريع نيوم", "en": "NEOM project refrigeration" },
+      "specAr": "حلول قابلة للتوسعة، استدامة عالية، توافق مع متطلبات نيوم البيئية",
+      "specEn": "Scalable solutions, high sustainability, NEOM environmental compliance"
+    },
+    "قمح": {
+      "key": "wheat",
+      "title": { "ar": "تخزين القمح المبرد", "en": "Cooled wheat storage" },
+      "specAr": "+12 إلى +18°م، رطوبة منخفضة 50-55%، تهوية لتفادي العفن والآفات",
+      "specEn": "+12 to +18°C, low 50-55% RH, ventilation to prevent mold and pests"
+    },
+    "ترانزيت": {
+      "key": "transit",
+      "title": { "ar": "خدمات الترانزيت المبرد", "en": "Refrigerated transit services" },
+      "specAr": "محطات تبريد عابرة، Reefer plug-in points، صيانة سريعة للشاحنات المبردة",
+      "specEn": "Transit cooling stations, reefer plug-in points, rapid maintenance for refrigerated trucks"
+    },
+    "جملة": {
+      "key": "wholesale",
+      "title": { "ar": "غرف تبريد تجار الجملة", "en": "Wholesale cold storage" },
+      "specAr": "مستودعات كبرى متعددة المناطق، Docks متعددة، تشغيل 24/7",
+      "specEn": "Large multi-zone warehouses, multiple docks, 24/7 operation"
+    }
+  },
+
+  "defaultIndustryAr": "تبريد القطاعات المختلفة",
+  "defaultIndustryEn": "Multi-sector refrigeration"
+}

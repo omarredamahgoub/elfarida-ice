@@ -1,0 +1,1667 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حاسبة غرفة التبريد المجانية | الفريدة آيس</title>
+    <meta
+      name="description"
+      content="احسب حجم وقدرة غرفة التبريد أو التجميد المناسبة لمشروعك مجانا — أداة هندسية دقيقة من الفريدة آيس للتبريد الصناعي."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="الفريدة آيس للهندسة والتبريد الصناعي" />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/cold-room-calculator.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/cold-room-calculator.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://elfaridaice.com/cold-room-calculator-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/cold-room-calculator.html"
+    />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="assets/ace-logos/elfaridaice.webp"
+    />
+    <link rel="apple-touch-icon" href="assets/ace-logos/elfaridaice.webp" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/cold-room-calculator.html"
+    />
+    <meta
+      property="og:title"
+      content="حاسبة غرفة التبريد المجانية | الفريدة آيس"
+    />
+    <meta
+      property="og:description"
+      content="احسب حجم وقدرة غرفة التبريد أو التجميد المناسبة لمشروعك مجانا — أداة هندسية دقيقة من الفريدة آيس للتبريد الصناعي."
+    />
+    <meta property="og:image" content="https://elfaridaice.com/og-image.webp" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="الفريدة آيس" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="twitter:title"
+      content="حاسبة غرفة التبريد المجانية | الفريدة آيس"
+    />
+    <meta
+      name="twitter:description"
+      content="احسب حجم وقدرة غرفة التبريد أو التجميد المناسبة لمشروعك مجانا — أداة هندسية دقيقة من الفريدة آيس للتبريد الصناعي."
+    />
+    <meta
+      name="twitter:image"
+      content="https://elfaridaice.com/og-image.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="حاسبة غرفة التبريد — الفريدة آيس للتبريد الصناعي"
+    />
+    <meta name="geo.region" content="SA-04" />
+    <meta
+      name="geo.placename"
+      content="الدمام، المنطقة الشرقية، المملكة العربية السعودية"
+    />
+    <meta name="geo.position" content="26.4207;50.0888" />
+    <meta name="ICBM" content="26.4207, 50.0888" />
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "حاسبة غرفة التبريد",
+          "url": "https://elfaridaice.com/cold-room-calculator.html",
+          "applicationCategory": "EngineeringApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "ar",
+          "isAccessibleForFree": true,
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SAR" },
+          "description": "أداة هندسية مجانية لحساب قدرة غرفة التبريد أو التجميد المناسبة لمشروعك بناءً على الأبعاد ونوع المنتج وظروف البيئة الخارجية.",
+          "provider": {
+            "@type": "Organization",
+            "name": "الفريدة آيس للهندسة والتبريد الصناعي",
+            "url": "https://elfaridaice.com"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "ما الفرق بين الطن الحراري والكيلوواط في التبريد؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "الطن الحراري (RT) يساوي 3.517 كيلوواط."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "هل نتيجة الحاسبة كافية للتنفيذ الفعلي؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "النتيجة تقديرية أولية للتخطيط والموازنة."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "ماذا يعني معامل الأمان في حساب قدرة التبريد؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "تُضاف نسبة 15–25% فوق الحمل الحراري المحسوب."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "كيف تؤثر درجة الحرارة الخارجية على قدرة التبريد المطلوبة؟",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "كل درجة مئوية إضافية ترفع الحمل الحراري على الجدران بنسبة 2–4% تقريباً."
+              }
+            }
+          ]
+        }
+      ]
+    </script>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link
+      rel="preload"
+      as="font"
+      href="assets/fonts/cairo-arabic.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      /* ══ متغيرات النظام ══ */
+      :root {
+        --bg-deep: #060e1e;
+        --bg-base: #080f20;
+        --bg-card: #0c1a30;
+        --bg-card-alt: #0a172b;
+        --bg-input: #060d1a;
+        --border: rgba(56, 189, 248, 0.14);
+        --border-mid: rgba(56, 189, 248, 0.28);
+        --border-strong: rgba(56, 189, 248, 0.5);
+        --accent: #38bdf8;
+        --accent-2: #0ea5e9;
+        --accent-3: #0284c7;
+        --accent-glow: rgba(56, 189, 248, 0.18);
+        --text-primary: #eef6ff;
+        --text-secondary: #a8c8e8;
+        --text-muted: #5a7a98;
+        --gold: #f0b429;
+        --success: #34d399;
+        --danger: #fb7185;
+        --radius-xl: 1.25rem;
+        --radius-2xl: 1.75rem;
+        --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border);
+        --shadow-glow: 0 0 48px rgba(56, 189, 248, 0.12);
+        --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ══ صفحة ══ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        background: var(--bg-base) !important;
+      }
+      main {
+        background: var(--bg-base);
+      }
+
+      /* ══════════════════════════
+         رأس الصفحة Hero
+      ══════════════════════════ */
+      .hero-section {
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 1.5rem 6rem;
+        text-align: center;
+        background: linear-gradient(
+          165deg,
+          #050d1e 0%,
+          #081830 45%,
+          #0a1f45 100%
+        );
+      }
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 55% at 20% 60%,
+            rgba(14, 165, 233, 0.13) 0%,
+            transparent 65%
+          ),
+          radial-gradient(
+            ellipse 50% 45% at 82% 25%,
+            rgba(56, 189, 248, 0.09) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      .hero-grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        -webkit-mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 0%,
+          transparent 75%
+        );
+        mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 0%,
+          transparent 75%
+        );
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 1.1rem;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+        margin-bottom: 1.75rem;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .hero-badge span {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+      }
+      .hero-badge i {
+        color: var(--accent);
+        font-size: 0.78rem;
+      }
+      .hero-title {
+        font-size: clamp(2.4rem, 7vw, 4.2rem);
+        font-weight: 900;
+        color: var(--text-primary);
+        line-height: 1.12;
+        margin-bottom: 1.25rem;
+        position: relative;
+      }
+      .hero-title .highlight {
+        color: transparent;
+        background: linear-gradient(
+          135deg,
+          #38bdf8 0%,
+          #7dd3fc 50%,
+          #38bdf8 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      .hero-subtitle {
+        font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+        color: var(--text-secondary);
+        line-height: 1.8;
+        max-width: 38rem;
+        margin: 0 auto;
+        font-weight: 500;
+      }
+
+      /* ══════════════════════════
+         بطاقة الحاسبة
+      ══════════════════════════ */
+      .calc-card {
+        background: var(--bg-card);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-card);
+        border: 1px solid var(--border);
+        padding: 2rem;
+        transition: border-color var(--transition);
+      }
+      .calc-card:hover {
+        border-color: var(--border-mid);
+      }
+
+      /* عنوان القسم */
+      .section-heading {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        color: var(--text-primary);
+        font-size: 1.15rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .section-heading .icon-wrap {
+        width: 38px;
+        height: 38px;
+        border-radius: 0.65rem;
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+
+      /* ══ Labels ══ */
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .calc-label {
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .dim-sublabel {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+        display: block;
+      }
+
+      /* ══ Inputs ══ */
+      .calc-input,
+      .calc-select {
+        width: 100%;
+        border: 1.5px solid rgba(56, 189, 248, 0.18);
+        border-radius: 0.85rem;
+        padding: 0.8rem 1rem;
+        font-size: 0.93rem;
+        font-family: inherit;
+        color: var(--text-primary);
+        background: var(--bg-input);
+        transition:
+          border-color var(--transition),
+          box-shadow var(--transition),
+          background var(--transition);
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .calc-input:hover,
+      .calc-select:hover {
+        border-color: rgba(56, 189, 248, 0.32);
+        background: rgba(6, 13, 26, 0.85);
+      }
+      .calc-input:focus,
+      .calc-select:focus {
+        border-color: var(--accent);
+        box-shadow:
+          0 0 0 3px rgba(56, 189, 248, 0.12),
+          0 0 20px rgba(56, 189, 248, 0.08);
+        background: rgba(4, 10, 20, 0.9);
+      }
+      .calc-input::placeholder {
+        color: var(--text-muted);
+      }
+
+      /* سهم القائمة */
+      .calc-select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: left 0.9rem center;
+        padding-left: 2.4rem;
+        cursor: pointer;
+      }
+      .calc-select option {
+        background: #0c1a30;
+        color: var(--text-primary);
+      }
+
+      /* ══ زر الحساب ══ */
+      #calc-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        padding: 1rem 2rem;
+        border-radius: var(--radius-xl);
+        border: none;
+        background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        color: #fff;
+        font-weight: 900;
+        font-size: 1.05rem;
+        font-family: inherit;
+        cursor: pointer;
+        box-shadow:
+          0 6px 28px rgba(14, 165, 233, 0.38),
+          0 0 0 1px rgba(56, 189, 248, 0.25);
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition),
+          filter var(--transition);
+        position: relative;
+        overflow: hidden;
+        margin-top: 0.5rem;
+      }
+      #calc-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.14) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      #calc-btn:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 12px 40px rgba(14, 165, 233, 0.55),
+          0 0 0 1px rgba(56, 189, 248, 0.45);
+        filter: brightness(1.07);
+      }
+      #calc-btn:active {
+        transform: translateY(0);
+      }
+
+      /* ══ نتيجة رئيسية ══ */
+      .result-box {
+        background: linear-gradient(
+          150deg,
+          #040d1e 0%,
+          #071a3a 50%,
+          #0a2160 100%
+        );
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border-mid);
+        padding: 2.25rem 2rem;
+        text-align: center;
+        box-shadow: var(--shadow-card), var(--shadow-glow);
+        position: relative;
+        overflow: hidden;
+      }
+      .result-box::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 320px;
+        height: 200px;
+        background: radial-gradient(
+          ellipse,
+          rgba(56, 189, 248, 0.14) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .result-label {
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        opacity: 0.8;
+        margin-bottom: 0.6rem;
+      }
+      .result-value {
+        font-size: clamp(2.8rem, 8vw, 4rem);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1;
+        text-shadow: 0 0 40px rgba(56, 189, 248, 0.45);
+        position: relative;
+      }
+      .result-unit {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--accent);
+        opacity: 0.75;
+        margin-top: 0.4rem;
+      }
+      .result-divider {
+        border-color: rgba(56, 189, 248, 0.15);
+        margin: 1.25rem 0;
+      }
+      .result-sub-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .result-sub-cell {
+        text-align: center;
+      }
+      .result-sub-label {
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.3rem;
+      }
+      .result-sub-value {
+        font-size: 1.35rem;
+        font-weight: 900;
+        color: var(--text-primary);
+      }
+
+      /* ══ بطاقة التوصية ══ */
+      .rec-card {
+        background: var(--bg-card-alt);
+        border: 1px solid var(--border-mid);
+        border-right: 3px solid var(--accent-2);
+        border-radius: var(--radius-xl);
+        padding: 1.6rem 1.75rem;
+      }
+      .rec-card-title {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 900;
+        margin-bottom: 0.9rem;
+        letter-spacing: 0.03em;
+      }
+      .rec-body {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.85;
+        font-weight: 500;
+      }
+      .rec-brand {
+        display: inline-block;
+        background: rgba(56, 189, 248, 0.12);
+        color: var(--accent);
+        border: 1px solid rgba(56, 189, 248, 0.28);
+        font-weight: 800;
+        font-size: 0.7rem;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        vertical-align: middle;
+      }
+      .rec-model {
+        display: inline-block;
+        background: rgba(56, 189, 248, 0.06);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.72rem;
+        padding: 0.12rem 0.5rem;
+        border-radius: 0.4rem;
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        margin: 0.1rem 0.04rem;
+      }
+
+      /* ══ تحذير ══ */
+      .disclaimer {
+        background: rgba(240, 180, 41, 0.06);
+        border: 1px solid rgba(240, 180, 41, 0.28);
+        border-radius: 0.9rem;
+        padding: 1rem 1.25rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #fbbf24;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        line-height: 1.65;
+      }
+      .disclaimer i {
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      /* ══ placeholder ══ */
+      #result-placeholder {
+        border: 1.5px dashed rgba(56, 189, 248, 0.18);
+        background: rgba(56, 189, 248, 0.025);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        border-radius: var(--radius-xl);
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+      }
+      #result-placeholder .ph-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 1rem;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.65rem;
+        color: var(--accent);
+        opacity: 0.5;
+        margin-bottom: 1rem;
+      }
+      #result-placeholder p {
+        color: var(--text-muted);
+        font-size: 0.88rem;
+        font-weight: 600;
+        max-width: 18rem;
+        line-height: 1.7;
+      }
+
+      /* ══ خطأ ══ */
+      #calc-error {
+        color: var(--danger);
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 0.6rem 1rem;
+        background: rgba(251, 113, 133, 0.07);
+        border: 1px solid rgba(251, 113, 133, 0.2);
+        border-radius: 0.65rem;
+        margin-top: 0.5rem;
+      }
+
+      /* ══════════════════════════
+         قسم: كيف تعمل
+      ══════════════════════════ */
+      .sec-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .sec-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+        opacity: 0.8;
+      }
+      .sec-title {
+        font-size: clamp(1.6rem, 3.5vw, 2.15rem);
+        font-weight: 900;
+        color: var(--text-primary);
+        line-height: 1.25;
+      }
+      .sec-line {
+        width: 2.5rem;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        border-radius: 999px;
+        margin: 0.75rem auto 0;
+      }
+
+      .how-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .how-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .how-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 2rem 1.5rem 1.75rem;
+        text-align: center;
+        position: relative;
+        transition:
+          border-color var(--transition),
+          transform var(--transition),
+          box-shadow var(--transition);
+      }
+      .how-card:hover {
+        border-color: var(--border-mid);
+        transform: translateY(-4px);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.4),
+          0 0 0 1px var(--border-mid);
+      }
+      .step-badge {
+        position: absolute;
+        top: -13px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--bg-base);
+        box-shadow: 0 4px 14px rgba(14, 165, 233, 0.45);
+      }
+      .how-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.25rem;
+        border: 1px solid var(--border);
+        font-size: 1.55rem;
+      }
+      .how-card h3 {
+        font-size: 0.97rem;
+        font-weight: 900;
+        color: var(--text-primary);
+        margin-bottom: 0.55rem;
+      }
+      .how-card p {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.75;
+      }
+
+      /* ══════════════════════════
+         قسم المصداقية
+      ══════════════════════════ */
+      .trust-grid {
+        display: grid;
+        gap: 1rem;
+      }
+      @media (min-width: 768px) {
+        .trust-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .trust-card {
+        background: rgba(8, 18, 40, 0.7);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 1.6rem;
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        transition:
+          border-color var(--transition),
+          transform var(--transition),
+          background var(--transition);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .trust-card:hover {
+        border-color: var(--border-mid);
+        background: rgba(12, 26, 54, 0.85);
+        transform: translateY(-3px);
+      }
+      .trust-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .sticky-header-shell {
+        background: #060e1e;
+        border-color: rgba(56, 189, 248, 0.12);
+        box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+      }
+      .hero-content-layer {
+        z-index: 2;
+      }
+      .tone-sky {
+        background: rgba(14, 165, 233, 0.1);
+        border-color: rgba(14, 165, 233, 0.2);
+      }
+      .tone-mint {
+        background: rgba(52, 211, 153, 0.1);
+        border-color: rgba(52, 211, 153, 0.2);
+      }
+      .tone-rose {
+        background: rgba(248, 113, 113, 0.1);
+        border-color: rgba(248, 113, 113, 0.2);
+      }
+      .tone-sky-strong {
+        background: rgba(14, 165, 233, 0.12);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+      }
+      .tone-mint-strong {
+        background: rgba(52, 211, 153, 0.12);
+        border: 1px solid rgba(52, 211, 153, 0.22);
+      }
+      .tone-gold-strong {
+        background: rgba(240, 180, 41, 0.12);
+        border: 1px solid rgba(240, 180, 41, 0.22);
+      }
+      .icon-sky {
+        color: #38bdf8;
+      }
+      .icon-mint {
+        color: #34d399;
+      }
+      .icon-rose {
+        color: #f87171;
+      }
+      .icon-gold {
+        color: #f0b429;
+      }
+      .trust-card h3 {
+        font-size: 0.93rem;
+        font-weight: 900;
+        color: var(--text-primary);
+        margin-bottom: 0.3rem;
+      }
+      .trust-card p {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        line-height: 1.72;
+      }
+
+      /* ══════════════════════════
+         FAQ
+      ══════════════════════════ */
+      .faq-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        transition: border-color var(--transition);
+      }
+      .faq-item:hover {
+        border-color: var(--border-mid);
+      }
+      .faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.2rem 1.6rem;
+        font-size: 0.93rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        cursor: pointer;
+        list-style: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-chevron {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 0.65rem;
+        flex-shrink: 0;
+        transition:
+          transform var(--transition),
+          background var(--transition);
+      }
+      .faq-item[open] .faq-chevron {
+        transform: rotate(180deg);
+        background: rgba(56, 189, 248, 0.18);
+      }
+      .faq-body {
+        padding: 0 1.6rem 1.4rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+        font-size: 0.87rem;
+        color: var(--text-secondary);
+        line-height: 1.82;
+        font-weight: 500;
+      }
+
+      /* ══════════════════════════
+         CTA النهائي
+      ══════════════════════════ */
+      .final-cta {
+        border-radius: var(--radius-2xl);
+        padding: 5rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(
+          140deg,
+          #102280 0%,
+          #1a3aaf 55%,
+          #1d4ed8 100%
+        );
+        border: 1px solid rgba(99, 179, 237, 0.18);
+        box-shadow: 0 24px 72px rgba(26, 58, 175, 0.35);
+      }
+      .final-cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 65% 55% at 50% 0%,
+            rgba(147, 197, 253, 0.14) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 40% at 85% 80%,
+            rgba(56, 189, 248, 0.08) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      .final-cta h2 {
+        font-size: clamp(1.6rem, 5vw, 2.7rem);
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+      .final-cta > p {
+        color: #bfdbfe;
+        font-size: clamp(0.9rem, 2vw, 1.05rem);
+        margin-bottom: 2.5rem;
+        max-width: 36rem;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;
+        position: relative;
+      }
+      .cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        position: relative;
+      }
+      .cta-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.9rem 2rem;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        color: #fff;
+        font-weight: 900;
+        font-size: 0.95rem;
+        text-decoration: none;
+        box-shadow: 0 8px 28px rgba(14, 165, 233, 0.42);
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition),
+          filter var(--transition);
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .cta-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(14, 165, 233, 0.58);
+        filter: brightness(1.08);
+      }
+      .cta-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.9rem 2rem;
+        border-radius: var(--radius-xl);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1.5px solid rgba(255, 255, 255, 0.22);
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition:
+          background var(--transition),
+          border-color var(--transition),
+          transform var(--transition);
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .cta-btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.42);
+        transform: translateY(-2px);
+      }
+
+      /* ══ CTA نتيجة ══ */
+      .result-cta-card {
+        border-radius: var(--radius-xl);
+        padding: 1.6rem;
+        text-align: center;
+        background: var(--bg-card-alt);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+      }
+      .result-cta-card p {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        font-weight: 600;
+        line-height: 1.65;
+      }
+      .result-cta-card .title {
+        color: var(--text-primary);
+        font-size: 1.05rem;
+        font-weight: 900;
+        margin-bottom: 0.4rem;
+      }
+
+      /* ══ CTA داخل نتيجة ══ */
+      .inline-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.72rem 1.6rem;
+        border-radius: 0.85rem;
+        background: linear-gradient(135deg, #0ea5e9, #0284c7);
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.88rem;
+        text-decoration: none;
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition);
+        box-shadow: 0 4px 18px rgba(14, 165, 233, 0.35);
+        margin-top: 1rem;
+      }
+      .inline-cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(14, 165, 233, 0.5);
+      }
+
+      /* ══ responsive ══ */
+      @media (max-width: 640px) {
+        .calc-card {
+          padding: 1.35rem;
+        }
+        .hero-section {
+          padding: 3.5rem 1.25rem 4.5rem;
+        }
+      }
+    </style>
+
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+    <link rel="stylesheet" href="cairo.css" />
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/site-shell.css" />
+  </head>
+
+  <body class="bg-[#080f20] text-right">
+    <div id="site-header"></div>
+    <header
+      role="banner"
+      class="sticky-header-shell sticky top-0 z-[100] border-b"
+    ></header>
+
+    <!-- ═══ Hero ═══ -->
+    <div class="hero-section" role="banner" aria-labelledby="hero-title">
+      <div class="hero-grid-lines" aria-hidden="true"></div>
+      <div class="hero-content-layer max-w-4xl mx-auto relative">
+        <div class="hero-badge">
+          <i class="fas fa-calculator" aria-hidden="true"></i>
+          <span>أداة هندسية مجانية</span>
+        </div>
+        <h1 id="hero-title" class="hero-title">
+          حاسبة <span class="highlight">غرفة التبريد</span>
+        </h1>
+        <p class="hero-subtitle">
+          أدخل أبعاد مشروعك واحصل على تقدير فوري لقدرة التبريد المطلوبة — مجاناً
+          وبدون التزام
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══ المحتوى الرئيسي ═══ -->
+    <main id="main-content" class="max-w-5xl mx-auto px-4 py-14 md:py-20">
+      <!-- شبكة الحاسبة -->
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <!-- ── نموذج الإدخال ── -->
+        <section class="calc-card" aria-labelledby="calc-form-title">
+          <h2 id="calc-form-title" class="section-heading">
+            <span class="icon-wrap"
+              ><i class="fas fa-sliders-h" aria-hidden="true"></i
+            ></span>
+            بيانات المشروع
+          </h2>
+          <div class="space-y-5">
+            <div class="field-group">
+              <label for="room-type" class="calc-label">نوع الغرفة</label>
+              <select id="room-type" class="calc-select" aria-required="true">
+                <option value="cooling">تبريد (0 – 8 درجة م)</option>
+                <option value="chilling">تبريد عميق (-2 – 2 درجة م)</option>
+                <option value="freezing">تجميد (-18 درجة م)</option>
+                <option value="deep-freeze">تجميد عميق (-25 درجة م)</option>
+              </select>
+            </div>
+
+            <fieldset class="border-0 p-0 m-0" aria-describedby="dim-hint">
+              <legend class="calc-label mb-3">
+                أبعاد الغرفة الداخلية (متر)
+              </legend>
+              <span id="dim-hint" class="sr-only"
+                >أدخل الطول والعرض والارتفاع الداخلي للغرفة بوحدة المتر</span
+              >
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label for="dim-l" class="dim-sublabel">الطول</label>
+                  <input
+                    type="number"
+                    id="dim-l"
+                    class="calc-input"
+                    placeholder="10"
+                    min="1"
+                    max="200"
+                    step="0.1"
+                    aria-required="true"
+                  />
+                </div>
+                <div>
+                  <label for="dim-w" class="dim-sublabel">العرض</label>
+                  <input
+                    type="number"
+                    id="dim-w"
+                    class="calc-input"
+                    placeholder="6"
+                    min="1"
+                    max="200"
+                    step="0.1"
+                    aria-required="true"
+                  />
+                </div>
+                <div>
+                  <label for="dim-h" class="dim-sublabel">الارتفاع</label>
+                  <input
+                    type="number"
+                    id="dim-h"
+                    class="calc-input"
+                    placeholder="4"
+                    min="1.5"
+                    max="20"
+                    step="0.1"
+                    aria-required="true"
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="field-group">
+              <label for="load-ton" class="calc-label"
+                >الحمولة التخزينية التقريبية (طن)</label
+              >
+              <input
+                type="number"
+                id="load-ton"
+                class="calc-input"
+                placeholder="20"
+                min="0"
+                max="5000"
+                step="1"
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="product-type" class="calc-label"
+                >نوع المنتج المخزن</label
+              >
+              <select id="product-type" class="calc-select">
+                <option value="1.00">لحوم وأسماك</option>
+                <option value="0.90">خضروات وفواكه</option>
+                <option value="0.80">منتجات ألبان</option>
+                <option value="0.75">مواد كيميائية / أدوية</option>
+                <option value="0.70">مجمدات جاهزة</option>
+                <option value="0.95">آيس كريم ومثلجات</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="amb-temp" class="calc-label"
+                >درجة الحرارة الخارجية المتوقعة</label
+              >
+              <select id="amb-temp" class="calc-select">
+                <option value="35">35 درجة م (معتدلة)</option>
+                <option value="40" selected>40 درجة م (صيف خليجي عادي)</option>
+                <option value="45">45 درجة م (صيف خليجي قاسٍ)</option>
+                <option value="50">50 درجة م (أقصى)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="door-open" class="calc-label"
+                >عدد مرات فتح الباب يومياً</label
+              >
+              <select id="door-open" class="calc-select">
+                <option value="1.00">أقل من 10 مرات (مستودع)</option>
+                <option value="1.08" selected>10 – 30 مرة (توزيع متوسط)</option>
+                <option value="1.18">30 – 60 مرة (توزيع مكثف)</option>
+                <option value="1.30">أكثر من 60 مرة (تجزئة)</option>
+              </select>
+            </div>
+
+            <button
+              id="calc-btn"
+              type="button"
+              aria-label="احسب قدرة التبريد بناءً على البيانات المدخلة"
+            >
+              <i class="fas fa-snowflake" aria-hidden="true"></i>
+              احسب القدرة المطلوبة
+            </button>
+
+            <p
+              id="calc-error"
+              class="hidden"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+        </section>
+
+        <!-- ── عمود النتائج ── -->
+        <div
+          class="space-y-5 lg:sticky lg:top-28"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <!-- القدرة الرئيسية -->
+          <div id="result-cooling" class="result-box hidden">
+            <p class="result-label">قدرة التبريد المطلوبة</p>
+            <div class="result-value" id="result-kw">—</div>
+            <div class="result-unit">كيلوواط حراري (kW)</div>
+            <hr class="result-divider" />
+            <div class="result-sub-grid">
+              <div class="result-sub-cell">
+                <div class="result-sub-label">بالطن الحراري</div>
+                <div class="result-sub-value" id="result-rt">—</div>
+              </div>
+              <div class="result-sub-cell">
+                <div class="result-sub-label">حجم الغرفة</div>
+                <div class="result-sub-value" id="result-vol">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- التوصية الهندسية -->
+          <div id="result-system" class="rec-card hidden">
+            <div class="rec-card-title">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              التوصية الهندسية
+            </div>
+            <div id="result-system-text" class="rec-body"></div>
+          </div>
+
+          <!-- ملاحظة تقديرية -->
+          <div id="result-note" class="disclaimer hidden">
+            <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+            <span
+              ><strong>ملاحظة:</strong> هذه نتيجة تقديرية بناءً على البيانات
+              المدخلة. التصميم الدقيق يتطلب دراسة حرارية كاملة مع مهندس
+              متخصص.</span
+            >
+          </div>
+
+          <!-- CTA نتيجة -->
+          <div id="result-cta" class="result-cta-card hidden">
+            <p class="title">هل تريد عرض سعر حقيقي؟</p>
+            <p>فريقنا الهندسي يرد خلال ساعات — الاستشارة مجانية وبدون التزام</p>
+            <a href="contact.html" class="inline-cta-btn">
+              <i class="fas fa-phone-alt" aria-hidden="true"></i>
+              احصل على استشارة مجانية
+            </a>
+          </div>
+
+          <!-- placeholder -->
+          <div id="result-placeholder">
+            <div class="ph-icon">
+              <i class="fas fa-thermometer-half" aria-hidden="true"></i>
+            </div>
+            <p>أدخل أبعاد مشروعك أعلاه ثم اضغط على زر الحساب</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ كيف تعمل ═══ -->
+      <section class="mt-24" aria-labelledby="how-title">
+        <div class="sec-header">
+          <div class="sec-label">
+            <i class="fas fa-info-circle" aria-hidden="true"></i> آلية العمل
+          </div>
+          <h2 id="how-title" class="sec-title">كيف تعمل الحاسبة؟</h2>
+          <div class="sec-line"></div>
+        </div>
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="step-badge" aria-hidden="true">1</div>
+            <div class="how-icon tone-sky">
+              <i class="fas fa-ruler-combined icon-sky" aria-hidden="true"></i>
+            </div>
+            <h3>أدخل الأبعاد</h3>
+            <p>
+              أبعاد الغرفة الداخلية ونوع المنتج والظروف البيئية المحيطة بمشروعك
+            </p>
+          </div>
+          <div class="how-card">
+            <div class="step-badge" aria-hidden="true">2</div>
+            <div class="how-icon tone-mint">
+              <i class="fas fa-cogs icon-mint" aria-hidden="true"></i>
+            </div>
+            <h3>خوارزمية هندسية</h3>
+            <p>
+              نحسب الأحمال الحرارية: الجدران، المنتج، الإضاءة، تكرار الفتح،
+              والمعامل المناخي
+            </p>
+          </div>
+          <div class="how-card">
+            <div class="step-badge" aria-hidden="true">3</div>
+            <div class="how-icon tone-rose">
+              <i class="fas fa-file-invoice icon-rose" aria-hidden="true"></i>
+            </div>
+            <h3>احصل على النتيجة</h3>
+            <p>
+              قدرة التبريد بالكيلوواط والطن الحراري مع توصية النظام الأمثل
+              لمشروعك
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ المصداقية E-E-A-T ═══ -->
+      <section class="mt-20" aria-labelledby="trust-title">
+        <div class="sec-header">
+          <div class="sec-label">
+            <i class="fas fa-shield-alt" aria-hidden="true"></i> الخبرة
+            والمصداقية
+          </div>
+          <h2 id="trust-title" class="sec-title">لماذا تثق بهذه الحاسبة؟</h2>
+          <div class="sec-line"></div>
+        </div>
+        <div class="trust-grid">
+          <div class="trust-card">
+            <div class="trust-icon tone-sky-strong">
+              <i class="fas fa-award icon-sky" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3>خبرة هندسية 20+ عاماً</h3>
+              <p>
+                الخوارزمية مبنية على معايير ASHRAE ومعاملات حرارية موثّقة من
+                مشاريع تبريد فعلية في المنطقة الشرقية.
+              </p>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon tone-mint-strong">
+              <i class="fas fa-shield-alt icon-mint" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3>معامل أمان خليجي 20%+</h3>
+              <p>
+                تأخذ الحاسبة بعين الاعتبار المناخ الخليجي القاسي حتى 50 °م،
+                بمعاملات أعلى من المعايير الأوروبية.
+              </p>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon tone-gold-strong">
+              <i class="fas fa-phone-alt icon-gold" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3>مراجعة مجانية من مهندس</h3>
+              <p>
+                بعد الحساب، فريقنا الهندسي يراجع النتيجة ويقدم دراسة حرارية
+                تفصيلية مجاناً وبدون التزام.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ أسئلة شائعة ═══ -->
+      <section class="mt-20" aria-labelledby="faq-title">
+        <div class="sec-header">
+          <div class="sec-label">
+            <i class="fas fa-question-circle" aria-hidden="true"></i> أسئلة
+            شائعة
+          </div>
+          <h2 id="faq-title" class="sec-title">أسئلة حول حساب التبريد</h2>
+          <div class="sec-line"></div>
+        </div>
+        <div class="space-y-3 max-w-3xl mx-auto">
+          <details class="faq-item">
+            <summary>
+              ما الفرق بين الطن الحراري والكيلوواط في التبريد؟
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              الطن الحراري (RT) يساوي 3.517 كيلوواط. يُستخدم الطن الحراري في
+              السوق الخليجية والأمريكية بينما يعتمد الكيلوواط في المواصفات
+              الأوروبية. حاسبة الفريدة آيس تعرض كلا الوحدتين تلقائياً.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              هل النتيجة كافية للتنفيذ الفعلي؟
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              النتيجة تقديرية أولية للتخطيط والموازنة. التنفيذ الفعلي يتطلب
+              دراسة حرارية تفصيلية تشمل نوع العزل وموقع المبخر وكفاءة الضاغط.
+              فريق الفريدة آيس يقدم الدراسة الكاملة مجاناً.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              ماذا يعني معامل الأمان في الحساب؟
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              نضيف 15–25% فوق الحمل الحراري المحسوب لتعويض التقادم التدريجي
+              للمعدات والأحمال غير المتوقعة، وضمان الاستقرار الحراري على المدى
+              البعيد.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              كيف تؤثر درجة الحرارة الخارجية على القدرة المطلوبة؟
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              كل درجة مئوية إضافية في المحيط الخارجي ترفع الحمل الحراري على
+              الجدران بنسبة 2–4% تقريباً. في المملكة العربية السعودية قد يصل
+              الصيف إلى 50 درجة، مما يستوجب تصميماً بمعاملات أمان أعلى من
+              المعايير الأوروبية.
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- ═══ CTA نهائي ═══ -->
+      <section class="mt-24 final-cta" aria-labelledby="final-cta-title">
+        <h2 id="final-cta-title">جاهز للخطوة التالية؟</h2>
+        <p>
+          فريقنا الهندسي يقدم تصميماً تفصيلياً وعرض سعر دقيق خلال 24 ساعة —
+          مجاناً وبدون التزام
+        </p>
+        <div class="cta-actions">
+          <a href="contact.html" class="cta-btn-primary">
+            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+            تواصل مع مهندس الآن
+          </a>
+          <a href="services.html" class="cta-btn-secondary">
+            <i class="fas fa-snowflake" aria-hidden="true"></i>
+            خدمات التبريد
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <!-- ═══ JavaScript ═══ -->
+    <script>
+      (function () {
+        "use strict";
+
+        /* ── مواصفات الغرف ── */
+        var ROOM_SPECS = {
+          cooling: { target: 4, uWall: 0.25 },
+          chilling: { target: 0, uWall: 0.22 },
+          freezing: { target: -18, uWall: 0.18 },
+          "deep-freeze": { target: -25, uWall: 0.15 },
+        };
+
+        /* ── التوصيات الهندسية ── */
+        var SYSTEM_RECS = {
+          cooling: {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>نطاق القدرة: حتى 5 RT</strong><br>نوصي بضاغط <span class="rec-brand">Bitzer</span> شبه مفتوح <span class="rec-model">2KES-05</span> أو <span class="rec-model">4TCS-8.2</span> بغاز R448A، مع مبخر هواء Friga-Bohn ووحدة تكثيف مناسبة للخليج حتى 50 °C.',
+              },
+              {
+                maxRT: 15,
+                html: '<strong>نطاق القدرة: 5 – 15 RT</strong><br>نوصي بضاغط <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-15X</span> أو <span class="rec-brand">Bitzer</span> <span class="rec-model">4NES-14</span> بغاز R449A. يُفضَّل Rack System ثنائي الضاغط للتشغيل الاحتياطي.',
+              },
+              {
+                maxRT: 40,
+                html: '<strong>نطاق القدرة: 15 – 40 RT</strong><br>نوصي بـ Rack متعدد الضواغط <span class="rec-brand">Bitzer</span> <span class="rec-model">6JE-25</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-40X</span>. VFD على الضاغط الرئيسي يوفّر 20–30% من الطاقة.',
+              },
+            ],
+            default:
+              '<strong>نطاق القدرة: أكثر من 40 RT</strong><br>نوصي بمحطة تبريد مركزية بضواغط <span class="rec-brand">Bitzer</span> <span class="rec-model">8GE-50</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-75X</span> مع BMS للتحكم الكامل.',
+          },
+          chilling: {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>نطاق القدرة: حتى 5 RT</strong><br>نوصي بضاغط <span class="rec-brand">Bitzer</span> <span class="rec-model">4TCS-8.2</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-10X</span> بغاز R448A، مع مبخر بتحكم دقيق في الرطوبة (RH 85–95%).',
+              },
+              {
+                maxRT: 20,
+                html: '<strong>نطاق القدرة: 5 – 20 RT</strong><br>نوصي بضاغط <span class="rec-brand">Bitzer</span> <span class="rec-model">4PES-15Y</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DKSH-20X</span> مع كنترولر Danfoss AK-CC لضبط الحرارة بدقة ±0.5 °C.',
+              },
+            ],
+            default:
+              '<strong>نطاق القدرة: أكثر من 20 RT</strong><br>نوصي بـ Rack System بضواغط <span class="rec-brand">Bitzer</span> <span class="rec-model">6JE-25</span> مع نظام تحكم مركزي Danfoss AK-SC لضمان الاستقرار الحراري في مستودعات الأغذية الكبيرة.',
+          },
+          freezing: {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>نطاق القدرة: حتى 5 RT</strong><br>نوصي بضاغط <span class="rec-brand">Bitzer</span> <span class="rec-model">2KES-05Y</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-10X</span> بغاز R448A، مع نظام إذابة صقيع تلقائي.',
+              },
+              {
+                maxRT: 20,
+                html: '<strong>نطاق القدرة: 5 – 20 RT</strong><br>نوصي بضاغط <span class="rec-brand">Bitzer</span> <span class="rec-model">4NCS-12.2Y</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DKSH-20X</span> ثنائي المرحلة مع مبخر Friga-Bohn وذوبان صقيع Hot Gas.',
+              },
+              {
+                maxRT: 50,
+                html: '<strong>نطاق القدرة: 20 – 50 RT</strong><br>نوصي بـ Rack System بضواغط <span class="rec-brand">Bitzer</span> <span class="rec-model">6HE-25Y</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-40X</span> مع VFD لتحسين كفاءة الطاقة.',
+              },
+            ],
+            default:
+              '<strong>نطاق القدرة: أكثر من 50 RT</strong><br>نوصي بمحطة تجميد مركزية بضواغط <span class="rec-brand">Bitzer</span> <span class="rec-model">8GE-50Y</span> أو <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-75X</span> بنظام Booster مع BMS للمراقبة الكاملة.',
+          },
+          "deep-freeze": {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>نطاق القدرة: حتى 5 RT</strong><br>نوصي بنظام ثنائي المرحلة (Two-Stage) <span class="rec-brand">Bitzer</span> <span class="rec-model">2KES-05Y</span> مع Economizer، أو <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-10X</span> بنظام Cascade. عزل بانل 200 مم على الأقل.',
+              },
+              {
+                maxRT: 20,
+                html: '<strong>نطاق القدرة: 5 – 20 RT</strong><br>نوصي بنظام Cascade: <span class="rec-brand">Bitzer</span> <span class="rec-model">4NCS-12.2Y</span> (دورة عالية) + <span class="rec-model">2KES-05Y</span> (دورة منخفضة) مع Defrost كهربائي محسوب.',
+              },
+            ],
+            default:
+              '<strong>نطاق القدرة: أكثر من 20 RT</strong><br>نوصي بنظام Cascade صناعي بضواغط <span class="rec-brand">Bitzer</span> <span class="rec-model">6HE-25Y</span> أو الانتقال لنظام NH₃/CO₂ للقدرات الكبيرة. عزل بانل 200–250 مم مع Vapour Barrier كامل.',
+          },
+        };
+
+        function getRecommendationHTML(rType, rt) {
+          var rec = SYSTEM_RECS[rType];
+          for (var i = 0; i < rec.ranges.length; i++) {
+            if (rt <= rec.ranges[i].maxRT) return rec.ranges[i].html;
+          }
+          return rec.default;
+        }
+
+        function calcLoad() {
+          var rType = document.getElementById("room-type").value;
+          var L = parseFloat(document.getElementById("dim-l").value);
+          var W = parseFloat(document.getElementById("dim-w").value);
+          var H = parseFloat(document.getElementById("dim-h").value);
+          var loadTon =
+            parseFloat(document.getElementById("load-ton").value) || 0;
+          var prodF = parseFloat(document.getElementById("product-type").value);
+          var ambT = parseFloat(document.getElementById("amb-temp").value);
+          var doorF = parseFloat(document.getElementById("door-open").value);
+          var errEl = document.getElementById("calc-error");
+
+          errEl.classList.add("hidden");
+          errEl.textContent = "";
+
+          if (isNaN(L) || isNaN(W) || isNaN(H) || L <= 0 || W <= 0 || H <= 0) {
+            errEl.textContent = "يرجى إدخال أبعاد صحيحة (طول، عرض، ارتفاع).";
+            errEl.classList.remove("hidden");
+            return;
+          }
+
+          var spec = ROOM_SPECS[rType];
+          var deltaT = ambT - spec.target;
+          var A = 2 * (L * W + L * H + W * H);
+          var qWall = spec.uWall * A * deltaT;
+          var vol = L * W * H;
+          var airLoad = (vol * 0.5 * 1.2 * 1006 * deltaT) / 3600;
+          var lightLoad = L * W * 6;
+          var prodLoad =
+            loadTon > 0
+              ? (loadTon * 1000 * 0.1 * prodF * 3.5 * 1000) / (24 * 3600)
+              : 0;
+          var qTotal = (qWall + airLoad + lightLoad + prodLoad) * doorF * 1.2;
+          var kw = qTotal / 1000;
+          var rt = kw / 3.517;
+
+          showResults(kw, rt, vol, rType);
+        }
+
+        function showResults(kw, rt, vol, rType) {
+          document.getElementById("result-placeholder").classList.add("hidden");
+          document.getElementById("result-cooling").classList.remove("hidden");
+          document.getElementById("result-system").classList.remove("hidden");
+          document.getElementById("result-note").classList.remove("hidden");
+          document.getElementById("result-cta").classList.remove("hidden");
+          document.getElementById("result-kw").textContent = kw.toFixed(1);
+          document.getElementById("result-rt").textContent =
+            rt.toFixed(2) + " RT";
+          document.getElementById("result-vol").textContent =
+            vol.toFixed(1) + " م³";
+          document.getElementById("result-system-text").innerHTML =
+            getRecommendationHTML(rType, rt);
+        }
+
+        document.getElementById("calc-btn").addEventListener("click", calcLoad);
+
+        ["dim-l", "dim-w", "dim-h", "load-ton"].forEach(function (id) {
+          document.getElementById(id).addEventListener("keydown", function (e) {
+            if (e.key === "Enter") calcLoad();
+          });
+        });
+
+        document.querySelectorAll("details").forEach(function (det) {
+          var sum = det.querySelector("summary");
+          if (!sum) return;
+          sum.setAttribute("aria-expanded", det.open ? "true" : "false");
+          det.addEventListener("toggle", function () {
+            sum.setAttribute("aria-expanded", det.open ? "true" : "false");
+          });
+        });
+      })();
+    </script>
+
+    <script src="js/lang-switch.js" defer></script>
+    <script src="js/site-shell.js" defer></script>
+  </body>
+</html>

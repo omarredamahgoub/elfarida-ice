@@ -1,0 +1,412 @@
+{
+  "$schema": "Technical Glossary — Refrigeration Industry",
+  "version": "1.1.0",
+  "last_updated": "2026-05-07",
+  "categories": [
+    {
+      "id": "refrigerants",
+      "name_ar": "غازات التبريد (Refrigerants)",
+      "name_en": "Refrigerants",
+      "terms": [
+        {
+          "id": "r134a",
+          "term_ar": "R134a (Tetrafluoroethane)",
+          "term_en": "R134a",
+          "definition_ar": "غاز تبريد هيدروفلوروكربوني HFC، خالٍ من الكلور وآمن لطبقة الأوزون. يُستخدم في التبريد التجاري المتوسط (+0°م إلى +10°م) وفي التكييف السيارات. درجة غليانه -26°م، وله GWP=1430 (Global Warming Potential). يُعد بديلاً للـ R12 المحظور دولياً.",
+          "definition_en": "HFC refrigerant, chlorine-free and ozone-safe. Used in medium-temperature commercial refrigeration (+0°C to +10°C) and automotive AC. Boiling point -26°C, GWP=1430. Replacement for banned R12.",
+          "applications_ar": ["ثلاجات منزلية", "تكييف سيارات", "غرف تبريد متوسطة الحرارة"],
+          "applications_en": ["Domestic refrigerators", "Automotive AC", "Medium-temperature cold rooms"],
+          "boiling_point": "-26°C",
+          "gwp": 1430,
+          "ozone_safe": true
+        },
+        {
+          "id": "r404a",
+          "term_ar": "R404a",
+          "term_en": "R404a",
+          "definition_ar": "خليط من ثلاثة غازات HFC (R125 + R143a + R134a) يُستخدم في التبريد والتجميد التجاري والصناعي. يعمل بكفاءة في درجات حرارة منخفضة (-40°م إلى 0°م). درجة غليانه -47°م، وله GWP=3922 (مرتفع). بدأ التحول للبدائل صديقة البيئة مثل R448A و R449A.",
+          "definition_en": "Blend of three HFC gases (R125 + R143a + R134a) used in commercial and industrial refrigeration and freezing. Operates efficiently at low temperatures (-40°C to 0°C). Boiling point -47°C, GWP=3922 (high). Being phased out in favour of eco-friendly alternatives such as R448A and R449A.",
+          "applications_ar": ["غرف تجميد", "أنظمة الراك", "ثلاجات السوبرماركت"],
+          "applications_en": ["Freezer rooms", "Rack systems", "Supermarket display cases"],
+          "boiling_point": "-47°C",
+          "gwp": 3922,
+          "ozone_safe": true
+        },
+        {
+          "id": "r507",
+          "term_ar": "R507 (R507A)",
+          "term_en": "R507A",
+          "definition_ar": "خليط ثنائي من R125 + R143a، شبيه بـ R404a لكن أكثر استقراراً حرارياً. يُستخدم في التجميد العميق (-50°م) وأنظمة Cascade. درجة غليانه -47°م، GWP=3985. يتميز بأداء أفضل في الحمل الحراري المتغير.",
+          "definition_en": "Binary blend of R125 + R143a, similar to R404a but more thermally stable. Used in deep freezing (-50°C) and Cascade systems. Boiling point -47°C, GWP=3985. Performs better under variable heat loads.",
+          "applications_ar": ["تجميد عميق", "أنظمة Cascade", "وحدات IQF"],
+          "applications_en": ["Deep freezing", "Cascade systems", "IQF units"],
+          "boiling_point": "-47°C",
+          "gwp": 3985
+        },
+        {
+          "id": "r717",
+          "term_ar": "R717 (الأمونيا - NH3)",
+          "term_en": "R717 (Ammonia - NH3)",
+          "definition_ar": "غاز تبريد طبيعي رائد في الصناعات الكبيرة (>500 كيلوواط) لكفاءته الفائقة (COP > 4) وصفر تأثيره على البيئة (GWP=0, ODP=0). درجة غليانه -33°م. سامّ بتركيزات عالية لذا يتطلب أنظمة أمان متقدمة بحساسات Honeywell.",
+          "definition_en": "Natural refrigerant leading large-scale industries (>500 kW) thanks to its superior efficiency (COP > 4) and zero environmental impact (GWP=0, ODP=0). Boiling point -33°C. Toxic at high concentrations, requiring advanced safety systems with Honeywell sensors.",
+          "applications_ar": ["مصانع الدواجن الكبرى", "مصانع الثلج الصناعي", "مستودعات لوجستية ضخمة", "صناعات الألبان الكبيرة"],
+          "applications_en": ["Large poultry plants", "Industrial ice factories", "Large logistics warehouses", "Large-scale dairy processing"],
+          "boiling_point": "-33°C",
+          "gwp": 0,
+          "ozone_safe": true,
+          "natural": true
+        },
+        {
+          "id": "r744",
+          "term_ar": "R744 (ثاني أكسيد الكربون - CO2)",
+          "term_en": "R744 (CO2)",
+          "definition_ar": "غاز تبريد طبيعي صديق للبيئة جداً (GWP=1)، يُستخدم في أنظمة الـ Trans-Critical CO2 الحديثة في السوبرماركت الأوروبية والآن الخليج. يعمل بضغط عالٍ جداً (90-130 بار)، ويتميز بأداء ممتاز في المناخ البارد إلى المعتدل. درجة غليانه -78°م.",
+          "definition_en": "Highly eco-friendly natural refrigerant (GWP=1), used in Trans-Critical CO2 systems in European supermarkets and increasingly in the Gulf. Operates at very high pressure (90–130 bar) with excellent performance in cold to moderate climates. Boiling point -78°C.",
+          "applications_ar": ["سوبرماركت حديثة", "أنظمة Cascade", "تبريد المختبرات"],
+          "applications_en": ["Modern supermarkets", "Cascade systems", "Laboratory cooling"],
+          "boiling_point": "-78°C",
+          "gwp": 1,
+          "natural": true
+        },
+        {
+          "id": "r290",
+          "term_ar": "R290 (البروبان)",
+          "term_en": "R290 (Propane)",
+          "definition_ar": "غاز تبريد هيدروكربوني طبيعي، GWP=3 فقط (الأقل بين كل غازات التبريد العملية). يُستخدم في الوحدات المغلقة الصغيرة والمتوسطة. قابل للاشتعال لذا محدود الاستخدام في أنظمة كبيرة ويتطلب احتياطات سلامة.",
+          "definition_en": "Natural hydrocarbon refrigerant with GWP=3 only — the lowest among practical refrigerants. Used in small to medium hermetic units. Flammable, so its use in large systems is restricted and requires specific safety precautions.",
+          "applications_ar": ["ثلاجات منزلية حديثة", "وحدات صغيرة محكمة"],
+          "applications_en": ["Modern domestic refrigerators", "Small hermetic units"],
+          "boiling_point": "-42°C",
+          "gwp": 3,
+          "natural": true,
+          "flammable": true
+        },
+        {
+          "id": "r448a",
+          "term_ar": "R448A (Solstice N40)",
+          "term_en": "R448A",
+          "definition_ar": "خليط HFO حديث صديق للبيئة، بديل مباشر لـ R404a بنفس الأنابيب والضواغط مع إعدادات بسيطة. GWP=1387 (أقل بـ 65% من R404a). يُستخدم في تبريد التجاري والصناعي.",
+          "definition_en": "Modern HFO blend and eco-friendly direct drop-in replacement for R404a, compatible with existing piping and compressors with minor adjustments. GWP=1387 — 65% lower than R404a. Used in commercial and industrial refrigeration.",
+          "applications_ar": ["تحديث أنظمة R404a القديمة", "غرف تبريد جديدة"],
+          "applications_en": ["Retrofitting legacy R404a systems", "New cold room installations"],
+          "gwp": 1387
+        },
+        {
+          "id": "freon",
+          "term_ar": "فريون",
+          "term_en": "Freon",
+          "definition_ar": "اسم تجاري عام لعائلة غازات التبريد (CFC, HCFC, HFC) التي طورتها شركة DuPont الأمريكية. أصبح المصطلح يُستخدم شائعاً للإشارة إلى أي غاز تبريد. الفريون الكلاسيكي (R12, R22) محظور حالياً لأنه يدمر طبقة الأوزون.",
+          "definition_en": "General trade name for the family of refrigerants (CFC, HCFC, HFC) developed by DuPont. The term is now commonly used to refer to any refrigerant. Classic Freon variants (R12, R22) are banned worldwide for destroying the ozone layer."
+        }
+      ]
+    },
+    {
+      "id": "measurements",
+      "name_ar": "وحدات القياس (Measurements)",
+      "name_en": "Measurements",
+      "terms": [
+        {
+          "id": "btu",
+          "term_ar": "BTU (وحدة حرارية بريطانية)",
+          "term_en": "BTU (British Thermal Unit)",
+          "definition_ar": "وحدة قياس الطاقة الحرارية، يساوي كمية الحرارة اللازمة لرفع درجة حرارة رطل واحد من الماء بدرجة فهرنهايت واحدة. في التبريد، تُستخدم BTU/hr لقياس قدرة تبريد الجهاز. مثال: مكيف 1 طن = 12,000 BTU/hr.",
+          "definition_en": "Unit of thermal energy equal to the heat required to raise one pound of water by one degree Fahrenheit. In refrigeration, BTU/hr measures cooling capacity. Example: a 1-ton AC unit = 12,000 BTU/hr."
+        },
+        {
+          "id": "kw",
+          "term_ar": "كيلوواط (kW)",
+          "term_en": "kW (Kilowatt)",
+          "definition_ar": "وحدة قياس القدرة الكهربائية أو الحرارية. 1 kW = 3,412 BTU/hr. تُستخدم في التبريد لقياس قدرة الضواغط واستهلاك الكهرباء. ضاغط 5 أحصنة ≈ 3.7 kW استهلاكاً، ينتج حوالي 11-15 kW قدرة تبريدية.",
+          "definition_en": "Unit of electrical or thermal power. 1 kW = 3,412 BTU/hr. Used in refrigeration to measure compressor capacity and power consumption. A 5 HP compressor consumes ≈3.7 kW and delivers approximately 11–15 kW of cooling capacity."
+        },
+        {
+          "id": "cop",
+          "term_ar": "COP (معامل الأداء)",
+          "term_en": "COP (Coefficient of Performance)",
+          "definition_ar": "معامل الأداء = القدرة التبريدية ÷ القدرة الكهربائية المستهلكة. كلما زاد COP زادت كفاءة النظام. أنظمة الفريون الجيدة COP=3-3.5، أنظمة الأمونيا COP=4-5، أنظمة Cascade الـ CO2 COP=2-2.5.",
+          "definition_en": "COP = Cooling Capacity ÷ Power Input. The higher the COP, the more efficient the system. Good Freon systems achieve COP=3–3.5, ammonia systems COP=4–5, and CO2 Cascade systems COP=2–2.5."
+        },
+        {
+          "id": "eer",
+          "term_ar": "EER (نسبة كفاءة الطاقة)",
+          "term_en": "EER (Energy Efficiency Ratio)",
+          "definition_ar": "EER = BTU/hr ÷ Watts. مشابه لـ COP لكن بوحدات إنجليزية. EER=10 ممتاز، EER=8 جيد، EER<6 ضعيف. تستخدم في تصنيف وحدات التبريد الصغيرة والمكيفات.",
+          "definition_en": "EER = BTU/hr ÷ Watts. Similar to COP but expressed in imperial units. EER=10 is excellent, EER=8 is good, EER<6 is poor. Used to rate small refrigeration units and air conditioners."
+        },
+        {
+          "id": "seer",
+          "term_ar": "SEER (نسبة كفاءة الطاقة الموسمية)",
+          "term_en": "SEER (Seasonal Energy Efficiency Ratio)",
+          "definition_ar": "EER لكنها محسوبة على مدار الموسم بأكمله مع تغير درجات الحرارة. أكثر دقة في تقييم الكفاءة الفعلية. SEER=15 جيد جداً، SEER=20+ ممتاز.",
+          "definition_en": "EER calculated over an entire season accounting for varying temperatures. Provides a more accurate measure of real-world efficiency. SEER=15 is very good; SEER=20+ is excellent."
+        },
+        {
+          "id": "ton-refrigeration",
+          "term_ar": "طن تبريد (TR)",
+          "term_en": "Ton of Refrigeration (TR)",
+          "definition_ar": "وحدة قدرة التبريد التقليدية. 1 طن تبريد = 12,000 BTU/hr = 3.517 kW. اشتُقّت من كمية الحرارة اللازمة لإذابة طن من الثلج خلال 24 ساعة. مثال: غرفة 50م³ تحتاج تقريباً 3-5 أطنان تبريد حسب نوع المنتج.",
+          "definition_en": "Traditional unit of cooling capacity. 1 TR = 12,000 BTU/hr = 3.517 kW. Derived from the heat required to melt one ton of ice in 24 hours. Example: a 50 m³ cold room requires approximately 3–5 TR depending on the stored product."
+        },
+        {
+          "id": "k-value",
+          "term_ar": "قيمة K (الموصلية الحرارية)",
+          "term_en": "K-Value (Thermal Conductivity)",
+          "definition_ar": "معامل قياس قدرة المادة على نقل الحرارة، بوحدة W/m·K. كلما قلّت قيمة K، كان العزل أفضل. بانل PUF: K=0.022، صوف زجاجي: K=0.040، Quadcore (Kingspan): K=0.018 (الأفضل عالمياً).",
+          "definition_en": "Measures a material's ability to conduct heat, expressed in W/m·K. The lower the K-value, the better the insulation. PUF panel: K=0.022, glass wool: K=0.040, Quadcore (Kingspan): K=0.018 — best in class globally."
+        },
+        {
+          "id": "u-value",
+          "term_ar": "قيمة U (نفاذية الحرارة)",
+          "term_en": "U-Value",
+          "definition_ar": "U-Value = K ÷ سماكة. تُقيس كم وحدة حرارية تنفذ من خلال متر مربع من البانل بفارق درجة حرارة 1°م. قيم U منخفضة = عزل أفضل. بانل 100mm PUF: U=0.22 W/m²K.",
+          "definition_en": "U-Value = K ÷ Thickness. Measures how much heat passes through one square metre of panel per 1°C temperature difference. Lower U-values mean better insulation. A 100 mm PUF panel achieves U=0.22 W/m²K."
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "name_ar": "مكونات النظام (System Components)",
+      "name_en": "System Components",
+      "terms": [
+        {
+          "id": "compressor",
+          "term_ar": "الضاغط (Compressor)",
+          "term_en": "Compressor",
+          "definition_ar": "قلب نظام التبريد. يضغط غاز التبريد رافعاً ضغطه ودرجة حرارته. أنواعه: نصف مغلق Semi-Hermetic (بيتزر، كوبلاند) للتطبيقات الصناعية، محكم Hermetic (تكومسي) للوحدات الصغيرة، لولبي Screw (بيتزر CSH) للقدرات الضخمة، Scroll الحلزوني (كوبلاند ZB) الأكثر هدوءاً.",
+          "definition_en": "The heart of any refrigeration system. Compresses the refrigerant gas, raising its pressure and temperature. Types: Semi-Hermetic (Bitzer, Copeland) for industrial use; Hermetic (Tecumseh) for small units; Screw (Bitzer CSH) for large capacities; Scroll (Copeland ZB) for quiet operation."
+        },
+        {
+          "id": "evaporator",
+          "term_ar": "المبخر (Evaporator)",
+          "term_en": "Evaporator",
+          "definition_ar": "الوحدة الداخلية في الغرفة الباردة. يمتص الحرارة من الهواء بسبب تبخر غاز التبريد داخله. أنواعه: مكعب Cubic للغرف المتوسطة (Friga-Bohn DUAL-O)، سقفي Ceiling للغرف منخفضة الارتفاع، عرض Display للثلاجات التجارية.",
+          "definition_en": "The indoor unit inside the cold room. Absorbs heat from the air as the refrigerant evaporates within it. Types: Cubic for medium rooms (Friga-Bohn DUAL-O); Ceiling-mounted for low-height rooms; Display for commercial refrigeration cases."
+        },
+        {
+          "id": "condenser",
+          "term_ar": "المكثف (Condenser)",
+          "term_en": "Condenser",
+          "definition_ar": "الوحدة الخارجية. يطرد الحرارة الممتصة من المبخر إلى الهواء الخارجي. أنواعه: مكثف بالهواء Air-Cooled (الأكثر شيوعاً في السعودية)، مكثف مائي Water-Cooled للقدرات الكبيرة، مكثف تبخيري Evaporative للكفاءة الفائقة.",
+          "definition_en": "The outdoor unit. Rejects the heat absorbed by the evaporator into the ambient air. Types: Air-Cooled (most common in Saudi Arabia); Water-Cooled for large capacities; Evaporative for superior efficiency."
+        },
+        {
+          "id": "expansion-valve",
+          "term_ar": "صمام التمدد (Expansion Valve)",
+          "term_en": "Expansion Valve",
+          "definition_ar": "صمام يخفض ضغط ودرجة حرارة غاز التبريد قبل دخوله المبخر. أنواعه: حراري TXV (تقليدي ميكانيكي)، إلكتروني EEV من دانفوس (دقة ±0.1°م، توفير طاقة 15%)، شعري Capillary للوحدات الصغيرة.",
+          "definition_en": "Reduces the pressure and temperature of the refrigerant before it enters the evaporator. Types: Thermal TXV (conventional mechanical); Electronic EEV by Danfoss (±0.1°C accuracy, 15% energy saving); Capillary tube for small units."
+        },
+        {
+          "id": "filter-drier",
+          "term_ar": "فلتر التجفيف (Filter Drier)",
+          "term_en": "Filter Drier",
+          "definition_ar": "يمتص الرطوبة والشوائب من غاز التبريد لحماية الضاغط والصمامات. يحتوي على مادة Molecular Sieve. يجب استبداله عند كل صيانة كبرى أو تغيير في النظام. ماركات شائعة: دانفوس DCL، كاستل 4316.",
+          "definition_en": "Absorbs moisture and contaminants from the refrigerant to protect the compressor and valves. Contains a Molecular Sieve desiccant. Must be replaced at every major service or system change. Common brands: Danfoss DCL, Castel 4316."
+        },
+        {
+          "id": "sight-glass",
+          "term_ar": "الزجاج البصري (Sight Glass)",
+          "term_en": "Sight Glass",
+          "definition_ar": "نافذة شفافة على خط السائل تسمح بمراقبة حالة غاز التبريد وكمية الرطوبة عبر مؤشر لوني (أخضر = جاف، أصفر = رطوبة عالية). ضرورية للتشخيص. ماركات: دانفوس SGN، كاستل 3740.",
+          "definition_en": "A transparent window on the liquid line for monitoring refrigerant state and moisture content via a colour indicator (green = dry, yellow = high moisture). Essential for diagnostics. Brands: Danfoss SGN, Castel 3740."
+        },
+        {
+          "id": "solenoid-valve",
+          "term_ar": "صمام الملف اللولبي (Solenoid Valve)",
+          "term_en": "Solenoid Valve",
+          "definition_ar": "صمام كهروميكانيكي يفتح أو يغلق خط غاز التبريد عند التحكم الكهربائي. يُستخدم لإيقاف التبريد عند الوصول لدرجة الحرارة، وفي دورات إذابة الجليد. ماركات: دانفوس EVR، كاستل 1078.",
+          "definition_en": "Electromechanical valve that opens or closes the refrigerant line on electrical command. Used to stop refrigeration when the set temperature is reached and during defrost cycles. Brands: Danfoss EVR, Castel 1078."
+        },
+        {
+          "id": "receiver",
+          "term_ar": "الخزان السائل (Liquid Receiver)",
+          "term_en": "Liquid Receiver",
+          "definition_ar": "خزان معدني بعد المكثف يخزن غاز التبريد السائل لاستخدامه حسب الحاجة. يضمن إمداداً مستقراً للصمام. حجمه يحدد بناء على حجم النظام (عادة 30-50% من الشحنة الكاملة).",
+          "definition_en": "A metal vessel after the condenser that stores liquid refrigerant and releases it on demand. Ensures a stable supply to the expansion valve. Sized at typically 30–50% of the full system charge."
+        },
+        {
+          "id": "oil-separator",
+          "term_ar": "فاصل الزيت (Oil Separator)",
+          "term_en": "Oil Separator",
+          "definition_ar": "جهاز يفصل زيت التشحيم عن غاز التبريد بعد الضاغط ويعيده إليه. ضروري في الأنظمة الكبيرة (>50 kW) لمنع تراكم الزيت في المبخر وتدهور كفاءة التبادل الحراري.",
+          "definition_en": "Separates lubricating oil from the refrigerant discharge gas and returns it to the compressor. Essential in large systems (>50 kW) to prevent oil accumulation in the evaporator and degradation of heat-transfer efficiency."
+        }
+      ]
+    },
+    {
+      "id": "systems",
+      "name_ar": "أنواع الأنظمة (System Types)",
+      "name_en": "System Types",
+      "terms": [
+        {
+          "id": "dx-system",
+          "term_ar": "نظام التمدد المباشر (DX System)",
+          "term_en": "DX (Direct Expansion) System",
+          "definition_ar": "النظام التقليدي حيث يتمدد غاز التبريد مباشرة في المبخر داخل الغرفة. بسيط، اقتصادي، الأكثر شيوعاً للأنظمة الصغيرة والمتوسطة. عيوبه: شحنة غاز كبيرة، صعوبة الصيانة في الأنظمة الكبيرة.",
+          "definition_en": "Traditional system in which the refrigerant expands directly inside the evaporator within the cold room. Simple, cost-effective, and the most common choice for small to medium systems. Drawbacks: large refrigerant charge and difficult maintenance on large installations."
+        },
+        {
+          "id": "secondary-loop",
+          "term_ar": "التبريد الثانوي (Secondary Loop)",
+          "term_en": "Secondary Loop System",
+          "definition_ar": "نظام يستخدم مائعاً وسيطاً (Brine, Glycol) ليبرد الغرف بدلاً من تمرير غاز التبريد مباشرة. مزاياه: تقليل شحنة غاز التبريد بنسبة 80%، أمان أعلى، صيانة أسهل. شائع في السوبرماركت الأوروبية.",
+          "definition_en": "Uses a secondary fluid (brine or glycol) to cool the rooms instead of circulating refrigerant directly. Benefits: 80% reduction in refrigerant charge, improved safety, and easier maintenance. Widely used in European supermarkets."
+        },
+        {
+          "id": "cascade-system",
+          "term_ar": "نظام Cascade",
+          "term_en": "Cascade System",
+          "definition_ar": "نظام مزدوج المراحل: المرحلة الأولى بغاز عالي الحرارة (R134a, R404a) تبرّد المرحلة الثانية بغاز منخفض الحرارة (CO2, R23) لتحقيق -70°م إلى -90°م. ضروري للتطبيقات الدوائية والمختبرات وحفظ لقاحات mRNA.",
+          "definition_en": "Two-stage system: a high-temperature stage (R134a, R404a) pre-cools a low-temperature stage (CO2, R23) to achieve -70°C to -90°C. Essential for pharmaceutical applications, laboratories, and mRNA vaccine storage."
+        },
+        {
+          "id": "rack-system",
+          "term_ar": "أنظمة الراك (Rack Systems)",
+          "term_en": "Rack Systems",
+          "definition_ar": "نظام تبريد مركزي يجمع عدة ضواغط متصلة على بعضها (3-12 ضاغط) في وحدة مركزية واحدة، تخدم عشرات نقاط التبريد عبر خطوط مشتركة. مزاياه: توفير 40% كهرباء، احتياطية Lead/Lag، استرداد حرارة، صيانة مركزية.",
+          "definition_en": "Centralised refrigeration system combining multiple compressors (3–12) in a single rack unit serving dozens of refrigeration points via shared pipework. Benefits: 40% energy saving, Lead/Lag redundancy, heat recovery, and centralised maintenance."
+        },
+        {
+          "id": "trans-critical-co2",
+          "term_ar": "نظام Trans-Critical CO2",
+          "term_en": "Trans-Critical CO2 System",
+          "definition_ar": "نظام حديث جداً يستخدم CO2 (R744) بضغط فوق نقطته الحرجة (>74 bar). صديق للبيئة 100% (GWP=1)، كفاءة عالية في المناخ المعتدل. تحدٍ في المناخ الحار يحتاج ejector technology. مستقبل التبريد التجاري.",
+          "definition_en": "Cutting-edge system operating CO2 (R744) above its critical point (>74 bar). 100% eco-friendly (GWP=1) with high efficiency in temperate climates. Requires ejector technology in hot climates. Widely regarded as the future of commercial refrigeration."
+        },
+        {
+          "id": "vrf",
+          "term_ar": "نظام VRF (تدفق غاز متغير)",
+          "term_en": "VRF (Variable Refrigerant Flow)",
+          "definition_ar": "نظام يعدّل تدفق غاز التبريد ديناميكياً حسب حاجة كل مبخر. مرن جداً، يدعم تشغيل التبريد والتدفئة في نفس الوقت بمناطق مختلفة. شائع في المباني التجارية والمكاتب.",
+          "definition_en": "Dynamically modulates refrigerant flow to match the demand of each evaporator. Highly flexible, supports simultaneous cooling and heating in different zones. Widely used in commercial buildings and offices."
+        }
+      ]
+    },
+    {
+      "id": "controls",
+      "name_ar": "التحكم والأتمتة (Controls)",
+      "name_en": "Controls & Automation",
+      "terms": [
+        {
+          "id": "pid-control",
+          "term_ar": "التحكم PID",
+          "term_en": "PID Control",
+          "definition_ar": "خوارزمية تحكم تجمع بين Proportional (متناسب) + Integral (تكاملي) + Derivative (تفاضلي) للوصول لدرجة الحرارة المطلوبة بسرعة وثبات دون تذبذب. تُستخدم في وحدات التحكم المتقدمة (CAREL pCO5, Danfoss EKE).",
+          "definition_en": "Control algorithm combining Proportional + Integral + Derivative terms to reach the target temperature quickly and stably without oscillation. Used in advanced controllers such as CAREL pCO5 and Danfoss EKE."
+        },
+        {
+          "id": "defrost-cycle",
+          "term_ar": "دورة إذابة الجليد (Defrost Cycle)",
+          "term_en": "Defrost Cycle",
+          "definition_ar": "عملية دورية لإذابة الجليد المتراكم على المبخر. أنواعها: كهربائي Electric (شائع، 4-6 مرات/يوم)، غاز ساخن Hot Gas (سريع، يستخدم في الراك)، طبيعي Off-Cycle (للغرف +2°م فقط). مدة الدورة 15-30 دقيقة.",
+          "definition_en": "Periodic process to melt frost accumulated on the evaporator. Types: Electric (common, 4–6 cycles/day); Hot Gas (fast, used in rack systems); Off-Cycle (for rooms above +2°C only). Cycle duration: 15–30 minutes."
+        },
+        {
+          "id": "superheat",
+          "term_ar": "التحميص الزائد (Superheat)",
+          "term_en": "Superheat",
+          "definition_ar": "الفرق بين درجة حرارة غاز التبريد عند خروجه من المبخر ودرجة حرارة التبخر. يجب أن يكون 5-10K للحماية من دخول السائل للضاغط. صمام التمدد الإلكتروني EEV يضبطه ديناميكياً بدقة.",
+          "definition_en": "The difference between refrigerant temperature at the evaporator outlet and the evaporation temperature. Must be maintained at 5–10 K to protect the compressor from liquid ingestion. The electronic EEV valve controls superheat dynamically with high precision."
+        },
+        {
+          "id": "subcooling",
+          "term_ar": "التبريد الزائد (Subcooling)",
+          "term_en": "Subcooling",
+          "definition_ar": "تبريد إضافي لغاز التبريد السائل بعد المكثف لزيادة الكفاءة. كل 1°م تبريد زائد يحسن الكفاءة 1-2%. عادة 3-7K. قياسه عبر Sight Glass والحساسات.",
+          "definition_en": "Additional cooling of the liquid refrigerant after the condenser to boost system efficiency. Each additional 1°C of subcooling improves efficiency by 1–2%. Typically 3–7 K, measured via the sight glass and temperature sensors."
+        },
+        {
+          "id": "data-logger",
+          "term_ar": "مسجل البيانات (Data Logger)",
+          "term_en": "Data Logger",
+          "definition_ar": "جهاز يسجل درجات الحرارة والرطوبة بشكل مستمر لأغراض المراقبة والامتثال (HACCP, GMP). يحفظ البيانات لسنوات ويُولّد تقارير. ماركات: Testo, Eliwell TelevisSystem، CAREL boss™.",
+          "definition_en": "Device that continuously records temperature and humidity for monitoring and compliance purposes (HACCP, GMP). Stores years of data and generates reports. Leading brands: Testo, Eliwell TelevisSystem, CAREL boss™."
+        },
+        {
+          "id": "alarm-system",
+          "term_ar": "أنظمة الإنذار (Alarm Systems)",
+          "term_en": "Alarm Systems",
+          "definition_ar": "تنبيهات فورية عند: ارتفاع درجة الحرارة، تسرب غاز التبريد، انقطاع الكهرباء، فشل ضاغط. يمكن أن ترسل SMS، Email، Push notifications، أو تدعم تكامل مع أنظمة BMS الكاملة.",
+          "definition_en": "Instant alerts triggered by: temperature rise, refrigerant leak, power failure, or compressor fault. Can send SMS, Email, and Push notifications, and integrate with full BMS systems."
+        }
+      ]
+    },
+    {
+      "id": "insulation",
+      "name_ar": "العزل والإنشاءات (Insulation)",
+      "name_en": "Insulation & Construction",
+      "terms": [
+        {
+          "id": "puf-panel",
+          "term_ar": "بانل بولي يوريثان (PUF Panel)",
+          "term_en": "PUF Panel (Polyurethane Foam)",
+          "definition_ar": "البانل العازل الأكثر استخداماً عالمياً. يتكون من رغوة بولي يوريثان عالية الكثافة (40-45 kg/m³) محصورة بين صفيحتين معدنيتين. K=0.022 W/m·K. متوفر بسماكات 60mm (للتبريد المعتدل) إلى 200mm (للتجميد العميق).",
+          "definition_en": "The world's most widely used insulation panel. Consists of high-density polyurethane foam (40–45 kg/m³) sandwiched between two metal skins. K=0.022 W/m·K. Available in thicknesses from 60 mm (medium-temperature cooling) to 200 mm (deep freezing)."
+        },
+        {
+          "id": "eps-panel",
+          "term_ar": "بانل EPS",
+          "term_en": "EPS Panel (Expanded Polystyrene)",
+          "definition_ar": "بانل أرخص من PUF لكن أقل كفاءة (K=0.038). يُستخدم في التطبيقات الاقتصادية والمؤقتة. عيوبه: امتصاص رطوبة أعلى، عمر أقصر.",
+          "definition_en": "Lower-cost alternative to PUF with reduced efficiency (K=0.038). Used for budget-sensitive or temporary applications. Drawbacks: higher moisture absorption and shorter service life."
+        },
+        {
+          "id": "xps-panel",
+          "term_ar": "بانل XPS",
+          "term_en": "XPS Panel (Extruded Polystyrene)",
+          "definition_ar": "بانل XPS أفضل من EPS في مقاومة الرطوبة (K=0.030). يُستخدم خاصة لعزل الأرضيات تحت غرف التجميد لمنع تسرب البرودة للتربة.",
+          "definition_en": "Outperforms EPS in moisture resistance (K=0.030). Used primarily for floor insulation beneath freezer rooms to prevent cold transfer to the ground."
+        },
+        {
+          "id": "vapor-barrier",
+          "term_ar": "حاجز البخار (Vapor Barrier)",
+          "term_en": "Vapor Barrier",
+          "definition_ar": "طبقة بلاستيكية أو معدنية تمنع تسرب بخار الماء داخل العزل، حيث يتكثف ويسبب عزل تالف. ضرورية في غرف التجميد. عادة من البولي إيثيلين 0.2-0.5mm.",
+          "definition_en": "A plastic or metallic layer that prevents water vapour from penetrating the insulation, where it would condense and cause degradation. Essential in freezer rooms. Typically polyethylene film 0.2–0.5 mm thick."
+        },
+        {
+          "id": "air-curtain",
+          "term_ar": "ستارة الهواء (Air Curtain)",
+          "term_en": "Air Curtain",
+          "definition_ar": "جهاز يدفع هواءً بسرعة عالية عند مدخل الغرفة الباردة لإنشاء حاجز هوائي يمنع دخول الهواء الحار وفقدان البرودة عند فتح الباب. يقلل فقد الطاقة بنسبة 70%.",
+          "definition_en": "Blows a high-velocity air stream across the cold room entrance to create an air barrier, preventing warm air ingress and cold air loss when the door is open. Reduces energy loss by up to 70%."
+        }
+      ]
+    },
+    {
+      "id": "loads",
+      "name_ar": "الأحمال الحرارية (Heat Loads)",
+      "name_en": "Heat Loads",
+      "terms": [
+        {
+          "id": "heat-load",
+          "term_ar": "الحمل الحراري (Heat Load)",
+          "term_en": "Heat Load",
+          "definition_ar": "إجمالي الحرارة التي يجب إزالتها من الغرفة بالكيلوواط أو BTU/hr. يُحسب من: التسرب عبر الجدران/السقف/الأرضية، حرارة المنتج المخزن، حرارة الإنارة والمعدات، حرارة الأشخاص الداخلين، حرارة فتح الباب. حسابه الدقيق ضروري لاختيار حجم الضاغط الصحيح.",
+          "definition_en": "Total heat that must be removed from the room, expressed in kW or BTU/hr. Calculated from: transmission through walls/ceiling/floor, product heat, lighting and equipment heat, personnel heat, and door-opening infiltration. Accurate calculation is essential for correct compressor sizing."
+        },
+        {
+          "id": "pull-down",
+          "term_ar": "زمن التبريد الأولي (Pull-Down Time)",
+          "term_en": "Pull-Down Time",
+          "definition_ar": "الوقت اللازم لإنزال درجة حرارة الغرفة من درجة حرارة الجو المحيط إلى درجة التشغيل المطلوبة. عادة 4-12 ساعة حسب الحجم. يُستخدم في حساب قدرة الضاغط الإضافية.",
+          "definition_en": "Time required to pull the room temperature down from ambient to the operating setpoint. Typically 4–12 hours depending on room size. Used when calculating the additional compressor capacity required."
+        },
+        {
+          "id": "holding-capacity",
+          "term_ar": "قدرة الاحتفاظ (Holding Capacity)",
+          "term_en": "Holding Capacity",
+          "definition_ar": "القدرة المطلوبة للحفاظ على درجة الحرارة في الظروف العادية بعد التبريد الأولي. أقل من قدرة Pull-Down عادة بنسبة 30-40%. عند الاختيار، نأخذ القدرة الأكبر بين الاثنين.",
+          "definition_en": "Capacity required to maintain the set temperature under normal steady-state conditions after the initial pull-down. Typically 30–40% lower than pull-down capacity. System design is based on whichever figure is greater."
+        },
+        {
+          "id": "infiltration-load",
+          "term_ar": "حمل تسرب الهواء (Infiltration Load)",
+          "term_en": "Infiltration Load",
+          "definition_ar": "الحرارة الداخلة عبر فتحات الأبواب وتسرب الهواء من العزل. تقدّر بـ 5-15% من الحمل الإجمالي. تقليلها يتم بستائر هواء، أبواب ذاتية الإغلاق، إحكام العزل.",
+          "definition_en": "Heat entering through door openings and air leaks in the insulation. Estimated at 5–15% of the total load. Reduced by air curtains, self-closing doors, and thorough insulation sealing."
+        }
+      ]
+    }
+  ]
+}

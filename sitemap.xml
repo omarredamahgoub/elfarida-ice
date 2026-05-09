@@ -1,0 +1,1148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 1 — HOMEPAGE  (priority 1.00)
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/index-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/index-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/index-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 2 — CORE COMMERCIAL PAGES  (priority 0.90)
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/services.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/services.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/services-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/services.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/services-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/services.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/services-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/services.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/contact.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/contact-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/contact.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/contact-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/contact.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/contact-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/contact.html" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 3 — GEO PAGES — COLD ROOMS  (priority 0.85)
+       Alphabetical by city slug
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-abha.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-abha.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-abha-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-abha.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-abha-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-abha.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-abha-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-abha.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-al-ahsa.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-al-ahsa.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-al-ahsa-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-al-ahsa.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-al-ahsa-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-al-ahsa.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-al-ahsa-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-al-ahsa.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-buraidah.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-buraidah.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-buraidah-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-buraidah.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-buraidah-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-buraidah.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-buraidah-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-buraidah.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-dammam.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-dammam.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-dammam-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-dammam.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-dammam-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-dammam.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-dammam-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-dammam.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-hafr-al-batin.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-hafr-al-batin.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-hafr-al-batin-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-hafr-al-batin.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-hafr-al-batin-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-hafr-al-batin.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-hafr-al-batin-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-hafr-al-batin.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-hail.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-hail.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-hail-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-hail.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-hail-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-hail.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-hail-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-hail.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-jeddah.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-jeddah.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-jeddah-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-jeddah.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-jeddah-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-jeddah.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-jeddah-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-jeddah.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-jubail.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-jubail.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-jubail-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-jubail.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-jubail-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-jubail.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-jubail-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-jubail.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-khobar.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-khobar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-khobar-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-khobar.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-khobar-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-khobar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-khobar-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-khobar.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-makkah.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-makkah.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-makkah-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-makkah.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-makkah-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-makkah.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-makkah-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-makkah.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-medina.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-medina.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-medina-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-medina.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-medina-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-medina.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-medina-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-medina.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-qatif.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-qatif.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-qatif-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-qatif.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-qatif-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-qatif.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-qatif-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-qatif.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-riyadh.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-riyadh.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-riyadh-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-riyadh.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-riyadh-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-riyadh.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-riyadh-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-riyadh.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-tabuk.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-tabuk.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-tabuk-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-tabuk.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-rooms-tabuk-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-rooms-tabuk.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-rooms-tabuk-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-rooms-tabuk.html" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 4 — INDUSTRY SECTOR PAGES  (priority 0.75)
+       Alphabetical by sector slug
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/industries/bakeries.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/bakeries.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/bakeries-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/bakeries.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/bakeries-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/bakeries.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/bakeries-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/bakeries.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/dairy.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/dairy.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/dairy-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/dairy.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/dairy-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/dairy.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/dairy-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/dairy.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/farms.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/farms.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/farms-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/farms.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/farms-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/farms.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/farms-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/farms.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/flower-shops.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/flower-shops.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/flower-shops-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/flower-shops.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/flower-shops-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/flower-shops.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/flower-shops-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/flower-shops.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/hospitals.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/hospitals.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/hospitals-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/hospitals.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/hospitals-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/hospitals.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/hospitals-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/hospitals.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/ice-factories.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/ice-factories.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/ice-factories-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/ice-factories.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/ice-factories-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/ice-factories.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/ice-factories-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/ice-factories.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/logistics.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/logistics.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/logistics-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/logistics.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/logistics-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/logistics.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/logistics-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/logistics.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/meat.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/meat.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/meat-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/meat.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/meat-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/meat.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/meat-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/meat.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/pharmaceutical.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/pharmaceutical.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/pharmaceutical-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/pharmaceutical.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/pharmaceutical-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/pharmaceutical.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/pharmaceutical-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/pharmaceutical.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/poultry.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/poultry.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/poultry-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/poultry.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/poultry-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/poultry.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/poultry-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/poultry.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/restaurants.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/restaurants.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/restaurants-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/restaurants.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/restaurants-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/restaurants.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/restaurants-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/restaurants.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/seafood.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/seafood.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/seafood-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/seafood.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/seafood-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/seafood.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/seafood-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/seafood.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/industries/supermarkets.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/supermarkets.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/supermarkets-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/supermarkets.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/industries/supermarkets-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/industries/supermarkets.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/industries/supermarkets-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/industries/supermarkets.html" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 5 — SUPPORTING COMMERCIAL PAGES  (priority 0.70–0.80)
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/about.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/about.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/about-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/about.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/about-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/about.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/about-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/about.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/projects.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/projects.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/projects-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/projects.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/projects-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/projects.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/projects-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/projects.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/brands.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/brands.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/brands-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/brands.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/brands-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/brands.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/brands-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/brands.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/company-profile.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/company-profile.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/company-profile-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/company-profile.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/company-profile-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/company-profile.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/company-profile-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/company-profile.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/services-technical.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/services-technical.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/services-technical-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/services-technical.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/services-technical-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/services-technical.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/services-technical-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/services-technical.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/blog.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/blog.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/blog-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/blog.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/blog-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/blog.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/blog-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/blog.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/faq.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/faq-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/faq.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/faq-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/faq-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/faq.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/glossary.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/glossary.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/glossary-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/glossary.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/glossary-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/glossary.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/glossary-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/glossary.html" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 6 — TOOLS  (priority 0.75)
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/cold-room-calculator.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-room-calculator.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-room-calculator-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-room-calculator.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/cold-room-calculator-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/cold-room-calculator.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/cold-room-calculator-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/cold-room-calculator.html" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 7 — ARTICLES — ARABIC  (priority 0.75)
+       Alphabetical by slug
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-ar.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-ar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/bitzer-maintenance-ar.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/bitzer-maintenance-ar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/bitzer-maintenance-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/bitzer-maintenance-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/blast-freezer-meat.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/blast-freezer-meat.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/blast-freezer-meat-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/blast-freezer-meat.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/cold-store-door-types.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/cold-store-door-types.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/cold-store-door-types-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/cold-store-door-types.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/condensing-unit-maintenance.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/condensing-unit-maintenance.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/condensing-unit-maintenance-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/condensing-unit-maintenance.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/danfoss-controller-setting.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/energy-saving-tips.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/energy-saving-tips.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/energy-saving-tips-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/energy-saving-tips.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/friga-bohn-evaporators.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/friga-bohn-evaporators.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/friga-bohn-evaporators-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/friga-bohn-evaporators.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/iqf-technology-guide.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/iqf-technology-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/iqf-technology-guide-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/iqf-technology-guide.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/refrigeration-gas-leak.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/refrigeration-gas-leak.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/refrigeration-gas-leak-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/refrigeration-gas-leak.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/sandwich-panel-specs.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/sandwich-panel-specs.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/sandwich-panel-specs-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/sandwich-panel-specs.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 8 — ARTICLES — ENGLISH  (priority 0.70)
+       Mirrors tier 7, same alphabetical order
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-ar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/ammonia-refrigeration-systems-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/bitzer-maintenance-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/bitzer-maintenance-ar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/bitzer-maintenance-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/bitzer-maintenance-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/blast-freezer-meat-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/blast-freezer-meat.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/blast-freezer-meat-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/blast-freezer-meat.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/cold-room-load-calculation-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/cold-storage-dammam-eastern.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/cold-store-door-types-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/cold-store-door-types.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/cold-store-door-types-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/cold-store-door-types.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/condensing-unit-maintenance-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/condensing-unit-maintenance.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/condensing-unit-maintenance-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/condensing-unit-maintenance.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/copeland-scroll-vs-recip.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/energy-saving-tips-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/energy-saving-tips.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/energy-saving-tips-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/energy-saving-tips.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/friga-bohn-evaporators-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/friga-bohn-evaporators.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/friga-bohn-evaporators-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/friga-bohn-evaporators.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/iqf-technology-guide-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/iqf-technology-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/iqf-technology-guide-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/iqf-technology-guide.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/refrigeration-gas-leak-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/refrigeration-gas-leak.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/refrigeration-gas-leak-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/refrigeration-gas-leak.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/sandwich-panel-specs-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/sandwich-panel-specs.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/sandwich-panel-specs-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/sandwich-panel-specs.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html" />
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TIER 9 — LEGAL / LOW-PRIORITY  (priority 0.30–0.40)
+       Excluded from primary crawl budget intentionally
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://elfaridaice.com/privacy.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/privacy-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/privacy.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/privacy-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.35</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/privacy-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/privacy.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/terms.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/terms.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/terms-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/terms.html" />
+  </url>
+  <url>
+    <loc>https://elfaridaice.com/terms-en.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.35</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/terms.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/terms-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/terms.html" />
+  </url>
+
+</urlset>

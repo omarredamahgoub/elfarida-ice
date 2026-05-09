@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-29",
+  "purpose": "Geo-targeted landing page generator config — drives /scripts/generate-geo-pages.js",
+
+  "regions": [
+    {
+      "id": "dammam",
+      "slug": "dammam",
+      "name": { "ar": "الدمام", "en": "Dammam" },
+      "regionName": { "ar": "المنطقة الشرقية", "en": "Eastern Province" },
+      "isHeadquarters": true,
+      "geo": { "lat": 26.4207, "lng": 50.0888 },
+      "postalCode": "32253",
+      "phoneDistance": "خدمة محلية مباشرة",
+      "responseTime": { "ar": "خلال 2-4 ساعات", "en": "within 2-4 hours" },
+      "industries": ["البتروكيماويات", "الموانئ", "الصناعات الغذائية", "اللوجستيات"],
+      "majorClients": ["مجمعات الأعمال", "مصانع غذائية", "مستودعات لوجستية"],
+      "uniqueSellingPoints": {
+        "ar": [
+          "مقرنا الرئيسي في الدمام — استجابة فورية لكل المنطقة الشرقية",
+          "خبرة 20+ سنة في مناخ الخليج عالي الرطوبة",
+          "فريق ميداني داخل المدينة 24/7",
+          "علاقات مباشرة مع موانئ الدمام لاستيراد المعدات"
+        ],
+        "en": [
+          "Headquartered in Dammam — instant response across the Eastern Province",
+          "20+ years of experience in the high-humidity Gulf climate",
+          "On-the-ground field team in the city 24/7",
+          "Direct relationships with Dammam ports for equipment imports"
+        ]
+      }
+    },
+    {
+      "id": "khobar",
+      "slug": "khobar",
+      "name": { "ar": "الخبر", "en": "Khobar" },
+      "regionName": { "ar": "المنطقة الشرقية", "en": "Eastern Province" },
+      "isHeadquarters": false,
+      "geo": { "lat": 26.2172, "lng": 50.1971 },
+      "postalCode": "31952",
+      "phoneDistance": "20 كم من المقر",
+      "responseTime": { "ar": "خلال 3-5 ساعات", "en": "within 3-5 hours" },
+      "industries": ["الفنادق", "المطاعم الراقية", "الموالات التجارية", "المستشفيات"],
+      "uniqueSellingPoints": {
+        "ar": [
+          "تغطية كاملة للقطاع التجاري والفندقي بالخبر",
+          "خبرة في غرف تبريد المطابخ المركزية للفنادق",
+          "صيانة طارئة سريعة للمنشآت التجارية"
+        ],
+        "en": [
+          "Full coverage of Khobar's commercial and hotel sectors",
+          "Expertise in central kitchen cold rooms for hotels",
+          "Rapid emergency maintenance for commercial facilities"
+        ]
+      }
+    },
+    {
+      "id": "jubail",
+      "slug": "jubail",
+      "name": { "ar": "الجبيل", "en": "Jubail" },
+      "regionName": { "ar": "المنطقة الشرقية", "en": "Eastern Province" },
+      "isHeadquarters": false,
+      "geo": { "lat": 27.0046, "lng": 49.6604 },
+      "postalCode": "31961",
+      "phoneDistance": "100 كم من المقر",
+      "responseTime": { "ar": "خلال 5-8 ساعات", "en": "within 5-8 hours" },
+      "industries": ["البتروكيماويات الكبرى", "الصناعات الثقيلة", "الموانئ الصناعية"],
+      "uniqueSellingPoints": {
+        "ar": [
+          "تخصص في أنظمة التبريد الصناعية الثقيلة لمنشآت الجبيل",
+          "خبرة في الامتثال لمعايير الهيئة الملكية للجبيل",
+          "أنظمة الأمونيا للمصانع الكبرى"
+        ],
+        "en": [
+          "Specialization in heavy industrial refrigeration for Jubail facilities",
+          "Compliance experience with Royal Commission for Jubail standards",
+          "Ammonia systems for large-scale factories"
+        ]
+      }
+    },
+    {
+      "id": "ahsa",
+      "slug": "al-ahsa",
+      "name": { "ar": "الأحساء", "en": "Al-Ahsa" },
+      "regionName": { "ar": "المنطقة الشرقية", "en": "Eastern Province" },
+      "isHeadquarters": false,
+      "geo": { "lat": 25.4295, "lng": 49.5921 },
+      "postalCode": "31982",
+      "phoneDistance": "150 كم من المقر",
+      "responseTime": { "ar": "خلال 6-10 ساعات", "en": "within 6-10 hours" },
+      "industries": ["الزراعة", "تعبئة التمور", "الصناعات الغذائية المحلية"],
+      "uniqueSellingPoints": {
+        "ar": [
+          "خبرة في غرف تبريد التمور والمنتجات الزراعية",
+          "أنظمة تجميد سريع للمنتجات الموسمية",
+          "حلول عزل مخصصة لمناخ الأحساء الجاف"
+        ],
+        "en": [
+          "Experience in cold storage for dates and agricultural products",
+          "Fast-freezing systems for seasonal produce",
+          "Custom insulation solutions for Al-Ahsa's dry climate"
+        ]
+      }
+    },
+    {
+      "id": "riyadh",
+      "slug": "riyadh",
+      "name": { "ar": "الرياض", "en": "Riyadh" },
+      "regionName": { "ar": "منطقة الرياض", "en": "Riyadh Region" },
+      "isHeadquarters": false,
+      "hasBranch": true,
+      "branchAddress": { "ar": "السلي، الرياض", "en": "As-Sulay, Riyadh" },
+      "geo": { "lat": 24.7136, "lng": 46.6753 },
+      "postalCode": "11564",
+      "phoneDistance": "فرع مباشر بالسلي",
+      "responseTime": { "ar": "خلال 4-6 ساعات", "en": "within 4-6 hours" },
+      "industries": ["مستودعات لوجستية", "السلاسل الغذائية", "المخابز الكبرى", "الفنادق"],
+      "uniqueSellingPoints": {
+        "ar": [
+          "فرع مباشر في السلي — تغطية كاملة لمنطقة الرياض",
+          "خبرة في المستودعات اللوجستية الكبرى للسلاسل الغذائية",
+          "تنفيذ مشاريع لكبرى المصانع الغذائية بالرياض"
+        ],
+        "en": [
+          "Direct branch in As-Sulay — full coverage of the Riyadh Region",
+          "Experience in large-scale logistics warehouses for food chains",
+          "Project execution for major food factories in Riyadh"
+        ]
+      }
+    },
+    {
+      "id": "jeddah",
+      "slug": "jeddah",
+      "name": { "ar": "جدة", "en": "Jeddah" },
+      "regionName": { "ar": "منطقة مكة المكرمة", "en": "Mecca Region" },
+      "isHeadquarters": false,
+      "geo": { "lat": 21.4858, "lng": 39.1925 },
+      "postalCode": "21577",
+      "phoneDistance": "تنفيذ بطلبات ضخمة",
+      "responseTime": { "ar": "تنسيق مسبق للزيارة", "en": "scheduled site visits" },
+      "industries": ["الموانئ", "اللوجستيات الإقليمية", "الفنادق الكبرى", "الصناعات الغذائية"],
+      "uniqueSellingPoints": {
+        "ar": [
+          "تنفيذ مشاريع كبرى في ميناء جدة الإسلامي",
+          "خبرة في المستودعات اللوجستية للموانئ",
+          "حلول تبريد للمنشآت الفندقية الكبرى"
+        ],
+        "en": [
+          "Major project execution at Jeddah Islamic Port",
+          "Experience in port-side logistics warehouses",
+          "Cooling solutions for major hotel facilities"
+        ]
+      }
+    }
+  ]
+}

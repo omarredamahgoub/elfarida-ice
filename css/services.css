@@ -1,0 +1,60 @@
+/* ================================================================
+   services.css — أنماط خاصة بصفحة services (عربي RTL)
+   ================================================================ */
+
+/* ── خلفية الصفحة ── */
+body {
+  scroll-behavior: smooth;
+}
+
+/* ── روابط التنقل مع خط تحتي متحرك ── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: #2563eb;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ── حاوية صور الخدمات مع تأثير التكبير ── */
+.service-img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+}
+
+.service-img-container img {
+  transition: transform 0.7s ease;
+}
+
+.service-img-container:hover img {
+  transform: scale(1.08);
+}
+
+/* ── أنيميشن واتساب ── */
+@keyframes wa-badge-in {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes wa-pulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(1.7); opacity: 0;   }
+  100% { transform: scale(1.7); opacity: 0;   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-pulse,
+  span[style*="wa-pulse"] { animation: none !important; }
+}

@@ -1,0 +1,1658 @@
+﻿<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Cold Room Calculator | Elfarida Ice</title>
+    <meta
+      name="description"
+      content="Calculate the refrigeration capacity for your cold room or freezer project for free — a precise engineering tool from Elfarida Ice Industrial Refrigeration."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="author"
+      content="Elfarida Ice Industrial Refrigeration Engineering"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/cold-room-calculator-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/cold-room-calculator.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://elfaridaice.com/cold-room-calculator-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/cold-room-calculator.html"
+    />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="assets/ace-logos/elfaridaice.webp"
+    />
+    <link rel="apple-touch-icon" href="assets/ace-logos/elfaridaice.webp" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/cold-room-calculator-en.html"
+    />
+    <meta
+      property="og:title"
+      content="Free Cold Room Calculator | Elfarida Ice"
+    />
+    <meta
+      property="og:description"
+      content="Calculate the size and capacity of the right cold room or freezer for your project for free — from Elfarida Ice."
+    />
+    <meta property="og:image" content="https://elfaridaice.com/og-image.webp" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Elfarida Ice" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="twitter:title"
+      content="Free Cold Room Calculator | Elfarida Ice"
+    />
+    <meta
+      name="twitter:description"
+      content="Calculate the size and capacity of the right cold room or freezer for your project for free — from Elfarida Ice."
+    />
+    <meta
+      name="twitter:image"
+      content="https://elfaridaice.com/og-image.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Cold Room Calculator — Elfarida Ice Industrial Refrigeration"
+    />
+    <meta name="geo.region" content="SA-04" />
+    <meta
+      name="geo.placename"
+      content="Dammam, Eastern Province, Saudi Arabia"
+    />
+    <meta name="geo.position" content="26.4207;50.0888" />
+    <meta name="ICBM" content="26.4207, 50.0888" />
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Cold Room Calculator",
+          "url": "https://elfaridaice.com/cold-room-calculator-en.html",
+          "applicationCategory": "EngineeringApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "en",
+          "isAccessibleForFree": true,
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SAR" },
+          "description": "Free engineering tool to calculate the refrigeration capacity required for your cold room or freezer project based on dimensions, product type, and ambient conditions.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Elfarida Ice Industrial Refrigeration Engineering",
+            "url": "https://elfaridaice.com"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between a refrigeration tonne and a kilowatt?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "One refrigeration tonne (RT) equals 3.517 kW."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the result sufficient for actual construction?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The result is an initial estimate for planning and budgeting."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does the safety factor in the calculation mean?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We add 15–25% above the calculated thermal load."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does outdoor temperature affect the required capacity?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Each additional degree Celsius outside raises the wall thermal load by approximately 2–4%."
+              }
+            }
+          ]
+        }
+      ]
+    </script>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link
+      rel="preload"
+      as="font"
+      href="assets/fonts/cairo-arabic.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      /* ══ System variables ══ */
+      :root {
+        --bg-deep: #060e1e;
+        --bg-base: #080f20;
+        --bg-card: #0c1a30;
+        --bg-card-alt: #0a172b;
+        --bg-input: #060d1a;
+        --border: rgba(56, 189, 248, 0.14);
+        --border-mid: rgba(56, 189, 248, 0.28);
+        --border-strong: rgba(56, 189, 248, 0.5);
+        --accent: #38bdf8;
+        --accent-2: #0ea5e9;
+        --accent-3: #0284c7;
+        --accent-glow: rgba(56, 189, 248, 0.18);
+        --text-primary: #eef6ff;
+        --text-secondary: #a8c8e8;
+        --text-muted: #5a7a98;
+        --gold: #f0b429;
+        --success: #34d399;
+        --danger: #fb7185;
+        --radius-xl: 1.25rem;
+        --radius-2xl: 1.75rem;
+        --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border);
+        --shadow-glow: 0 0 48px rgba(56, 189, 248, 0.12);
+        --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        background: var(--bg-base) !important;
+      }
+      main {
+        background: var(--bg-base);
+      }
+
+      /* ══ Hero ══ */
+      .hero-section {
+        position: relative;
+        overflow: hidden;
+        padding: 5rem 1.5rem 6rem;
+        text-align: center;
+        background: linear-gradient(
+          165deg,
+          #050d1e 0%,
+          #081830 45%,
+          #0a1f45 100%
+        );
+      }
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 55% at 20% 60%,
+            rgba(14, 165, 233, 0.13) 0%,
+            transparent 65%
+          ),
+          radial-gradient(
+            ellipse 50% 45% at 82% 25%,
+            rgba(56, 189, 248, 0.09) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      .hero-grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        -webkit-mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 0%,
+          transparent 75%
+        );
+        mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 0%,
+          transparent 75%
+        );
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 1.1rem;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+        margin-bottom: 1.75rem;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .hero-badge span {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+      }
+      .hero-badge i {
+        color: var(--accent);
+        font-size: 0.78rem;
+      }
+      .hero-title {
+        font-size: clamp(2.4rem, 7vw, 4.2rem);
+        font-weight: 900;
+        color: var(--text-primary);
+        line-height: 1.12;
+        margin-bottom: 1.25rem;
+        position: relative;
+      }
+      .hero-title .highlight {
+        color: transparent;
+        background: linear-gradient(
+          135deg,
+          #38bdf8 0%,
+          #7dd3fc 50%,
+          #38bdf8 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      .hero-subtitle {
+        font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+        color: var(--text-secondary);
+        line-height: 1.8;
+        max-width: 38rem;
+        margin: 0 auto;
+        font-weight: 500;
+      }
+
+      /* ══ Calculator card ══ */
+      .calc-card {
+        background: var(--bg-card);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-card);
+        border: 1px solid var(--border);
+        padding: 2rem;
+        transition: border-color var(--transition);
+      }
+      .calc-card:hover {
+        border-color: var(--border-mid);
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        color: var(--text-primary);
+        font-size: 1.15rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .section-heading .icon-wrap {
+        width: 38px;
+        height: 38px;
+        border-radius: 0.65rem;
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .calc-label {
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .dim-sublabel {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+        display: block;
+      }
+
+      .calc-input,
+      .calc-select {
+        width: 100%;
+        border: 1.5px solid rgba(56, 189, 248, 0.18);
+        border-radius: 0.85rem;
+        padding: 0.8rem 1rem;
+        font-size: 0.93rem;
+        font-family: inherit;
+        color: var(--text-primary);
+        background: var(--bg-input);
+        transition:
+          border-color var(--transition),
+          box-shadow var(--transition),
+          background var(--transition);
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      .calc-input:hover,
+      .calc-select:hover {
+        border-color: rgba(56, 189, 248, 0.32);
+        background: rgba(6, 13, 26, 0.85);
+      }
+      .calc-input:focus,
+      .calc-select:focus {
+        border-color: var(--accent);
+        box-shadow:
+          0 0 0 3px rgba(56, 189, 248, 0.12),
+          0 0 20px rgba(56, 189, 248, 0.08);
+        background: rgba(4, 10, 20, 0.9);
+      }
+      .calc-input::placeholder {
+        color: var(--text-muted);
+      }
+
+      .calc-select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.9rem center;
+        padding-right: 2.4rem;
+        cursor: pointer;
+      }
+      .calc-select option {
+        background: #0c1a30;
+        color: var(--text-primary);
+      }
+
+      #calc-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        padding: 1rem 2rem;
+        border-radius: var(--radius-xl);
+        border: none;
+        background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        color: #fff;
+        font-weight: 900;
+        font-size: 1.05rem;
+        font-family: inherit;
+        cursor: pointer;
+        box-shadow:
+          0 6px 28px rgba(14, 165, 233, 0.38),
+          0 0 0 1px rgba(56, 189, 248, 0.25);
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition),
+          filter var(--transition);
+        position: relative;
+        overflow: hidden;
+        margin-top: 0.5rem;
+      }
+      #calc-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.14) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      #calc-btn:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 12px 40px rgba(14, 165, 233, 0.55),
+          0 0 0 1px rgba(56, 189, 248, 0.45);
+        filter: brightness(1.07);
+      }
+      #calc-btn:active {
+        transform: translateY(0);
+      }
+
+      /* ══ Result ══ */
+      .result-box {
+        background: linear-gradient(
+          150deg,
+          #040d1e 0%,
+          #071a3a 50%,
+          #0a2160 100%
+        );
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border-mid);
+        padding: 2.25rem 2rem;
+        text-align: center;
+        box-shadow: var(--shadow-card), var(--shadow-glow);
+        position: relative;
+        overflow: hidden;
+      }
+      .result-box::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 320px;
+        height: 200px;
+        background: radial-gradient(
+          ellipse,
+          rgba(56, 189, 248, 0.14) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .result-label {
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        opacity: 0.8;
+        margin-bottom: 0.6rem;
+      }
+      .result-value {
+        font-size: clamp(2.8rem, 8vw, 4rem);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1;
+        text-shadow: 0 0 40px rgba(56, 189, 248, 0.45);
+        position: relative;
+      }
+      .result-unit {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--accent);
+        opacity: 0.75;
+        margin-top: 0.4rem;
+      }
+      .result-divider {
+        border-color: rgba(56, 189, 248, 0.15);
+        margin: 1.25rem 0;
+      }
+      .result-sub-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .result-sub-cell {
+        text-align: center;
+      }
+      .result-sub-label {
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.3rem;
+      }
+      .result-sub-value {
+        font-size: 1.35rem;
+        font-weight: 900;
+        color: var(--text-primary);
+      }
+
+      .rec-card {
+        background: var(--bg-card-alt);
+        border: 1px solid var(--border-mid);
+        border-left: 3px solid var(--accent-2);
+        border-radius: var(--radius-xl);
+        padding: 1.6rem 1.75rem;
+      }
+      .rec-card-title {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 900;
+        margin-bottom: 0.9rem;
+        letter-spacing: 0.03em;
+      }
+      .rec-body {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.85;
+        font-weight: 500;
+      }
+      .rec-brand {
+        display: inline-block;
+        background: rgba(56, 189, 248, 0.12);
+        color: var(--accent);
+        border: 1px solid rgba(56, 189, 248, 0.28);
+        font-weight: 800;
+        font-size: 0.7rem;
+        padding: 0.1rem 0.5rem;
+        border-radius: 999px;
+        vertical-align: middle;
+      }
+      .rec-model {
+        display: inline-block;
+        background: rgba(56, 189, 248, 0.06);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.72rem;
+        padding: 0.12rem 0.5rem;
+        border-radius: 0.4rem;
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        margin: 0.1rem 0.04rem;
+      }
+
+      .disclaimer {
+        background: rgba(240, 180, 41, 0.06);
+        border: 1px solid rgba(240, 180, 41, 0.28);
+        border-radius: 0.9rem;
+        padding: 1rem 1.25rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #fbbf24;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        line-height: 1.65;
+      }
+      .disclaimer i {
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      #result-placeholder {
+        border: 1.5px dashed rgba(56, 189, 248, 0.18);
+        background: rgba(56, 189, 248, 0.025);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        border-radius: var(--radius-xl);
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+      }
+      #result-placeholder .ph-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 1rem;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.65rem;
+        color: var(--accent);
+        opacity: 0.5;
+        margin-bottom: 1rem;
+      }
+      #result-placeholder p {
+        color: var(--text-muted);
+        font-size: 0.88rem;
+        font-weight: 600;
+        max-width: 18rem;
+        line-height: 1.7;
+      }
+
+      #calc-error {
+        color: var(--danger);
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 0.6rem 1rem;
+        background: rgba(251, 113, 133, 0.07);
+        border: 1px solid rgba(251, 113, 133, 0.2);
+        border-radius: 0.65rem;
+        margin-top: 0.5rem;
+      }
+
+      /* ══ Section header ══ */
+      .sec-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .sec-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+        opacity: 0.8;
+      }
+      .sec-title {
+        font-size: clamp(1.6rem, 3.5vw, 2.15rem);
+        font-weight: 900;
+        color: var(--text-primary);
+        line-height: 1.25;
+      }
+      .sec-line {
+        width: 2.5rem;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        border-radius: 999px;
+        margin: 0.75rem auto 0;
+      }
+
+      /* ══ How it works ══ */
+      .how-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .how-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .how-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 2rem 1.5rem 1.75rem;
+        text-align: center;
+        position: relative;
+        transition:
+          border-color var(--transition),
+          transform var(--transition),
+          box-shadow var(--transition);
+      }
+      .how-card:hover {
+        border-color: var(--border-mid);
+        transform: translateY(-4px);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.4),
+          0 0 0 1px var(--border-mid);
+      }
+      .step-badge {
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--bg-base);
+        box-shadow: 0 4px 14px rgba(14, 165, 233, 0.45);
+      }
+      .how-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.25rem;
+        border: 1px solid var(--border);
+        font-size: 1.55rem;
+      }
+      .how-card h3 {
+        font-size: 0.97rem;
+        font-weight: 900;
+        color: var(--text-primary);
+        margin-bottom: 0.55rem;
+      }
+      .how-card p {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.75;
+      }
+
+      /* ══ Trust ══ */
+      .trust-grid {
+        display: grid;
+        gap: 1rem;
+      }
+      @media (min-width: 768px) {
+        .trust-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .trust-card {
+        background: rgba(8, 18, 40, 0.7);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 1.6rem;
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        transition:
+          border-color var(--transition),
+          transform var(--transition),
+          background var(--transition);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .trust-card:hover {
+        border-color: var(--border-mid);
+        background: rgba(12, 26, 54, 0.85);
+        transform: translateY(-3px);
+      }
+      .trust-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .sticky-header-shell {
+        background: #060e1e;
+        border-color: rgba(56, 189, 248, 0.12);
+        box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+      }
+      .hero-content-layer {
+        z-index: 2;
+      }
+      .tone-sky {
+        background: rgba(14, 165, 233, 0.1);
+        border-color: rgba(14, 165, 233, 0.2);
+      }
+      .tone-mint {
+        background: rgba(52, 211, 153, 0.1);
+        border-color: rgba(52, 211, 153, 0.2);
+      }
+      .tone-rose {
+        background: rgba(248, 113, 113, 0.1);
+        border-color: rgba(248, 113, 113, 0.2);
+      }
+      .tone-sky-strong {
+        background: rgba(14, 165, 233, 0.12);
+        border: 1px solid rgba(56, 189, 248, 0.22);
+      }
+      .tone-mint-strong {
+        background: rgba(52, 211, 153, 0.12);
+        border: 1px solid rgba(52, 211, 153, 0.22);
+      }
+      .tone-gold-strong {
+        background: rgba(240, 180, 41, 0.12);
+        border: 1px solid rgba(240, 180, 41, 0.22);
+      }
+      .icon-sky {
+        color: #38bdf8;
+      }
+      .icon-mint {
+        color: #34d399;
+      }
+      .icon-rose {
+        color: #f87171;
+      }
+      .icon-gold {
+        color: #f0b429;
+      }
+      .trust-card h3 {
+        font-size: 0.93rem;
+        font-weight: 900;
+        color: var(--text-primary);
+        margin-bottom: 0.3rem;
+      }
+      .trust-card p {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        line-height: 1.72;
+      }
+
+      /* ══ FAQ ══ */
+      .faq-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        transition: border-color var(--transition);
+      }
+      .faq-item:hover {
+        border-color: var(--border-mid);
+      }
+      .faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.2rem 1.6rem;
+        font-size: 0.93rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        cursor: pointer;
+        list-style: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-chevron {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 0.65rem;
+        flex-shrink: 0;
+        transition:
+          transform var(--transition),
+          background var(--transition);
+      }
+      .faq-item[open] .faq-chevron {
+        transform: rotate(180deg);
+        background: rgba(56, 189, 248, 0.18);
+      }
+      .faq-body {
+        padding: 0 1.6rem 1.4rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+        font-size: 0.87rem;
+        color: var(--text-secondary);
+        line-height: 1.82;
+        font-weight: 500;
+      }
+
+      /* ══ Final CTA ══ */
+      .final-cta {
+        border-radius: var(--radius-2xl);
+        padding: 5rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(
+          140deg,
+          #102280 0%,
+          #1a3aaf 55%,
+          #1d4ed8 100%
+        );
+        border: 1px solid rgba(99, 179, 237, 0.18);
+        box-shadow: 0 24px 72px rgba(26, 58, 175, 0.35);
+      }
+      .final-cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 65% 55% at 50% 0%,
+            rgba(147, 197, 253, 0.14) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 40% at 85% 80%,
+            rgba(56, 189, 248, 0.08) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      .final-cta h2 {
+        font-size: clamp(1.6rem, 5vw, 2.7rem);
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+      .final-cta > p {
+        color: #bfdbfe;
+        font-size: clamp(0.9rem, 2vw, 1.05rem);
+        margin-bottom: 2.5rem;
+        max-width: 36rem;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;
+        position: relative;
+      }
+      .cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        position: relative;
+      }
+      .cta-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.9rem 2rem;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        color: #fff;
+        font-weight: 900;
+        font-size: 0.95rem;
+        text-decoration: none;
+        box-shadow: 0 8px 28px rgba(14, 165, 233, 0.42);
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition),
+          filter var(--transition);
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .cta-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(14, 165, 233, 0.58);
+        filter: brightness(1.08);
+      }
+      .cta-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.9rem 2rem;
+        border-radius: var(--radius-xl);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1.5px solid rgba(255, 255, 255, 0.22);
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition:
+          background var(--transition),
+          border-color var(--transition),
+          transform var(--transition);
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .cta-btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.42);
+        transform: translateY(-2px);
+      }
+
+      .result-cta-card {
+        border-radius: var(--radius-xl);
+        padding: 1.6rem;
+        text-align: center;
+        background: var(--bg-card-alt);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+      }
+      .result-cta-card p {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        font-weight: 600;
+        line-height: 1.65;
+      }
+      .result-cta-card .title {
+        color: var(--text-primary);
+        font-size: 1.05rem;
+        font-weight: 900;
+        margin-bottom: 0.4rem;
+      }
+
+      .inline-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.72rem 1.6rem;
+        border-radius: 0.85rem;
+        background: linear-gradient(135deg, #0ea5e9, #0284c7);
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.88rem;
+        text-decoration: none;
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition);
+        box-shadow: 0 4px 18px rgba(14, 165, 233, 0.35);
+        margin-top: 1rem;
+      }
+      .inline-cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(14, 165, 233, 0.5);
+      }
+
+      @media (max-width: 640px) {
+        .calc-card {
+          padding: 1.35rem;
+        }
+        .hero-section {
+          padding: 3.5rem 1.25rem 4.5rem;
+        }
+      }
+    </style>
+
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+    <link rel="stylesheet" href="cairo.css" />
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/site-shell.css" />
+  </head>
+
+  <body class="bg-[#080f20] text-left">
+    <div id="site-header"></div>
+    <header
+      role="banner"
+      class="sticky-header-shell sticky top-0 z-[100] border-b"
+    ></header>
+
+    <!-- ═══ Hero ═══ -->
+    <div class="hero-section" role="banner" aria-labelledby="hero-title">
+      <div class="hero-grid-lines" aria-hidden="true"></div>
+      <div class="hero-content-layer max-w-4xl mx-auto relative">
+        <div class="hero-badge">
+          <i class="fas fa-calculator" aria-hidden="true"></i>
+          <span>Free Engineering Tool</span>
+        </div>
+        <h1 id="hero-title" class="hero-title">
+          Cold Room <span class="highlight">Calculator</span>
+        </h1>
+        <p class="hero-subtitle">
+          Enter your project dimensions and get an instant estimate of the
+          required refrigeration capacity — free and without obligation
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══ Main content ═══ -->
+    <main id="main-content" class="max-w-5xl mx-auto px-4 py-14 md:py-20">
+      <!-- Calculator grid -->
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <!-- Input form -->
+        <section class="calc-card" aria-labelledby="calc-form-title">
+          <h2 id="calc-form-title" class="section-heading">
+            <span class="icon-wrap"
+              ><i class="fas fa-sliders-h" aria-hidden="true"></i
+            ></span>
+            Project Data
+          </h2>
+          <div class="space-y-5">
+            <div class="field-group">
+              <label for="room-type" class="calc-label">Room type</label>
+              <select id="room-type" class="calc-select" aria-required="true">
+                <option value="cooling">Chilled (0 – 8 °C)</option>
+                <option value="chilling">Deep chill (-2 – 2 °C)</option>
+                <option value="freezing">Frozen (-18 °C)</option>
+                <option value="deep-freeze">Deep freeze (-25 °C)</option>
+              </select>
+            </div>
+
+            <fieldset class="border-0 p-0 m-0" aria-describedby="dim-hint">
+              <legend class="calc-label mb-3">
+                Internal room dimensions (metres)
+              </legend>
+              <span id="dim-hint" class="sr-only"
+                >Enter the internal length, width, and height of the room in
+                metres</span
+              >
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label for="dim-l" class="dim-sublabel">Length</label>
+                  <input
+                    type="number"
+                    id="dim-l"
+                    class="calc-input"
+                    placeholder="10"
+                    min="1"
+                    max="200"
+                    step="0.1"
+                    aria-required="true"
+                  />
+                </div>
+                <div>
+                  <label for="dim-w" class="dim-sublabel">Width</label>
+                  <input
+                    type="number"
+                    id="dim-w"
+                    class="calc-input"
+                    placeholder="6"
+                    min="1"
+                    max="200"
+                    step="0.1"
+                    aria-required="true"
+                  />
+                </div>
+                <div>
+                  <label for="dim-h" class="dim-sublabel">Height</label>
+                  <input
+                    type="number"
+                    id="dim-h"
+                    class="calc-input"
+                    placeholder="4"
+                    min="1.5"
+                    max="20"
+                    step="0.1"
+                    aria-required="true"
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="field-group">
+              <label for="load-ton" class="calc-label"
+                >Approximate storage load (tonnes)</label
+              >
+              <input
+                type="number"
+                id="load-ton"
+                class="calc-input"
+                placeholder="20"
+                min="0"
+                max="5000"
+                step="1"
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="product-type" class="calc-label"
+                >Stored product type</label
+              >
+              <select id="product-type" class="calc-select">
+                <option value="1.00">Meat &amp; fish</option>
+                <option value="0.90">Vegetables &amp; fruit</option>
+                <option value="0.80">Dairy products</option>
+                <option value="0.75">Chemicals / pharmaceuticals</option>
+                <option value="0.70">Ready-made frozen goods</option>
+                <option value="0.95">Ice cream &amp; frozen desserts</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="amb-temp" class="calc-label"
+                >Expected outdoor temperature</label
+              >
+              <select id="amb-temp" class="calc-select">
+                <option value="35">35 °C (mild)</option>
+                <option value="40" selected>40 °C (typical Gulf summer)</option>
+                <option value="45">45 °C (harsh Gulf summer)</option>
+                <option value="50">50 °C (extreme)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="door-open" class="calc-label"
+                >Approximate daily door openings</label
+              >
+              <select id="door-open" class="calc-select">
+                <option value="1.00">Fewer than 10 (warehouse)</option>
+                <option value="1.08" selected>
+                  10 – 30 (medium distribution)
+                </option>
+                <option value="1.18">30 – 60 (intensive distribution)</option>
+                <option value="1.30">More than 60 (retail)</option>
+              </select>
+            </div>
+
+            <button
+              id="calc-btn"
+              type="button"
+              aria-label="Calculate refrigeration capacity based on entered data"
+            >
+              <i class="fas fa-snowflake" aria-hidden="true"></i>
+              Calculate required capacity
+            </button>
+
+            <p
+              id="calc-error"
+              class="hidden"
+              role="alert"
+              aria-live="polite"
+            ></p>
+          </div>
+        </section>
+
+        <!-- Results column -->
+        <div
+          class="space-y-5 lg:sticky lg:top-28"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <!-- Primary result -->
+          <div id="result-cooling" class="result-box hidden">
+            <p class="result-label">Required refrigeration capacity</p>
+            <div class="result-value" id="result-kw">—</div>
+            <div class="result-unit">Thermal kilowatts (kW)</div>
+            <hr class="result-divider" />
+            <div class="result-sub-grid">
+              <div class="result-sub-cell">
+                <div class="result-sub-label">In refrigeration tonnes</div>
+                <div class="result-sub-value" id="result-rt">—</div>
+              </div>
+              <div class="result-sub-cell">
+                <div class="result-sub-label">Room volume</div>
+                <div class="result-sub-value" id="result-vol">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Engineering recommendation -->
+          <div id="result-system" class="rec-card hidden">
+            <div class="rec-card-title">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              Engineering Recommendation
+            </div>
+            <div id="result-system-text" class="rec-body"></div>
+          </div>
+
+          <!-- Disclaimer -->
+          <div id="result-note" class="disclaimer hidden">
+            <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+            <span
+              ><strong>Note:</strong> This is an indicative result based on the
+              data entered. Accurate design requires a full thermal study with a
+              specialist engineer.</span
+            >
+          </div>
+
+          <!-- Result CTA -->
+          <div id="result-cta" class="result-cta-card hidden">
+            <p class="title">Want a real quotation?</p>
+            <p>
+              Our engineering team replies within hours — consultation is free
+              and without obligation
+            </p>
+            <a href="contact-en.html" class="inline-cta-btn">
+              <i class="fas fa-phone-alt" aria-hidden="true"></i>
+              Get a free consultation
+            </a>
+          </div>
+
+          <!-- Placeholder -->
+          <div id="result-placeholder">
+            <div class="ph-icon">
+              <i class="fas fa-thermometer-half" aria-hidden="true"></i>
+            </div>
+            <p>Enter your project dimensions above then press Calculate</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ How it works ═══ -->
+      <section class="mt-24" aria-labelledby="how-title">
+        <div class="sec-header">
+          <div class="sec-label">
+            <i class="fas fa-info-circle" aria-hidden="true"></i> How it works
+          </div>
+          <h2 id="how-title" class="sec-title">
+            How does the calculator work?
+          </h2>
+          <div class="sec-line"></div>
+        </div>
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="step-badge" aria-hidden="true">1</div>
+            <div class="how-icon tone-sky">
+              <i class="fas fa-ruler-combined icon-sky" aria-hidden="true"></i>
+            </div>
+            <h3>Enter dimensions</h3>
+            <p>
+              Internal room dimensions, product type, and the ambient conditions
+              surrounding your project
+            </p>
+          </div>
+          <div class="how-card">
+            <div class="step-badge" aria-hidden="true">2</div>
+            <div class="how-icon tone-mint">
+              <i class="fas fa-cogs icon-mint" aria-hidden="true"></i>
+            </div>
+            <h3>Engineering algorithm</h3>
+            <p>
+              We calculate thermal loads: walls, product, lighting, door opening
+              frequency, and the climatic factor
+            </p>
+          </div>
+          <div class="how-card">
+            <div class="step-badge" aria-hidden="true">3</div>
+            <div class="how-icon tone-rose">
+              <i class="fas fa-file-invoice icon-rose" aria-hidden="true"></i>
+            </div>
+            <h3>Get the result</h3>
+            <p>
+              Refrigeration capacity in kW and RT with an optimal system
+              recommendation for your project
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Trust / E-E-A-T ═══ -->
+      <section class="mt-20" aria-labelledby="trust-title">
+        <div class="sec-header">
+          <div class="sec-label">
+            <i class="fas fa-shield-alt" aria-hidden="true"></i> Expertise &amp;
+            Trust
+          </div>
+          <h2 id="trust-title" class="sec-title">Why trust this calculator?</h2>
+          <div class="sec-line"></div>
+        </div>
+        <div class="trust-grid">
+          <div class="trust-card">
+            <div class="trust-icon tone-sky-strong">
+              <i class="fas fa-award icon-sky" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3>20+ years of engineering experience</h3>
+              <p>
+                The algorithm is built on ASHRAE standards and verified thermal
+                coefficients from real refrigeration projects across the Eastern
+                Province.
+              </p>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon tone-mint-strong">
+              <i class="fas fa-shield-alt icon-mint" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3>Gulf safety factor 20%+</h3>
+              <p>
+                The calculator accounts for harsh Gulf climates up to 50 °C,
+                applying safety margins higher than European standards.
+              </p>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon tone-gold-strong">
+              <i class="fas fa-phone-alt icon-gold" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3>Free engineer review</h3>
+              <p>
+                After calculating, our engineering team reviews the result and
+                provides a detailed thermal study — free and without obligation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FAQ ═══ -->
+      <section class="mt-20" aria-labelledby="faq-title">
+        <div class="sec-header">
+          <div class="sec-label">
+            <i class="fas fa-question-circle" aria-hidden="true"></i> FAQ
+          </div>
+          <h2 id="faq-title" class="sec-title">
+            Frequently asked questions about refrigeration calculation
+          </h2>
+          <div class="sec-line"></div>
+        </div>
+        <div class="space-y-3 max-w-3xl mx-auto">
+          <details class="faq-item">
+            <summary>
+              What is the difference between a refrigeration tonne and a
+              kilowatt?
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              One refrigeration tonne (RT) equals 3.517 kW. RT is used in Gulf
+              and American markets while kW is the standard in European
+              specifications. The Elfarida Ice calculator displays both units
+              automatically.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Is the result sufficient for actual construction?
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              The result is an initial estimate for planning and budgeting.
+              Actual construction requires a detailed thermal study covering
+              insulation type, evaporator location, and compressor efficiency.
+              The Elfarida Ice team provides the full study at no cost.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              What does the safety factor in the calculation mean?
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              We add 15–25% above the calculated thermal load to compensate for
+              gradual equipment ageing and unexpected loads, ensuring long-term
+              thermal stability.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              How does outdoor temperature affect the required capacity?
+              <span class="faq-chevron" aria-hidden="true"
+                ><i class="fas fa-chevron-down"></i
+              ></span>
+            </summary>
+            <div class="faq-body">
+              Each additional degree Celsius outside raises the wall thermal
+              load by approximately 2–4%. Saudi summers can reach 50 °C,
+              requiring design safety factors higher than European standards.
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- ═══ Final CTA ═══ -->
+      <section class="mt-24 final-cta" aria-labelledby="final-cta-title">
+        <h2 id="final-cta-title">Ready for the next step?</h2>
+        <p>
+          Our engineering team provides a detailed design and accurate quotation
+          within 24 hours — free and without obligation
+        </p>
+        <div class="cta-actions">
+          <a href="contact-en.html" class="cta-btn-primary">
+            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+            Contact an engineer now
+          </a>
+          <a href="services-en.html" class="cta-btn-secondary">
+            <i class="fas fa-snowflake" aria-hidden="true"></i>
+            Refrigeration services
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <!-- ═══ JavaScript ═══ -->
+    <script>
+      (function () {
+        "use strict";
+
+        var ROOM_SPECS = {
+          cooling: { target: 4, uWall: 0.25 },
+          chilling: { target: 0, uWall: 0.22 },
+          freezing: { target: -18, uWall: 0.18 },
+          "deep-freeze": { target: -25, uWall: 0.15 },
+        };
+
+        var SYSTEM_RECS = {
+          cooling: {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>Capacity range: up to 5 RT</strong><br>We recommend a <span class="rec-brand">Bitzer</span> semi-hermetic compressor <span class="rec-model">2KES-05</span> or <span class="rec-model">4TCS-8.2</span> with R448A, a Friga-Bohn air evaporator, and a condensing unit rated for Gulf conditions up to 50 °C.',
+              },
+              {
+                maxRT: 15,
+                html: '<strong>Capacity range: 5 – 15 RT</strong><br>We recommend a <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-15X</span> or <span class="rec-brand">Bitzer</span> <span class="rec-model">4NES-14</span> with R449A. A dual-compressor rack system is preferred for standby redundancy.',
+              },
+              {
+                maxRT: 40,
+                html: '<strong>Capacity range: 15 – 40 RT</strong><br>We recommend a multi-compressor rack with <span class="rec-brand">Bitzer</span> <span class="rec-model">6JE-25</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-40X</span>. A VFD on the lead compressor saves 20–30% energy.',
+              },
+            ],
+            default:
+              '<strong>Capacity range: over 40 RT</strong><br>We recommend a central refrigeration plant with <span class="rec-brand">Bitzer</span> <span class="rec-model">8GE-50</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-75X</span> with a BMS for full system control.',
+          },
+          chilling: {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>Capacity range: up to 5 RT</strong><br>We recommend a <span class="rec-brand">Bitzer</span> <span class="rec-model">4TCS-8.2</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-10X</span> with R448A, and an air evaporator with precise humidity control (RH 85–95%).',
+              },
+              {
+                maxRT: 20,
+                html: '<strong>Capacity range: 5 – 20 RT</strong><br>We recommend a <span class="rec-brand">Bitzer</span> <span class="rec-model">4PES-15Y</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DKSH-20X</span> with a Danfoss AK-CC controller for ±0.5 °C temperature precision.',
+              },
+            ],
+            default:
+              '<strong>Capacity range: over 20 RT</strong><br>We recommend a rack system with <span class="rec-brand">Bitzer</span> <span class="rec-model">6JE-25</span> and a centralised Danfoss AK-SC controller for thermal stability in large food warehouses.',
+          },
+          freezing: {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>Capacity range: up to 5 RT</strong><br>We recommend a <span class="rec-brand">Bitzer</span> <span class="rec-model">2KES-05Y</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-10X</span> with R448A and automatic defrost.',
+              },
+              {
+                maxRT: 20,
+                html: '<strong>Capacity range: 5 – 20 RT</strong><br>We recommend a <span class="rec-brand">Bitzer</span> <span class="rec-model">4NCS-12.2Y</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DKSH-20X</span> two-stage, with a Friga-Bohn evaporator and hot-gas defrost.',
+              },
+              {
+                maxRT: 50,
+                html: '<strong>Capacity range: 20 – 50 RT</strong><br>We recommend a rack system with <span class="rec-brand">Bitzer</span> <span class="rec-model">6HE-25Y</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-40X</span> with VFD for energy efficiency.',
+              },
+            ],
+            default:
+              '<strong>Capacity range: over 50 RT</strong><br>We recommend a central freezing plant with <span class="rec-brand">Bitzer</span> <span class="rec-model">8GE-50Y</span> or <span class="rec-brand">Copeland</span> <span class="rec-model">DLSH-75X</span> using a booster system with BMS and remote monitoring.',
+          },
+          "deep-freeze": {
+            ranges: [
+              {
+                maxRT: 5,
+                html: '<strong>Capacity range: up to 5 RT</strong><br>We recommend a two-stage system: <span class="rec-brand">Bitzer</span> <span class="rec-model">2KES-05Y</span> with Economizer, or <span class="rec-brand">Copeland</span> <span class="rec-model">DKSL-10X</span> cascade. Minimum 200 mm panel insulation.',
+              },
+              {
+                maxRT: 20,
+                html: '<strong>Capacity range: 5 – 20 RT</strong><br>We recommend a dual-circuit cascade: <span class="rec-brand">Bitzer</span> <span class="rec-model">4NCS-12.2Y</span> (high-stage) + <span class="rec-model">2KES-05Y</span> (low-stage) with calibrated electric defrost.',
+              },
+            ],
+            default:
+              '<strong>Capacity range: over 20 RT</strong><br>We recommend an industrial cascade system with <span class="rec-brand">Bitzer</span> <span class="rec-model">6HE-25Y</span>, or an NH\u2082/CO\u2082 system for larger capacities. 200–250 mm panel insulation and a full vapour barrier are mandatory.',
+          },
+        };
+
+        function getRecommendationHTML(rType, rt) {
+          var rec = SYSTEM_RECS[rType];
+          for (var i = 0; i < rec.ranges.length; i++) {
+            if (rt <= rec.ranges[i].maxRT) return rec.ranges[i].html;
+          }
+          return rec.default;
+        }
+
+        function calcLoad() {
+          var rType = document.getElementById("room-type").value;
+          var L = parseFloat(document.getElementById("dim-l").value);
+          var W = parseFloat(document.getElementById("dim-w").value);
+          var H = parseFloat(document.getElementById("dim-h").value);
+          var loadTon =
+            parseFloat(document.getElementById("load-ton").value) || 0;
+          var prodF = parseFloat(document.getElementById("product-type").value);
+          var ambT = parseFloat(document.getElementById("amb-temp").value);
+          var doorF = parseFloat(document.getElementById("door-open").value);
+          var errEl = document.getElementById("calc-error");
+
+          errEl.classList.add("hidden");
+          errEl.textContent = "";
+
+          if (isNaN(L) || isNaN(W) || isNaN(H) || L <= 0 || W <= 0 || H <= 0) {
+            errEl.textContent =
+              "Please enter valid dimensions (length, width, height).";
+            errEl.classList.remove("hidden");
+            return;
+          }
+
+          var spec = ROOM_SPECS[rType];
+          var deltaT = ambT - spec.target;
+          var A = 2 * (L * W + L * H + W * H);
+          var qWall = spec.uWall * A * deltaT;
+          var vol = L * W * H;
+          var airLoad = (vol * 0.5 * 1.2 * 1006 * deltaT) / 3600;
+          var lightLoad = L * W * 6;
+          var prodLoad =
+            loadTon > 0
+              ? (loadTon * 1000 * 0.1 * prodF * 3.5 * 1000) / (24 * 3600)
+              : 0;
+          var qTotal = (qWall + airLoad + lightLoad + prodLoad) * doorF * 1.2;
+          var kw = qTotal / 1000;
+          var rt = kw / 3.517;
+
+          showResults(kw, rt, vol, rType);
+        }
+
+        function showResults(kw, rt, vol, rType) {
+          document.getElementById("result-placeholder").classList.add("hidden");
+          document.getElementById("result-cooling").classList.remove("hidden");
+          document.getElementById("result-system").classList.remove("hidden");
+          document.getElementById("result-note").classList.remove("hidden");
+          document.getElementById("result-cta").classList.remove("hidden");
+          document.getElementById("result-kw").textContent = kw.toFixed(1);
+          document.getElementById("result-rt").textContent =
+            rt.toFixed(2) + " RT";
+          document.getElementById("result-vol").textContent =
+            vol.toFixed(1) + " m\u00B3";
+          document.getElementById("result-system-text").innerHTML =
+            getRecommendationHTML(rType, rt);
+        }
+
+        document.getElementById("calc-btn").addEventListener("click", calcLoad);
+
+        ["dim-l", "dim-w", "dim-h", "load-ton"].forEach(function (id) {
+          document.getElementById(id).addEventListener("keydown", function (e) {
+            if (e.key === "Enter") calcLoad();
+          });
+        });
+
+        document.querySelectorAll("details").forEach(function (det) {
+          var sum = det.querySelector("summary");
+          if (!sum) return;
+          sum.setAttribute("aria-expanded", det.open ? "true" : "false");
+          det.addEventListener("toggle", function () {
+            sum.setAttribute("aria-expanded", det.open ? "true" : "false");
+          });
+        });
+      })();
+    </script>
+
+    <script src="js/lang-switch.js" defer></script>
+    <script src="js/site-shell.js" defer></script>
+  </body>
+</html>

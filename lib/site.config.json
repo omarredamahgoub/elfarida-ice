@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "version": "2.0.0",
+  "lastUpdated": "2026-05-05",
+  "gaId": "G-XXXXXXXXXX",
+
+  "organization": {
+    "legalNameAr": "مؤسسة الفريدة آيس للهندسة والتبريد الصناعي",
+    "legalNameEn": "Elfarida Ice Industrial Refrigeration Engineering",
+    "shortNameAr": "الفريدة آيس",
+    "shortNameEn": "Elfarida Ice",
+    "foundingYear": 2004,
+    "yearsOfExperience": 20,
+    "completedProjects": 550,
+    "supportPolicy": "24/7",
+    "logo": "/assets/ace-logos/elfaridaice.webp",
+    "ogImage": "/og-image.webp",
+    "primaryColor": "#1e3a8a",
+    "accentColor": "#dc2626"
+  },
+
+  "contact": {
+    "phonePrimary": { "display": "0598366214", "e164": "+966598366214" },
+    "phoneWhatsapp": { "display": "0548113865", "e164": "+966548113865" },
+    "email": "info@elfaridaice.com",
+    "website": "https://elfaridaice.com"
+  },
+
+  "headquarters": {
+    "ar": {
+      "streetAddress": "حي البادية",
+      "addressLocality": "الدمام",
+      "addressRegion": "المنطقة الشرقية",
+      "addressCountry": "المملكة العربية السعودية"
+    },
+    "en": {
+      "streetAddress": "Al-Badiya District",
+      "addressLocality": "Dammam",
+      "addressRegion": "Eastern Province",
+      "addressCountry": "Saudi Arabia"
+    },
+    "postalCode": "32253",
+    "geo": { "lat": 26.4207, "lng": 50.0888 }
+  },
+
+  "branches": [
+    {
+      "id": "dammam-khadriyah",
+      "name": { "ar": "فرع الدمام — الخضرية", "en": "Dammam — Al-Khadriyah Branch" },
+      "addressLocality": { "ar": "الدمام", "en": "Dammam" },
+      "addressRegion": { "ar": "المنطقة الشرقية", "en": "Eastern Province" },
+      "geo": { "lat": 26.4282, "lng": 50.0997 }
+    },
+    {
+      "id": "riyadh-sulay",
+      "name": { "ar": "فرع الرياض — السلي", "en": "Riyadh — As-Sulay Branch" },
+      "addressLocality": { "ar": "الرياض", "en": "Riyadh" },
+      "addressRegion": { "ar": "منطقة الرياض", "en": "Riyadh Region" },
+      "geo": { "lat": 24.7136, "lng": 46.6753 }
+    }
+  ],
+
+  "openingHours": [
+    { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "08:00", "closes": "17:00" },
+    { "dayOfWeek": ["Saturday"], "opens": "08:00", "closes": "14:00" }
+  ],
+
+  "social": {
+    "facebook":  "https://www.facebook.com/alfaridaice.sa",
+    "instagram": "https://www.instagram.com/alfaridaice_sa/",
+    "twitter":   "https://x.com/EngMoha64468185",
+    "linkedin":  "https://sa.linkedin.com/company/al-farida-ice",
+    "tiktok":    "https://www.tiktok.com/@alfaridaice_sa",
+    "snapchat":  "https://www.snapchat.com/add/alfaridaice_sa",
+    "youtube":   ""
+  },
+
+  "services": [
+    {
+      "id": "cold-rooms",
+      "slug": "cold-rooms",
+      "name": { "ar": "غرف التبريد والتجميد الصناعي", "en": "Industrial Cold Rooms & Freezing" },
+      "shortDescription": {
+        "ar": "تصميم وتنفيذ غرف تبريد وتجميد بمواصفات عالمية مع عزل PIR/PUR وأنظمة Bitzer و Copeland.",
+        "en": "Design and installation of cold rooms and freezing rooms to world-class standards using PIR/PUR insulation and Bitzer/Copeland systems."
+      },
+      "icon": "fa-solid fa-snowflake"
+    },
+    {
+      "id": "iqf-systems",
+      "slug": "iqf-systems",
+      "name": { "ar": "أنظمة التجميد الصاعق IQF", "en": "IQF Blast Freezing Systems" },
+      "shortDescription": {
+        "ar": "أنظمة تجميد سريع للمنتجات الغذائية مع الحفاظ على ملمسها وقيمتها الغذائية.",
+        "en": "Rapid freezing systems for food products that preserve texture and nutritional value."
+      },
+      "icon": "fa-solid fa-icicles"
+    },
+    {
+      "id": "ammonia-systems",
+      "slug": "ammonia-systems",
+      "name": { "ar": "أنظمة الأمونيا الصناعية", "en": "Industrial Ammonia Systems" },
+      "shortDescription": {
+        "ar": "حلول NH3 منخفضة الانبعاثات للمنشآت الصناعية الكبرى مع التزام كامل بمعايير السلامة.",
+        "en": "Low-emission NH3 solutions for major industrial facilities with full safety compliance."
+      },
+      "icon": "fa-solid fa-flask"
+    },
+    {
+      "id": "compressor-maintenance",
+      "slug": "compressor-maintenance",
+      "name": { "ar": "صيانة وعمرة الكمبروسرات", "en": "Compressor Maintenance & Overhaul" },
+      "shortDescription": {
+        "ar": "عقود صيانة سنوية وعمرة كاملة بقطع غيار أصلية لـ Bitzer و Copeland و Danfoss.",
+        "en": "Annual maintenance contracts and full overhaul with OEM parts for Bitzer, Copeland, and Danfoss."
+      },
+      "icon": "fa-solid fa-wrench"
+    },
+    {
+      "id": "logistics-warehouses",
+      "slug": "logistics-warehouses",
+      "name": { "ar": "المستودعات اللوجستية المبردة", "en": "Cold Logistics Warehouses" },
+      "shortDescription": {
+        "ar": "تجهيز مستودعات تبريد لوجستية متكاملة بأنظمة راك وتحكم بيئي متقدم.",
+        "en": "Complete cold-storage logistics warehouses with rack systems and advanced environmental control."
+      },
+      "icon": "fa-solid fa-warehouse"
+    }
+  ],
+
+  "areasServed": [
+    { "ar": "الدمام",     "en": "Dammam" },
+    { "ar": "الخبر",      "en": "Khobar" },
+    { "ar": "الظهران",    "en": "Dhahran" },
+    { "ar": "الجبيل",     "en": "Jubail" },
+    { "ar": "الأحساء",    "en": "Al-Ahsa" },
+    { "ar": "القطيف",     "en": "Qatif" },
+    { "ar": "رأس تنورة",  "en": "Ras Tanura" },
+    { "ar": "حفر الباطن", "en": "Hafr Al-Batin" },
+    { "ar": "الرياض",     "en": "Riyadh" },
+    { "ar": "الخرج",      "en": "Al-Kharj" },
+    { "ar": "جدة",        "en": "Jeddah" },
+    { "ar": "مكة المكرمة","en": "Mecca" },
+    { "ar": "المدينة المنورة","en": "Medina" },
+    { "ar": "الطائف",     "en": "Taif" },
+    { "ar": "بريدة",      "en": "Buraydah" },
+    { "ar": "تبوك",       "en": "Tabuk" },
+    { "ar": "حائل",       "en": "Hail" },
+    { "ar": "أبها",       "en": "Abha" }
+  ],
+
+  "faqs": [
+    {
+      "id": "warranty",
+      "question": {
+        "ar": "ما هي مدة ضمان غرف التبريد التي تقومون بتركيبها؟",
+        "en": "What is the warranty period on the cold rooms you install?"
+      },
+      "answer": {
+        "ar": "نمنح ضماناً شاملاً لمدة 12 شهراً على الإنشاءات والعزل والمعدات الرئيسية، مع إمكانية تمديد الضمان عبر عقد صيانة سنوي يضمن استمرار الأداء.",
+        "en": "We provide a comprehensive 12-month warranty on construction, insulation, and main equipment, with optional extension through an annual maintenance contract that guarantees continued performance."
+      }
+    },
+    {
+      "id": "lead-time",
+      "question": {
+        "ar": "كم تستغرق فترة تصميم وتنفيذ غرفة تبريد صناعية متوسطة الحجم؟",
+        "en": "How long does the design and installation of a medium-sized industrial cold room take?"
+      },
+      "answer": {
+        "ar": "تتراوح فترة التنفيذ بين 3 إلى 6 أسابيع حسب الحجم والمواصفات، تشمل: المعاينة، الدراسة الهندسية، تصنيع البانلات، التركيب، التجارب، والتسليم.",
+        "en": "Execution typically takes 3 to 6 weeks depending on size and specifications, including site survey, engineering study, panel manufacturing, installation, commissioning, and handover."
+      }
+    },
+    {
+      "id": "brands",
+      "question": {
+        "ar": "ما العلامات التجارية للمعدات التي تعتمدونها؟",
+        "en": "Which equipment brands do you rely on?"
+      },
+      "answer": {
+        "ar": "نعتمد على Bitzer و Copeland للضواغط، Danfoss للتحكم، Schneider للتمديدات الكهربائية، SABIC لألواح الصاج، Friga-Bohn و LU-VE للمبخرات والمكثفات.",
+        "en": "We rely on Bitzer and Copeland for compressors, Danfoss for controls, Schneider for electrical, SABIC for steel sheets, and Friga-Bohn and LU-VE for evaporators and condensers."
+      }
+    },
+    {
+      "id": "energy-saving",
+      "question": {
+        "ar": "هل أنظمتكم موفرة للطاقة؟",
+        "en": "Are your systems energy-efficient?"
+      },
+      "answer": {
+        "ar": "نعم، نعتمد ضواغط متغيرة السرعة (Inverter)، عزل PIR عالي الكفاءة، أنظمة استرجاع حرارة، ومتحكمات ذكية تخفض الاستهلاك بنسبة 25-40٪ مقارنة بالأنظمة التقليدية.",
+        "en": "Yes — we use variable-speed (inverter) compressors, high-efficiency PIR insulation, heat-recovery systems, and intelligent controllers that reduce consumption by 25-40% versus conventional systems."
+      }
+    },
+    {
+      "id": "service-area",
+      "question": {
+        "ar": "ما المناطق التي تخدمونها؟",
+        "en": "Which regions do you serve?"
+      },
+      "answer": {
+        "ar": "نخدم جميع مناطق المملكة من خلال مقرنا الرئيسي في الدمام وفرعنا في الرياض، مع تركيز على المنطقة الشرقية، الرياض، جدة، الجبيل، والأحساء.",
+        "en": "We serve all regions of the Kingdom from our headquarters in Dammam and our Riyadh branch, with focus on the Eastern Province, Riyadh, Jeddah, Jubail, and Al-Ahsa."
+      }
+    },
+    {
+      "id": "quote-process",
+      "question": {
+        "ar": "كيف أحصل على عرض سعر هندسي؟",
+        "en": "How do I get an engineering quote?"
+      },
+      "answer": {
+        "ar": "تواصل معنا عبر النموذج أو الواتساب، يقوم مهندس بمعاينة موقعك مجاناً، نحسب الأحمال الحرارية ونصدر عرضاً تفصيلياً خلال 48 ساعة عمل.",
+        "en": "Contact us via the form or WhatsApp; an engineer will visit your site for a free survey, we calculate thermal loads, and issue a detailed quote within 48 working hours."
+      }
+    },
+    {
+      "id": "compliance",
+      "question": {
+        "ar": "هل أعمالكم مطابقة لاشتراطات السلامة السعودية؟",
+        "en": "Do your works comply with Saudi safety standards?"
+      },
+      "answer": {
+        "ar": "نعم، جميع تنفيذاتنا تلتزم بكود البناء السعودي SBC، اشتراطات الدفاع المدني، ومعايير ASHRAE الدولية، مع إصدار تقارير اختبار وتسليم رسمية.",
+        "en": "Yes — all our installations comply with the Saudi Building Code (SBC), Civil Defense requirements, and international ASHRAE standards, with official test and handover reports."
+      }
+    }
+  ],
+
+  "geoFaqTemplates": [
+    {
+      "id": "geo-cost",
+      "question": {
+        "ar": "كم تكلفة تركيب غرفة تبريد في {city}؟",
+        "en": "How much does it cost to install a cold room in {city}?"
+      },
+      "answer": {
+        "ar": "تبدأ أسعار غرف التبريد في {city} من 15,000 ريال للغرف الصغيرة (حتى 10 م³) وترتفع إلى أكثر من 500,000 ريال للمستودعات الكبرى، وتتحدد التكلفة بعوامل: المساحة، درجة الحرارة المستهدفة، نوع العزل (PIR أو PUR)، وعلامة الكمبروسر التجارية. تواصل معنا للحصول على عرض سعر هندسي مجاني خلال 24 ساعة.",
+        "en": "Cold room prices in {city} start from SAR 15,000 for small rooms (up to 10 m³) and exceed SAR 500,000 for large warehouses. The final cost depends on floor area, target temperature, insulation type (PIR or PUR), and compressor brand. Contact us for a free engineering quote within 24 hours."
+      }
+    },
+    {
+      "id": "geo-duration",
+      "question": {
+        "ar": "كم يستغرق تركيب غرفة تبريد في {city}؟",
+        "en": "How long does cold room installation take in {city}?"
+      },
+      "answer": {
+        "ar": "يستغرق تركيب غرفة تبريد صغيرة أو متوسطة في {city} من 5 إلى 21 يوم عمل؛ الغرف حتى 30 م² تكتمل في أسبوع واحد، بينما تستغرق المستودعات الكبرى بين 4 و8 أسابيع، شاملةً الدراسة الهندسية وحساب الأحمال الحرارية وتصنيع البانلات والتركيب والتشغيل التجريبي.",
+        "en": "Small to medium cold room installation in {city} takes 5 to 21 working days; rooms up to 30 m² are completed in one week, while large warehouses require 4 to 8 weeks including engineering study, thermal load calculation, panel manufacturing, installation, and commissioning."
+      }
+    },
+    {
+      "id": "geo-maintenance",
+      "question": {
+        "ar": "هل تقدم الفريدة آيس خدمة صيانة غرف التبريد في {city}؟",
+        "en": "Does Elfarida Ice provide cold room maintenance in {city}?"
+      },
+      "answer": {
+        "ar": "نعم، نوفر خدمة صيانة دورية وطارئة 24/7 لجميع أنواع غرف التبريد في {city}. يشمل عقد الصيانة السنوي: فحص الكمبروسر، تنظيف المبخر والمكثف، قياس ضغط غاز التبريد، معايرة متحكمات Danfoss، وإصلاح أي أعطال طارئة بقطع غيار أصلية.",
+        "en": "Yes — we provide 24/7 routine and emergency maintenance for all types of cold rooms in {city}. The annual maintenance contract covers: compressor inspection, evaporator and condenser cleaning, refrigerant pressure measurement, Danfoss controller calibration, and emergency fault repair with original spare parts."
+      }
+    },
+    {
+      "id": "geo-types",
+      "question": {
+        "ar": "ما أنواع غرف التبريد التي تنفذها الفريدة آيس في {city}؟",
+        "en": "What types of cold rooms does Elfarida Ice install in {city}?"
+      },
+      "answer": {
+        "ar": "ننفذ في {city} جميع أنواع غرف التبريد: غرف التبريد التجارية (من +2°م إلى +8°م)، غرف التجميد (من -18°م إلى -25°م)، غرف التجميد العميق (حتى -40°م)، المستودعات اللوجستية المبردة متعددة الأقسام، وغرف تبريد متخصصة للمستشفيات والصيدليات والمطاعم والمجازر.",
+        "en": "In {city} we install all cold room types: commercial refrigeration rooms (+2°C to +8°C), freezing rooms (-18°C to -25°C), deep-freeze rooms (down to -40°C), multi-zone cold logistics warehouses, and specialised rooms for hospitals, pharmacies, restaurants, and slaughterhouses."
+      }
+    },
+    {
+      "id": "geo-upgrade",
+      "question": {
+        "ar": "هل يمكن ترقية أو توسعة غرفة تبريد قديمة في {city}؟",
+        "en": "Can an existing cold room in {city} be upgraded or expanded?"
+      },
+      "answer": {
+        "ar": "نعم، نتخصص في توسعة وترقية غرف التبريد القائمة في {city}، من إضافة بانلات عزل أو بوابات جديدة إلى استبدال الكمبروسر القديم بنظام Inverter حديث يوفر من 25% إلى 40% من فاتورة الكهرباء الشهرية.",
+        "en": "Yes — we specialise in expanding and upgrading existing cold rooms in {city}, from adding insulation panels or new doors to replacing an old compressor with a modern Inverter system that saves 25–40% on monthly electricity costs."
+      }
+    }
+  ],
+
+  "aggregateRating": {
+    "ratingValue": "4.9",
+    "reviewCount": "84",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}

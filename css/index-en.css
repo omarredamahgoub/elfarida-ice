@@ -1,0 +1,119 @@
+/* ================================================================
+   index-en.css — Page-exclusive styles for index-en.html (English LTR)
+   Depends on: shared.css, site-shell.css
+   This file contains ONLY rules unique to this page.
+   ================================================================ */
+
+/* ── Hero — gradient over project image ── */
+.hero-section {
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)),
+    url('../assets/gallery/1-1-1.webp') center / cover no-repeat;
+}
+
+/* ── Service dropdown — hero form (LTR) ── */
+.svc-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.svc-trigger {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  transition: border-color 0.2s, background 0.2s;
+  outline: none;
+}
+
+.svc-trigger:focus-visible {
+  border-color: #60a5fa;
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.svc-trigger:hover,
+.svc-dropdown.open .svc-trigger {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #60a5fa;
+}
+
+.svc-arrow {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.svc-dropdown.open .svc-arrow {
+  transform: rotate(180deg);
+}
+
+.svc-list {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  max-height: 280px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.svc-list::-webkit-scrollbar       { width: 5px; }
+.svc-list::-webkit-scrollbar-track { background: transparent; }
+.svc-list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 999px; }
+
+.svc-dropdown.open .svc-list {
+  display: block;
+}
+
+.svc-group-label {
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #60a5fa;
+  background: rgba(37, 99, 235, 0.12);
+  user-select: none;
+}
+
+.svc-option {
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.svc-option:hover,
+.svc-option:focus {
+  background: rgba(37, 99, 235, 0.25);
+  color: #ffffff;
+  outline: none;
+}
+
+.svc-option.selected {
+  background: rgba(37, 99, 235, 0.35);
+  color: #93c5fd;
+  font-weight: 700;
+}

@@ -1,0 +1,20 @@
+/* ================================================================
+   blog.css — أنماط خاصة بصفحة blog
+   ================================================================ */
+
+.article-card {
+  transition: all 0.3s ease;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+.article-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px -12px rgba(15, 23, 42, 0.2);
+}
+
+body {
+  background-color: #f8fafc;
+}

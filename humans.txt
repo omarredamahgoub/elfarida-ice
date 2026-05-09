@@ -1,0 +1,34 @@
+/* TEAM */
+
+   Company:    Elfarida Ice Industrial Refrigeration Engineering
+   Arabic:     مؤسسة الفريدة آيس للهندسة والتبريد الصناعي
+   Contact:    info [at] elfaridaice [dot] com
+   Phone:      +966 59 836 6214
+   Location:   Dammam, Eastern Province, Saudi Arabia
+   Founded:    2004
+
+
+/* SITE */
+
+   Last update:    2026-04-29
+   Language:       Arabic (primary), English (secondary)
+   Doctype:        HTML5 (Static Site)
+   Standards:      HTML5, CSS3, ES2022, WCAG 2.1 AA, Schema.org
+   Components:     Tailwind CSS, Vanilla JavaScript, Cloudflare Pages
+   Software:       Visual Studio Code, Git, GitHub Actions
+
+
+/* COMPLIANCE */
+
+   Privacy:        Saudi PDPL (Personal Data Protection Law)
+   Accessibility:  WCAG 2.1 AA target
+   Security:       RFC 9116 security.txt, HSTS preload, CSP strict
+   SEO:            Schema.org JSON-LD multi-layer, hreflang ar/en/x-default
+
+
+/* THANKS */
+
+   Equipment partners:  Bitzer, Copeland, Danfoss, Schneider Electric,
+                        Friga-Bohn, LU-VE, SABIC
+   Standards bodies:    ASHRAE, Saudi Building Code (SBC)
+                        Refrigeration & AC Engineers Association

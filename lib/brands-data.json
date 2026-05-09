@@ -1,0 +1,486 @@
+{
+  "$schema": "Brands knowledge base — Elfarida Ice",
+  "version": "1.0.1",
+  "last_updated": "2026-05-04",
+  "brands": [
+    {
+      "id": "bitzer",
+      "name_ar": "بيتزر",
+      "name_en": "BITZER",
+      "country": "ألمانيا",
+      "country_en": "Germany",
+      "category": "compressors",
+      "category_ar": "ضواغط التبريد",
+      "logo": "assets/partners/BITZER.webp",
+      "url": "https://www.bitzer.de",
+      "tagline_ar": "ضواغط التبريد الألمانية الأكثر موثوقية في العالم",
+      "tagline_en": "World's most reliable German refrigeration compressors",
+      "description_ar": "تأسست بيتزر عام 1934 في زنديلفنغن بألمانيا، وتُعد المعيار الذهبي عالمياً لضواغط التبريد التجاري والصناعي. توفّر بيتزر مجموعة كاملة من الضواغط نصف المغلقة (Semi-Hermetic) من سلسلة 4U إلى 8GE بقدرات من 4 أحصنة إلى 80 حصاناً، إضافةً إلى الضواغط اللولبية (Screw) لأنظمة الراك الكبيرة بقدرات تصل إلى 600 حصان. تتميز بيتزر بكفاءتها العالية في استهلاك الطاقة (COP يفوق 3.5)، وعمرها التشغيلي الطويل (>80,000 ساعة)، وتوافقها مع جميع غازات التبريد الحديثة (R134a, R404a, R507, R448A, R449A، الأمونيا R717، وثاني أكسيد الكربون R744). نحن في الفريدة آيس وكلاء معتمدون لتركيب وصيانة ضواغط بيتزر في كافة أنحاء المملكة العربية السعودية، ونوفر قطع الغيار الأصلية والصيانة الوقائية وفق دليل الشركة الأم.",
+      "description_en": "Founded in 1934 in Sindelfingen, Germany, BITZER is the global gold standard for commercial and industrial refrigeration compressors. BITZER offers a complete range of semi-hermetic compressors from the 4U to 8GE series with capacities from 4 HP to 80 HP, plus screw compressors for large rack systems reaching 600 HP. BITZER compressors feature exceptional energy efficiency (COP > 3.5), long operational lifetime (>80,000 hours), and compatibility with all modern refrigerants (R134a, R404a, R507, R448A, R449A, ammonia R717, and CO2 R744). Elfarida Ice is a certified BITZER installation and maintenance partner across Saudi Arabia, providing genuine spare parts and preventive maintenance according to manufacturer specifications.",
+      "key_products_ar": [
+        "ضواغط نصف مغلقة Semi-Hermetic (سلسلة Octagon, Ecoline, Ecostar)",
+        "ضواغط لولبية Screw (سلسلة CSH, CSV, OS)",
+        "ضواغط أمونيا للتطبيقات الصناعية الثقيلة",
+        "ضواغط CO2 لأنظمة Cascade",
+        "وحدات تكثيف خارجية جاهزة (LH, FH series)"
+      ],
+      "applications_ar": [
+        "أنظمة الراك المركزية للسوبرماركت والمستودعات",
+        "غرف التجميد العميق للحوم والأسماك (-25°م)",
+        "وحدات التجميد الصاعق IQF",
+        "مصانع الثلج والآيس كريم",
+        "تبريد المستودعات اللوجستية الكبيرة"
+      ],
+      "warranty_ar": "ضمان المصنع 24 شهراً + ضمان تركيب 12 شهراً من الفريدة آيس",
+      "keywords_ar": ["بيتزر", "ضواغط بيتزر", "كمبروسر بيتزر", "صيانة بيتزر", "Bitzer Saudi Arabia"]
+    },
+    {
+      "id": "copeland",
+      "name_ar": "كوبلاند",
+      "name_en": "Copeland",
+      "country": "الولايات المتحدة الأمريكية",
+      "country_en": "United States",
+      "category": "compressors",
+      "category_ar": "ضواغط التبريد",
+      "logo": "assets/partners/COPELAND.webp",
+      "url": "https://climate.emerson.com",
+      "tagline_ar": "ضواغط Scroll الأمريكية الرائدة عالمياً",
+      "tagline_en": "Leading American Scroll compressors",
+      "description_ar": "تأسست كوبلاند عام 1921 في سيدني بولاية أوهايو الأمريكية، وتُعدّ من أعرق شركات التبريد في العالم وعضواً في مجموعة Emerson Climate Technologies. تشتهر كوبلاند بريادتها لتقنية الضواغط اللولبية الحلزونية (Scroll Technology) التي توفر هدوءاً تشغيلياً استثنائياً وكفاءة طاقة عالية. تشمل تشكيلتها ضواغط Discus نصف المغلقة بقدرات من 1.5 إلى 50 حصاناً للتطبيقات التجارية، وضواغط Scroll Digital ZBD التي تُعدّل قدرتها التبريدية ديناميكياً حسب الحمل الحراري، مما يوفّر حتى 35% من استهلاك الكهرباء. توفر كوبلاند أيضاً ضواغط CO2 ZO للتطبيقات الخضراء صديقة البيئة. نحن في الفريدة آيس نُنفّذ تركيبات كوبلاند في المطاعم وسلاسل المواد الغذائية والمصانع الدوائية بدقة هندسية كاملة، مع توفير ضمان موسّع وعقود صيانة دورية.",
+      "description_en": "Founded in 1921 in Sidney, Ohio, Copeland is one of the world's most established refrigeration brands and member of Emerson Climate Technologies. Copeland pioneered Scroll compressor technology, delivering exceptional acoustic performance and energy efficiency. Its lineup includes Discus semi-hermetic compressors from 1.5 to 50 HP for commercial applications, and ZBD Digital Scroll compressors that dynamically modulate cooling capacity based on heat load — saving up to 35% in electricity consumption. Copeland also provides CO2 ZO compressors for environmentally-friendly green applications. Elfarida Ice executes Copeland installations across restaurants, food chains, and pharmaceutical facilities with complete engineering precision, extended warranty, and periodic maintenance contracts.",
+      "key_products_ar": [
+        "ضواغط Scroll الحلزونية (سلسلة ZB, ZF, ZR)",
+        "ضواغط Discus نصف المغلقة (سلسلة 4D, 6D, 8D)",
+        "ضواغط Digital Scroll للتعديل التلقائي",
+        "ضواغط CO2 الترانس-كريتيكال",
+        "وحدات تكثيف ZX خارجية جاهزة"
+      ],
+      "applications_ar": [
+        "تبريد المطاعم والكافيهات",
+        "تبريد سلاسل السوبرماركت والمحلات",
+        "تبريد المستشفيات والمختبرات الطبية",
+        "أنظمة التكييف الصناعي عالي الكفاءة",
+        "ثلاجات العرض في المخابز ومحلات الحلوى"
+      ],
+      "warranty_ar": "ضمان المصنع 18 شهراً + ضمان تركيب 12 شهراً",
+      "keywords_ar": ["كوبلاند", "ضواغط كوبلاند", "Copeland Saudi", "Scroll compressor", "Discus"]
+    },
+    {
+      "id": "danfoss",
+      "name_ar": "دانفوس",
+      "name_en": "Danfoss",
+      "country": "الدنمارك",
+      "country_en": "Denmark",
+      "category": "controls",
+      "category_ar": "أنظمة التحكم وصمامات التبريد",
+      "logo": "assets/partners/DANFOSS.webp",
+      "url": "https://www.danfoss.com",
+      "tagline_ar": "صمامات التمدد وأنظمة التحكم الدنماركية",
+      "tagline_en": "Danish expansion valves and control systems",
+      "description_ar": "تأسست دانفوس عام 1933 في نوربورغ بالدنمارك، وتُعد من أكبر شركات التبريد والتحكم الإلكتروني في العالم. توفر دانفوس مجموعة شاملة تشمل: صمامات التمدد الإلكترونية ETS و AKVE التي تحقق دقة ±0.1°م في تنظيم درجة الحرارة، صمامات التمدد الحرارية TX/TR، صمامات الملف اللولبي EVR و ICM، فلاتر التجفيف DCL و DML، الزجاج البصري SGN، حساسات الضغط AKS و KP، وحدات التحكم EKE و EKC للتحكم الذكي بالنظام. تمتاز منتجات دانفوس بجودتها الاستثنائية وتوافقها مع جميع غازات التبريد الحديثة وصديقة البيئة. تمتلك الفريدة آيس فريقاً فنياً معتمداً من دانفوس لتنفيذ أنظمة التحكم المتكاملة في المشاريع الكبيرة.",
+      "description_en": "Founded in 1933 in Nordborg, Denmark, Danfoss is among the world's largest refrigeration and electronic control companies. Danfoss provides a comprehensive range including: ETS and AKVE electronic expansion valves achieving ±0.1°C temperature accuracy, TX/TR thermostatic expansion valves, EVR and ICM solenoid valves, DCL and DML filter driers, SGN sight glasses, AKS and KP pressure sensors, and EKE/EKC controllers for intelligent system management. Danfoss products are distinguished by exceptional quality and compatibility with all modern and eco-friendly refrigerants. Elfarida Ice has a Danfoss-certified technical team executing integrated control systems in large projects.",
+      "key_products_ar": [
+        "صمامات تمدد إلكترونية ETS, AKVE",
+        "صمامات تمدد حرارية TX, TR",
+        "صمامات سولينويد EVR, ICM",
+        "حساسات ضغط AKS, KP",
+        "وحدات تحكم ذكية EKE, EKC, AK-PC"
+      ],
+      "applications_ar": [
+        "أنظمة التبريد المركزي في الراك",
+        "غرف التبريد ذات التحكم الدقيق (±0.5°م)",
+        "الأنظمة الدوائية والمختبرية",
+        "أنظمة CO2 الترانس-كريتيكال",
+        "تبريد مرافق التبريد البحري والصناعي"
+      ],
+      "warranty_ar": "ضمان المصنع 24 شهراً",
+      "keywords_ar": ["دانفوس", "صمام تمدد دانفوس", "Danfoss Saudi", "EKE", "AKV"]
+    },
+    {
+      "id": "carrier",
+      "name_ar": "كاريير",
+      "name_en": "Carrier",
+      "country": "الولايات المتحدة الأمريكية",
+      "country_en": "United States",
+      "category": "complete_systems",
+      "category_ar": "وحدات تبريد متكاملة",
+      "logo": "assets/partners/carrier.webp",
+      "url": "https://www.carrier.com",
+      "tagline_ar": "رائد صناعة التبريد العالمية منذ 1902",
+      "tagline_en": "Pioneer of global refrigeration since 1902",
+      "description_ar": "تأسست كاريير عام 1902 على يد ويليس كاريير، مخترع تقنية تكييف الهواء الحديثة. تُعد كاريير من أكبر شركات التبريد والتكييف في العالم وتقدم وحدات تبريد متكاملة للتطبيقات الصناعية والتجارية. توفر كاريير: وحدات تكثيف خارجية بالهواء (Air-Cooled) من سلسلة 38AKS و 38AUZ بقدرات من 5 إلى 200 طن تبريد، وحدات تبريد مياه (Water Chillers) من سلسلة 30XA و 30RB بكفاءة COP فوق 4.5، وحدات تبريد محمولة للمشاريع المؤقتة، وأنظمة التبريد الجاف (Dry Coolers). نحن في الفريدة آيس نوصي بكاريير للمشاريع الكبيرة التي تتطلب موثوقية أمريكية وضمان طويل الأمد.",
+      "description_en": "Founded in 1902 by Willis Carrier, the inventor of modern air conditioning. Carrier is one of the world's largest refrigeration and air conditioning companies, providing integrated cooling units for industrial and commercial applications.",
+      "key_products_ar": [
+        "وحدات تكثيف خارجية 38AKS, 38AUZ",
+        "وحدات تبريد مياه 30XA, 30RB",
+        "وحدات تبريد محمولة للإيجار",
+        "أبراج تبريد ومبادلات حرارية",
+        "أنظمة VRF صناعية"
+      ],
+      "applications_ar": [
+        "المستودعات اللوجستية الكبيرة",
+        "المصانع الغذائية والدوائية",
+        "مراكز البيانات",
+        "المستشفيات والمراكز الطبية",
+        "المجمعات التجارية والفنادق"
+      ],
+      "warranty_ar": "ضمان المصنع 36 شهراً",
+      "keywords_ar": ["كاريير", "Carrier Saudi", "وحدات كاريير", "Carrier chiller"]
+    },
+    {
+      "id": "friga-bohn",
+      "name_ar": "فريجابون",
+      "name_en": "Friga-Bohn",
+      "country": "فرنسا",
+      "country_en": "France",
+      "category": "evaporators",
+      "category_ar": "مبخرات ووحدات داخلية",
+      "logo": "assets/partners/Friga-Bohn.webp",
+      "url": "https://www.friga-bohn.com",
+      "tagline_ar": "مبخرات فرنسية رائدة لمستودعات الأغذية",
+      "tagline_en": "Leading French evaporators for food warehouses",
+      "description_ar": "تأسست فريجابون في فرنسا عام 1965 وتنتمي حالياً لمجموعة Lennox EMEA الأمريكية. تتخصص فريجابون في تصنيع المبخرات (Evaporators) عالية الكفاءة لجميع تطبيقات التبريد التجاري والصناعي. تتميز مبخرات فريجابون بـ: مسافة قذف هواء طويلة (تصل إلى 35 متراً في موديلات MCRP)، توزيع هواء متجانس يمنع تشكّل البقع الباردة، تصميم موفر للطاقة بـ EC fans قابلة للتعديل، نظام إذابة جليد كهربائي أو غازي حسب التطبيق، هياكل مقاومة للصدأ من الألمنيوم المعالج. تشمل تشكيلتها: سلسلة DUAL-O للحجم الصغير (50-150م³)، سلسلة GLE للمتوسط (500-2000م³)، وسلسلة MCRP للمستودعات الكبيرة (>5000م³). الفريدة آيس وكيل معتمد لفريجابون في المملكة وتنفّذ مشاريع المبخرات بدقة هندسية احترافية.",
+      "description_en": "Founded in France in 1965, Friga-Bohn is part of Lennox EMEA group. Friga-Bohn specializes in high-efficiency evaporators for all commercial and industrial refrigeration applications, featuring long air throw (up to 35m in MCRP models), uniform air distribution, EC fan technology, electric or gas defrost systems, and corrosion-resistant aluminum housing.",
+      "key_products_ar": [
+        "مبخرات DUAL-O للغرف الصغيرة",
+        "مبخرات GLE المتوسطة (500-2000م³)",
+        "مبخرات MCRP للمستودعات الكبيرة",
+        "مبخرات IQF للتجميد الصاعق",
+        "وحدات تكثيف SLP و SHP"
+      ],
+      "applications_ar": [
+        "مستودعات اللحوم والدواجن",
+        "غرف تبريد الأسماك والمأكولات البحرية",
+        "مستودعات تخزين الفواكه والخضروات",
+        "تبريد منتجات الألبان",
+        "غرف تجميد المخابز والحلويات"
+      ],
+      "warranty_ar": "ضمان المصنع 24 شهراً",
+      "keywords_ar": ["فريجابون", "Friga-Bohn", "مبخرات فرنسية", "evaporators"]
+    },
+    {
+      "id": "lu-ve",
+      "name_ar": "لوفي",
+      "name_en": "LU-VE",
+      "country": "إيطاليا",
+      "country_en": "Italy",
+      "category": "evaporators_condensers",
+      "category_ar": "مبخرات ومكثفات",
+      "logo": "assets/partners/LU-VE.webp",
+      "url": "https://www.luvegroup.com",
+      "tagline_ar": "مبخرات ومكثفات إيطالية بتقنية Turbocoil الحاصلة على براءة اختراع",
+      "tagline_en": "Italian evaporators and condensers with patented Turbocoil technology",
+      "description_ar": "تأسست LU-VE عام 1985 في فاريزي بإيطاليا وتُعد من رواد صناعة المبادلات الحرارية في أوروبا. تتميز LU-VE بتقنيتها المسجّلة Turbocoil® التي تستخدم أنابيب نحاسية مزدوجة الحلزون، مما يزيد كفاءة نقل الحرارة بنسبة 30% مقارنة بالمبادلات التقليدية. تنتج LU-VE: مبخرات مكعبة Cubic للغرف المتوسطة، مبخرات سقفية Ceiling للمستودعات منخفضة الارتفاع، مكثفات هواء Air-Cooled (سلسلة EAV, EHV, XAV)، أبراج التبريد الجاف (Dry Coolers) لمراكز البيانات، ومبادلات حرارية للتطبيقات الصناعية الثقيلة. منتجاتها متوفرة بطلاء Heresite® المقاوم للأجواء البحرية والصناعية القاسية، وهو مهم جداً لمشاريع المنطقة الشرقية والساحلية في السعودية.",
+      "description_en": "Founded in 1985 in Varese, Italy. LU-VE is a European leader in heat exchangers, distinguished by its patented Turbocoil® technology using double-helix copper tubes that increase heat transfer efficiency by 30% compared to conventional exchangers. LU-VE produces cubic and ceiling evaporators, air-cooled condensers, dry coolers for data centers, and heat exchangers for heavy industrial applications. Products are available with Heresite® coating resistant to marine and harsh industrial environments — critical for Saudi Arabia's Eastern and coastal region projects.",
+      "key_products_ar": [
+        "مبخرات Turbocoil المكعبة (سلسلة F, S)",
+        "مبخرات سقفية للمستودعات",
+        "مكثفات هواء EAV, EHV, XAV",
+        "أبراج تبريد جاف لمراكز البيانات",
+        "مبادلات حرارية للأمونيا والـ CO2"
+      ],
+      "applications_ar": [
+        "المستودعات اللوجستية في المناطق الساحلية",
+        "أنظمة التبريد الصناعي الكبيرة",
+        "المصانع الدوائية والكيميائية",
+        "مراكز البيانات وغرف الخوادم",
+        "تبريد منتجات اللحوم والمأكولات البحرية"
+      ],
+      "warranty_ar": "ضمان المصنع 24 شهراً",
+      "keywords_ar": ["LU-VE", "لوفي", "Turbocoil", "مكثفات إيطالية"]
+    },
+    {
+      "id": "carel",
+      "name_ar": "كاريل",
+      "name_en": "CAREL",
+      "country": "إيطاليا",
+      "country_en": "Italy",
+      "category": "controls",
+      "category_ar": "أنظمة تحكم وأتمتة ذكية",
+      "logo": "assets/partners/CAREL.webp",
+      "url": "https://www.carel.com",
+      "tagline_ar": "أنظمة التحكم الذكي IoT للتبريد",
+      "tagline_en": "Smart IoT control systems for refrigeration",
+      "description_ar": "تأسست CAREL عام 1973 في بادوفا بإيطاليا، وتُعد رائدة عالمياً في أنظمة التحكم الإلكتروني والأتمتة الذكية لأنظمة التبريد والتكييف. تقدم CAREL: وحدات التحكم pCO5+ و pCO3 المتكاملة لإدارة كاملة للنظام، صمامات التمدد الإلكترونية ExV عالية الدقة، حساسات NTC و PT1000 الدقيقة، أنظمة الترطيب humiSteam الفريدة، نظام إدارة الطاقة boss™ المتصل بالسحابة. تمتاز منتجات CAREL بقدرتها على الاتصال عبر الإنترنت (IoT) ومراقبة النظام عن بُعد، مع تنبيهات فورية للأعطال وتقارير استهلاك الطاقة. الفريدة آيس تستخدم منظومة CAREL في مشاريع التبريد عالية القيمة التي تتطلب رقابة مستمرة وموثوقية فائقة.",
+      "description_en": "Founded in 1973 in Padova, Italy, CAREL is a global leader in electronic control and smart automation for refrigeration and HVAC. CAREL offers pCO5+ and pCO3 integrated controllers, ExV electronic expansion valves with high precision, NTC and PT1000 sensors, humiSteam humidification systems, and the cloud-connected boss™ energy management platform. CAREL products feature IoT connectivity, remote monitoring, instant fault alerts, and energy consumption reports.",
+      "key_products_ar": [
+        "وحدات تحكم pCO5+ و pCO3",
+        "صمامات تمدد إلكترونية ExV",
+        "حساسات NTC و PT1000",
+        "أنظمة ترطيب humiSteam",
+        "نظام إدارة طاقة boss™ السحابي"
+      ],
+      "applications_ar": [
+        "أنظمة الراك المتقدمة في السوبرماركت",
+        "تبريد المستودعات اللوجستية الذكية",
+        "المصانع الدوائية بالـ GMP",
+        "مراكز البيانات",
+        "غرف نمو المختبرات والبحث"
+      ],
+      "warranty_ar": "ضمان المصنع 24 شهراً",
+      "keywords_ar": ["CAREL", "كاريل", "pCO5", "IoT refrigeration"]
+    },
+    {
+      "id": "eliwell",
+      "name_ar": "إليويل",
+      "name_en": "Eliwell",
+      "country": "إيطاليا",
+      "country_en": "Italy",
+      "category": "controls",
+      "category_ar": "ترموستات ووحدات تحكم رقمية",
+      "logo": "assets/partners/Eliwell.webp",
+      "url": "https://www.eliwell.com",
+      "tagline_ar": "ترموستات رقمية إيطالية للتبريد التجاري",
+      "tagline_en": "Italian digital thermostats for commercial refrigeration",
+      "description_ar": "Eliwell شركة إيطالية تأسست عام 1980 وتنتمي حالياً لمجموعة Schneider Electric الفرنسية. متخصصة في ترموستات التبريد الرقمية ووحدات التحكم الإلكترونية للتطبيقات التجارية. تشمل تشكيلتها: سلسلة IDPlus 902/971/974 الأكثر شيوعاً في غرف التبريد، سلسلة EWCM للمستودعات المتقدمة، سلسلة EWPlus للوحدات الصغيرة، وأنظمة المراقبة المركزية TelevisSystem لإدارة عشرات الغرف من نقطة واحدة. منتجات Eliwell معروفة بسهولة برمجتها، موثوقيتها، وتوفّر قطع غيارها في السوق السعودي.",
+      "key_products_ar": [
+        "ترموستات IDPlus 902, 971, 974",
+        "وحدات تحكم EWCM للمستودعات",
+        "ترموستات EWPlus للوحدات الصغيرة",
+        "أنظمة مراقبة TelevisSystem",
+        "حساسات حرارة NTC"
+      ],
+      "applications_ar": [
+        "غرف التبريد التجارية الصغيرة والمتوسطة",
+        "ثلاجات العرض في السوبرماركت",
+        "غرف تبريد المطاعم والمخابز",
+        "ثلاجات السيارات النقل المبرد"
+      ],
+      "warranty_ar": "ضمان المصنع 18 شهراً",
+      "keywords_ar": ["Eliwell", "إليويل", "ترموستات", "IDPlus"]
+    },
+    {
+      "id": "schneider",
+      "name_ar": "شنايدر إلكتريك",
+      "name_en": "Schneider Electric",
+      "country": "فرنسا",
+      "country_en": "France",
+      "category": "electrical",
+      "category_ar": "لوحات التحكم والمعدات الكهربائية",
+      "logo": "assets/partners/Schneider-Electric.webp",
+      "url": "https://www.se.com",
+      "tagline_ar": "لوحات التحكم الكهربائية الفرنسية لأنظمة التبريد",
+      "tagline_en": "French electrical control panels for refrigeration",
+      "description_ar": "تُعد شنايدر إلكتريك من أكبر شركات الإدارة الكهربائية في العالم، تأسست عام 1836 في فرنسا. توفّر شنايدر منظومة كاملة لأنظمة التبريد تشمل: قواطع كهربائية صناعية NSX و Compact، مغذّيات TeSys للمحركات، PLCs ذكية من سلسلة Modicon M221/M241، شاشات لمسية Magelis HMI، أجهزة قياس الطاقة PowerLogic، نظام إدارة الطاقة EcoStruxure للمراقبة عن بُعد. الفريدة آيس تستخدم لوحات شنايدر في كل مشاريعها الكبيرة لضمان موثوقية كهربائية تامة.",
+      "key_products_ar": [
+        "قواطع NSX, Compact NSXm",
+        "مغذيات TeSys D, F",
+        "PLC Modicon M221, M241",
+        "شاشات HMI Magelis",
+        "نظام EcoStruxure للمراقبة"
+      ],
+      "applications_ar": [
+        "لوحات تحكم رئيسية لأنظمة الراك",
+        "لوحات توزيع كهرباء المستودعات",
+        "أنظمة الإنذار والحماية",
+        "المراقبة الكهربائية للمشاريع الصناعية"
+      ],
+      "warranty_ar": "ضمان 36 شهراً على المنتجات الرئيسية",
+      "keywords_ar": ["Schneider Electric", "شنايدر", "لوحات تحكم", "NSX"]
+    },
+    {
+      "id": "honeywell",
+      "name_ar": "هانيويل",
+      "name_en": "Honeywell",
+      "country": "الولايات المتحدة الأمريكية",
+      "country_en": "United States",
+      "category": "sensors_safety",
+      "category_ar": "حساسات وأنظمة السلامة",
+      "logo": "assets/partners/honeywell.webp",
+      "url": "https://www.honeywell.com",
+      "tagline_ar": "حساسات الأمان وكشف تسرب غازات التبريد",
+      "tagline_en": "Safety sensors and refrigerant leak detection",
+      "description_ar": "هانيويل شركة أمريكية تأسست عام 1906، رائدة في تكنولوجيا حساسات السلامة وكشف الغازات. توفّر للقطاع التبريد: حساسات كشف تسرب الفريون Manning EC-F9, IR-F9 لجميع غازات التبريد، أنظمة إنذار متعددة المناطق E3Point، حساسات الأمونيا للمصانع الكبيرة، حساسات CO2 لأنظمة الـ Cascade، صمامات الأمان والتفريغ الميكانيكية. هانيويل ضرورية في أي مشروع تبريد حديث للامتثال لمعايير السلامة الدولية ASHRAE 15 والـ EN 378.",
+      "key_products_ar": [
+        "حساسات تسرب فريون EC-F9, IR-F9",
+        "أنظمة إنذار E3Point متعددة المناطق",
+        "حساسات أمونيا NH3",
+        "حساسات CO2 للأنظمة الترانس-كريتيكال",
+        "صمامات أمان وتفريغ"
+      ],
+      "applications_ar": [
+        "غرف التبريد الكبيرة (>100م³)",
+        "مصانع الأمونيا والصناعات الثقيلة",
+        "المرافق الدوائية المعتمدة GMP",
+        "مستودعات اللحوم والأسماك",
+        "غرف الخوادم ومراكز البيانات"
+      ],
+      "warranty_ar": "ضمان المصنع 24 شهراً",
+      "keywords_ar": ["Honeywell", "هانيويل", "كشف تسرب", "حساسات أمان"]
+    },
+    {
+      "id": "castel",
+      "name_ar": "كاستل",
+      "name_en": "Castel",
+      "country": "إيطاليا",
+      "country_en": "Italy",
+      "category": "valves_filters",
+      "category_ar": "صمامات وفلاتر التبريد",
+      "logo": "assets/partners/CASTEL.webp",
+      "url": "https://www.castel.it",
+      "tagline_ar": "صمامات وفلاتر تبريد إيطالية بأعلى جودة",
+      "tagline_en": "Premium Italian refrigeration valves and filters",
+      "description_ar": "تأسست Castel عام 1961 في ميلانو بإيطاليا، وتُعد المرجع الأوروبي لصمامات وفلاتر التبريد. تقدم Castel: صمامات الكرة Ball valves من سلسلة 6590 المعتمدة عالمياً، صمامات الإغلاق Shut-off valves بكافة الأقطار، فلاتر التجفيف Filter driers من سلسلة 4316 و 4416، الزجاج البصري Sight glasses 3740, 3780، صمامات الأمان والتفريغ، وصلات Charging valves لشحن غازات التبريد. منتجات Castel معتمدة وفق PED 2014/68/EU وتعمل بكفاءة مع جميع الفريونات الحديثة وغازات الأمونيا و CO2.",
+      "key_products_ar": [
+        "صمامات كرة Ball valves 6590",
+        "فلاتر تجفيف 4316, 4416",
+        "زجاج بصري Sight glass 3740",
+        "صمامات أمان وتفريغ",
+        "وصلات شحن غاز Charging valves"
+      ],
+      "applications_ar": [
+        "تركيب أنظمة الراك",
+        "تجهيز خطوط التبريد التجارية والصناعية",
+        "صيانة دائرة التبريد",
+        "أنظمة CO2 والأمونيا"
+      ],
+      "warranty_ar": "ضمان المصنع 18 شهراً",
+      "keywords_ar": ["Castel", "كاستل", "صمامات تبريد", "Ball valves"]
+    },
+    {
+      "id": "mueller",
+      "name_ar": "موللر",
+      "name_en": "Mueller",
+      "country": "الولايات المتحدة الأمريكية",
+      "country_en": "United States",
+      "category": "copper_tubing",
+      "category_ar": "أنابيب نحاس للتبريد",
+      "logo": "assets/partners/MUELLER.webp",
+      "url": "https://www.muellerstreamline.com",
+      "tagline_ar": "أنابيب النحاس الأمريكية الأولى في عالم التبريد",
+      "tagline_en": "Premier American copper tubing for refrigeration",
+      "description_ar": "Mueller Industries شركة أمريكية تأسست عام 1917، رائدة عالمياً في تصنيع أنابيب النحاس عالية النقاء (>99.9% نحاس) للتبريد والتكييف. تنتج Mueller: أنابيب نحاس صلب Type K و L للضغط العالي، أنابيب نحاس مرن (Soft Copper) لفائف 15 و 30 متر، فيتنغات نحاس للحام والكبس، فيتنغات قص ضغط للتركيب السريع، أنابيب معزولة جاهزة للتمديدات الخارجية. أنابيب Mueller معتمدة وفق ASTM B280 وتدعم الضغط حتى 600 PSI، مناسبة للأمونيا والـ CO2.",
+      "key_products_ar": [
+        "أنابيب نحاس Type K, L صلب",
+        "أنابيب نحاس مرن (لفائف 15-30م)",
+        "فيتنغات لحام Brazing fittings",
+        "أنابيب معزولة جاهزة Pre-insulated",
+        "أنابيب لأنظمة الـ CO2 والأمونيا"
+      ],
+      "applications_ar": [
+        "خطوط التبريد بين المكثف والمبخر",
+        "خطوط شحن غازات التبريد",
+        "تمديدات أنظمة الراك المركزي",
+        "خطوط الأمونيا الصناعية"
+      ],
+      "warranty_ar": "ضمان المنشأ + اختبار الضغط",
+      "keywords_ar": ["Mueller", "أنابيب نحاس", "copper tubing"]
+    },
+    {
+      "id": "ls-electric",
+      "name_ar": "إل إس إلكتريك",
+      "name_en": "LS Electric",
+      "country": "كوريا الجنوبية",
+      "country_en": "South Korea",
+      "category": "electrical",
+      "category_ar": "قواطع ومحركات كهربائية",
+      "logo": "assets/partners/ls-company.webp",
+      "url": "https://www.lselectric.co.kr",
+      "tagline_ar": "قواطع ومحركات كورية بمواصفات عالمية",
+      "tagline_en": "Korean breakers and motors with global specifications",
+      "description_ar": "LS Electric شركة كورية جنوبية تأسست عام 1974 (سابقاً LG Industrial Systems)، رائدة آسيوياً في المعدات الكهربائية الصناعية. توفر: قواطع MCCB من سلسلة Susol للحماية الصناعية، عواكس تردد iC5 و iG5A للتحكم في سرعة المحركات، مغذيات MC للمحركات الكهربائية، PLCs ذكية من سلسلة XGT، شاشات HMI XP-Series. منتجات LS Electric معروفة بكفاءتها العالية وأسعارها التنافسية مقارنة بالمنافسين الأوروبيين، مما يجعلها خياراً ذكياً لتقليل تكلفة المشروع دون التضحية بالجودة.",
+      "key_products_ar": [
+        "قواطع MCCB سلسلة Susol",
+        "عواكس تردد iC5, iG5A",
+        "مغذيات MC للمحركات",
+        "PLC XGT",
+        "شاشات HMI XP-Series"
+      ],
+      "applications_ar": [
+        "لوحات التحكم لمشاريع التبريد الاقتصادية",
+        "التحكم في سرعة مراوح المبخرات",
+        "حماية محركات الضواغط",
+        "أنظمة التحكم المتوسطة"
+      ],
+      "warranty_ar": "ضمان المصنع 18 شهراً",
+      "keywords_ar": ["LS Electric", "قواطع كورية", "iC5 inverter"]
+    },
+    {
+      "id": "assan-panel",
+      "name_ar": "أسان بانل",
+      "name_en": "Assan Panel",
+      "country": "تركيا",
+      "country_en": "Turkey",
+      "category": "insulation",
+      "category_ar": "بانل عازل لغرف التبريد",
+      "logo": "assets/partners/Assan-Panel.webp",
+      "url": "https://www.assanpanel.com.tr",
+      "tagline_ar": "البانل العازل التركي الرائد في الشرق الأوسط",
+      "tagline_en": "Leading Turkish insulated panels in the Middle East",
+      "description_ar": "Assan Panel شركة تركية تأسست عام 1982، أكبر منتج للبانل العازل في تركيا والشرق الأوسط. تنتج بانلات بولي يوريثان PUF بكثافة 40 كجم/م³ وموصلية حرارية K=0.022 W/m·K، متوفرة بسماكات 60mm, 80mm, 100mm, 120mm, 150mm, 200mm. تتميز ببانلات Cold Storage Panels المخصصة لغرف التبريد بإحكام عالي، Sandwich Panels للجدران والأسقف، أبواب التبريد المنزلقة والمفصلية. الفريدة آيس وكيل معتمد لـ Assan Panel وتنفذ مشاريع كبرى تستخدم آلاف الأمتار المربعة من بانلاتها سنوياً.",
+      "key_products_ar": [
+        "بانل تبريد PUF (60-200mm)",
+        "بانل ساندويتش للجدران والأسقف",
+        "أبواب تبريد منزلقة (Sliding)",
+        "أبواب تبريد مفصلية (Hinged)",
+        "ملحقات الزوايا والإكسسوارات"
+      ],
+      "applications_ar": [
+        "بناء غرف التبريد والتجميد",
+        "المستودعات اللوجستية",
+        "غرف التحضير الباردة في المطاعم",
+        "غرف نضج اللحوم",
+        "غرف الإنبات الزراعي"
+      ],
+      "warranty_ar": "ضمان عزل 10 سنوات + ضمان تركيب 2 سنة",
+      "keywords_ar": ["Assan Panel", "بانل عازل", "PUF panel", "بانل تركي"]
+    },
+    {
+      "id": "kingspan",
+      "name_ar": "كينغسبان",
+      "name_en": "Kingspan",
+      "country": "أيرلندا",
+      "country_en": "Ireland",
+      "category": "insulation",
+      "category_ar": "بانل عازل بريميوم",
+      "logo": "assets/partners/Assan-Panel.webp",
+      "url": "https://www.kingspan.com",
+      "tagline_ar": "البانل العازل الأيرلندي البريميوم القياسي عالمياً",
+      "tagline_en": "Premium Irish insulated panels — global standard",
+      "description_ar": "Kingspan شركة أيرلندية تأسست عام 1965، رائدة عالمياً في حلول العزل المتقدم. توفر بانلات Quadcore بأعلى موصلية حرارية في الصناعة (K=0.018 W/m·K)، مما يعني توفير أكثر بنسبة 20% في استهلاك الكهرباء مقارنة بالبانل التقليدي. منتجاتها معتمدة بشهادات FM Global و LPCB لمقاومة الحريق فئة B-s2-d0. مناسبة للمشاريع التي تتطلب أعلى معايير الجودة والاستدامة (LEED).",
+      "key_products_ar": [
+        "بانل Quadcore عالي الكفاءة",
+        "بانل KS1000 للجدران",
+        "بانل KS1000 RW السقف",
+        "أبواب تبريد بريميوم",
+        "حلول عزل LEED-Certified"
+      ],
+      "applications_ar": [
+        "المشاريع الفخمة والفنادق",
+        "المراكز الطبية المعتمدة GMP",
+        "مراكز البيانات",
+        "المنشآت ذات الكفاءة العالية للطاقة"
+      ],
+      "warranty_ar": "ضمان عزل 25 سنة",
+      "keywords_ar": ["Kingspan", "Quadcore", "بانل بريميوم"]
+    },
+    {
+      "id": "tecumseh",
+      "name_ar": "تكومسي",
+      "name_en": "Tecumseh",
+      "country": "الولايات المتحدة الأمريكية",
+      "country_en": "United States",
+      "category": "compressors",
+      "category_ar": "ضواغط محكمة الإغلاق",
+      "logo": "assets/partners/BITZER.webp",
+      "url": "https://www.tecumseh.com",
+      "tagline_ar": "ضواغط محكمة الإغلاق Hermetic للوحدات الصغيرة",
+      "tagline_en": "Hermetic compressors for small units",
+      "description_ar": "Tecumseh شركة أمريكية تأسست عام 1934، متخصصة في تصنيع الضواغط محكمة الإغلاق (Hermetic) للتطبيقات التجارية الصغيرة والمتوسطة. تنتج ضواغط من 1/4 حصان إلى 5 أحصنة، مناسبة للثلاجات التجارية، عربات الآيس كريم، وحدات التبريد الصغيرة، وثلاجات العرض. تتميز بسعر اقتصادي وموثوقية عالية في التطبيقات منخفضة الحمل.",
+      "key_products_ar": [
+        "ضواغط Hermetic AE, AG, AJ",
+        "وحدات تكثيف خارجية صغيرة",
+        "ضواغط التبريد والتجميد",
+        "ضواغط للنقل المبرد"
+      ],
+      "applications_ar": [
+        "ثلاجات العرض في المحلات الصغيرة",
+        "عربات الآيس كريم",
+        "ثلاجات السيارات التجارية",
+        "غرف التبريد الصغيرة (<20م³)"
+      ],
+      "warranty_ar": "ضمان المصنع 18 شهراً",
+      "keywords_ar": ["Tecumseh", "تكومسي", "ضاغط محكم"]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "الفريدة آيس للتبريد الصناعي",
+  "short_name": "الفريدة آيس",
+  "description": "شركة سعودية متخصصة في تصميم وتنفيذ وصيانة أنظمة التبريد والتجميد الصناعي. خبرة 20+ سنة و 550+ مشروع منجز في المملكة العربية السعودية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#1e3a8a",
+  "categories": ["business", "industrial", "engineering"],
+  "icons": [
+    { "src": "/assets/ace-logos/elfaridaice.webp", "sizes": "192x192", "type": "image/webp", "purpose": "any" },
+    { "src": "/assets/ace-logos/elfaridaice.webp", "sizes": "512x512", "type": "image/webp", "purpose": "any" },
+    { "src": "/assets/ace-logos/elfaridaice.webp", "sizes": "192x192", "type": "image/webp", "purpose": "maskable" },
+    { "src": "/assets/ace-logos/elfaridaice.webp", "sizes": "512x512", "type": "image/webp", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "خدماتنا",
+      "short_name": "الخدمات",
+      "description": "تصفح خدمات التبريد الصناعي",
+      "url": "/services.html",
+      "icons": [{ "src": "/assets/ace-logos/elfaridaice.webp", "sizes": "96x96", "type": "image/webp" }]
+    },
+    {
+      "name": "مشاريعنا",
+      "short_name": "المشاريع",
+      "description": "اطّلع على مشاريعنا المنجزة",
+      "url": "/projects.html",
+      "icons": [{ "src": "/assets/ace-logos/elfaridaice.webp", "sizes": "96x96", "type": "image/webp" }]
+    },
+    {
+      "name": "تواصل معنا",
+      "short_name": "تواصل",
+      "description": "احصل على عرض سعر مجاني",
+      "url": "/contact.html",
+      "icons": [{ "src": "/assets/ace-logos/elfaridaice.webp", "sizes": "96x96", "type": "image/webp" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.webp",
+      "sizes": "1200x630",
+      "type": "image/webp"
+    }
+  ],
+  "prefer_related_applications": false
+}
