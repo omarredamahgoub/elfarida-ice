@@ -2,10 +2,6 @@
 # _redirects — Cloudflare Workers Static Assets
 # Site   : elfaridaice.com
 # Updated: 2026-05-09
-# ───────────────────────────────────────────────────────────────────
-# Rules: Cloudflare Workers supports 301,302,303,307,308,200 only.
-# 410 → 301 to /404.html | absolute URLs removed (relative only)
-# Duplicates removed. Last rule is the 404 fallback.
 # ═══════════════════════════════════════════════════════════════════
 
 # ───────────────────────────────────────────────────────────────────
@@ -47,38 +43,25 @@
 /en/services-technical    /services-technical-en.html  301
 
 # ───────────────────────────────────────────────────────────────────
-# 2. REMOVED PAGES → 301 to 404 (410 not supported)
+# 2. REMOVED PAGES
 # ───────────────────────────────────────────────────────────────────
 /webdev.html              /404.html           301
 /webdev                   /404.html           301
 /portfolio.html           /404.html           301
-/portfolio                /404.html           301
-/portfolio/               /404.html           301
 
 # ───────────────────────────────────────────────────────────────────
 # 3. LEGACY WORDPRESS — ARABIC PAGES
 # ───────────────────────────────────────────────────────────────────
 /our-projects             /projects.html      301
 /our-projects/            /projects.html      301
-/projects                 /projects.html      301
-/projects/                /projects.html      301
 /our-partners             /brands.html        301
 /our-partners/            /brands.html        301
-/partners                 /brands.html        301
-/partners/                /brands.html        301
 /about-us                 /about.html         301
 /about-us/                /about.html         301
-/about                    /about.html         301
-/about/                   /about.html         301
 /contact-us               /contact.html       301
 /contact-us/              /contact.html       301
-/contact                  /contact.html       301
-/contact/                 /contact.html       301
 /our-services             /services.html      301
 /our-services/            /services.html      301
-/services                 /services.html      301
-/blog                     /blog.html          301
-/blog/                    /blog.html          301
 /news                     /blog.html          301
 /news/                    /blog.html          301
 
@@ -124,10 +107,8 @@
 /index.html               /                   301
 
 # ───────────────────────────────────────────────────────────────────
-# 8. GEO & INDUSTRY PAGES
+# 8. GEO PAGES
 # ───────────────────────────────────────────────────────────────────
-/ar/industries/*          /industries/:splat     301
-/en/industries/*          /industries/:splat-en  301
 /cold-rooms/tabuk         /cold-rooms-tabuk.html          301
 /cold-rooms/hail          /cold-rooms-hail.html           301
 /cold-rooms/buraidah      /cold-rooms-buraidah.html       301
@@ -139,35 +120,17 @@
 /assets/articles/bitzer-maintenance.html  /assets/articles/bitzer-maintenance-ar.html  301
 
 # ───────────────────────────────────────────────────────────────────
-# 9. CANONICAL ALIASES
+# 9. INDUSTRY SHORTCUTS (non-conflicting slugs only)
 # ───────────────────────────────────────────────────────────────────
-/dictionary               /glossary.html      301
-/terms-glossary           /glossary.html      301
-/industries               /industries.html    301
-/sectors                  /industries.html    301
-/our-industries           /industries.html    301
-/faq                      /faq.html           301
-/questions                /faq.html           301
-/help                     /faq.html           301
-/services-technical       /services-technical.html   301
-/technical-services       /services-technical.html   301
-/services/technical       /services-technical.html   301
-/restaurants              /industries/restaurants.html      301
-/bakeries                 /industries/bakeries.html         301
 /bakery                   /industries/bakeries.html         301
-/poultry                  /industries/poultry.html          301
 /meat-cold-storage        /industries/meat.html             301
-/meat                     /industries/meat.html             301
-/seafood                  /industries/seafood.html          301
-/dairy                    /industries/dairy.html            301
-/ice-factories            /industries/ice-factories.html    301
 /pharma                   /industries/pharmaceutical.html   301
-/pharmaceutical           /industries/pharmaceutical.html   301
-/hospitals                /industries/hospitals.html        301
-/farms                    /industries/farms.html            301
-/logistics                /industries/logistics.html        301
-/supermarkets             /industries/supermarkets.html     301
-
-# ───────────────────────────────────────────────────────────────────
-# 10. 404 FALLBACK — MUST BE LAST
-# ───────────────────────────────────────────────────────────────────
+/sectors                  /industries.html                  301
+/our-industries           /industries.html                  301
+/dictionary               /glossary.html                    301
+/terms-glossary           /glossary.html                    301
+/questions                /faq.html                         301
+/help                     /faq.html                         301
+/technical-services       /services-technical.html          301
+/ar/industries/*          /industries/:splat                301
+/en/industries/*          /industries/:splat-en             301
