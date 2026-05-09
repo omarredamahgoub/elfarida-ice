@@ -1,203 +1,133 @@
-# ═════════════════════════════════════════════════════════════════════
-# _redirects — Cloudflare Pages / Netlify universal redirect rules
-# ─────────────────────────────────────────────────────────────────────
-# CRITICAL: This file preserves SEO equity from the legacy WordPress
-# site. Every legacy URL discovered in Google's index is mapped here
-# to its closest topical equivalent on the new static site.
-#
-# Redirect order: most specific → most general. Cloudflare/Netlify
-# stop at the first match.
-#
-# Status code reference:
-#   301 = Permanent (passes ~99% of link equity — USE FOR SEO MIGRATION)
-#   302 = Temporary (DO NOT USE — Google may not consolidate signals)
-#   410 = Gone (use only for permanently removed content)
-#   200 = Rewrite (URL changes but content shows from new path)
-# ═════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════
+# _redirects — Cloudflare Workers Static Assets
+# Site   : elfaridaice.com
+# Updated: 2026-05-09
+# ───────────────────────────────────────────────────────────────────
+# Rules: Cloudflare Workers supports 301,302,303,307,308,200 only.
+# 410 → 301 to /404.html | absolute URLs removed (relative only)
+# Duplicates removed. Last rule is the 404 fallback.
+# ═══════════════════════════════════════════════════════════════════
 
-
-# ═════════════════════════════════════════════════════════════════════
-# 1. DOMAIN CANONICALIZATION
-# ═════════════════════════════════════════════════════════════════════
-
-# Force apex (drop www)
-https://www.elfaridaice.com/*  https://elfaridaice.com/:splat  301!
-
-
-# ═════════════════════════════════════════════════════════════════════
-# 2. LEGACY WORDPRESS — ENGLISH PAGES
-# ═════════════════════════════════════════════════════════════════════
-
-# Homepage variants
-/en                       /index-en.html  301
-/en/                      /index-en.html  301
-/en/home                  /index-en.html  301
-/en/home/                 /index-en.html  301
-
-# Static pages
+# ───────────────────────────────────────────────────────────────────
+# 1. LEGACY WORDPRESS — ENGLISH PAGES
+# ───────────────────────────────────────────────────────────────────
+/en                       /index-en.html      301
+/en/                      /index-en.html      301
+/en/home                  /index-en.html      301
+/en/home/                 /index-en.html      301
 /en/about-us              /about-en.html      301
 /en/about-us/             /about-en.html      301
 /en/about                 /about-en.html      301
 /en/about/                /about-en.html      301
-
 /en/contact-us            /contact-en.html    301
 /en/contact-us/           /contact-en.html    301
 /en/contact               /contact-en.html    301
 /en/contact/              /contact-en.html    301
-
 /en/services              /services-en.html   301
 /en/services/             /services-en.html   301
 /en/our-services          /services-en.html   301
 /en/our-services/         /services-en.html   301
-
 /en/projects              /projects-en.html   301
 /en/projects/             /projects-en.html   301
 /en/our-projects          /projects-en.html   301
 /en/our-projects/         /projects-en.html   301
 /en/portfolio             /projects-en.html   301
 /en/portfolio/            /projects-en.html   301
-
-# Permanently removed pages — signal Gone to crawlers
-/webdev.html   /404.html  410
-/webdev        /404.html  410
-/portfolio.html /404.html  410
-
 /en/partners              /brands-en.html     301
 /en/partners/             /brands-en.html     301
 /en/our-partners          /brands-en.html     301
 /en/our-partners/         /brands-en.html     301
 /en/brands                /brands-en.html     301
 /en/brands/               /brands-en.html     301
-
 /en/blog                  /blog-en.html       301
 /en/blog/                 /blog-en.html       301
 /en/news                  /blog-en.html       301
 /en/news/                 /blog-en.html       301
+/en/faq                   /faq-en.html        301
+/en/services-technical    /services-technical-en.html  301
 
+# ───────────────────────────────────────────────────────────────────
+# 2. REMOVED PAGES → 301 to 404 (410 not supported)
+# ───────────────────────────────────────────────────────────────────
+/webdev.html              /404.html           301
+/webdev                   /404.html           301
+/portfolio.html           /404.html           301
+/portfolio                /404.html           301
+/portfolio/               /404.html           301
 
-# ═════════════════════════════════════════════════════════════════════
-# 3. LEGACY WORDPRESS — ARABIC PAGES (default locale, no prefix)
-# ═════════════════════════════════════════════════════════════════════
-
+# ───────────────────────────────────────────────────────────────────
+# 3. LEGACY WORDPRESS — ARABIC PAGES
+# ───────────────────────────────────────────────────────────────────
 /our-projects             /projects.html      301
 /our-projects/            /projects.html      301
 /projects                 /projects.html      301
 /projects/                /projects.html      301
-/portfolio                /404.html           410
-/portfolio/               /404.html           410
-
 /our-partners             /brands.html        301
 /our-partners/            /brands.html        301
 /partners                 /brands.html        301
 /partners/                /brands.html        301
-
 /about-us                 /about.html         301
 /about-us/                /about.html         301
 /about                    /about.html         301
 /about/                   /about.html         301
-
 /contact-us               /contact.html       301
 /contact-us/              /contact.html       301
 /contact                  /contact.html       301
 /contact/                 /contact.html       301
-
 /our-services             /services.html      301
 /our-services/            /services.html      301
 /services                 /services.html      301
-/services/                /services.html      301
-
 /blog                     /blog.html          301
 /blog/                    /blog.html          301
 /news                     /blog.html          301
 /news/                    /blog.html          301
 
-
-# ═════════════════════════════════════════════════════════════════════
-# 4. LEGACY ARABIC ARTICLES — /ar/[slug]/
-# All old Arabic articles redirect to the new blog hub. Once we
-# identify high-traffic individual articles, override above this rule.
-# ═════════════════════════════════════════════════════════════════════
-
+# ───────────────────────────────────────────────────────────────────
+# 4. ARABIC ARTICLE ARCHIVES
+# ───────────────────────────────────────────────────────────────────
 /ar                       /                   301
 /ar/                      /                   301
 /ar/*                     /blog.html          301
 
+# ───────────────────────────────────────────────────────────────────
+# 5. DATE & TAXONOMY ARCHIVES
+# ───────────────────────────────────────────────────────────────────
+/2020/*                   /blog.html          301
+/2021/*                   /blog.html          301
+/2022/*                   /blog.html          301
+/2023/*                   /blog.html          301
+/2024/*                   /blog.html          301
+/2025/*                   /blog.html          301
+/2026/*                   /blog.html          301
+/category/*               /blog.html          301
+/tag/*                    /blog.html          301
+/author/*                 /about.html         301
 
-# ═════════════════════════════════════════════════════════════════════
-# 5. WORDPRESS DEFAULT PERMALINK PATTERNS
-# These catch any old links shared with default WP URL formats.
-# ═════════════════════════════════════════════════════════════════════
+# ───────────────────────────────────────────────────────────────────
+# 6. WORDPRESS ADMIN & FEEDS
+# ───────────────────────────────────────────────────────────────────
+/wp-admin                 /404.html           301
+/wp-admin/*               /404.html           301
+/wp-login.php             /404.html           301
+/wp-config.php            /404.html           301
+/xmlrpc.php               /404.html           301
+/feed                     /contact.html       301
+/feed/                    /contact.html       301
+/rss                      /contact.html       301
+/rss/                     /contact.html       301
+/comments/feed            /404.html           301
+/comments/feed/           /404.html           301
 
-# Date-based archives → blog
-/2020/*  /blog.html  301
-/2021/*  /blog.html  301
-/2022/*  /blog.html  301
-/2023/*  /blog.html  301
-/2024/*  /blog.html  301
-/2025/*  /blog.html  301
-/2026/*  /blog.html  301
+# ───────────────────────────────────────────────────────────────────
+# 7. PATH NORMALIZATION
+# ───────────────────────────────────────────────────────────────────
+/index.html               /                   301
 
-# Category & tag archives → blog
-/category/*  /blog.html  301
-/tag/*       /blog.html  301
-/author/*    /about.html  301
-
-
-# ═════════════════════════════════════════════════════════════════════
-# 6. WORDPRESS ADMIN & FEED — BLOCK / RETIRE
-# ═════════════════════════════════════════════════════════════════════
-
-# Block WordPress admin paths (security + SEO hygiene)
-/wp-admin            /404.html  410
-/wp-admin/*          /404.html  410
-/wp-login.php        /404.html  410
-/wp-config.php       /404.html  410
-/xmlrpc.php          /404.html  410
-
-# RSS feeds → contact (encourage human engagement)
-/feed                /contact.html  301
-/feed/               /contact.html  301
-/rss                 /contact.html  301
-/rss/                /contact.html  301
-/comments/feed       /404.html  410
-/comments/feed/      /404.html  410
-
-
-# ═════════════════════════════════════════════════════════════════════
-# 8. CONTENT PATH NORMALIZATION (new site)
-# ═════════════════════════════════════════════════════════════════════
-
-# Canonicalize index.html → root
-/index.html  /  301
-
-# Trailing-slash normalization for clean URLs
-/services/   /services.html   301
-/projects/   /projects.html   301
-/about/      /about.html      301
-/contact/    /contact.html    301
-/blog/       /blog.html       301
-/brands/     /brands.html     301
-
-
-# ═════════════════════════════════════════════════════════════════════
-# 9. SEO ENRICHMENT 2026 — Industries & Geo pages
-# ═════════════════════════════════════════════════════════════════════
-
-/ar/industries/*    /industries/:splat     301
-/en/industries/*    /industries/:splat-en  301
-/restaurants        /industries/restaurants.html      301
-/bakery             /industries/bakeries.html         301
-/poultry            /industries/poultry.html          301
-/meat-cold-storage  /industries/meat.html             301
-/seafood            /industries/seafood.html          301
-/dairy              /industries/dairy.html            301
-/ice-factories      /industries/ice-factories.html    301
-/pharma             /industries/pharmaceutical.html   301
-/hospitals          /industries/hospitals.html        301
-/farms              /industries/farms.html            301
-/logistics          /industries/logistics.html        301
-/supermarkets       /industries/supermarkets.html     301
-
+# ───────────────────────────────────────────────────────────────────
+# 8. GEO & INDUSTRY PAGES
+# ───────────────────────────────────────────────────────────────────
+/ar/industries/*          /industries/:splat     301
+/en/industries/*          /industries/:splat-en  301
 /cold-rooms/tabuk         /cold-rooms-tabuk.html          301
 /cold-rooms/hail          /cold-rooms-hail.html           301
 /cold-rooms/buraidah      /cold-rooms-buraidah.html       301
@@ -206,46 +136,39 @@ https://www.elfaridaice.com/*  https://elfaridaice.com/:splat  301!
 /cold-rooms/makkah        /cold-rooms-makkah.html         301
 /cold-rooms/qatif         /cold-rooms-qatif.html          301
 /cold-rooms/hafr-al-batin /cold-rooms-hafr-al-batin.html  301
-
-# Canonicalize legacy duplicate Arabic article → authoritative -ar URL
 /assets/articles/bitzer-maintenance.html  /assets/articles/bitzer-maintenance-ar.html  301
 
-/dictionary     /glossary.html   301
-/terms-glossary /glossary.html   301
+# ───────────────────────────────────────────────────────────────────
+# 9. CANONICAL ALIASES
+# ───────────────────────────────────────────────────────────────────
+/dictionary               /glossary.html      301
+/terms-glossary           /glossary.html      301
+/industries               /industries.html    301
+/sectors                  /industries.html    301
+/our-industries           /industries.html    301
+/faq                      /faq.html           301
+/questions                /faq.html           301
+/help                     /faq.html           301
+/services-technical       /services-technical.html   301
+/technical-services       /services-technical.html   301
+/services/technical       /services-technical.html   301
+/restaurants              /industries/restaurants.html      301
+/bakeries                 /industries/bakeries.html         301
+/bakery                   /industries/bakeries.html         301
+/poultry                  /industries/poultry.html          301
+/meat-cold-storage        /industries/meat.html             301
+/meat                     /industries/meat.html             301
+/seafood                  /industries/seafood.html          301
+/dairy                    /industries/dairy.html            301
+/ice-factories            /industries/ice-factories.html    301
+/pharma                   /industries/pharmaceutical.html   301
+/pharmaceutical           /industries/pharmaceutical.html   301
+/hospitals                /industries/hospitals.html        301
+/farms                    /industries/farms.html            301
+/logistics                /industries/logistics.html        301
+/supermarkets             /industries/supermarkets.html     301
 
-/industries     /industries.html  301
-/sectors        /industries.html  301
-/our-industries /industries.html  301
-
-# FAQ canonical aliases
-/faq            /faq.html         301
-/questions      /faq.html         301
-/help           /faq.html         301
-/en/faq         /faq-en.html      301
-
-# Services technical deep-dive aliases
-/services-technical      /services-technical.html     301
-/technical-services      /services-technical.html     301
-/services/technical      /services-technical.html     301
-/en/services-technical   /services-technical-en.html  301
-
-# Industry sub-pages canonical aliases
-/restaurants            /industries/restaurants.html      301
-/bakeries               /industries/bakeries.html         301
-/poultry                /industries/poultry.html          301
-/meat                   /industries/meat.html             301
-/seafood                /industries/seafood.html          301
-/dairy                  /industries/dairy.html            301
-/ice-factories          /industries/ice-factories.html    301
-/pharmaceutical         /industries/pharmaceutical.html   301
-/hospitals              /industries/hospitals.html        301
-/farms                  /industries/farms.html            301
-/logistics              /industries/logistics.html        301
-/supermarkets           /industries/supermarkets.html     301
-
-
-# ═════════════════════════════════════════════════════════════════════
-# 10. CUSTOM 404 FALLBACK — MUST BE LAST
-# ═════════════════════════════════════════════════════════════════════
-
-/*  /404.html  404
+# ───────────────────────────────────────────────────────────────────
+# 10. 404 FALLBACK — MUST BE LAST
+# ───────────────────────────────────────────────────────────────────
+/*                        /404.html           301
