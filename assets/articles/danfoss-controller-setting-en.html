@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Danfoss EKC Controller Setup for Cold Rooms: Correct Parameters Step by
+      Step | Elfarida Ice
+    </title>
+    <meta
+      name="description"
+      content="Practical engineering guide for Danfoss EKC 202 and EKC 361 setup in cold and freezer rooms, including temperature settings, defrost limits, drip time, alarm handling, and common field mistakes."
+    />
+    <meta
+      name="keywords"
+      content="Danfoss EKC controller setup, EKC 202 settings, EKC 361 settings, cold room controller parameters, refrigeration thermostat configuration"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/ace-logos/elfaridaice.webp"
+    />
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+    />
+    <meta
+      property="og:title"
+      content="Danfoss EKC Controller Setup for Cold Rooms: Step-by-Step Correct Parameters"
+    />
+    <meta
+      property="og:description"
+      content="Incorrect EKC setup causes unstable temperature and energy waste. Learn the practical parameter strategy from a refrigeration engineering perspective."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html"
+    />
+    <meta
+      property="og:image"
+      content="https://elfaridaice.com/assets/gallery/danfoss.webp"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Elfarida Ice" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta
+      name="author"
+      content="Refrigeration Engineering Team - Elfarida Ice"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Danfoss EKC Controller Setup for Cold Rooms: Correct Parameters Step by Step",
+        "description": "Engineering guide for practical setup of Danfoss EKC controllers in commercial and industrial refrigeration.",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://elfaridaice.com/assets/gallery/danfoss.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Elfarida Ice Engineering & Industrial Refrigeration",
+          "url": "https://elfaridaice.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Elfarida Ice",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://elfaridaice.com/assets/ace-logos/elfaridaice.webp"
+          },
+          "url": "https://elfaridaice.com"
+        },
+        "mainEntityOfPage": "https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html",
+        "url": "https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html",
+        "inLanguage": "en",
+        "datePublished": "2025-06-01",
+        "dateModified": "2026-05-07",
+        "articleSection": "Controls and Operation",
+        "keywords": "Danfoss EKC, refrigeration controller setup, defrost parameters"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://elfaridaice.com/index-en.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://elfaridaice.com/blog-en.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Danfoss EKC Controller Setup",
+            "item": "https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html"
+          }
+        ]
+      }
+    </script>
+    
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+    <script src="../../js/seo-injector.js" defer></script>
+    <link rel="stylesheet" href="../../cairo.css" />
+    <link rel="stylesheet" href="../../css/shared.css" />
+    <link rel="stylesheet" href="../../tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/site-shell.css" />
+<link rel="stylesheet" href="../../css/article.css" />
+  </head>
+  <body class="bg-slate-50 text-left" dir="ltr">
+    <div id="site-header"></div>
+    <div id="read-progress"></div>
+
+    <div class="bg-white border-b border-slate-200">
+      <div class="max-w-5xl mx-auto px-4 py-12">
+        <div
+          class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-bold"
+        >
+          <a href="../../index-en.html" class="hover:text-blue-600">Home</a
+          ><span>></span>
+          <a href="../../blog-en.html" class="hover:text-blue-600"
+            >Engineering Blog</a
+          ><span>></span>
+          <span class="text-slate-600">Controls and Tuning</span>
+        </div>
+        <span
+          class="inline-block bg-indigo-50 text-indigo-600 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
+          >Controls and Tuning</span
+        >
+        <h1
+          class="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-5 article-h1-tight"
+        >
+          Danfoss EKC Controller Setup:<br class="hidden md:block" />
+          Correct Parameters Step by Step
+        </h1>
+        <p
+          class="text-xl text-slate-500 font-light leading-relaxed max-w-3xl mb-8"
+        >
+          EKC controllers manage room temperature stability and defrost cycles.
+          Poor setup causes product-risk temperature swings and continuous
+          energy waste.
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="grid lg:grid-cols-[1fr_300px] gap-14 items-start">
+        <article class="prose-article" data-aos="fade-up">
+          <div class="rounded-3xl overflow-hidden shadow-2xl mb-10">
+            <img
+              src="../gallery/danfoss.webp"
+              alt="Danfoss EKC controller for cold rooms"
+              class="w-full h-72 object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <p>
+            Danfoss EKC controllers are widely deployed in Gulf-region
+            commercial and industrial refrigeration. Their value is high only
+            when key control parameters are tuned correctly for actual load
+            behavior.
+          </p>
+
+          <h2 id="models">Common EKC Models and Applications</h2>
+          <p>
+            Danfoss offers many EKC variants. In cold-room projects, these are
+            the most frequent models:
+          </p>
+
+          <div
+            class="rounded-2xl overflow-hidden border border-slate-200 shadow-lg my-6"
+          >
+            <table class="article-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Main Application</th>
+                  <th>Sensor Count</th>
+                  <th>Defrost Control</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>EKC 101</td>
+                  <td>Basic temperature control</td>
+                  <td>1</td>
+                  <td><span class="badge badge-orange">No</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 202</td>
+                  <td>Cooling with electric defrost</td>
+                  <td>2 - 3</td>
+                  <td><span class="badge badge-green">Yes</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 301</td>
+                  <td>Condensing unit control</td>
+                  <td>2</td>
+                  <td><span class="badge badge-orange">Partial</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 361</td>
+                  <td>Advanced industrial freezing</td>
+                  <td>Up to 4</td>
+                  <td><span class="badge badge-green">Yes - advanced</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 414</td>
+                  <td>Evaporator and expansion valve logic</td>
+                  <td>3</td>
+                  <td><span class="badge badge-green">Yes</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="ekc202">EKC 202 Setup: Core Parameters for Cold Rooms</h2>
+          <p>
+            EKC 202 is common for chilled rooms and medium freezer applications.
+            The following parameter groups matter most in field commissioning.
+          </p>
+
+          <h3>Temperature Parameters</h3>
+          <div class="param-block">
+            <div>
+              <span class="param-key">r01</span> =
+              <span class="param-val">4</span>
+              <span class="param-comment"
+                >// Set point in deg C (example chilled room)</span
+              >
+            </div>
+            <div>
+              <span class="param-key">r02</span> =
+              <span class="param-val">2</span>
+              <span class="param-comment">// Differential band</span>
+            </div>
+            <div>
+              <span class="param-key">r04</span> =
+              <span class="param-val">-5</span>
+              <span class="param-comment">// Minimum allowed set point</span>
+            </div>
+            <div>
+              <span class="param-key">r05</span> =
+              <span class="param-val">15</span>
+              <span class="param-comment">// Maximum allowed set point</span>
+            </div>
+            <div>
+              <span class="param-key">A01</span> =
+              <span class="param-val">8</span>
+              <span class="param-comment"
+                >// High temperature alarm threshold</span
+              >
+            </div>
+            <div>
+              <span class="param-key">A02</span> =
+              <span class="param-val">0</span>
+              <span class="param-comment"
+                >// Low temperature alarm threshold</span
+              >
+            </div>
+          </div>
+
+          <h3>Defrost Parameters</h3>
+          <div class="param-block">
+            <div>
+              <span class="param-key">d01</span> =
+              <span class="param-val">2</span>
+              <span class="param-comment"
+                >// Defrost mode (electric in this example)</span
+              >
+            </div>
+            <div>
+              <span class="param-key">d02</span> =
+              <span class="param-val">4</span>
+              <span class="param-comment">// Defrost cycles per day</span>
+            </div>
+            <div>
+              <span class="param-key">d03</span> =
+              <span class="param-val">30</span>
+              <span class="param-comment"
+                >// Max defrost duration in minutes</span
+              >
+            </div>
+            <div>
+              <span class="param-key">d04</span> =
+              <span class="param-val">10</span>
+              <span class="param-comment"
+                >// End-of-defrost temperature in deg C</span
+              >
+            </div>
+            <div>
+              <span class="param-key">d05</span> =
+              <span class="param-val">3</span>
+              <span class="param-comment">// Drip time in minutes</span>
+            </div>
+            <div>
+              <span class="param-key">d06</span> =
+              <span class="param-val">2</span>
+              <span class="param-comment">// Fan delay after defrost</span>
+            </div>
+          </div>
+
+          <div class="callout callout-warn">
+            <span class="callout-icon">!</span>
+            <div class="callout-body">
+              <strong>Most common field mistake: very high d04</strong>
+              Setting end-of-defrost temperature too high overheats the
+              evaporator and lifts room temperature after every cycle. Keep d04
+              aligned with actual application duty.
+            </div>
+          </div>
+
+          <h2 id="ekc361">EKC 361 Setup for Industrial Freezing</h2>
+          <p>
+            EKC 361 fits deeper freezing applications and more advanced control
+            logic. Typical reference values are:
+          </p>
+
+          <div class="specs-grid">
+            <div class="spec-cell">
+              <div class="spec-label">Deep-freeze set point</div>
+              <div class="spec-value">-20 <span class="spec-unit">C</span></div>
+            </div>
+            <div class="spec-cell">
+              <div class="spec-label">Recommended differential</div>
+              <div class="spec-value">
+                2 - 3 <span class="spec-unit">C</span>
+              </div>
+            </div>
+            <div class="spec-cell">
+              <div class="spec-label">Defrost cycles per day</div>
+              <div class="spec-value">
+                2 - 3 <span class="spec-unit">cycles</span>
+              </div>
+            </div>
+            <div class="spec-cell">
+              <div class="spec-label">End-of-defrost for freezing</div>
+              <div class="spec-value">
+                12 - 14 <span class="spec-unit">C</span>
+              </div>
+            </div>
+          </div>
+
+          <h2 id="alarm">Alarm Handling: Do Not Ignore Codes</h2>
+          <p>
+            EKC controllers expose fault and warning codes. Fast response
+            prevents product loss and major failures.
+          </p>
+
+          <div
+            class="rounded-2xl overflow-hidden border border-slate-200 shadow-lg my-6"
+          >
+            <table class="article-table">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Meaning</th>
+                  <th>Immediate Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="font-mono-tech">E1</span></td>
+                  <td>S1 temperature sensor fault</td>
+                  <td>Check wiring or replace sensor</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">E2</span></td>
+                  <td>S2 defrost sensor fault</td>
+                  <td>Check mounting and continuity</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">A1</span></td>
+                  <td>High temperature alarm</td>
+                  <td>Inspect doors, load pattern, and cooling performance</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">A2</span></td>
+                  <td>Low temperature alarm</td>
+                  <td>Review set point and defrost behavior</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">dEF</span></td>
+                  <td>Controller is in defrost mode</td>
+                  <td>Normal status, not a fault</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">tEP</span></td>
+                  <td>Temperature far outside expected range</td>
+                  <td>Check compressor or possible refrigerant issue</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="common-mistakes">Common Field Configuration Mistakes</h2>
+
+          <h3>1. Very Wide Differential</h3>
+          <p>
+            A wide differential allows large room-temperature swings and can
+            compromise product stability.
+          </p>
+
+          <h3>2. Too Many Defrost Cycles</h3>
+          <p>
+            Excessive defrosting adds energy load and can repeatedly lift room
+            temperature unnecessarily.
+          </p>
+
+          <h3>3. Ignoring Drip Time</h3>
+          <p>
+            If drip time is too short, fans may distribute residual water and
+            moisture back into the room.
+          </p>
+
+          <div class="callout callout-danger">
+            <span class="callout-icon">X</span>
+            <div class="callout-body">
+              <strong
+                >Do not set target temperature below actual system
+                capability</strong
+              >
+              Control targets must match plant design capacity. Aggressive
+              unrealistic set points can overload the compressor with no real
+              thermal gain.
+            </div>
+          </div>
+
+          <h2 id="wiring">Correct EKC Sensor Wiring Practice</h2>
+          <p>
+            Sensor placement and wiring quality directly affect control
+            accuracy.
+          </p>
+
+          <ul class="checklist">
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              Use insulated moisture-resistant cable for sensor lines.
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              Respect practical cable-length limits unless compensated by
+              suitable interface design.
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              Mount S1 in representative return-air location, not directly in
+              evaporator discharge path.
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              Place S2 at the appropriate coil position for realistic defrost
+              termination behavior.
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              Separate low-voltage sensor cables from power runs to reduce
+              electrical noise.
+            </li>
+          </ul>
+
+          <h2 id="calibration">Sensor Calibration</h2>
+          <p>
+            When controller reading differs from validated field measurement,
+            use the proper offset parameter (model-dependent) to calibrate
+            display and control behavior.
+          </p>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">OK</span>
+            <div class="callout-body">
+              <strong>Conclusion</strong>
+              EKC setup is an iterative commissioning process. Track performance
+              for at least one to two weeks after changes and optimize toward
+              stable temperature with minimal defrost overhead.
+            </div>
+          </div>
+
+          <div class="bg-blue-900 text-white rounded-3xl p-8 mt-10 text-center">
+            <h3 class="text-2xl font-black mb-3">
+              Need On-Site EKC Setup Support?
+            </h3>
+            <p class="text-blue-200 mb-6 font-light">
+              Elfarida Ice provides field setup, wiring verification, and
+              programming support for Danfoss EKC families.
+            </p>
+            <a
+              href="../../contact-en.html"
+              class="inline-block bg-white text-blue-900 font-black px-10 py-4 rounded-2xl hover:bg-blue-50 transition shadow-xl"
+              >Contact Us Now</a
+            >
+          </div>
+        </article>
+
+        <aside
+          class="sidebar-sticky hidden lg:block"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              Article Contents
+            </div>
+            <div class="p-4"></div>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              Quick Reference
+            </div>
+            <div class="p-4">
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >Differential - chilled</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >1.5 - 2 C</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >Differential - frozen</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >2 - 3 C</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >Defrost end - chilled</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >10 C</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >Defrost end - frozen</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >12 - 14 C</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold">Drip time</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >>= 3 min</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              Tags
+            </div>
+            <div class="p-4 flex flex-wrap gap-2">
+              <span
+                class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-full"
+                >Danfoss EKC</span
+              >
+              <span
+                class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-full"
+                >Refrigeration Controller</span
+              >
+              <span
+                class="text-xs bg-blue-100 text-blue-700 font-bold px-3 py-1.5 rounded-full"
+                >Controls</span
+              >
+            </div>
+          </div>
+          <div class="bg-blue-800 text-white rounded-2xl p-5 text-center">
+            <i class="fas fa-phone-alt text-blue-300 text-2xl mb-3 block"></i>
+            <p class="font-black text-sm mb-1">Free Engineering Consultation</p>
+            <p class="text-blue-300 text-xs mb-4">Our team is ready to help</p>
+            <a
+              href="tel:0598366214"
+              class="block bg-white text-blue-900 font-black text-sm py-2.5 rounded-xl hover:bg-blue-50 transition"
+              >Call Now</a
+            >
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <section class="py-20 bg-white border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <h2 class="text-3xl font-black text-slate-900">Related Articles</h2>
+            <p class="text-slate-500 mt-1">
+              From Elfarida Ice engineering blog
+            </p>
+          </div>
+          <a
+            href="../../blog-en.html"
+            class="hidden md:block text-blue-700 font-bold border-b-2 border-blue-700"
+            >Browse All</a
+          >
+        </div>
+        <div class="grid md:grid-cols-3 gap-10">
+          <article class="blog-card group" data-aos="fade-up">
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/condensing-unit.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-orange-600 font-black text-sm"
+              >Preventive Maintenance</span
+            >
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="condensing-unit-maintenance-en.html"
+                >Condensing Unit Maintenance in Hot Climates</a
+              >
+            </h3>
+          </article>
+          <article
+            class="blog-card group"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/rack-3-bitzer-compressors.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-red-600 font-black text-sm">Gas Leak</span>
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="refrigeration-gas-leak-en.html"
+                >Refrigeration Gas Leak Detection and Repair</a
+              >
+            </h3>
+          </article>
+          <article
+            class="blog-card group"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/bitzer-compressor-components.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-blue-600 font-black text-sm"
+              >Preventive Maintenance</span
+            >
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="bitzer-maintenance-en.html"
+                >Bitzer Compressor Maintenance Guide</a
+              >
+            </h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+      window.addEventListener("scroll", () => {
+        const d = document.documentElement;
+        document.getElementById("read-progress").style.width =
+          Math.min(
+            (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100,
+            100,
+          ) + "%";
+      });
+      const secs = document.querySelectorAll("h2[id]");
+      const tocs = document.querySelectorAll(".toc-link");
+      window.addEventListener("scroll", () => {
+        let cur = "";
+        secs.forEach((s) => {
+          if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+        });
+        tocs.forEach((a) => {
+          a.classList.toggle(
+            "text-blue-700",
+            a.getAttribute("href") === "#" + cur,
+          );
+          a.classList.toggle(
+            "font-black",
+            a.getAttribute("href") === "#" + cur,
+          );
+        });
+      });
+    </script>
+    <div id="site-footer"></div>
+    <script src="../../js/lang-switch.js" defer></script>
+    <script src="../../js/site-shell.js" defer></script>
+  </body>
+</html>

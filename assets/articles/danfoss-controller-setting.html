@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ضبط كنترولر دانفوس EKC لغرف التبريد: الإعدادات الصحيحة خطوة بخطوة |
+      الفريدة آيس
+    </title>
+    <meta
+      name="description"
+      content="دليل هندسي عملي لضبط كنترولر دانفوس EKC 202 وEKC 361 في غرف التبريد والتجميد: إعدادات درجة الحرارة، حد الذوبان، التفريغ الحراري، والأعطال الشائعة وحلولها."
+    />
+    <meta
+      name="keywords"
+      content="ضبط كنترولر دانفوس، Danfoss EKC controller، إعدادات غرف التبريد، EKC 202، EKC 361، Danfoss temperature controller، ضبط ثرموستات تبريد"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/ace-logos/elfaridaice.webp"
+    />
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/"
+    />
+    <meta
+      property="og:title"
+      content="ضبط كنترولر دانفوس EKC لغرف التبريد: الإعدادات الصحيحة خطوة بخطوة"
+    />
+    <meta
+      property="og:description"
+      content="إعدادات كنترولر دانفوس الخاطئة تعني درجة حرارة غير مستقرة وهدراً في الطاقة — تعلم الضبط الصحيح من مهندس متخصص."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+    />
+    <meta
+      property="og:image"
+      content="https://elfaridaice.com/assets/gallery/danfoss.webp"
+    />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="الفريدة آيس" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta name="author" content="فريق هندسة التبريد — الفريدة آيس" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ضبط كنترولر دانفوس EKC لغرف التبريد: الإعدادات الصحيحة خطوة بخطوة",
+        "description": "دليل هندسي لضبط كنترولر دانفوس EKC في أنظمة التبريد التجاري والصناعي",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://elfaridaice.com/assets/gallery/danfoss.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "الفريدة آيس للهندسة والتبريد الصناعي",
+          "url": "https://elfaridaice.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "الفريدة آيس",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://elfaridaice.com/assets/ace-logos/elfaridaice.webp"
+          },
+          "url": "https://elfaridaice.com"
+        },
+        "mainEntityOfPage": "https://elfaridaice.com/assets/articles/danfoss-controller-setting.html",
+        "url": "https://elfaridaice.com/assets/articles/danfoss-controller-setting.html",
+        "inLanguage": "ar",
+        "datePublished": "2025-06-01",
+        "dateModified": "2026-05-05",
+        "articleSection": "أنظمة التحكم والتشغيل",
+        "keywords": "Danfoss EKC, كنترولر تبريد, ضبط درجة الحرارة, defrost controller"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://elfaridaice.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "المدونة",
+            "item": "https://elfaridaice.com/blog.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "ضبط كنترولر دانفوس EKC",
+            "item": "https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+          }
+        ]
+      }
+    </script>
+    
+
+    <!-- ═══ PWA + Resource Hints + Schema Injector ═══ -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+    <script src="../../js/seo-injector.js" defer></script>
+
+    <link rel="stylesheet" href="../../cairo.css" />
+    <link rel="stylesheet" href="../../css/shared.css" />
+    <link rel="stylesheet" href="../../tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/site-shell.css" />
+<link rel="stylesheet" href="../../css/article.css" />
+  </head>
+  <body class="bg-slate-50 text-right" dir="rtl">
+    <div id="site-header"></div>
+    <div id="read-progress"></div>
+
+    <div class="bg-white border-b border-slate-200">
+      <div class="max-w-5xl mx-auto px-4 py-12">
+        <div
+          class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-bold"
+        >
+          <a href="../../index.html" class="hover:text-blue-600">الرئيسية</a
+          ><span>›</span>
+          <a href="../../blog.html" class="hover:text-blue-600"
+            >المدونة الهندسية</a
+          ><span>›</span>
+          <span class="text-slate-600">ضبط وتحكم</span>
+        </div>
+        <span
+          class="inline-block bg-indigo-50 text-indigo-600 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
+          >ضبط وتحكم</span
+        >
+        <h1
+          class="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-5 article-h1-tight"
+        >
+          ضبط كنترولر دانفوس EKC:<br class="hidden md:block" />
+          الإعدادات الصحيحة خطوة بخطوة
+        </h1>
+        <p
+          class="text-xl text-slate-500 font-light leading-relaxed max-w-3xl mb-8"
+        >
+          كنترولر دانفوس EKC هو الدماغ الذي يتحكم في درجة حرارة غرفة التبريد
+          ودورات الذوبان — إعداده الخاطئ يعني تذبذباً في درجة الحرارة وهدراً
+          مستمراً في الطاقة.
+        </p>
+        <div class="flex flex-wrap items-center gap-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center text-white font-black text-sm"
+            >
+              م.أ
+            </div>
+            <div>
+              <p class="text-sm font-black text-slate-800 leading-none mb-0.5">
+                م. أحمد الغامدي
+              </p>
+              <p class="text-xs text-slate-400 font-bold">
+                مهندس أنظمة التبريد · خبرة +15 سنة
+              </p>
+            </div>
+          </div>
+          <div class="w-px h-8 bg-slate-200 hidden sm:block"></div>
+          <div class="text-sm text-slate-400 font-bold">
+            <span class="text-slate-600">1 يونيو 2025</span><br />وقت القراءة: 9
+            دقائق
+          </div>
+          <div class="flex items-center gap-3 mr-auto">
+            <span class="text-xs text-slate-400 font-bold">شارك:</span>
+            <a
+              href="https://wa.me/?text=https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="مشاركة عبر واتساب"
+              class="text-green-500 text-xl"
+              ><i class="fab fa-whatsapp" aria-hidden="true"></i
+            ></a>
+            <a
+              href="https://x.com/intent/tweet?url=https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="مشاركة عبر X"
+              class="text-blue-500 text-xl"
+              ><i class="fab fa-x-twitter" aria-hidden="true"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/sharing/share-offsite/?url=https://elfaridaice.com/assets/articles/danfoss-controller-setting.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="مشاركة عبر لينكد إن"
+              class="text-blue-800 text-xl"
+              ><i class="fab fa-linkedin" aria-hidden="true"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="grid lg:grid-cols-[1fr_300px] gap-14 items-start">
+        <article class="prose-article" data-aos="fade-up">
+          <div class="rounded-3xl overflow-hidden shadow-2xl mb-10">
+            <img
+              src="../gallery/danfoss.webp"
+              alt="كنترولر دانفوس EKC لغرف التبريد"
+              class="w-full h-72 object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <p>
+            كنترولرات دانفوس EKC من أكثر وحدات التحكم انتشاراً في أنظمة التبريد
+            التجاري والصناعي في منطقة الخليج. يتميز بدقة التحكم في درجة الحرارة،
+            إدارة دورات الذوبان (Defrost)، وحماية الكمبروسر. لكن المنفعة الكاملة
+            لهذا الجهاز مشروطة بضبط صحيح لمعاملاته — وهذا ما يتناوله هذا الدليل.
+          </p>
+
+          <h2 id="models">نماذج EKC الشائعة وتطبيقاتها</h2>
+          <p>
+            تُنتج دانفوس سلسلة EKC بأكثر من عشرين موديلاً. أكثرها استخداماً في
+            غرف التبريد:
+          </p>
+
+          <div
+            class="rounded-2xl overflow-hidden border border-slate-200 shadow-lg my-6"
+          >
+            <table class="article-table">
+              <thead>
+                <tr>
+                  <th>الموديل</th>
+                  <th>التطبيق الرئيسي</th>
+                  <th>عدد المستشعرات</th>
+                  <th>التحكم في الذوبان</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>EKC 101</td>
+                  <td>تحكم بسيط في درجة الحرارة</td>
+                  <td>1</td>
+                  <td><span class="badge badge-orange">لا</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 202</td>
+                  <td>تبريد + ذوبان كهربائي</td>
+                  <td>2 – 3</td>
+                  <td><span class="badge badge-green">نعم</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 301</td>
+                  <td>تحكم في وحدة التكثيف</td>
+                  <td>2</td>
+                  <td><span class="badge badge-orange">جزئي</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 361</td>
+                  <td>تجميد صناعي متقدم</td>
+                  <td>حتى 4</td>
+                  <td><span class="badge badge-green">نعم — متقدم</span></td>
+                </tr>
+                <tr>
+                  <td>EKC 414</td>
+                  <td>إدارة مبخر مع صمام تمدد</td>
+                  <td>3</td>
+                  <td><span class="badge badge-green">نعم</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="ekc202">إعدادات EKC 202: الضبط الأساسي لغرف التبريد</h2>
+          <p>
+            EKC 202 هو الأكثر شيوعاً في غرف التبريد التجارية (0°م إلى 8°م) وغرف
+            التجميد المتوسطة (−18°م إلى −22°م). معاملاته الجوهرية:
+          </p>
+
+          <h3>معاملات درجة الحرارة (Temperature Parameters)</h3>
+          <div class="param-block">
+            <div>
+              <span class="param-key">r01</span> =
+              <span class="param-val">4</span>
+              <span class="param-comment"
+                >// نقطة ضبط درجة الحرارة (Set Point) — مثال: غرفة تبريد
+                4°م</span
+              >
+            </div>
+            <div>
+              <span class="param-key">r02</span> =
+              <span class="param-val">2</span>
+              <span class="param-comment"
+                >// نطاق التفاضل (Differential) — فرق درجة بين التشغيل
+                والإيقاف</span
+              >
+            </div>
+            <div>
+              <span class="param-key">r04</span> =
+              <span class="param-val">−5</span>
+              <span class="param-comment"
+                >// الحد الأدنى المسموح به لنقطة الضبط</span
+              >
+            </div>
+            <div>
+              <span class="param-key">r05</span> =
+              <span class="param-val">15</span>
+              <span class="param-comment"
+                >// الحد الأقصى المسموح به لنقطة الضبط</span
+              >
+            </div>
+            <div>
+              <span class="param-key">A01</span> =
+              <span class="param-val">8</span>
+              <span class="param-comment"
+                >// درجة إنذار درجة حرارة عالية (High Temp Alarm)</span
+              >
+            </div>
+            <div>
+              <span class="param-key">A02</span> =
+              <span class="param-val">0</span>
+              <span class="param-comment"
+                >// درجة إنذار درجة حرارة منخفضة (Low Temp Alarm)</span
+              >
+            </div>
+          </div>
+
+          <h3>معاملات الذوبان (Defrost Parameters)</h3>
+          <div class="param-block">
+            <div>
+              <span class="param-key">d01</span> =
+              <span class="param-val">2</span>
+              <span class="param-comment"
+                >// نوع الذوبان: 0=بدون / 1=غاز ساخن / 2=كهربائي / 3=هواء</span
+              >
+            </div>
+            <div>
+              <span class="param-key">d02</span> =
+              <span class="param-val">4</span>
+              <span class="param-comment">// عدد دورات الذوبان يومياً</span>
+            </div>
+            <div>
+              <span class="param-key">d03</span> =
+              <span class="param-val">30</span>
+              <span class="param-comment"
+                >// الحد الأقصى لوقت الذوبان بالدقائق</span
+              >
+            </div>
+            <div>
+              <span class="param-key">d04</span> =
+              <span class="param-val">10</span>
+              <span class="param-comment"
+                >// درجة إنهاء الذوبان (End of Defrost Temp) — بالدرجة
+                المئوية</span
+              >
+            </div>
+            <div>
+              <span class="param-key">d05</span> =
+              <span class="param-val">3</span>
+              <span class="param-comment"
+                >// وقت قطر الذوبان (Drip Time) بالدقائق بعد انتهاء
+                الذوبان</span
+              >
+            </div>
+            <div>
+              <span class="param-key">d06</span> =
+              <span class="param-val">2</span>
+              <span class="param-comment"
+                >// تأخير تشغيل المروحة بعد الذوبان بالدقائق</span
+              >
+            </div>
+          </div>
+
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠</span>
+            <div class="callout-body">
+              <strong>الخطأ الأكثر شيوعاً: d04 مضبوط بدرجة عالية جداً</strong>
+              ضبط درجة إنهاء الذوبان (d04) على 25°م أو 30°م يعني أن المبخر
+              يُسخّن أكثر من اللازم، مما يرفع درجة حرارة الغرفة بعد كل دورة
+              ذوبان. القيمة الموصى بها لغرف التبريد هي 10°م وللتجميد 12°م — لا
+              أكثر.
+            </div>
+          </div>
+
+          <h2 id="ekc361">إعدادات EKC 361 لغرف التجميد الصناعي</h2>
+          <p>
+            EKC 361 مصمم للتطبيقات الأكثر تعقيداً: التجميد العميق، التحكم في
+            صمام التمدد الإلكتروني، وإدارة متقدمة للذوبان. المعاملات الحرجة:
+          </p>
+
+          <div class="specs-grid">
+            <div class="spec-cell">
+              <div class="spec-label">نقطة ضبط التجميد العميق</div>
+              <div class="spec-value">
+                −20 <span class="spec-unit">°م</span>
+              </div>
+            </div>
+            <div class="spec-cell">
+              <div class="spec-label">نطاق التفاضل الموصى به</div>
+              <div class="spec-value">
+                2 – 3 <span class="spec-unit">°م</span>
+              </div>
+            </div>
+            <div class="spec-cell">
+              <div class="spec-label">دورات الذوبان اليومية — تجميد</div>
+              <div class="spec-value">
+                2 – 3 <span class="spec-unit">دورات</span>
+              </div>
+            </div>
+            <div class="spec-cell">
+              <div class="spec-label">درجة إنهاء الذوبان — تجميد</div>
+              <div class="spec-value">
+                12 – 14 <span class="spec-unit">°م</span>
+              </div>
+            </div>
+          </div>
+
+          <h2 id="alarm">إدارة الإنذارات: لا تتجاهل الأكواد</h2>
+          <p>
+            EKC 202 وEKC 361 يعرضان أكواداً عند وجود خلل. أهم الأكواد وتفسيرها:
+          </p>
+
+          <div
+            class="rounded-2xl overflow-hidden border border-slate-200 shadow-lg my-6"
+          >
+            <table class="article-table">
+              <thead>
+                <tr>
+                  <th>الكود</th>
+                  <th>المعنى</th>
+                  <th>الإجراء الفوري</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="font-mono-tech">E1</span></td>
+                  <td>خطأ في مستشعر درجة الحرارة S1</td>
+                  <td>فحص التوصيل أو استبدال المستشعر</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">E2</span></td>
+                  <td>خطأ في مستشعر الذوبان S2</td>
+                  <td>فحص المستشعر ومكان تركيبه على المبخر</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">A1</span></td>
+                  <td>تجاوز حد درجة الحرارة العليا</td>
+                  <td>فحص الباب، الحمل، وكفاءة التبريد</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">A2</span></td>
+                  <td>تجاوز حد درجة الحرارة الدنيا</td>
+                  <td>فحص إعداد نقطة الضبط والذوبان</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">dEF</span></td>
+                  <td>الكنترولر في وضع الذوبان حالياً</td>
+                  <td>إشعار طبيعي — ليس خطأ</td>
+                </tr>
+                <tr>
+                  <td><span class="font-mono-tech">tEP</span></td>
+                  <td>درجة الحرارة خارج النطاق الطبيعي جداً</td>
+                  <td>فحص عطل في الكمبروسر أو تسرب غاز</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="common-mistakes">أخطاء الضبط الشائعة في الميدان</h2>
+
+          <h3>١. تفاضل واسع جداً (Differential كبير)</h3>
+          <p>
+            ضبط التفاضل على 5°م أو 6°م يعني أن درجة الحرارة ستتذبذب بشكل واسع
+            (مثلاً بين 1°م و7°م في غرفة مضبوطة على 4°م). القيمة المثلى للتبريد
+            هي 1.5°م إلى 2°م، وللتجميد 2°م إلى 3°م.
+          </p>
+
+          <h3>٢. دورات ذوبان كثيرة جداً</h3>
+          <p>
+            أربع دورات ذوبان يومياً قد تكون ضرورية في بيئات رطبة جداً، لكنها في
+            كثير من الحالات مبالغة تستهلك طاقة إضافية وترفع درجة الحرارة بعد كل
+            دورة. ابدأ بدورتين وراقب تراكم الصقيع على المبخر.
+          </p>
+
+          <h3>٣. إغفال وقت القطر (Drip Time)</h3>
+          <p>
+            بعد الذوبان، يحتاج الماء وقتاً للقطر قبل أن تُشغَّل المروحة من جديد.
+            إغفال هذا الإعداد أو ضبطه على صفر يعني أن المروحة ستوزع الماء المذاب
+            داخل الغرفة. الحد الأدنى الموصى به هو 3 دقائق.
+          </p>
+
+          <div class="callout callout-danger">
+            <span class="callout-icon">✕</span>
+            <div class="callout-body">
+              <strong>لا تضبط نقطة الضبط أدنى من قدرة المنظومة الفعلية</strong>
+              إذا كانت غرفة التبريد مصممة على 4°م وضبطت الكنترولر على 0°م، ستعمل
+              المنظومة باستمرار دون الوصول للهدف، مما يُحمّل الكمبروسر فوق
+              طاقته. التصميم أولاً، ثم الضبط.
+            </div>
+          </div>
+
+          <h2 id="wiring">التوصيل الكهربائي الصحيح لمستشعرات EKC</h2>
+          <p>
+            مستشعرات EKC من نوع NTC (معامل درجة حرارة سلبي) ذات مقاومة 10 كيلو
+            أوم عند 25°م. قواعد التوصيل:
+          </p>
+
+          <ul class="checklist">
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              استخدم كابل مُعزول لمقاومة الرطوبة — الرطوبة على موصلات المستشعر
+              تعطي قراءات خاطئة
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              أقصى طول موصى به للكابل: 30 متراً — تجاوزه يتطلب كابلاً أثخن أو
+              مستشعراً بإشارة 4-20 mA
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              مستشعر S1 (درجة الحرارة) يُثبَّت في منطقة عودة الهواء — لا أمام
+              المبخر مباشرة
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              مستشعر S2 (الذوبان) يُثبَّت على زعانف المبخر في نقطة أبطأ في
+              الذوبان — ليس على الأنبوب مباشرة
+            </li>
+            <li>
+              <div class="check-box">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="2,6 5,9 10,3" />
+                </svg>
+              </div>
+              تأكد من عزل الكابلات المنخفضة الجهد عن كابلات القدرة 220 فولت
+              لتجنب التشويش
+            </li>
+          </ul>
+
+          <h2 id="calibration">معايرة المستشعر (Sensor Calibration)</h2>
+          <p>
+            إذا كانت قراءة الكنترولر تختلف عن مقياس الحرارة الفعلي داخل الغرفة،
+            يمكن تعديل ذلك بمعامل المعايرة (عادةً يُرمز له بـ
+            <strong>r03</strong> أو <strong>o01</strong> حسب الموديل). مثلاً إذا
+            قرأ الكنترولر 6°م والمقياس الفعلي 4°م، اضبط o01 على −2.
+          </p>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">✓</span>
+            <div class="callout-body">
+              <strong>خلاصة</strong>
+              ضبط كنترولر دانفوس EKC ليس عملية من مرة واحدة — راقب الأداء
+              لأسبوعين بعد أي تعديل وسجّل درجات الحرارة يومياً. الإعدادات
+              المثالية هي التي تُحافظ على درجة الحرارة ضمن ±1°م من نقطة الضبط مع
+              أقل عدد ممكن من دورات الذوبان.
+            </div>
+          </div>
+
+          <div class="bg-blue-900 text-white rounded-3xl p-8 mt-10 text-center">
+            <h3 class="text-2xl font-black mb-3">
+              تحتاج ضبط كنترولر غرفة التبريد؟
+            </h3>
+            <p class="text-blue-200 mb-6 font-light">
+              فريق الفريدة آيس يوفر خدمة الضبط والتوصيل والبرمجة الميدانية لجميع
+              موديلات دانفوس EKC
+            </p>
+            <a
+              href="../../contact.html"
+              class="inline-block bg-white text-blue-900 font-black px-10 py-4 rounded-2xl hover:bg-blue-50 transition shadow-xl"
+              >تواصل معنا الآن</a
+            >
+          </div>
+        </article>
+
+        <aside
+          class="sidebar-sticky hidden lg:block"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              محتويات المقال
+            </div>
+            <div class="p-4"></div>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              قيم مرجعية سريعة
+            </div>
+            <div class="p-4">
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >التفاضل — تبريد</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >1.5 – 2°م</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >التفاضل — تجميد</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >2 – 3°م</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >إنهاء الذوبان — تبريد</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >10°م</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >إنهاء الذوبان — تجميد</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >12 – 14°م</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >وقت القطر (Drip)</span
+                ><span class="font-mono-tech font-bold text-slate-800 text-sm"
+                  >≥ 3 دقائق</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              الوسوم
+            </div>
+            <div class="p-4 flex flex-wrap gap-2">
+              <span
+                class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-full"
+                >دانفوس EKC</span
+              >
+              <span
+                class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-full"
+                >كنترولر تبريد</span
+              >
+              <span
+                class="text-xs bg-blue-100 text-blue-700 font-bold px-3 py-1.5 rounded-full"
+                >ضبط وتحكم</span
+              >
+            </div>
+          </div>
+          <div class="bg-blue-800 text-white rounded-2xl p-5 text-center">
+            <i class="fas fa-phone-alt text-blue-300 text-2xl mb-3 block"></i>
+            <p class="font-black text-sm mb-1">استشارة هندسية مجانية</p>
+            <p class="text-blue-300 text-xs mb-4">فريقنا جاهز لمساعدتك</p>
+            <a
+              href="tel:0598366214"
+              class="block bg-white text-blue-900 font-black text-sm py-2.5 rounded-xl hover:bg-blue-50 transition"
+              >اتصل الآن</a
+            >
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <section class="py-20 bg-white border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <h2 class="text-3xl font-black text-slate-900">مقالات ذات صلة</h2>
+            <p class="text-slate-500 mt-1">من المدونة الهندسية للفريدة آيس</p>
+          </div>
+          <a
+            href="../../blog.html"
+            class="hidden md:block text-blue-700 font-bold border-b-2 border-blue-700"
+            >تصفح الكل</a
+          >
+        </div>
+        <div class="grid md:grid-cols-3 gap-10">
+          <article class="blog-card group" data-aos="fade-up">
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/condensing-unit.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-orange-600 font-black text-sm">صيانة وقائية</span>
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="condensing-unit-maintenance.html"
+                >صيانة وحدات التكثيف في المناطق الحارة</a
+              >
+            </h3>
+          </article>
+          <article
+            class="blog-card group"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/rack-3-bitzer-compressors.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-red-600 font-black text-sm">تسرب الغاز</span>
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="refrigeration-gas-leak.html"
+                >كشف تسرب غاز التبريد وإصلاحه</a
+              >
+            </h3>
+          </article>
+          <article
+            class="blog-card group"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/bitzer-compressor-components.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-blue-600 font-black text-sm">صيانة وقائية</span>
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="bitzer-maintenance-ar.html">دليل صيانة كمبروسر بيتزر</a>
+            </h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+      window.addEventListener("scroll", () => {
+        const d = document.documentElement;
+        document.getElementById("read-progress").style.width =
+          Math.min(
+            (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100,
+            100,
+          ) + "%";
+      });
+      const secs = document.querySelectorAll("h2[id]"),
+        tocs = document.querySelectorAll(".toc-link");
+      window.addEventListener("scroll", () => {
+        let cur = "";
+        secs.forEach((s) => {
+          if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+        });
+        tocs.forEach((a) => {
+          a.classList.toggle(
+            "text-blue-700",
+            a.getAttribute("href") === "#" + cur,
+          );
+          a.classList.toggle(
+            "font-black",
+            a.getAttribute("href") === "#" + cur,
+          );
+        });
+      });
+    </script>
+    <div id="site-footer"></div>
+
+    <script src="../../js/lang-switch.js" defer></script>
+    <script src="../../js/site-shell.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,930 @@
+﻿<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Superheat and Subcooling: The Complete Engineering Guide to Measurement,
+      Diagnostics and TXV Tuning | Elfarida Ice
+    </title>
+    <meta
+      name="description"
+      content="Complete engineering guide to measuring and diagnosing superheat and subcooling in commercial and industrial refrigeration systems: field measurement steps, normal ranges, fault patterns, TXV tuning, and hot-climate troubleshooting in Saudi Arabia."
+    />
+    <meta
+      name="keywords"
+      content="superheat, subcooling, TXV tuning, refrigeration diagnostics, expansion valve adjustment, field commissioning, Saudi Arabia refrigeration, industrial refrigeration guide"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="author"
+      content="Refrigeration Engineering Team — Elfarida Ice Industrial Refrigeration"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/ace-logos/elfaridaice.webp"
+    />
+
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html"
+    />
+    <meta
+      property="og:title"
+      content="Superheat and Subcooling: The Complete Engineering Guide | Elfarida Ice"
+    />
+    <meta
+      property="og:description"
+      content="A practical engineering guide to reading superheat and subcooling correctly, diagnosing charge issues, TXV feeding errors, liquid-line restrictions, and condenser problems."
+    />
+    <meta
+      property="og:image"
+      content="https://elfaridaice.com/assets/gallery/control-panel.webp"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Elfarida Ice" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="twitter:title"
+      content="Superheat and Subcooling: The Complete Engineering Guide | Elfarida Ice"
+    />
+    <meta
+      name="twitter:description"
+      content="Field guide for measuring superheat and subcooling and using them to make correct refrigeration service decisions."
+    />
+    <meta
+      name="twitter:image"
+      content="https://elfaridaice.com/assets/gallery/control-panel.webp"
+    />
+    <meta name="geo.region" content="SA-04" />
+    <meta
+      name="geo.placename"
+      content="Dammam, Eastern Province, Saudi Arabia"
+    />
+    <meta name="geo.position" content="26.4207;50.0888" />
+    <meta name="ICBM" content="26.4207, 50.0888" />
+    <meta name="article:published_time" content="2026-05-07" />
+    <meta name="article:modified_time" content="2026-05-07" />
+    <meta
+      name="article:author"
+      content="Elfarida Ice Industrial Refrigeration Engineering"
+    />
+    <meta name="article:section" content="System Diagnostics" />
+
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Superheat and Subcooling: The Complete Engineering Guide to Measurement, Diagnostics and TXV Tuning",
+        "description": "Complete engineering guide to measuring and diagnosing superheat and subcooling in commercial and industrial refrigeration systems: field measurement steps, normal ranges, fault patterns, TXV tuning, and hot-climate troubleshooting in Saudi Arabia.",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://elfaridaice.com/assets/gallery/control-panel.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Elfarida Ice Industrial Refrigeration Engineering",
+          "url": "https://elfaridaice.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Elfarida Ice",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://elfaridaice.com/assets/ace-logos/elfaridaice.webp",
+            "width": 400,
+            "height": 400
+          }
+        },
+        "datePublished": "2026-05-07",
+        "dateModified": "2026-05-07",
+        "mainEntityOfPage": "https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html",
+        "inLanguage": "en",
+        "keywords": "superheat, subcooling, TXV tuning, refrigeration diagnostics, expansion valve adjustment",
+        "articleSection": "System Diagnostics",
+        "wordCount": "3300",
+        "timeRequired": "PT22M"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://elfaridaice.com/index-en.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://elfaridaice.com/blog-en.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Superheat and Subcooling Guide",
+            "item": "https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html"
+          }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the difference between superheat and subcooling?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Superheat is the temperature of refrigerant vapor above its saturation temperature at suction pressure, and it indicates evaporator feeding quality and compressor protection. Subcooling is the temperature of liquid refrigerant below its saturation temperature at condensing pressure, and it indicates liquid quality leaving the condenser and charge stability in the liquid line."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a normal superheat value for a cold room?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In many cold room systems with a TXV, normal evaporator outlet superheat is around 5 to 8°C. Some commercial systems may operate acceptably at 6 to 10°C depending on evaporator design, suction line layout, and load profile, but the manufacturer design data is the final reference."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does low subcooling always mean low charge?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not always. Low subcooling is a strong indicator of undercharge, but it can also be caused by flash gas, unstable readings, poor condenser performance, or measurement at the wrong point. It must be interpreted together with suction conditions, condenser cleanliness, liquid line condition, and filter-drier temperature drop."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When does high superheat become dangerous for the compressor?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If superheat remains continuously high, such as 15 to 20°C or above in ordinary refrigeration applications, suction gas and discharge temperatures rise, oil degrades faster, and valve damage risk increases. This often points to undercharge, liquid-line restriction, or an incorrectly adjusted expansion valve."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Saudi summer heat affect these readings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "High ambient temperatures increase condensing pressure and make the condenser more sensitive to dirt, poor airflow, and fan issues. That means subcooling and head pressure must always be interpreted in the context of actual outdoor conditions and condenser cleanliness."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <link
+      rel="preload"
+      as="image"
+      href="../../assets/gallery/control-panel.webp"
+    />
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script src="../../js/seo-injector.js" defer></script>
+    <link rel="stylesheet" href="../../cairo.css" />
+    <link rel="stylesheet" href="../../css/shared.css" />
+    <link rel="stylesheet" href="../../tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/site-shell.css" />
+    <link rel="stylesheet" href="../../css/article.css" />
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <header
+      class="bg-gradient-to-br from-slate-900 via-sky-950 to-slate-900 text-white py-16 md:py-24"
+    >
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span
+            class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+            >System Diagnostics</span
+          >
+          <span class="text-slate-300 text-sm">22 min read</span>
+          <span class="text-slate-300 text-sm"
+            >Field guide for engineers and service teams</span
+          >
+        </div>
+        <h1 class="text-3xl md:text-5xl font-black leading-tight mb-6 text-white">
+          Superheat and Subcooling:<br />
+          <span class="text-sky-400">The Complete Engineering Guide</span><br />
+          to Measurement, Diagnostics and TXV Tuning
+        </h1>
+        <p class="text-slate-300 text-lg leading-relaxed max-w-3xl">
+          Many bad service decisions begin with pressure readings alone. A good
+          refrigeration engineer does not add charge or adjust a TXV before
+          reading
+          <strong class="text-sky-300">superheat</strong> and
+          <strong class="text-sky-300">subcooling</strong> correctly. This guide
+          turns those two values into a structured diagnostic method for
+          undercharge, liquid-line restriction, feeding problems, and condenser
+          performance.
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" class="article-layout article-layout--no-sidebar">
+    <article class="article-body">
+      <div class="flex flex-wrap gap-3 mb-10">
+        <span class="stat-badge"
+          ><i class="fas fa-gauge-high text-sky-500"></i>Core diagnostic
+          pair</span
+        >
+        <span class="stat-badge"
+          ><i class="fas fa-temperature-half text-red-500"></i>Early fault
+          detection</span
+        >
+        <span class="stat-badge"
+          ><i class="fas fa-screwdriver-wrench text-amber-500"></i>TXV tuning
+          confidence</span
+        >
+        <span class="stat-badge"
+          ><i class="fas fa-sun text-emerald-500"></i>Hot-climate ready</span
+        >
+      </div>
+
+      <figure>
+        <img
+          src="../../assets/gallery/control-panel.webp"
+          alt="Industrial refrigeration control panel used for temperature and pressure diagnostics including superheat and subcooling analysis"
+          class="w-full rounded-2xl shadow-xl object-cover"
+          width="1200"
+          height="480"
+          loading="eager"
+        />
+        <figcaption>
+          Correct superheat and subcooling analysis starts with stable, accurate
+          pressure and temperature measurement.
+        </figcaption>
+      </figure>
+
+      <nav class="toc" aria-labelledby="toc-heading">
+        <h3 id="toc-heading">Guide Outline</h3>
+        <ol>
+          <li>
+            <a href="#definitions">What superheat and subcooling really mean</a>
+          </li>
+          <li>
+            <a href="#importance">Why they matter more than pressure alone</a>
+          </li>
+          <li>
+            <a href="#measurement"
+              >How to measure them correctly in the field</a
+            >
+          </li>
+          <li><a href="#ranges">Normal operating ranges</a></li>
+          <li><a href="#diagnostics">Fault diagnosis matrix</a></li>
+          <li><a href="#txv">TXV and EEV tuning logic</a></li>
+          <li><a href="#climate">Saudi hot-climate effects</a></li>
+          <li><a href="#commissioning">Commissioning checklist</a></li>
+          <li><a href="#faq">Frequently asked questions</a></li>
+        </ol>
+      </nav>
+      
+        <section id="definitions">
+          <h2>What superheat and subcooling really mean</h2>
+          <p>
+            <strong>Superheat</strong> is the temperature of refrigerant vapor
+            above its saturation temperature at suction pressure. If suction
+            pressure corresponds to a 0°C saturation temperature and the suction
+            line actually measures 7°C, then superheat is 7°C. That tells you
+            whether the evaporator is being fed properly or is running dry too
+            early.
+          </p>
+          <p>
+            <strong>Subcooling</strong> is the temperature of liquid refrigerant
+            below its saturation temperature at condensing pressure. If
+            condensing pressure corresponds to 40°C saturation and the liquid
+            line measures 34°C, then subcooling is 6°C. That indicates how
+            stable the liquid column is before the expansion device.
+          </p>
+          <div class="callout callout-info">
+            Superheat belongs to the evaporator and suction side. Subcooling
+            belongs to the condenser and liquid side. One protects the
+            compressor from floodback, the other protects the expansion valve
+            from flash gas.
+          </div>
+        </section>
+
+        <section id="importance">
+          <h2>Why they matter more than pressure alone</h2>
+          <p>
+            Pressure readings by themselves can mislead even experienced
+            technicians. Low suction pressure may suggest low charge, but the
+            real cause could be a restricted filter-drier, a starved TXV, or
+            unstable load. Superheat and subcooling add context by showing how
+            refrigerant is actually moving through the system.
+          </p>
+          <ul>
+            <li>
+              High superheat + low subcooling usually points toward undercharge
+              or flash gas.
+            </li>
+            <li>
+              High superheat + normal/high subcooling often suggests a
+              liquid-line restriction or TXV issue.
+            </li>
+            <li>
+              Very low superheat + normal subcooling indicates floodback risk.
+            </li>
+            <li>Normal superheat + high subcooling may indicate overcharge.</li>
+          </ul>
+
+          <table>
+            <caption>
+              Table 1 — What each value tells you
+            </caption>
+            <thead>
+              <tr>
+                <th>Indicator</th>
+                <th>Measured at</th>
+                <th>Diagnostic role</th>
+                <th>Main risk when out of range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Superheat</td>
+                <td>Evaporator outlet / suction line</td>
+                <td>Evaporator feeding quality and compressor safety</td>
+                <td>Floodback or excessive dry suction</td>
+              </tr>
+              <tr>
+                <td>Subcooling</td>
+                <td>Condenser outlet / liquid line</td>
+                <td>Liquid quality and charge stability</td>
+                <td>Flash gas or overcharge</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="measurement">
+          <h2>How to measure them correctly in the field</h2>
+          <p>
+            Bad measurements lead to bad decisions. Before you take readings,
+            the system must be operating under reasonably stable load. Avoid
+            making decisions during startup, right after defrost, or when the
+            refrigerated space is clearly unstable.
+          </p>
+
+          <h3>Superheat measurement steps</h3>
+          <ol>
+            <li>Measure suction pressure at a reliable service point.</li>
+            <li>
+              Convert that pressure into saturation temperature using a PT chart
+              or digital gauge.
+            </li>
+            <li>
+              Measure actual suction line temperature with a properly clamped
+              and insulated probe.
+            </li>
+            <li>
+              Subtract saturation temperature from actual line temperature.
+            </li>
+          </ol>
+
+          <h3>Subcooling measurement steps</h3>
+          <ol>
+            <li>
+              Measure condensing or liquid-line pressure at the correct point.
+            </li>
+            <li>Convert it into saturation temperature.</li>
+            <li>
+              Measure actual liquid-line temperature after the condenser or
+              receiver, depending on design.
+            </li>
+            <li>
+              Subtract actual liquid-line temperature from saturation
+              temperature.
+            </li>
+          </ol>
+
+          <div class="callout callout-warn">
+            Common mistake: measuring suction temperature near the compressor
+            and comparing it to evaporator saturation temperature. That gives
+            total superheat, not evaporator outlet superheat, and the difference
+            can be significant if the suction line is long or poorly insulated.
+          </div>
+
+          <figure>
+            <img
+              src="../../assets/gallery/evaporator.webp"
+              alt="Industrial refrigeration evaporator where suction temperature and pressure are used to calculate superheat"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              width="900"
+              height="420"
+              loading="lazy"
+            />
+            <figcaption>
+              At the evaporator, superheat reveals feeding quality far better
+              than suction pressure alone.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section id="ranges">
+          <h2>Normal operating ranges</h2>
+          <p>
+            There is no universal number for every system. Acceptable values
+            depend on refrigerant, evaporator design, line lengths, expansion
+            device type, and the nature of the load. Still, there are
+            field-proven ranges that work as a solid starting point.
+          </p>
+
+          <table>
+            <caption>
+              Table 2 — Typical field reference ranges
+            </caption>
+            <thead>
+              <tr>
+                <th>Application</th>
+                <th>Evaporator superheat</th>
+                <th>Subcooling</th>
+                <th>Operational note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Medium-temperature cold rooms</td>
+                <td>5 to 8°C</td>
+                <td>4 to 8°C</td>
+                <td>Common TXV target band</td>
+              </tr>
+              <tr>
+                <td>Low-temperature freezer rooms</td>
+                <td>6 to 10°C</td>
+                <td>5 to 10°C</td>
+                <td>More compressor protection margin</td>
+              </tr>
+              <tr>
+                <td>Small commercial condensing units</td>
+                <td>8 to 12°C</td>
+                <td>3 to 6°C</td>
+                <td>Strongly affected by short line layout</td>
+              </tr>
+              <tr>
+                <td>Electronically controlled EEV systems</td>
+                <td>4 to 7°C</td>
+                <td>4 to 9°C</td>
+                <td>Better stability under changing load</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="diagnostics">
+          <h2>Fault diagnosis matrix</h2>
+          <p>
+            The real value of these readings appears when you combine them with
+            suction pressure, discharge temperature, liquid-line behavior, and
+            visual inspection. The table below is one of the most practical
+            service references for field diagnosis.
+          </p>
+
+          <table>
+            <caption>
+              Table 3 — Diagnostic decision matrix
+            </caption>
+            <thead>
+              <tr>
+                <th>Superheat</th>
+                <th>Subcooling</th>
+                <th>Most likely condition</th>
+                <th>Correct next action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>High</td>
+                <td>Low</td>
+                <td>Undercharge or flash gas</td>
+                <td>
+                  Check for leaks, verify charge history, inspect liquid line
+                </td>
+              </tr>
+              <tr>
+                <td>High</td>
+                <td>Normal / high</td>
+                <td>Restricted filter-drier or starved TXV</td>
+                <td>
+                  Measure temperature drop across drier and inspect TXV sensing
+                  bulb
+                </td>
+              </tr>
+              <tr>
+                <td>Very low</td>
+                <td>Normal</td>
+                <td>Overfeeding TXV / floodback risk</td>
+                <td>Readjust valve gradually and monitor suction condition</td>
+              </tr>
+              <tr>
+                <td>Low</td>
+                <td>High</td>
+                <td>Overcharge or excess condenser fill</td>
+                <td>Review actual charge weight and receiver behavior</td>
+              </tr>
+              <tr>
+                <td>Normal</td>
+                <td>Low</td>
+                <td>Poor condensing performance</td>
+                <td>
+                  Clean condenser, inspect fans, verify airflow and approach
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-danger">
+            Adding charge without checking subcooling, or adjusting a TXV
+            without checking superheat, often treats the symptom while leaving
+            the root cause untouched. The result is higher energy use, hotter
+            discharge gas, and shorter compressor life.
+          </div>
+        </section>
+
+        <section id="txv">
+          <h2>TXV and EEV tuning logic</h2>
+          <p>
+            A TXV exists to maintain a reasonably stable evaporator outlet
+            superheat. That means every adjustment must be evaluated by
+            observing how superheat responds after the system has had enough
+            time to stabilize. Rapid, repeated turns create confusion rather
+            than control.
+          </p>
+          <p>
+            In EEV-based systems, the controller automates this process, but
+            manual verification is still essential during commissioning and
+            troubleshooting. A bad sensor location or a drifting pressure
+            transducer will make the controller act decisively on bad data.
+          </p>
+
+          <figure>
+            <img
+              src="../../assets/gallery/danfoss.webp"
+              alt="Danfoss refrigeration control hardware used with electronic expansion valves to manage superheat"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              width="900"
+              height="420"
+              loading="lazy"
+            />
+            <figcaption>
+              With EEV systems, sensor quality and placement are part of control
+              quality.
+            </figcaption>
+          </figure>
+
+          <table>
+            <caption>
+              Table 4 — Common expansion valve setup mistakes
+            </caption>
+            <thead>
+              <tr>
+                <th>Mistake</th>
+                <th>Direct effect</th>
+                <th>What you will see</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Opening the TXV too quickly</td>
+                <td>Floodback risk</td>
+                <td>Superheat drops rapidly to very low values</td>
+              </tr>
+              <tr>
+                <td>Closing the TXV too much</td>
+                <td>Starved evaporator</td>
+                <td>High superheat with low suction pressure</td>
+              </tr>
+              <tr>
+                <td>Poor sensing bulb mounting</td>
+                <td>Misleading feedback to the valve</td>
+                <td>Unstable feeding and erratic readings</td>
+              </tr>
+              <tr>
+                <td>Bad thermal insulation around the bulb</td>
+                <td>Ambient heat influence</td>
+                <td>Valve opens illogically in hot surroundings</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="climate">
+          <h2>Saudi hot-climate effects on readings</h2>
+          <p>
+            In Dammam, Riyadh, and Jeddah, rooftop condensing units can operate
+            in ambient temperatures above 45°C. That raises condensing pressure
+            and makes the condenser much more sensitive to dirt, restricted
+            airflow, and weak fan performance. Subcooling must always be
+            interpreted in that real-world context.
+          </p>
+          <ul>
+            <li>Condenser cleaning is mandatory before meaningful analysis.</li>
+            <li>
+              Review compressor and fan current draw together with thermal
+              readings.
+            </li>
+            <li>
+              Do not trust a single reading during unstable load or open-door
+              operation.
+            </li>
+            <li>
+              On exposed roofs, liquid-line insulation quality matters more than
+              many teams expect.
+            </li>
+          </ul>
+          <div class="callout callout-success">
+            In many Eastern Province service calls, the most common mistake is
+            not true undercharge. It is misdiagnosing undercharge when the real
+            issue is a dirty condenser, poor airflow, or unstable measurement
+            conditions after defrost.
+          </div>
+        </section>
+
+        <section id="commissioning">
+          <h2>Commissioning and acceptance checklist</h2>
+          <p>
+            During startup or after major service, record baseline values for
+            the system. Those readings become the reference point for every
+            future complaint and maintenance decision.
+          </p>
+          <table>
+            <caption>
+              Table 5 — Baseline commissioning checklist
+            </caption>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>What to document</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Refrigerant type and charge weight</td>
+                <td>Refrigerant designation and actual charge</td>
+                <td>Critical reference for all later service</td>
+              </tr>
+              <tr>
+                <td>Superheat</td>
+                <td>At evaporator outlet and compressor if relevant</td>
+                <td>Separates evaporator condition from line gain</td>
+              </tr>
+              <tr>
+                <td>Subcooling</td>
+                <td>After condenser / receiver</td>
+                <td>Confirms liquid quality and charge stability</td>
+              </tr>
+              <tr>
+                <td>Amperage and temperatures</td>
+                <td>Compressor, fans, air in/out</td>
+                <td>Links thermal condition to electrical load</td>
+              </tr>
+              <tr>
+                <td>Insulation and filter condition</td>
+                <td>Photos and field notes</td>
+                <td>Speeds up future troubleshooting</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="faq">
+          <h2>Frequently asked questions</h2>
+          <div class="faq-item">
+            <div class="faq-question">
+              What is the practical difference between superheat and subcooling?
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Superheat shows how the evaporator is feeding and whether the
+                compressor is protected from liquid floodback. Subcooling shows
+                whether a solid column of liquid is reaching the expansion
+                device.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Does high superheat always mean low refrigerant charge?
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                No. It may also indicate a restricted filter-drier, an
+                underfeeding TXV, poor bulb mounting, or low evaporator load.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              What is a good subcooling target?
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Many cold room systems operate well around 4 to 8°C, but the
+                exact target should be matched to the equipment design and
+                manufacturer data.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Should I tune a TXV during unstable load?
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                No. Always wait for stable conditions after startup, defrost,
+                and major load disturbances before making an adjustment.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              What should I do before adding refrigerant?
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Check for leaks, inspect condenser cleanliness, verify
+                subcooling, and rule out restrictions or valve control issues.
+                Adding charge should follow diagnosis, not replace it.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Conclusion</h2>
+          <p>
+            Professional refrigeration diagnosis does not begin with pressure
+            alone. It begins with a better question:
+            <strong
+              >what are the superheat and subcooling values telling us?</strong
+            >
+            Once those two values are read correctly, you can distinguish
+            between charge issues, feed issues, condensing problems, and
+            measurement error with much greater confidence.
+          </p>
+          <div class="callout callout-success">
+            Need a technical performance review for an operating refrigeration
+            system or a newly commissioned project? Elfarida Ice provides field
+            diagnostics covering pressures, superheat, subcooling, valve tuning,
+            and operating efficiency.
+          </div>
+        </section>
+      </article>
+
+      <aside class="mt-14 pt-10 border-t border-slate-200 col-span-full">
+        <h2 class="text-xl font-black text-slate-800 mb-6">Related articles</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a href="refrigeration-gas-leak-en.html" class="related-card">
+            <span
+              class="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full"
+              >Leak Detection</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              Refrigerant gas leak detection: indicators, tools and corrective
+              action
+            </p>
+          </a>
+          <a href="danfoss-controller-setting-en.html" class="related-card">
+            <span
+              class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-full"
+              >Controls</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              Danfoss controller settings for industrial refrigeration
+            </p>
+          </a>
+          <a href="bitzer-maintenance-en.html" class="related-card">
+            <span
+              class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
+              >Compressors</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              Bitzer compressor maintenance in hot regions
+            </p>
+          </a>
+        </div>
+      </aside>
+
+      <div class="article-cta">
+        <h2>Need a precise refrigeration diagnosis?</h2>
+        <p>
+          Request a technical visit or performance review from Elfarida Ice to
+          verify charge, expansion valve settings, and operating efficiency.
+        </p>
+        <div class="article-cta__actions">
+          <a
+            href="../../contact-en.html"
+            class="article-cta__btn article-cta__btn--primary"
+            >Request technical review</a
+          >
+          <a
+            href="https://wa.me/966598366214?text=I%20need%20a%20superheat%20and%20subcooling%20diagnostic%20review"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-cta__btn article-cta__btn--whatsapp"
+            >WhatsApp</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <a
+      href="https://wa.me/966598366214?text=Superheat%20and%20subcooling%20diagnostic%20inquiry"
+      class="wa-float-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contact us on WhatsApp"
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="white"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"
+        />
+      </svg>
+    </a>
+
+    <script>
+      (function () {
+        const bar = document.getElementById("readingProgress");
+        function update() {
+          const h = document.documentElement;
+          const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+          bar.style.width = Math.min(pct, 100) + "%";
+        }
+        window.addEventListener("scroll", update, { passive: true });
+      })();
+
+      document.querySelectorAll(".faq-question").forEach(function (btn) {
+        const answer = btn.nextElementSibling;
+        btn.addEventListener("click", function () {
+          const isOpen = answer.style.display === "block";
+          document.querySelectorAll(".faq-answer").forEach(function (a) {
+            a.style.display = "none";
+          });
+          if (!isOpen) {
+            answer.style.display = "block";
+          }
+        });
+      });
+    </script>
+
+    <div id="site-footer"></div>
+    <script src="../../js/lang-switch.js" defer></script>
+    <script src="../../js/site-shell.js" defer></script>
+  </body>
+</html>

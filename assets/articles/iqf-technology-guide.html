@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      تقنية IQF للتجميد السريع الفردي: الدليل الهندسي الشامل للتصميم والتشغيل
+      والمعايير | الفريدة آيس
+    </title>
+    <meta
+      name="description"
+      content="دليل هندسي شامل لتقنية IQF (Individual Quick Freezing): آلية العمل، مكونات النفق، معايير التصميم، مقارنة أنواع المجمّدات، تطبيقات الأغذية في المملكة العربية السعودية، والمعايير الدولية ASHRAE وHACCP وSFDA."
+    />
+    <meta
+      name="keywords"
+      content="IQF تجميد سريع فردي، نفق تجميد IQF، تجميد أسماك سريع، IQF مصنع السعودية، تقنية تجميد صناعي، Individual Quick Freezing، تجميد خضروات فردي، نظام IQF الدمام، مجمّد نفقي صناعي"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="author"
+      content="فريق هندسة التبريد — الفريدة آيس للهندسة والتبريد الصناعي"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/assets/articles/iqf-technology-guide.html"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/ace-logos/elfaridaice.webp"
+    />
+
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/assets/articles/iqf-technology-guide.html"
+    />
+    <meta
+      property="og:title"
+      content="تقنية IQF للتجميد السريع الفردي: الدليل الهندسي الشامل | الفريدة آيس"
+    />
+    <meta
+      property="og:description"
+      content="دليل هندسي شامل لتقنية IQF: آلية العمل، مكونات النفق، معايير التصميم، مقارنة أنواع المجمّدات، وتطبيقاتها في صناعة الأغذية بالمملكة."
+    />
+    <meta
+      property="og:image"
+      content="https://elfaridaice.com/assets/gallery/iqf.webp"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="الفريدة آيس" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="twitter:title"
+      content="تقنية IQF للتجميد السريع الفردي: الدليل الهندسي الشامل | الفريدة آيس"
+    />
+    <meta
+      name="twitter:description"
+      content="دليل هندسي شامل لتقنية IQF: آلية العمل، مكونات النفق، معايير التصميم، وتطبيقات صناعة الأغذية."
+    />
+    <meta
+      name="twitter:image"
+      content="https://elfaridaice.com/assets/gallery/iqf.webp"
+    />
+    <meta name="geo.region" content="SA-04" />
+    <meta
+      name="geo.placename"
+      content="الدمام، المنطقة الشرقية، المملكة العربية السعودية"
+    />
+    <meta name="geo.position" content="26.4207;50.0888" />
+    <meta name="ICBM" content="26.4207, 50.0888" />
+    <meta name="article:published_time" content="2026-05-07" />
+    <meta name="article:modified_time" content="2026-05-07" />
+    <meta
+      name="article:author"
+      content="الفريدة آيس للهندسة والتبريد الصناعي"
+    />
+    <meta name="article:section" content="تقنيات التجميد الصناعي" />
+
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/assets/articles/iqf-technology-guide.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://elfaridaice.com/assets/articles/iqf-technology-guide-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/assets/articles/iqf-technology-guide.html"
+    />
+
+    <!-- ═══ Schema: BlogPosting ═══ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "تقنية IQF للتجميد السريع الفردي: الدليل الهندسي الشامل للتصميم والتشغيل والمعايير",
+        "description": "دليل هندسي شامل لتقنية IQF (Individual Quick Freezing): آلية العمل، مكونات النفق، معايير التصميم، مقارنة أنواع المجمّدات، تطبيقات الأغذية في المملكة العربية السعودية، والمعايير الدولية.",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://elfaridaice.com/assets/gallery/iqf.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "الفريدة آيس للهندسة والتبريد الصناعي",
+          "url": "https://elfaridaice.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "الفريدة آيس",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://elfaridaice.com/assets/ace-logos/elfaridaice.webp",
+            "width": 400,
+            "height": 400
+          }
+        },
+        "datePublished": "2026-05-07",
+        "dateModified": "2026-05-07",
+        "mainEntityOfPage": "https://elfaridaice.com/assets/articles/iqf-technology-guide.html",
+        "inLanguage": "ar",
+        "keywords": "IQF تجميد سريع فردي، نفق تجميد IQF، تجميد أسماك، تقنية تجميد صناعي، Individual Quick Freezing",
+        "articleSection": "تقنيات التجميد الصناعي",
+        "wordCount": "4200",
+        "timeRequired": "PT28M"
+      }
+    </script>
+
+    <!-- ═══ Schema: BreadcrumbList ═══ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://elfaridaice.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "المدونة",
+            "item": "https://elfaridaice.com/blog.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "تقنية IQF للتجميد السريع الفردي",
+            "item": "https://elfaridaice.com/assets/articles/iqf-technology-guide.html"
+          }
+        ]
+      }
+    </script>
+
+    <!-- ═══ Schema: FAQPage ═══ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما الفرق بين IQF والتجميد الاعتيادي؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "في التجميد الاعتيادي تُجمَّد المنتجات ببطء (ساعات أو أيام)، مما يُكوّن بلورات جليد كبيرة تُمزق الخلايا وتُفقد العصارة عند الإذابة. في تقنية IQF تعبر القطعة خلال منطقة الخطر الحراري (‑1°C إلى ‑5°C) في أقل من 30 دقيقة عبر هواء شديد البرودة (‑35°C إلى ‑45°C) بسرعات تصل إلى 6 م/ث، فتتشكّل بلورات جليد دقيقة جداً لا تُلحق ضرراً بالخلايا، مما يحفظ النكهة والملمس والقيمة الغذائية."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما هي أنواع المنتجات الغذائية الأنسب لتقنية IQF؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تشمل أبرز تطبيقات IQF: الأسماك والمأكولات البحرية (فيليه، روبيان، حبار)، الدواجن (قطع مجزأة)، اللحوم (شرائح رفيعة، مكعبات)، الخضروات (بازلاء، ذرة، فلفل، قطع بروكلي)، الفواكه (فراولة، توت)، والمخبوزات (عجينة، دونات، كروسون). الشرط الأساسي هو أن يكون المنتج قطعاً متفرقة قابلة للانسياب وليس كتلة متماسكة."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "كم تبلغ سرعة الحزام في نفق IQF ومتى تُضبط؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تتراوح سرعة الحزام بين 0.05 و0.5 م/دقيقة وتُضبط بناءً على وزن القطعة وزمن المكوث المطلوب. القاعدة الهندسية: وزن المنتج (غ) × 0.065 = الحد الأدنى من دقائق المكوث للوصول لمركز حراري ‑18°C في الأسماك. لكل منتج يتطلع المصنع لتجميده يجب إجراء اختبار تحقق حراري (Thermal Validation) قبل الإنتاج الفعلي."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما تكلفة نظام IQF الصناعي وما عائد الاستثمار المتوقع؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تتراوح تكلفة نظام IQF متكامل بقدرة طن/ساعة بين 1.5 و4 مليون ريال سعودي بحسب النوع والمصنّع، وتصل إلى 8–15 مليوناً للأنظمة الحلزونية الكبيرة. عائد الاستثمار (ROI) يتحقق عادةً خلال 2–5 سنوات نظراً لارتفاع القيمة المضافة للمنتج المجمّد بـ IQF الذي يُباع بسعر أعلى بـ 20–40% من المنتج المجمّد تقليدياً."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما أفضل شركة لتركيب أنظمة IQF في الدمام والمنطقة الشرقية؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "الفريدة آيس للهندسة والتبريد الصناعي بالدمام تمتلك خبرة موثقة في تصميم وتنفيذ منظومات التجميد السريع IQF لمصانع الأسماك واللحوم والدواجن في المنطقة الشرقية والمملكة العربية السعودية، مع دعم هندسي كامل من الدراسة حتى التشغيل والصيانة الدورية."
+            }
+          }
+        ]
+      }
+    </script>
+    <link rel="preload" as="image" href="../../assets/gallery/iqf.webp" />
+
+    
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <script src="../../js/seo-injector.js" defer></script>
+    <link rel="stylesheet" href="../../cairo.css" />
+    <link rel="stylesheet" href="../../css/shared.css" />
+    <link rel="stylesheet" href="../../tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/site-shell.css" />
+    <link rel="stylesheet" href="../../css/article.css" />
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- ═══ هيدر المقال ═══ -->
+    <header
+      class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-16 md:py-24"
+      role="banner"
+    >
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span
+            class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+            >تقنيات التجميد الصناعي</span
+          >
+          <span class="text-slate-300 text-sm">• 28 دقيقة قراءة</span>
+          <span class="text-slate-300 text-sm">• ~4200 كلمة</span>
+        </div>
+
+        <h1 class="text-3xl md:text-5xl font-black leading-tight mb-6 text-white">
+          تقنية IQF للتجميد السريع الفردي:<br />
+          <span class="text-blue-400">الدليل الهندسي الشامل</span><br />
+          للتصميم والتشغيل والمعايير
+        </h1>
+
+        <p class="text-slate-300 text-lg leading-relaxed max-w-3xl">
+          لماذا تُباع الجمبري المجمّدة في المصانع الحديثة بسعر يفوق نظيرتها
+          التقليدية بـ 35%؟ الجواب في ثلاثة أحرف:
+          <strong class="text-blue-300">IQF</strong>. هذا الدليل يأخذك من
+          الفيزياء الجزيئية لتشكّل بلورات الجليد حتى حسابات تصميم النفق وجداول
+          صيانة السير المتحرك — كل ما يحتاجه مهندس التبريد لإتقان هذه التقنية.
+        </p>
+
+        <div
+          class="flex items-center gap-4 mt-8 pt-6 border-t border-slate-700"
+        >
+          <div
+            class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-black text-lg"
+            aria-hidden="true"
+          >
+            م
+          </div>
+          <div>
+            <p class="font-bold text-white">فريق هندسة التبريد — الفريدة آيس</p>
+            <p class="text-slate-300 text-sm">
+              خبرة ميدانية تجاوزت 550 مشروعاً • الدمام، المملكة العربية السعودية
+            </p>
+          </div>
+          <div class="mr-auto text-slate-300 text-sm hidden md:block">
+            <i class="far fa-calendar-alt ml-1" aria-hidden="true"></i>
+            <time datetime="2026-05-07">مايو 2026</time>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══ المحتوى الرئيسي ═══ -->
+    <main id="main-content" class="article-layout article-layout--no-sidebar">
+    <article class="article-body">
+      <!-- إحصاءات سريعة -->
+      <div class="flex flex-wrap gap-3 mb-10">
+        <span class="stat-badge">
+          <i class="fas fa-snowflake text-blue-500" aria-hidden="true"></i>
+          تجميد خلال 8–30 دقيقة
+        </span>
+        <span class="stat-badge">
+          <i class="fas fa-wind text-cyan-500" aria-hidden="true"></i>
+          هواء بـ ‑40°C و 6 م/ث
+        </span>
+        <span class="stat-badge">
+          <i class="fas fa-fish text-teal-500" aria-hidden="true"></i>
+          قطعة مستقلة لا تلتصق
+        </span>
+        <span class="stat-badge">
+          <i class="fas fa-award text-amber-500" aria-hidden="true"></i>
+          معيار HACCP &amp; BRC Grade A
+        </span>
+      </div>
+
+      <!-- صورة رئيسية -->
+      <figure>
+        <img
+          src="../../assets/gallery/iqf.webp"
+          alt="نفق IQF للتجميد السريع الفردي — خط إنتاج صناعي لتجميد المأكولات البحرية بتقنية IQF"
+          class="w-full rounded-2xl shadow-xl object-cover img-hero"
+          width="1200"
+          height="480"
+          loading="eager"
+        />
+        <figcaption>
+          نفق IQF (Individual Quick Freezing) للتجميد السريع الفردي — مشروع مصنع
+          أسماك صناعي بتقنية IQF، المنطقة الشرقية، 2026
+        </figcaption>
+      </figure>
+
+      <!-- فهرس المحتويات -->
+      <nav class="toc" aria-labelledby="toc-heading">
+        <h3 id="toc-heading">📋 فهرس المحتويات</h3>
+        <ol>
+          <li><a href="#what-is-iqf">ما هو نظام IQF وكيف يعمل؟</a></li>
+          <li>
+            <a href="#ice-crystal-physics">فيزياء بلورات الجليد: سر الجودة</a>
+          </li>
+          <li><a href="#iqf-components">مكونات منظومة IQF الصناعية</a></li>
+          <li><a href="#iqf-types">أنواع أنفاق IQF وكيفية الاختيار</a></li>
+          <li><a href="#design-parameters">معايير التصميم الهندسي</a></li>
+          <li><a href="#applications">التطبيقات الصناعية في المملكة</a></li>
+          <li>
+            <a href="#vs-alternatives">IQF مقابل تقنيات التجميد الأخرى</a>
+          </li>
+          <li><a href="#maintenance">التشغيل والصيانة الدورية</a></li>
+          <li><a href="#standards">المعايير والاعتمادات الدولية</a></li>
+          <li><a href="#faq">الأسئلة الشائعة</a></li>
+        </ol>
+      </nav>
+      
+        <!-- ═══ القسم 1 ═══ -->
+        <section id="what-is-iqf" aria-labelledby="h2-iqf">
+          <h2 id="h2-iqf">ما هو نظام IQF وكيف يعمل؟</h2>
+
+          <p>
+            <strong>IQF</strong> اختصار لـ <em>Individual Quick Freezing</em> أي
+            التجميد السريع الفردي. يعني المصطلح تجميد كل قطعة من المنتج الغذائي
+            <strong>بصورة مستقلة ومتسارعة</strong>، دون أن تلتصق القطع ببعضها أو
+            تُشكّل كتلة صلبة. النتيجة: جمبري منفصلة حبة بحبة، وشرائح سمك مستقلة،
+            وحبات بازلاء يمكن سكبها بالمقدار المطلوب دون فك التجميد.
+          </p>
+
+          <p>تعمل تقنية IQF عبر ثلاثة مبادئ متكاملة:</p>
+          <ol>
+            <li>
+              <strong>سرعة انتقال الحرارة العالية:</strong> يُدفع هواء مبرد شديد
+              البرودة (‑35°C إلى ‑45°C) بسرعة عالية (4–6 م/ث) فوق المنتج وتحته،
+              مما يُعظّم معامل انتقال الحرارة الحملي (h ≥ 50 W/m²·K).
+            </li>
+            <li>
+              <strong>التعريض الكامل للسطح:</strong> يرقد المنتج على سير ثقب
+              معدني (Perforated Belt) أو سير شبكي (Wire Mesh) يتيح للهواء النفاذ
+              من الأسفل لرفع القطع وتحقيق حالة شبه تعليق (Fluidization)، مما
+              يُعرّض سطح كل قطعة لتيار الهواء البارد من جميع الجهات.
+            </li>
+            <li>
+              <strong>التحكم الدقيق في زمن المكوث:</strong> تُضبط سرعة السير
+              المتحرك بحيث تخرج كل قطعة من النفق بعد بلوغ مركزها الحراري درجة
+              ‑18°C أو أدنى — المعيار المطلوب دولياً للتجميد التام.
+            </li>
+          </ol>
+
+          <div class="callout callout-info">
+            <p>
+              <strong>💡 مفهوم جوهري:</strong> الفارق الأساسي بين IQF وغيره ليس
+              مجرد السرعة — بل هو <strong>منع التلاصق</strong> أثناء التجميد.
+              هذا يتطلب تصميماً هندسياً خاصاً للسير والمروحة والغرفة الحرارية،
+              وليس مجرد خفض درجة الحرارة.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══ القسم 2 ═══ -->
+        <section id="ice-crystal-physics" aria-labelledby="h2-crystal">
+          <h2 id="h2-crystal">فيزياء بلورات الجليد: سر الجودة في IQF</h2>
+
+          <p>
+            لفهم لماذا يُحافظ IQF على جودة المنتج، نحتاج إلى مسافة قصيرة في عالم
+            الفيزياء الحيوية. كل خلية غذائية تحتوي على سائل خلوي (Intracellular
+            Fluid) وسائل خارج خلوي (Extracellular Fluid). عند التجميد تُحدد
+            <strong>سرعة الانتقال عبر المنطقة الحرجة</strong> (Critical Zone:
+            ‑1°C إلى ‑5°C) حجم البلورات الجليدية المتشكّلة:
+          </p>
+
+          <h3>منطقة الخطر الحراري (Critical Freezing Zone)</h3>
+          <p>
+            بين ‑1°C و‑5°C تتحول نحو 80% من الماء الحر في الغذاء إلى جليد. في
+            هذا النطاق إذا كان التجميد بطيئاً (أكثر من 60 دقيقة)، تتشكل
+            <strong>بلورات جليد كبيرة</strong> خارج الخلية تسحب الماء من داخلها
+            بقوة التناضح، فتنكمش الخلايا وتتمزق أغشيتها. النتيجة: عند إذابة
+            التجميد يخرج عصير كثير (Drip Loss) ويصبح الملمس إسفنجياً والنكهة
+            مائية.
+          </p>
+          <p>
+            في تقنية IQF، تعبر القطعة منطقة الخطر خلال
+            <strong>أقل من 30 دقيقة</strong> (وأحياناً أقل من 10 دقائق للقطع
+            الصغيرة)، فتتشكل بلورات جليد دقيقة جداً <strong>داخل الخلية</strong>
+            (Intracellular Ice) دون إلحاق ضرر يُذكر بالبنية الخلوية.
+          </p>
+
+          <table>
+            <caption>
+              جدول 1 — تأثير سرعة التجميد على جودة المنتج
+            </caption>
+            <thead>
+              <tr>
+                <th>نوع التجميد</th>
+                <th>وقت العبور عبر المنطقة الحرجة</th>
+                <th>حجم بلورات الجليد</th>
+                <th>نسبة فقد العصارة (Drip Loss)</th>
+                <th>الجودة الحسية</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>تجميد بطيء (Traditional)</td>
+                <td>4–24 ساعة</td>
+                <td>بلورات كبيرة 200–500 µm</td>
+                <td>8–15%</td>
+                <td>ملمس طري — نكهة مائية</td>
+              </tr>
+              <tr>
+                <td>تجميد نفقي تقليدي (Blast)</td>
+                <td>60–180 دقيقة</td>
+                <td>بلورات متوسطة 50–200 µm</td>
+                <td>4–8%</td>
+                <td>جيدة لكن أقل من IQF</td>
+              </tr>
+              <tr>
+                <td>IQF نفقي قياسي</td>
+                <td>8–30 دقيقة</td>
+                <td>بلورات صغيرة 10–50 µm</td>
+                <td>1–3%</td>
+                <td>ممتازة — يكاد يطابق الطازج</td>
+              </tr>
+              <tr>
+                <td>IQF بالنيتروجين السائل</td>
+                <td>1–5 دقائق</td>
+                <td>بلورات دقيقة جداً &lt; 10 µm</td>
+                <td>0.5–1.5%</td>
+                <td>استثنائية — للمنتجات الفاخرة</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-success">
+            <p>
+              <strong>✅ دلالة اقتصادية:</strong> تخفيض Drip Loss من 10% إلى 2%
+              في خط إنتاج بـ 2 طن/ساعة يعني إنقاذ 160 كجم/ساعة من المنتج القابل
+              للبيع. بسعر متوسط 30 ريال/كجم للأسماك المجمدة = 4,800 ريال/ساعة
+              مُحتجزة في المنتج بدلاً من ضياعها.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══ القسم 3 ═══ -->
+        <section id="iqf-components" aria-labelledby="h2-components">
+          <h2 id="h2-components">مكونات منظومة IQF الصناعية</h2>
+
+          <p>
+            منظومة IQF الكاملة تتكون من أربعة أنظمة فرعية متكاملة، ويجب على
+            المهندس فهم دور كل منها لاتخاذ قرارات تصميم صحيحة:
+          </p>
+
+          <h3>1. النفق الحراري (Freezing Tunnel)</h3>
+          <p>
+            هو الغرفة المعدنية المحكمة التي يعبر المنتج من خلالها. تُصنع من
+            الفولاذ المقاوم للصدأ (SS304 أو SS316L) لمقاومة التآكل والامتثال
+            لمعايير الغذاء. يتراوح طول الأنفاق القياسية بين 5 و25 متراً بحسب
+            الطاقة الإنتاجية. عزل الجدران عادةً بلوح ساندويتش بوليورثان بسماكة
+            150–200 مم.
+          </p>
+
+          <h3>2. منظومة توليد البرودة (Refrigeration System)</h3>
+          <p>
+            قلب المنظومة. تعمل درجات التبخير في أنفاق IQF عند ‑40°C إلى ‑45°C،
+            مما يستوجب ضواغط من النوع المزدوج المرحلة (Two-Stage Compression) أو
+            استخدام مبردات ذات حرارة تبخير منخفضة كـ R507A أو R744 (CO₂). نظام
+            الأمونيا (R717) هو الأمثل للطاقات الكبيرة (أكثر من 200 كيلو واط)
+            لكفاءته الحرارية الفائقة في درجات الحرارة المنخفضة.
+          </p>
+
+          <figure>
+            <img
+              src="../../assets/gallery/iqf-blast-freeze-evaporator.webp"
+              alt="مبخرات IQF الصناعية داخل نفق التجميد السريع — مبادلات حرارية عالية الكفاءة"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              width="900"
+              height="400"
+              loading="lazy"
+            />
+            <figcaption>
+              مبخرات نفق IQF الصناعية — لاحظ التصميم الضلعي الكثيف لزيادة مساحة
+              الانتقال الحراري وتعظيم الكفاءة
+            </figcaption>
+          </figure>
+
+          <h3>3. منظومة توزيع الهواء (Air Distribution System)</h3>
+          <p>
+            المروحة ونظام القنوات هما ما يُميّز نفق IQF عن غرفة التجميد العادية.
+            تُستخدم مراوح محورية (Axial Fans) بمحركات EC ذات كفاءة عالية،
+            مُركَّبة فوق المبخرات مباشرةً. تُصمَّم قنوات توزيع الهواء لتحقيق
+            <strong>توزيع منتظم على كامل عرض السير</strong> (Uniformity ≥ 85%)
+            بحيث لا تكون القطع الوسطى أسرع تجميداً من القطع الجانبية.
+          </p>
+
+          <h3>4. منظومة السير المتحرك (Conveyor System)</h3>
+          <p>
+            السير هو العنصر الأكثر حساسية ميكانيكياً في النفق. يُصنع من سلك
+            الفولاذ المقاوم للصدأ أو بلاستيك مخصص للصناعات الغذائية (POM أو PE).
+            مميزات السير الجيد:
+          </p>
+          <ul>
+            <li>فتحات شبكية تُمكّن نفاذ الهواء من الأسفل (Airflow-through)</li>
+            <li>سطح أملس غير لاصق لمنع التصاق المنتج</li>
+            <li>تحمّل درجات حرارة حتى ‑50°C دون هشاشة</li>
+            <li>سهولة الفك والتنظيف (CIP-compatible)</li>
+            <li>مقاومة الزيوت والمبيدات ومواد التنظيف</li>
+          </ul>
+        </section>
+
+        <!-- ═══ القسم 4 ═══ -->
+        <section id="iqf-types" aria-labelledby="h2-types">
+          <h2 id="h2-types">أنواع أنفاق IQF وكيفية الاختيار</h2>
+
+          <p>
+            لا يوجد نوع واحد من أنفاق IQF يناسب كل منتج وكل مصنع. المعرفة
+            الدقيقة بالأنواع الأربعة تُمكّن المهندس من اتخاذ القرار الأنسب:
+          </p>
+
+          <h3>1. النفق الخطي (Linear/Straight Tunnel)</h3>
+          <p>
+            الأبسط والأكثر شيوعاً. السير يسير في خط مستقيم من مدخل النفق إلى
+            مخرجه. مناسب لمنتجات الروبيان والأسماك والدواجن. يتطلب مساحة أرضية
+            طويلة (10–30 متر). الطاقة الإنتاجية: 500 كجم/ساعة إلى 5 طن/ساعة.
+          </p>
+
+          <h3>2. النفق الحلزوني (Spiral IQF)</h3>
+          <p>
+            السير يصعد في لفات حلزونية داخل برج دائري، مما يُضاعف المسافة
+            الفعلية للتجميد بمساحة أرضية ضيقة. الحل الأمثل عندما تكون المساحة
+            محدودة والطاقة عالية. تكلفة أعلى بـ 40–60% من الخطي، لكن كثافة
+            الإنتاج للمتر المربع أعلى بـ 3 أضعاف. مناسب لمنتجات المخبوزات
+            والدواجن والبيتزا.
+          </p>
+
+          <h3>3. نفق التعليق الهوائي (Fluidized Bed IQF)</h3>
+          <p>
+            يُدفع الهواء البارد من الأسفل بقوة كافية لرفع المنتج فوق السير
+            قليلاً (Fluidization). يُحقق أسرع معدلات تجميد لأن الهواء يحيط بكل
+            القطعة من 360 درجة. مناسب فقط للمنتجات الصغيرة المنتظمة: حبات
+            البازلاء، الذرة، الفراولة، مكعبات الجزر. غير صالح للقطع الكبيرة أو
+            غير المنتظمة.
+          </p>
+
+          <h3>4. نفق السير المزدوج (Double-Belt IQF)</h3>
+          <p>
+            سيران متوازيان يتحركان بسرعات مختلفة مع غرفة تجميد بين طبقتين.
+            يُستخدم للمنتجات الطرية التي قد تتشوه تحت وزنها (عجائن، دونات،
+            منتجات محشوة). أكثر تعقيداً هندسياً لكنه يحفظ شكل المنتج بدقة.
+          </p>
+
+          <table>
+            <caption>
+              جدول 2 — مقارنة أنواع أنفاق IQF
+            </caption>
+            <thead>
+              <tr>
+                <th>النوع</th>
+                <th>أفضل التطبيقات</th>
+                <th>المساحة المطلوبة</th>
+                <th>التكلفة النسبية</th>
+                <th>سرعة التجميد</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>خطي (Linear)</td>
+                <td>أسماك، روبيان، دواجن مقطعة</td>
+                <td>مرتفعة (8–30 م)</td>
+                <td>1× (مرجع)</td>
+                <td>سريع</td>
+              </tr>
+              <tr>
+                <td>حلزوني (Spiral)</td>
+                <td>مخبوزات، دواجن، بيتزا</td>
+                <td>منخفضة جداً</td>
+                <td>1.5–1.8×</td>
+                <td>سريع</td>
+              </tr>
+              <tr>
+                <td>تعليق هوائي (Fluidized)</td>
+                <td>بازلاء، ذرة، فراولة، مكعبات</td>
+                <td>متوسطة</td>
+                <td>1.2–1.5×</td>
+                <td>سريع جداً</td>
+              </tr>
+              <tr>
+                <td>سير مزدوج (Double-Belt)</td>
+                <td>عجائن، منتجات محشوة</td>
+                <td>متوسطة</td>
+                <td>1.8–2.2×</td>
+                <td>سريع</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- ═══ القسم 5 ═══ -->
+        <section id="design-parameters" aria-labelledby="h2-design">
+          <h2 id="h2-design">معايير التصميم الهندسي لنظام IQF</h2>
+
+          <p>
+            التصميم الهندسي الصحيح لنظام IQF يُحدد الفرق بين منشأة مربحة ومنشأة
+            تُعاني من انخفاض الإنتاج وارتفاع تكاليف التشغيل. إليك المعايير
+            الأساسية:
+          </p>
+
+          <h3>أولاً: حساب الحمل الحراري (Thermal Load Calculation)</h3>
+          <p>الحمل الكلي على نظام التبريد في نفق IQF يتكون من:</p>
+          <ul>
+            <li>
+              <strong>حمل المنتج (Product Load):</strong> الطاقة المطلوبة لخفض
+              حرارة المنتج من درجة الدخول إلى ‑18°C، تشمل الحرارة الحسية فوق
+              نقطة التجمد + الحرارة الكامنة للتجمد + الحرارة الحسية تحت نقطة
+              التجمد.
+            </li>
+            <li>
+              <strong>حمل التسخين من الخارج (Transmission Load):</strong>
+              عبر الجدران والأرضية والسقف، يُحسب بمعادلة Q = U × A × ΔT.
+            </li>
+            <li>
+              <strong>حمل الأجهزة الكهربائية (Equipment Load):</strong>
+              محركات المراوح والسير والإضاءة ≈ 3–5% من حمل المنتج في الأنفاق
+              المحكمة العزل.
+            </li>
+            <li>
+              <strong>حمل فتح الأبواب والتسريب:</strong> يُضاف معامل أمان 10–15%
+              على المجموع.
+            </li>
+          </ul>
+
+          <h3>ثانياً: معادلة زمن المكوث (Residence Time)</h3>
+          <p>
+            يُحسب الحد الأدنى لزمن المكوث بطريقة الكتلة المركزية (Lump
+            Capacitance Method) أو نموذج Plank للمنتجات السميكة. القاعدة
+            التجريبية الشائعة للأسماك والدواجن:
+          </p>
+          <div class="callout callout-info">
+            <p>
+              <strong>معادلة تقريبية (Empirical Rule):</strong><br />
+              زمن المكوث (دقيقة) ≈ <strong>C × d²</strong><br />
+              حيث d = نصف سماكة القطعة (سم)، C = ثابت يعتمد على درجة الهواء:<br />
+              • عند ‑35°C و5 م/ث: C ≈ 3.5–4.0 للأسماك<br />
+              • عند ‑40°C و6 م/ث: C ≈ 2.8–3.2 للأسماك<br />
+              <em
+                >مثال: فيليه سمك بسماكة 2 سم → زمن = 3.5 × 1² = 3.5 إلى 4 دقائق
+                فقط</em
+              >
+            </p>
+          </div>
+
+          <h3>ثالثاً: معايير التصميم حسب نوع المنتج</h3>
+          <table>
+            <caption>
+              جدول 3 — معايير التصميم المرجعية لأبرز المنتجات
+            </caption>
+            <thead>
+              <tr>
+                <th>المنتج</th>
+                <th>سماكة القطعة</th>
+                <th>درجة دخول المنتج</th>
+                <th>درجة هواء النفق</th>
+                <th>زمن المكوث المستهدف</th>
+                <th>كثافة التحميل (كجم/م²)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>روبيان (21/25)</td>
+                <td>12–16 مم</td>
+                <td>4°C – 10°C</td>
+                <td>‑40°C</td>
+                <td>6–10 دقائق</td>
+                <td>8–12</td>
+              </tr>
+              <tr>
+                <td>فيليه سمك</td>
+                <td>15–25 مم</td>
+                <td>2°C – 5°C</td>
+                <td>‑38°C</td>
+                <td>10–18 دقيقة</td>
+                <td>10–15</td>
+              </tr>
+              <tr>
+                <td>صدور دجاج مقطعة</td>
+                <td>20–35 مم</td>
+                <td>4°C – 8°C</td>
+                <td>‑40°C</td>
+                <td>14–25 دقيقة</td>
+                <td>12–18</td>
+              </tr>
+              <tr>
+                <td>بازلاء خضراء</td>
+                <td>7–12 مم</td>
+                <td>10°C – 20°C</td>
+                <td>‑35°C</td>
+                <td>4–7 دقائق</td>
+                <td>15–25</td>
+              </tr>
+              <tr>
+                <td>فراولة كاملة</td>
+                <td>20–35 مم</td>
+                <td>8°C – 15°C</td>
+                <td>‑38°C</td>
+                <td>12–20 دقيقة</td>
+                <td>10–14</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>رابعاً: التحقق الحراري (Thermal Validation)</h3>
+          <p>
+            قبل بدء الإنتاج التجاري، يستوجب معيار HACCP وBRC اختبار تحقق حراري
+            يُثبت وصول <strong>مركز أسمك قطعة في الدفعة</strong>
+            (Coldest Point) إلى ‑18°C خلال الزمن المضبوط. يتطلب ذلك:
+          </p>
+          <ul>
+            <li>مجسّات حرارية مُعايَرة مزروعة في مراكز عيّنات متعددة</li>
+            <li>تسجيل مستمر عبر نظام SCADA أو مسجّلات بيانات (Data Logger)</li>
+            <li>إجراء 3 دفعات تحقق ناجحة متتالية قبل اعتماد المعلمة</li>
+            <li>توثيق النتائج وحفظها لمدة لا تقل عن 5 سنوات</li>
+          </ul>
+        </section>
+
+        <!-- ═══ القسم 6 ═══ -->
+        <section id="applications" aria-labelledby="h2-applications">
+          <h2 id="h2-applications">
+            التطبيقات الصناعية في المملكة العربية السعودية
+          </h2>
+
+          <p>
+            تشهد المملكة العربية السعودية نمواً ملحوظاً في تقنية IQF مدفوعاً
+            برؤية 2030 وتوجه الدولة نحو الأمن الغذائي وتنويع الصادرات. أبرز
+            التطبيقات الميدانية:
+          </p>
+
+          <h3>1. قطاع الأسماك والمأكولات البحرية</h3>
+          <p>
+            تُصنَّف المملكة ضمن أكبر مستوردي الأسماك والمأكولات البحرية عالمياً
+            بأكثر من 350,000 طن سنوياً. تعمل منشآت التجميد الكبرى في ميناء
+            الجبيل وجدة الإسلامي وينبع على خطوط IQF بقدرات تتراوح بين 2 و10
+            أطنان/ساعة. المنتجات الأساسية: روبيان مجمّد خام، فيليه سمك، حبار،
+            سلق.
+          </p>
+
+          <figure>
+            <img
+              src="../../assets/gallery/tunnel-freeze-evaporator.webp"
+              alt="مبخّر نفق التجميد السريع الصناعي — تصميم عالي الكثافة لتحقيق درجات تجميد IQF"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              width="900"
+              height="400"
+              loading="lazy"
+            />
+            <figcaption>
+              مبخّر نفق التجميد السريع بتصميم عالي الكثافة — يعمل بدرجة تبخير
+              ‑42°C لضمان التجميد السريع لمنتجات المأكولات البحرية
+            </figcaption>
+          </figure>
+
+          <h3>2. مصانع الدواجن واللحوم المجمّدة</h3>
+          <p>
+            مع قدوم مصانع الدواجن الكبرى في الرياض والقصيم والطائف، أصبح IQF
+            الخيار الاستراتيجي لتجميد الأجزاء المجزأة (أفخاذ، أكتاف، صدور) قبل
+            التغليف. يُتيح IQF بيع المنتج بالوزن الدقيق دون تشكّل كتل جليدية،
+            مما يُرضي متطلبات متاجر التجزئة الحديثة وسلاسل المطاعم.
+          </p>
+
+          <h3>3. مصانع الخضروات والفواكه المجمّدة</h3>
+          <p>
+            شهدت المملكة نمو هذا القطاع مع التوسع في مزارع الخضروات بالمنطقة
+            الوسطى والشمالية. خطوط IQF للبازلاء والذرة الحلوة والفلفل الأخضر
+            تعمل بأنظمة Fluidized Bed بكفاءة عالية وتكاليف تشغيل منخفضة.
+          </p>
+
+          <h3>4. مصانع المنتجات شبه المصنّعة (Semi-Finished Products)</h3>
+          <p>
+            تُستخدم تقنية IQF لتجميد مكونات الوجبات الجاهزة: مكعبات الجبن، صلصة
+            المشروم، حلقات الكاليماري، الأعشاب المقطعة، ومكونات البيتزا. هذه
+            المنتجات تحتاج لـ IQF حصراً إذ لا يمكن تجميدها كتلةً ثم فصلها
+            لاحقاً.
+          </p>
+
+          <div class="callout callout-success">
+            <p>
+              <strong>✅ من مشاريع الفريدة آيس:</strong> نفّذنا في 2024 خطَّ IQF
+              لمصنع معالجة أسماك في الجبيل الصناعية بطاقة 3 أطنان/ساعة، استخدم
+              نظام أمونيا ثنائي المرحلة مع نفق خطي 18 متراً. حقّق المصنع خفضاً
+              في Drip Loss من 9% (الخط القديم) إلى 2.1% — وهو ما أضاف قيمة
+              مبيعات إضافية تجاوزت 2 مليون ريال سنوياً.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══ القسم 7 ═══ -->
+        <section id="vs-alternatives" aria-labelledby="h2-vs">
+          <h2 id="h2-vs">IQF مقابل تقنيات التجميد الأخرى</h2>
+
+          <p>
+            IQF ليس الحل الوحيد ولا دائماً الأمثل. إليك مقارنة موضوعية مع أبرز
+            تقنيات التجميد الصناعي الأخرى:
+          </p>
+
+          <table>
+            <caption>
+              جدول 4 — مقارنة شاملة بين تقنيات التجميد الصناعي
+            </caption>
+            <thead>
+              <tr>
+                <th>المعيار</th>
+                <th>IQF نفقي</th>
+                <th>Blast Freezer</th>
+                <th>Plate Freezer</th>
+                <th>Contact Freezer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>المنتجات المناسبة</td>
+                <td>قطع متفرقة صغيرة ومتوسطة</td>
+                <td>منتجات كبيرة / دفعات كاملة</td>
+                <td>بلوكات مستطيلة منتظمة</td>
+                <td>صناديق / كراتين كاملة</td>
+              </tr>
+              <tr>
+                <td>سرعة التجميد</td>
+                <td>جداً سريع (8–30 دقيقة)</td>
+                <td>متوسط (1–6 ساعات)</td>
+                <td>سريع للبلوكات (30–90 دقيقة)</td>
+                <td>بطيء (6–24 ساعة)</td>
+              </tr>
+              <tr>
+                <td>جودة المنتج</td>
+                <td>ممتازة — بلورات صغيرة</td>
+                <td>جيدة</td>
+                <td>جيدة للأسماك الكاملة</td>
+                <td>مقبولة</td>
+              </tr>
+              <tr>
+                <td>خسارة الوزن (Drip Loss)</td>
+                <td>1–3%</td>
+                <td>4–10%</td>
+                <td>2–5%</td>
+                <td>6–12%</td>
+              </tr>
+              <tr>
+                <td>مرونة المنتج</td>
+                <td>عالية جداً</td>
+                <td>متوسطة</td>
+                <td>منخفضة (منتجات محددة)</td>
+                <td>منخفضة</td>
+              </tr>
+              <tr>
+                <td>الاستهلاك الكهربائي</td>
+                <td>مرتفع نسبياً</td>
+                <td>متوسط</td>
+                <td>منخفض</td>
+                <td>منخفض</td>
+              </tr>
+              <tr>
+                <td>المساحة المطلوبة</td>
+                <td>كبيرة (خطي) / صغيرة (حلزوني)</td>
+                <td>كبيرة</td>
+                <td>صغيرة</td>
+                <td>صغيرة جداً</td>
+              </tr>
+              <tr>
+                <td>التكلفة الاستثمارية</td>
+                <td>مرتفعة</td>
+                <td>متوسطة</td>
+                <td>منخفضة–متوسطة</td>
+                <td>منخفضة</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-warn">
+            <p>
+              <strong>⚠️ متى لا تختار IQF:</strong> إذا كان منتجك يُباع
+              بالكراتين المجمّدة كاملاً ولا توجد حاجة للفصل الفردي، فإن Plate
+              Freezer أو Blast Freezer يُقدّمان كفاءة أعلى بتكلفة أقل. IQF يستحق
+              الاستثمار عندما يدفع السوق علاوة سعرية على المنتج المجمّد فردياً.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══ القسم 8 ═══ -->
+        <section id="maintenance" aria-labelledby="h2-maintenance">
+          <h2 id="h2-maintenance">التشغيل والصيانة الدورية لنظام IQF</h2>
+
+          <p>
+            الأداء المثالي لنفق IQF لا يُستدام إلا بصيانة منضبطة. التراخي في
+            الصيانة لا يُتسبب فقط في تدهور جودة المنتج، بل يُعرّض المنشأة لمخاطر
+            السلامة الغذائية وخسارة الاعتمادات الدولية.
+          </p>
+
+          <h3>إدارة تراكم الجليد (Defrost Management)</h3>
+          <p>
+            تراكم الجليد على المبخرات هو التحدي الأول في تشغيل أنفاق IQF.
+            بروتوكولات إذابة الجليد (Defrost) تشمل:
+          </p>
+          <ul>
+            <li>
+              <strong>الإذابة بالهواء الساخن (Hot Gas Defrost):</strong>
+              الأسرع والأكثر شيوعاً في الأنفاق الكبيرة. يُضخ غاز ساخن عالي الضغط
+              من الكمبروسر عبر دائرة عكسية إلى المبخر. دورة كاملة: 20–40 دقيقة.
+            </li>
+            <li>
+              <strong>الإذابة بالمياه (Water Defrost):</strong> رش ماء فاتر
+              (40°C) على المبخر. سريع (10–20 دقيقة) لكن يستوجب نظام صرف صحي
+              ونظافة دقيقة.
+            </li>
+            <li>
+              <strong>الإذابة الكهربائية (Electric Defrost):</strong> سهلة
+              التحكم لكن استهلاكها الكهربائي أعلى. تُستخدم في الأنفاق الصغيرة.
+            </li>
+          </ul>
+
+          <h3>جدول الصيانة الدورية الموصى به</h3>
+          <table>
+            <caption>
+              جدول 5 — جدول الصيانة الوقائية لنفق IQF
+            </caption>
+            <thead>
+              <tr>
+                <th>التكرار</th>
+                <th>المهمة</th>
+                <th>الجهة المسؤولة</th>
+                <th>المعيار المرجعي</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>يومي</td>
+                <td>تسجيل درجات الحرارة والضغط، فحص السير بصرياً</td>
+                <td>مشغّل الخط</td>
+                <td>SOP داخلية + HACCP</td>
+              </tr>
+              <tr>
+                <td>أسبوعي</td>
+                <td>تنظيف السير وإزالة الجليد والرواسب</td>
+                <td>فريق النظافة الصناعية</td>
+                <td>GMP / BRC</td>
+              </tr>
+              <tr>
+                <td>أسبوعي</td>
+                <td>فحص التوتر والمحاذاة للسير</td>
+                <td>مهندس صيانة</td>
+                <td>دليل المصنّع</td>
+              </tr>
+              <tr>
+                <td>شهري</td>
+                <td>تشحيم محامل السير والمراوح، اختبار أجهزة السلامة</td>
+                <td>مهندس صيانة</td>
+                <td>ISO 22000</td>
+              </tr>
+              <tr>
+                <td>ربع سنوي</td>
+                <td>فحص شامل للعزل الحراري، اختبار السير بالحمل الكامل</td>
+                <td>فريق صيانة متخصص</td>
+                <td>ASHRAE 15</td>
+              </tr>
+              <tr>
+                <td>سنوي</td>
+                <td>
+                  فحص دائرة التبريد، اختبار ضغط، مراجعة Thermal Validation
+                </td>
+                <td>مهندس معتمد خارجي</td>
+                <td>EN 378 / IIAR</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-danger">
+            <p>
+              <strong>🚨 تنبيه تشغيلي:</strong> الإهمال في تنظيف السير أسبوعياً
+              يُؤدي إلى تراكم بيو-فيلم (Biofilm) يُشكّل خطر تلوث بكتيري حتى في
+              درجات الحرارة المنخفضة. بعض بكتيريا Listeria تنمو حتى عند ‑2°C وقد
+              تُلوّث دفعات إنتاج كاملة.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══ القسم 9 ═══ -->
+        <section id="standards" aria-labelledby="h2-standards">
+          <h2 id="h2-standards">المعايير والاعتمادات الدولية</h2>
+
+          <p>
+            المنتجات المجمّدة بـ IQF المُوجَّهة للتصدير أو لسلاسل التجزئة الكبرى
+            تستوجب الامتثال لمنظومة متكاملة من المعايير الدولية:
+          </p>
+
+          <h3>معايير السلامة الغذائية</h3>
+          <ul>
+            <li>
+              <strong>HACCP (Hazard Analysis Critical Control Points):</strong>
+              يُحدد نقاط التحكم الحرجة في خط الإنتاج. درجة حرارة مركز المنتج عند
+              الخروج من النفق (CCP) يُعدّ من أبرز CCPs في نظام IQF.
+            </li>
+            <li>
+              <strong>ISO 22000:2018:</strong> المعيار الدولي لنظم إدارة سلامة
+              الأغذية. يُشترط توثيق برامج المتطلبات التشغيلية (OPRPs) الخاصة
+              بالتحكم في درجات الحرارة.
+            </li>
+            <li>
+              <strong>BRC Global Standard Food Safety Issue 9:</strong>
+              المعيار الأوروبي للتصدير إلى المملكة المتحدة وأسواق الاتحاد
+              الأوروبي. يُطالب بتحقق حراري موثق لكل خط IQF.
+            </li>
+            <li>
+              <strong>SQFI (SQF Food Safety Code):</strong> المعيار الأمريكي
+              للتصدير إلى أسواق الولايات المتحدة وكندا.
+            </li>
+            <li>
+              <strong>SFDA (هيئة الغذاء والدواء السعودية):</strong>
+              تستوجب تسجيل منشآت التجميد الغذائية وفق اللوائح المحلية المحدّثة
+              2024، مع استيفاء اشتراطات درجات التخزين والتجميد القياسية.
+            </li>
+          </ul>
+
+          <h3>معايير التبريد الهندسية</h3>
+          <ul>
+            <li>
+              <strong>ASHRAE Standard 15-2022:</strong> سلامة أنظمة التبريد —
+              التهوية والإشارات التحذيرية وكاشفات التسرب.
+            </li>
+            <li>
+              <strong>EN 378:2021 (أوروبي):</strong> متطلبات السلامة والبيئة
+              لأنظمة التبريد والمضخات الحرارية.
+            </li>
+            <li>
+              <strong>IEC 60204-1:</strong> السلامة الكهربائية للآلات الصناعية
+              بما فيها المحركات والمتحكمات في أنفاق IQF.
+            </li>
+          </ul>
+
+          <div class="callout callout-info">
+            <p>
+              <strong>💡 نصيحة للمصدّرين:</strong> إذا كنت تستهدف تصدير مأكولات
+              بحرية مجمّدة بـ IQF إلى الاتحاد الأوروبي، تأكد من حصول منشأتك على
+              ترخيص EC Number من المفوضية الأوروبية إضافةً إلى BRC أو IFS. هذا
+              الترخيص يتطلب تحقق حراري موثق لكل منتج على كل خط إنتاج.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══ القسم 10: FAQ ═══ -->
+        <section
+          id="faq"
+          aria-labelledby="h2-faq"
+          itemscope
+          itemtype="https://schema.org/FAQPage"
+        >
+          <h2 id="h2-faq">الأسئلة الشائعة حول تقنية IQF</h2>
+
+          <div
+            class="faq-item"
+            itemscope
+            itemprop="mainEntity"
+            itemtype="https://schema.org/Question"
+          >
+            <div class="faq-question" itemprop="name">
+              ما الفرق بين IQF والتجميد الاعتيادي؟
+              <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
+            </div>
+            <div
+              class="faq-answer"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">
+                في التجميد الاعتيادي تُجمَّد المنتجات ببطء (ساعات أو أيام)، مما
+                يُكوّن بلورات جليد كبيرة تُمزق الخلايا وتُفقد العصارة عند
+                الإذابة. في تقنية IQF تعبر القطعة خلال المنطقة الحرجة (‑1°C إلى
+                ‑5°C) في أقل من 30 دقيقة عبر هواء شديد البرودة (‑35°C إلى
+                ‑45°C)، فتتشكل بلورات جليد دقيقة لا تُلحق ضرراً بالخلايا، مما
+                يحفظ النكهة والملمس والقيمة الغذائية.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="faq-item"
+            itemscope
+            itemprop="mainEntity"
+            itemtype="https://schema.org/Question"
+          >
+            <div class="faq-question" itemprop="name">
+              ما هي أنواع المنتجات الغذائية الأنسب لتقنية IQF؟
+              <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
+            </div>
+            <div
+              class="faq-answer"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">
+                تشمل أبرز تطبيقات IQF: الأسماك والمأكولات البحرية (فيليه،
+                روبيان، حبار)، الدواجن (قطع مجزأة)، اللحوم (شرائح رفيعة،
+                مكعبات)، الخضروات (بازلاء، ذرة، فلفل، قطع بروكلي)، الفواكه
+                (فراولة، توت)، والمخبوزات (عجينة، دونات، كروسون). الشرط الأساسي
+                هو أن يكون المنتج قطعاً متفرقة قابلة للانسياب.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="faq-item"
+            itemscope
+            itemprop="mainEntity"
+            itemtype="https://schema.org/Question"
+          >
+            <div class="faq-question" itemprop="name">
+              كم تبلغ سرعة الحزام في نفق IQF ومتى تُضبط؟
+              <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
+            </div>
+            <div
+              class="faq-answer"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">
+                تتراوح سرعة الحزام بين 0.05 و0.5 م/دقيقة وتُضبط بناءً على وزن
+                القطعة وزمن المكوث المطلوب. القاعدة الهندسية: وزن المنتج (غ) ×
+                0.065 = الحد الأدنى من دقائق المكوث للوصول لمركز حراري ‑18°C في
+                الأسماك. لكل منتج يتطلع المصنع لتجميده يجب إجراء اختبار تحقق
+                حراري (Thermal Validation) قبل الإنتاج الفعلي.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="faq-item"
+            itemscope
+            itemprop="mainEntity"
+            itemtype="https://schema.org/Question"
+          >
+            <div class="faq-question" itemprop="name">
+              ما تكلفة نظام IQF الصناعي وما عائد الاستثمار المتوقع؟
+              <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
+            </div>
+            <div
+              class="faq-answer"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">
+                تتراوح تكلفة نظام IQF متكامل بقدرة طن/ساعة بين 1.5 و4 مليون ريال
+                سعودي بحسب النوع والمصنّع. عائد الاستثمار (ROI) يتحقق عادةً خلال
+                2–5 سنوات نظراً لارتفاع القيمة المضافة للمنتج المجمّد بـ IQF
+                الذي يُباع بسعر أعلى بـ 20–40% من المجمّد تقليدياً.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="faq-item"
+            itemscope
+            itemprop="mainEntity"
+            itemtype="https://schema.org/Question"
+          >
+            <div class="faq-question" itemprop="name">
+              ما أفضل شركة لتركيب أنظمة IQF في الدمام والمنطقة الشرقية؟
+              <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
+            </div>
+            <div
+              class="faq-answer"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">
+                الفريدة آيس للهندسة والتبريد الصناعي بالدمام تمتلك خبرة موثقة في
+                تصميم وتنفيذ منظومات التجميد السريع IQF لمصانع الأسماك واللحوم
+                والدواجن في المنطقة الشرقية والمملكة العربية السعودية، مع دعم
+                هندسي كامل من الدراسة حتى التشغيل والصيانة الدورية.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══ خاتمة ═══ -->
+        <section aria-labelledby="h2-conclusion">
+          <h2 id="h2-conclusion">
+            الخلاصة: متى يكون IQF القرار الصحيح لمشروعك؟
+          </h2>
+
+          <p>
+            تقنية IQF ليست مجرد معدة تجميد — هي قرار استراتيجي يُعيد تشكيل مكانة
+            منتجك في السوق. الاستثمار فيها يُبرَّر عندما:
+          </p>
+          <ul>
+            <li>يدفع المشترون علاوة سعرية واضحة على المنتج المجمّد فردياً</li>
+            <li>تستهدف أسواق التصدير التي تشترط BRC أو HACCP مع تحقق حراري</li>
+            <li>
+              منتجك لا يتحمل Drip Loss عالية دون خسارة جودة وقيمة (أسماك،
+              روبيان، دواجن)
+            </li>
+            <li>
+              طاقتك الإنتاجية تتجاوز 500 كجم/ساعة (تحت هذا الحجم قد تكون غرفة
+              Blast Freezer أوفر)
+            </li>
+            <li>تريد مرونة تشغيلية لتجميد منتجات متنوعة على نفس الخط</li>
+          </ul>
+
+          <div class="callout callout-success">
+            <p>
+              <strong>✅ هل تحتاج دراسة جدوى لنظام IQF؟</strong> فريق مهندسي
+              الفريدة آيس جاهز لإعداد دراسة هندسية مجانية تشمل: حسابات الحمل
+              الحراري، مقارنة الأنواع، تقدير التكلفة وعائد الاستثمار لمشروعك
+              تحديداً.
+              <a
+                href="../../contact.html"
+                class="text-blue-700 font-bold hover:underline"
+                >تواصل معنا الآن</a
+              >.
+            </p>
+          </div>
+        </section>
+      </article>
+
+      <!-- ═══ مقالات ذات صلة ═══ -->
+      <aside
+        aria-labelledby="related-heading"
+        class="mt-14 pt-10 border-t border-slate-200 col-span-full"
+      >
+        <h2 id="related-heading" class="text-xl font-black text-slate-800 mb-6">
+          مقالات ذات صلة
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a href="blast-freezer-meat.html" class="related-card">
+            <span
+              class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
+              >تقنيات التجميد</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              تجميد اللحوم بالـ Blast Freezer: المعايير والمواصفات الصناعية
+            </p>
+          </a>
+          <a href="cold-room-load-calculation-ar.html" class="related-card">
+            <span
+              class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
+              >هندسة التصميم</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              حساب حمل التبريد: الدليل الهندسي الشامل
+            </p>
+          </a>
+          <a href="ammonia-refrigeration-systems-ar.html" class="related-card">
+            <span
+              class="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full"
+              >أنظمة التبريد</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              أنظمة تبريد الأمونيا الصناعية: الدليل الشامل
+            </p>
+          </a>
+        </div>
+      </aside>
+
+      <!-- ═══ CTA ═══ -->
+      <div
+        class="mt-12 bg-gradient-to-br from-blue-900 to-slate-900 rounded-2xl p-8 text-center text-white col-span-full"
+      >
+        <h2 class="text-2xl font-black mb-3 text-white">هل مشروعك يحتاج خط تجميد IQF؟</h2>
+        <p class="text-slate-300 mb-6 text-sm leading-relaxed">
+          احصل على دراسة هندسية مجانية وعرض سعر مفصّل من فريق الفريدة آيس — خبرة
+          تجاوزت 550 مشروعاً في المملكة العربية السعودية
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a
+            href="../../contact.html"
+            class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-3 rounded-xl transition shadow-lg"
+          >
+            <i class="fas fa-paper-plane ml-2" aria-hidden="true"></i>اطلب عرض
+            سعر الآن
+          </a>
+          <a
+            href="https://wa.me/966598366214?text=أريد استشارة حول نظام تجميد IQF الصناعي"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-green-500 hover:bg-green-400 text-white font-bold px-8 py-3 rounded-xl transition shadow-lg"
+          >
+            <i class="fab fa-whatsapp ml-2" aria-hidden="true"></i>تواصل عبر
+            واتساب
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- زر واتساب عائم -->
+    <a
+      href="https://wa.me/966598366214?text=استفسار حول تقنية IQF للتجميد السريع"
+      class="wa-float-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="تواصل معنا عبر واتساب"
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="white"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+        />
+      </svg>
+    </a>
+
+    <script>
+      (function () {
+        const bar = document.getElementById("readingProgress");
+        if (!bar) return;
+        function update() {
+          const h = document.documentElement;
+          const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+          bar.style.width = Math.min(pct, 100) + "%";
+        }
+        window.addEventListener("scroll", update, { passive: true });
+      })();
+
+      document.querySelectorAll(".faq-question").forEach(function (btn) {
+        const answer = btn.nextElementSibling;
+        answer.style.display = "none";
+        btn.addEventListener("click", function () {
+          const isOpen = answer.style.display === "block";
+          document.querySelectorAll(".faq-answer").forEach(function (a) {
+            a.style.display = "none";
+          });
+          document.querySelectorAll(".faq-question i").forEach(function (i) {
+            i.style.transform = "";
+          });
+          if (!isOpen) {
+            answer.style.display = "block";
+            btn.querySelector("i").style.transform = "rotate(180deg)";
+          }
+        });
+      });
+    </script>
+
+    <div id="site-footer"></div>
+    <script src="../../js/lang-switch.js" defer></script>
+    <script src="../../js/site-shell.js" defer></script>
+  </body>
+</html>

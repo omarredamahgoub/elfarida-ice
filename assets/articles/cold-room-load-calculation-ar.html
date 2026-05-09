@@ -1,0 +1,1031 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      حساب حمل التبريد لغرفة التبريد الصناعية: الدليل الهندسي الشامل | الفريدة
+      آيس
+    </title>
+    <meta
+      name="description"
+      content="كيف تحسب حمل التبريد لغرفة التبريد الصناعية بدقة؟ دليل هندسي متكامل يشرح مصادر الأحمال الحرارية، معادلات الحساب، العزل الحراري، ومعايير الاختيار الصحيح للمعدات — بأمثلة واقعية من مشاريع سعودية."
+    />
+    <meta
+      name="keywords"
+      content="حساب حمل التبريد، تصميم غرف التبريد، cooling load calculation، عزل غرف التبريد، مستودع تبريد السعودية، سماكة البانل، اختيار كمبروسر تبريد، تبريد صناعي الدمام"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta
+      name="author"
+      content="م. فريق الفريدة آيس للهندسة والتبريد الصناعي"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html"
+    />
+    <link rel="apple-touch-icon" href="../../assets/ace-logos/elfaridaice.webp" />
+
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html"
+    />
+    <meta
+      property="og:title"
+      content="حساب حمل التبريد لغرفة التبريد الصناعية: الدليل الهندسي الشامل | الفريدة آيس"
+    />
+    <meta
+      property="og:description"
+      content="دليل هندسي متكامل يشرح مصادر الأحمال الحرارية، معادلات الحساب، والعزل الحراري لغرف التبريد الصناعية في المملكة العربية السعودية."
+    />
+    <meta
+      property="og:image"
+      content="https://elfaridaice.com/assets/gallery/cold-room-aluminum-floor.webp"
+    />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="الفريدة آيس" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "حساب حمل التبريد لغرفة التبريد الصناعية: الدليل الهندسي الشامل",
+        "description": "دليل هندسي يشرح مصادر الأحمال الحرارية، معادلات الحساب، العزل الحراري، واختيار المعدات لغرف التبريد الصناعية في المملكة العربية السعودية.",
+        "image": "https://elfaridaice.com/assets/ace-logos/elfaridaice.webp",
+        "author": {
+          "@type": "Organization",
+          "name": "الفريدة آيس للهندسة والتبريد الصناعي",
+          "url": "https://elfaridaice.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "الفريدة آيس",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://elfaridaice.com/assets/ace-logos/elfaridaice.webp"
+          }
+        },
+        "datePublished": "2025-04-20",
+        "dateModified": "2025-06-05",
+        "mainEntityOfPage": "https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html",
+        "inLanguage": "ar",
+        "keywords": "حمل التبريد، تصميم غرفة التبريد، cooling load، عزل حراري، مستودع تبريد",
+        "articleSection": "تصميم غرف التبريد"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://elfaridaice.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "المدونة",
+            "item": "https://elfaridaice.com/blog.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "حساب حمل التبريد",
+            "item": "https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html"
+          }
+        ]
+      }
+    </script>
+
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/assets/articles/cold-room-load-calculation-ar.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/"
+    />
+
+    
+
+    <!-- ═══ PWA + Resource Hints + Schema Injector ═══ -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+    <script src="../../js/seo-injector.js" defer></script>
+  
+    <link rel="stylesheet" href="../../cairo.css" />
+    <link rel="stylesheet" href="../../css/shared.css" />
+    <link rel="stylesheet" href="../../tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/site-shell.css" />
+    <link rel="stylesheet" href="../../css/article.css" />
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- ═══ شريط التنقل ═══ -->
+
+<!-- ═══ هيدر المقال ═══ -->
+    <header
+      class="bg-gradient-to-br from-slate-900 via-red-950 to-slate-900 text-white py-16 md:py-24"
+    >
+      <div class="max-w-4xl mx-auto px-4">
+        
+        <div class="flex items-center gap-2 mb-5">
+          <span
+            class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+            >تصميم غرف التبريد</span
+          >
+          <span class="text-slate-300 text-sm">• 22 دقيقة قراءة</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-black leading-tight mb-6 text-white">
+          حساب حمل التبريد<br />
+          <span class="text-red-400">لغرفة التبريد الصناعية:</span><br />
+          الدليل الهندسي الشامل
+        </h1>
+        <p class="text-slate-300 text-lg leading-relaxed max-w-3xl">
+          الخطأ الأكثر تكلفةً في مشاريع غرف التبريد ليس في الإنشاء ولا في اختيار
+          المعدات — بل في الخطوة التي تسبق كل ذلك: حساب حمل التبريد. حمل مُبالَغ
+          فيه يعني استثماراً زائداً. حمل منقوص يعني فشل المشروع كاملاً.
+        </p>
+        <div
+          class="flex items-center gap-4 mt-8 pt-6 border-t border-slate-700"
+        >
+          <div
+            class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center text-white font-black text-lg"
+          >
+            م
+          </div>
+          <div>
+            <p class="font-bold text-white">فريق هندسة التصميم — الفريدة آيس</p>
+            <p class="text-slate-300 text-sm">
+              +550 مشروع منجز • المنطقة الشرقية، الرياض، جدة
+            </p>
+          </div>
+          <div class="mr-auto text-slate-300 text-sm hidden md:block">
+            <i class="far fa-calendar-alt ml-1"></i> أبريل 2025
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══ المحتوى الرئيسي ═══ -->
+    <div
+      class="article-layout"
+    >
+    <article class="article-body">
+      <!-- المقال -->
+      
+        <!-- جدول المحتويات -->
+        <div class="toc bg-red-50 border border-red-100 rounded-2xl p-6 mb-10">
+          <h2
+            class="text-lg font-black text-red-900 mb-4 border-0 p-0 m-0 !mt-0"
+          >
+            📋 محتويات هذا الدليل
+          </h2>
+          <ol class="space-y-2 text-sm font-medium">
+            <li>
+              <a href="#intro">١. مقدمة: ما هو حمل التبريد ولماذا هو أساسي؟</a>
+            </li>
+            <li>
+              <a href="#sources">٢. مصادر الأحمال الحرارية في غرفة التبريد</a>
+            </li>
+            <li>
+              <a href="#transmission"
+                >٣. الحمل الحراري للجدران والسقف والأرضية (Transmission Load)</a
+              >
+            </li>
+            <li>
+              <a href="#infiltration"
+                >٤. حمل تسرّب الهواء (Infiltration Load)</a
+              >
+            </li>
+            <li>
+              <a href="#product">٥. الحمل الحراري للمنتج (Product Load)</a>
+            </li>
+            <li>
+              <a href="#internal"
+                >٦. الأحمال الداخلية: الإضاءة، الموتورات، العمال</a
+              >
+            </li>
+            <li>
+              <a href="#insulation">٧. اختيار العزل الحراري المناسب للمملكة</a>
+            </li>
+            <li>
+              <a href="#example">٨. مثال حسابي كامل: غرفة تبريد 500 م²</a>
+            </li>
+            <li><a href="#equipment">٩. من الحمل إلى اختيار المعدات</a></li>
+            <li>
+              <a href="#mistakes">١٠. أكثر أخطاء التصميم شيوعاً في السعودية</a>
+            </li>
+          </ol>
+        </div>
+
+        <!-- ١ -->
+        <section id="intro">
+          <h2>مقدمة: ما هو حمل التبريد ولماذا هو أساسي؟</h2>
+          <p>
+            حمل التبريد (Refrigeration Load أو Cooling Load) هو إجمالي الحرارة
+            التي يجب أن يُزيلها نظام التبريد من الغرفة المبردة خلال فترة زمنية
+            محددة للحفاظ على درجة الحرارة التصميمية المطلوبة. يُقاس عادةً
+            بالكيلوواط (kW) أو بالطن من التبريد (TR)، علماً بأن:
+          </p>
+
+          <div class="formula-box">
+            1 طن تبريد (TR) = 3.517 كيلوواط (kW)
+            <br /><span class="comment"
+              >// التحويل الأمريكي المعتمد دولياً في صناعة التبريد</span
+            >
+          </div>
+
+          <p>
+            الحساب الدقيق لهذا الحمل هو ركيزة كل قرار تصميمي لاحق: سماكة البانل
+            العازل، قدرة الكمبروسر، حجم المبخّر، سعة المكثف، وحتى أبعاد أنابيب
+            المبرّد. التساهل في هذه المرحلة هو تساهل في النتيجة النهائية.
+          </p>
+
+          <p>
+            في المملكة العربية السعودية تحديداً، ثمة متغيران بالغا الأثر لا يجب
+            إهمالهما:
+            <strong>درجة الحرارة المحيطية الخارجية التصميمية</strong> التي تصل
+            إلى 48°م في المنطقة الشرقية، و<strong
+              >الرطوبة النسبية العالية</strong
+            >
+            في المناطق الساحلية التي ترفع حمل تسرّب الهواء بشكل كبير. لهذا
+            السبب، الأرقام الأوروبية أو الأمريكية لا يمكن تطبيقها مباشرة على
+            مشاريعنا دون تعديل.
+          </p>
+
+          <div class="callout callout-warn">
+            <p>
+              <strong>⚠️ نقطة مرجعية:</strong> درجة الحرارة الخارجية التصميمية
+              الموصى باستخدامها في حسابات غرف التبريد بالمنطقة الشرقية والرياض
+              وجدة هي <strong>48°م</strong> (درجة الحرارة الجافة الصيفية)، وليس
+              متوسط السنة. نصمّم دائماً للحالة الأسوأ.
+            </p>
+          </div>
+        </section>
+
+        <!-- ٢ -->
+        <section id="sources">
+          <h2>مصادر الأحمال الحرارية في غرفة التبريد</h2>
+          <p>
+            ينقسم الحمل الحراري الكلي لأي غرفة تبريد إلى خمسة مصادر رئيسية،
+            ويختلف وزن كل مصدر بحسب طبيعة الغرفة واستخدامها:
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>مصدر الحمل الحراري</th>
+                <th>الرمز</th>
+                <th>النسبة التقريبية من الإجمالي</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>١</td>
+                <td>الحمل الحراري للجدران والسقف والأرضية (Transmission)</td>
+                <td>Q_t</td>
+                <td>30 – 50%</td>
+              </tr>
+              <tr>
+                <td>٢</td>
+                <td>حمل تسرّب الهواء (Infiltration)</td>
+                <td>Q_inf</td>
+                <td>10 – 25%</td>
+              </tr>
+              <tr>
+                <td>٣</td>
+                <td>الحمل الحراري للمنتج عند تخزينه</td>
+                <td>Q_p</td>
+                <td>20 – 40%</td>
+              </tr>
+              <tr>
+                <td>٤</td>
+                <td>الأحمال الداخلية (إضاءة + موتورات + عمال)</td>
+                <td>Q_int</td>
+                <td>5 – 15%</td>
+              </tr>
+              <tr>
+                <td>٥</td>
+                <td>حمل فك جليد المبخّر (Defrost Load)</td>
+                <td>Q_d</td>
+                <td>5 – 10%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>الحمل الإجمالي = Q_total = Q_t + Q_inf + Q_p + Q_int + Q_d</p>
+          <p>
+            ثم نُضيف <strong>هامش أمان (Safety Factor)</strong> يتراوح بين 10
+            و15% في المملكة (نستخدم 15% في الغرف التي تعمل ضمن ظروف تشغيلية
+            قاسية أو تخزّن منتجات حساسة).
+          </p>
+        </section>
+
+        <!-- ٣ -->
+        <section id="transmission">
+          <h2>الحمل الحراري للجدران والسقف والأرضية (Transmission Load)</h2>
+          <p>
+            يُحسب هذا الحمل باستخدام معادلة انتقال الحرارة الكلاسيكية عبر
+            الجدران المعزولة:
+          </p>
+
+          <div class="formula-box">
+            Q_t = U × A × ΔT
+            <br /><br />
+            <span class="comment">// حيث:</span>
+            <br />U = معامل انتقال الحرارة الكلي (W/m²·K) <br />A = المساحة
+            السطحية (م²) <br />ΔT = فرق درجة الحرارة بين الخارج والداخل (°م)
+            <br /><br />
+            <span class="comment"
+              >// وU = 1 / R_total = 1 / (Σ d/λ + 1/h_i + 1/h_o)</span
+            >
+            <br /><span class="comment"
+              >// d = سماكة الطبقة (م) ، λ = موصلية حرارية (W/m·K)</span
+            >
+          </div>
+
+          <h3>قيم U المرجعية للبانل العازل (PU Panel)</h3>
+          <p>
+            البانل المصنوع من رغوة البولي يوريثين (Polyurethane) هو الأكثر
+            استخداماً في غرف التبريد السعودية. فيما يلي قيم U المعتمدة حسب سماكة
+            البانل ونوع الغرفة:
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>سماكة البانل</th>
+                <th>معامل U (W/m²·K)</th>
+                <th>نطاق الاستخدام</th>
+                <th>درجة حرارة الغرفة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60 مم</td>
+                <td>0.37 – 0.40</td>
+                <td>غرف تبريد الخضروات والفواكه</td>
+                <td>+2°م إلى +8°م</td>
+              </tr>
+              <tr>
+                <td>80 مم</td>
+                <td>0.27 – 0.30</td>
+                <td>غرف تبريد اللحوم والألبان</td>
+                <td>-2°م إلى +4°م</td>
+              </tr>
+              <tr>
+                <td>100 مم</td>
+                <td>0.22 – 0.25</td>
+                <td>غرف التجميد الخفيف</td>
+                <td>-10°م إلى -5°م</td>
+              </tr>
+              <tr>
+                <td>120 مم</td>
+                <td>0.18 – 0.20</td>
+                <td>غرف التجميد الصناعي</td>
+                <td>-18°م إلى -12°م</td>
+              </tr>
+              <tr>
+                <td>150 مم</td>
+                <td>0.14 – 0.16</td>
+                <td>التجميد العميق والمستودعات الكبرى</td>
+                <td>-25°م إلى -18°م</td>
+              </tr>
+              <tr>
+                <td>200 مم</td>
+                <td>0.10 – 0.12</td>
+                <td>مخازن التجميد الطويل الأمد</td>
+                <td>أقل من -25°م</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-info">
+            <p>
+              <strong>📌 ملاحظة للأرضية:</strong> الأرضية تحتاج معالجة خاصة في
+              غرف التجميد تحت -18°م لمنع تجمّد التربة التي يمكن أن تُسبب تمدد
+              الأرضية وتشققها. يُستخدم إما عزل أسفل البلاطة مع دفء تحتي
+              (Underfloor Heating) أو تصميم الأرضية المرتفعة على أعمدة.
+            </p>
+          </div>
+        </section>
+
+        <!-- ٤ -->
+        <section id="infiltration">
+          <h2>حمل تسرّب الهواء (Infiltration Load)</h2>
+          <p>
+            كل مرة تُفتح فيها باب غرفة التبريد، يدخل هواء خارجي دافئ ورطب يُضاف
+            حمله الحراري والرطوبي إلى النظام. هذا الحمل مُهمَل كثيراً في مرحلة
+            التصميم وقد يكون مفاجئاً في الحجم.
+          </p>
+
+          <h3>معادلة تقدير حمل التسرّب</h3>
+          <div class="formula-box">
+            Q_inf = V_room × N × ρ_air × Δh / 3600
+            <br /><br />
+            <span class="comment">// حيث:</span>
+            <br />V_room = حجم الغرفة (م³) <br />N = عدد مرات تغيير الهواء
+            يومياً (Air Changes Per Day) <br />ρ_air = كثافة الهواء الداخل ≈ 1.2
+            كغم/م³ <br />Δh = فرق المحتوى الحراري بين هواء الخارج والداخل
+            (kJ/kg) <br /><span class="comment"
+              >// Δh يُحسب من مخطط السيكروميتري للظروف المحلية</span
+            >
+          </div>
+
+          <p>
+            قيمة N (عدد تغييرات الهواء يومياً) تعتمد على حجم الغرفة وحركة
+            العمال:
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>حجم الغرفة (م³)</th>
+                <th>N (تغييرات يومية) لغرفة تبريد</th>
+                <th>N لغرفة تجميد</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>أقل من 50</td>
+                <td>20 – 30</td>
+                <td>8 – 15</td>
+              </tr>
+              <tr>
+                <td>50 – 200</td>
+                <td>10 – 20</td>
+                <td>5 – 10</td>
+              </tr>
+              <tr>
+                <td>200 – 1000</td>
+                <td>6 – 12</td>
+                <td>3 – 6</td>
+              </tr>
+              <tr>
+                <td>أكثر من 1000</td>
+                <td>4 – 8</td>
+                <td>2 – 4</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            لتقليل هذا الحمل عملياً، نُوصي دائماً بتركيب
+            <strong>ستارة هوائية (Air Curtain)</strong> فوق مدخل الغرفة وستارة
+            بلاستيكية (PVC Strip Curtain) في كل الغرف التي تزيد مساحتها عن 100
+            م². الاستثمار في هذين العنصرين يُوفّر ما يصل إلى 60% من حمل التسرّب.
+          </p>
+        </section>
+
+        <!-- ٥ -->
+        <section id="product">
+          <h2>الحمل الحراري للمنتج (Product Load)</h2>
+          <p>
+            عندما يُدخَل المنتج إلى غرفة التبريد وهو في درجة حرارة أعلى من درجة
+            الغرفة، فإنه يُطلق حرارة يجب أن يمتصها النظام حتى يتبرد المنتج إلى
+            درجة التخزين المطلوبة.
+          </p>
+
+          <div class="formula-box">
+            Q_p = m × Cp × (T_in - T_room) / t
+            <br /><br />
+            <span class="comment">// حيث:</span>
+            <br />m = كتلة المنتج المُدخَل يومياً (كغم/يوم) <br />Cp = الحرارة
+            النوعية للمنتج (kJ/kg·°C) <br />T_in = درجة حرارة المنتج عند الإدخال
+            (°م) <br />T_room = درجة حرارة الغرفة المطلوبة (°م) <br />t = زمن
+            التبريد المطلوب (ساعات) × 3600 ثانية
+          </div>
+
+          <h3>الحرارة النوعية لأكثر المنتجات شيوعاً في السعودية</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>المنتج</th>
+                <th>Cp فوق نقطة التجمد (kJ/kg·°C)</th>
+                <th>Cp تحت نقطة التجمد</th>
+                <th>درجة التخزين الموصى بها</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>لحم بقري طازج</td>
+                <td>3.52</td>
+                <td>1.92</td>
+                <td>0°م إلى +2°م</td>
+              </tr>
+              <tr>
+                <td>دجاج طازج</td>
+                <td>3.35</td>
+                <td>1.80</td>
+                <td>0°م إلى +2°م</td>
+              </tr>
+              <tr>
+                <td>أسماك ومأكولات بحرية</td>
+                <td>3.60</td>
+                <td>1.90</td>
+                <td>-2°م إلى 0°م</td>
+              </tr>
+              <tr>
+                <td>خضروات (طماطم، خيار)</td>
+                <td>3.98</td>
+                <td>1.88</td>
+                <td>+8°م إلى +12°م</td>
+              </tr>
+              <tr>
+                <td>فواكه (تفاح، موز)</td>
+                <td>3.76</td>
+                <td>1.84</td>
+                <td>+1°م إلى +7°م</td>
+              </tr>
+              <tr>
+                <td>ألبان ومشتقات</td>
+                <td>3.90</td>
+                <td>1.95</td>
+                <td>+1°م إلى +4°م</td>
+              </tr>
+              <tr>
+                <td>آيس كريم</td>
+                <td>3.50</td>
+                <td>1.88</td>
+                <td>-25°م إلى -20°م</td>
+              </tr>
+              <tr>
+                <td>لحم مجمّد</td>
+                <td>3.52</td>
+                <td>1.92</td>
+                <td>-18°م</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-warn">
+            <p>
+              <strong>⚠️ لا تنسَ حمل حرارة التنفس!</strong> المنتجات الحية
+              كالخضروات والفواكه والزهور تُنتج حرارة بيولوجية مستمرة بسبب عملية
+              التنفس الخلوي (Respiration Heat). هذه الحرارة تُضاف إلى الحمل
+              وتختلف بحسب نوع المنتج ودرجة حرارة التخزين. يمكن الرجوع إلى جداول
+              ASHRAE Handbook للحصول على القيم الدقيقة.
+            </p>
+          </div>
+        </section>
+
+        <!-- ٦ -->
+        <section id="internal">
+          <h2>الأحمال الداخلية: الإضاءة، الموتورات، العمال</h2>
+          <p>
+            هذه الأحمال يُستهان بها أحياناً لكنها قد تصل إلى 15% من الحمل الكلي
+            في الغرف ذات التشغيل المكثّف.
+          </p>
+
+          <h3>أ. حمل الإضاءة</h3>
+          <div class="formula-box">
+            Q_light = P_total (واط) × 3.413 (BTU/h.W) × معامل التحويل إلى kW
+            <br /><span class="comment"
+              >// أو ببساطة: Q_light = P_total (kW)</span
+            >
+            <br /><span class="comment"
+              >// افترض 10-15 واط لكل م² مساحة أرضية للإضاءة LED</span
+            >
+          </div>
+
+          <h3>ب. حمل موتورات المراوح الداخلية</h3>
+          <p>
+            مراوح المبخّر تعمل باستمرار داخل الغرفة وكل طاقتها الميكانيكية تتحول
+            في النهاية إلى حرارة داخل الغرفة المبردة. استخدم القاعدة البسيطة:
+            <strong>100% من استهلاك الموتور الكهربائي يُضاف كحمل حراري</strong>.
+          </p>
+
+          <h3>ج. حمل العمال</h3>
+          <div class="formula-box">
+            Q_workers = عدد العمال × معدل الإنتاج الحراري
+            <br /><br />
+            <span class="comment">// القيم المرجعية:</span>
+            <br />غرفة تبريد (+4°م): 350 واط لكل عامل <br />غرفة تجميد (-18°م):
+            525 واط لكل عامل <br /><span class="comment"
+              >// العمل في البرد الشديد يُنتج طاقة حرارية أكثر بسبب الجهد
+              العضلي</span
+            >
+          </div>
+        </section>
+
+        <!-- ٧ -->
+        <section id="insulation">
+          <h2>اختيار العزل الحراري المناسب للمملكة</h2>
+          <p>
+            اختيار سماكة العزل الحراري هو توازن دقيق بين تكلفة المواد الإنشائية
+            ووفورات الطاقة على المدى البعيد. في المملكة العربية السعودية، بفعل
+            ارتفاع درجات الحرارة وأسعار الكهرباء الصناعية، المعادلة تميل دائماً
+            لصالح العزل الأسمك.
+          </p>
+
+          <h3>معيار تحديد السماكة الأمثل اقتصادياً</h3>
+          <p>
+            السماكة الأمثل هي تلك التي يتساوى عندها
+            <strong>معدل توفير الطاقة السنوي</strong> مع
+            <strong>التكلفة السنوية المُقسَّطة للعزل الإضافي</strong>. في ظروف
+            السعودية، وبناءً على حسابات المشاريع التي نفّذناها، خلصنا إلى
+            التوصيات التالية:
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>نوع الغرفة</th>
+                <th>درجة التشغيل</th>
+                <th>السماكة الموصى بها للمناخ السعودي</th>
+                <th>السماكة القياسية الأوروبية المقابلة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>غرفة تبريد خضروات</td>
+                <td>+8°م</td>
+                <td>80 مم</td>
+                <td>60 مم</td>
+              </tr>
+              <tr>
+                <td>غرفة تبريد لحوم</td>
+                <td>+2°م</td>
+                <td>100 مم</td>
+                <td>80 مم</td>
+              </tr>
+              <tr>
+                <td>غرفة تجميد</td>
+                <td>-18°م</td>
+                <td>150 مم</td>
+                <td>120 مم</td>
+              </tr>
+              <tr>
+                <td>مستودع IQF</td>
+                <td>-30°م</td>
+                <td>200 مم</td>
+                <td>150 مم</td>
+              </tr>
+              <tr>
+                <td>تجميد الأسماك</td>
+                <td>-25°م</td>
+                <td>200 مم</td>
+                <td>150 مم</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-success">
+            <p>
+              <strong>✅ توصية خاصة بالسعودية:</strong> نُضيف دائماً طبقة عاكسة
+              للإشعاع (Reflective Layer) على السطح الخارجي للبانل في السقف
+              للتقليل من تأثير الإشعاع الشمسي المباشر. هذه الطبقة وحدها يمكن أن
+              تُخفّض الحمل الحراري على السقف بنسبة 8-12%.
+            </p>
+          </div>
+        </section>
+
+        <!-- ٨ -->
+        <section id="example">
+          <h2>مثال حسابي كامل: غرفة تبريد لحوم 500 م²</h2>
+          <div class="example-box">
+            <h3 class="text-blue-900 font-black text-xl mb-4">
+              📐 بيانات المشروع
+            </h3>
+            <div class="grid sm:grid-cols-2 gap-3 text-sm text-slate-700">
+              <div><strong>الاستخدام:</strong> غرفة تبريد لحوم طازجة</div>
+              <div><strong>المساحة الأرضية:</strong> 500 م² (25م × 20م)</div>
+              <div><strong>ارتفاع الغرفة:</strong> 6 م (حجم = 3000 م³)</div>
+              <div><strong>درجة التصميم الداخلية:</strong> +2°م</div>
+              <div>
+                <strong>درجة الحرارة الخارجية:</strong> 48°م (صيف الدمام)
+              </div>
+              <div>
+                <strong>سماكة البانل:</strong> 100 مم PU (U = 0.22 W/m²·K)
+              </div>
+              <div>
+                <strong>إدخال المنتج اليومي:</strong> 5,000 كغم لحم بقري
+              </div>
+              <div><strong>درجة حرارة المنتج عند الإدخال:</strong> 20°م</div>
+              <div><strong>زمن التبريد المطلوب:</strong> 8 ساعات</div>
+              <div>
+                <strong>الإضاءة:</strong> 15 واط/م² × 500 م² = 7,500 واط
+              </div>
+              <div>
+                <strong>موتورات المراوح:</strong> 4 × 1.5 كيلوواط = 6 كيلوواط
+              </div>
+              <div><strong>عدد العمال:</strong> 8 عمال</div>
+            </div>
+          </div>
+
+          <h3>الخطوة الأولى: حساب Q_t (Transmission Load)</h3>
+          <p>
+            المساحة الكلية للأسطح = (25×20)×2 [أرضية+سقف] + (25×6)×2 + (20×6)×2
+            = 1000 + 300 + 240 = <strong>1540 م²</strong>
+          </p>
+          <p>ΔT = 48 - 2 = 46°م</p>
+          <div class="formula-box">
+            Q_t = 0.22 × 1540 × 46 = 15,583 واط ≈ <strong>15.6 كيلوواط</strong>
+          </div>
+
+          <h3>الخطوة الثانية: حساب Q_inf (Infiltration Load)</h3>
+          <p>
+            بافتراض N = 8 تغيير يومي لغرفة بحجم 3000 م³، وΔh = 85 kJ/kg (فرق
+            المحتوى الحراري للهواء بين 48°م و2°م في رطوبة 60%):
+          </p>
+          <div class="formula-box">
+            Q_inf = (3000 × 8 × 1.2 × 85) / (3600 × 24) =
+            <strong>9.9 كيلوواط ≈ 10 كيلوواط</strong>
+          </div>
+
+          <h3>الخطوة الثالثة: حساب Q_p (Product Load)</h3>
+          <div class="formula-box">
+            Q_p = 5000 × 3.52 × (20 - 2) / (8 × 3600) = 316,800 / 28,800 ≈
+            <strong>11.0 كيلوواط</strong>
+          </div>
+
+          <h3>الخطوة الرابعة: حساب Q_int (Internal Load)</h3>
+          <div class="formula-box">
+            Q_light = 7,500 واط = <strong>7.5 كيلوواط</strong> <br />Q_fans =
+            6,000 واط = <strong>6.0 كيلوواط</strong> <br />Q_workers = 8 × 350 =
+            <strong>2.8 كيلوواط</strong> <br />Q_int إجمالي =
+            <strong>16.3 كيلوواط</strong>
+          </div>
+
+          <h3>الخطوة الخامسة: الحمل الكلي مع هامش الأمان</h3>
+          <div class="formula-box">
+            Q_total (قبل هامش الأمان) = 15.6 + 10.0 + 11.0 + 16.3 = 52.9 كيلوواط
+            <br />+ هامش أمان 15% = 52.9 × 1.15 =
+            <strong>60.8 كيلوواط ≈ 61 كيلوواط</strong> <br /><br />
+            <span class="comment">// بالطن: 61 / 3.517 ≈ 17.3 طن تبريد</span>
+          </div>
+
+          <div class="callout callout-success">
+            <p>
+              <strong>✅ القرار الهندسي:</strong> لهذه الغرفة نختار نظاماً بقدرة
+              <strong>18-20 طن تبريد (63-70 كيلوواط)</strong> مع كمبروسر Bitzer
+              من سلسلة 4H-25.2 أو ما يعادله من ضواغط مشابهة. الفائض عن 61
+              كيلوواط يُقابل احتياطي التشغيل في درجات الحرارة الأشد حرارة ودرجات
+              الرطوبة العالية.
+            </p>
+          </div>
+        </section>
+
+        <!-- ٩ -->
+        <section id="equipment">
+          <h2>من الحمل إلى اختيار المعدات</h2>
+          <p>
+            بعد الحصول على الحمل الكلي المصحّح، تبدأ مرحلة اختيار المعدات وفق
+            التسلسل التالي:
+          </p>
+          <ol>
+            <li>
+              <strong>الكمبروسر:</strong> يُختار بقدرة تبريدية مساوية للحمل
+              الكلي عند ظروف التشغيل الفعلية (درجات الحرارة المحلية)، وليس عند
+              ظروف ARI/EN القياسية الأوروبية. Bitzer Software يُسهّل هذا
+              الاختيار.
+            </li>
+            <li>
+              <strong>المبخّر (Evaporator):</strong> يُختار بقدرة تبريدية تعادل
+              1.1 – 1.3 مرة قدرة الكمبروسر لضمان التبادل الحراري الكافي بفارق
+              حرارة (TD) يتراوح بين 5 و8°م في غرف التبريد.
+            </li>
+            <li>
+              <strong>المكثّف (Condenser):</strong> في المناخ السعودي الساخن،
+              يُختار بقدرة إجمالية تعادل قدرة التبريد مُضافاً إليها استهلاك
+              الكمبروسر الكهربائي: Q_cond = Q_cool + W_comp.
+            </li>
+            <li>
+              <strong>صمام التمدد (Expansion Valve):</strong> يُختار حسب نوع
+              المبرّد والقدرة التبريدية وفرق الضغط، مع تفضيل الصمامات
+              الإلكترونية (EEV) في الغرف التي تتطلب تحكماً دقيقاً.
+            </li>
+          </ol>
+        </section>
+
+        <!-- ١٠ -->
+        <section id="mistakes">
+          <h2>أكثر أخطاء التصميم شيوعاً في السعودية</h2>
+          <p>
+            من خبرة نفّذنا فيها صيانة ومراجعة عشرات المشاريع التي نفّذها آخرون،
+            هذه هي الأخطاء التي تتكرر باستمرار:
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>الخطأ</th>
+                <th>العاقبة</th>
+                <th>التصحيح</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>استخدام درجة حرارة خارجية 35°م بدلاً من 48°م</td>
+                <td>الكمبروسر يتعطل في الصيف بسبب الحمل الزائد</td>
+                <td>
+                  استخدم دائماً 48°م كحرارة تصميم خارجية في المناطق الساحلية
+                  والوسطى
+                </td>
+              </tr>
+              <tr>
+                <td>إهمال حمل الأبواب والتسرّب</td>
+                <td>
+                  النظام لا يستطيع الحفاظ على درجة الحرارة في أوقات الذروة
+                </td>
+                <td>احسب حمل التسرّب بعناية وأضف ستائر هوائية</td>
+              </tr>
+              <tr>
+                <td>اختيار البانل بناءً على السعر لا على U-Value</td>
+                <td>استهلاك كهرباء أعلى بكثير طوال عمر المشروع</td>
+                <td>احسب تكلفة الطاقة على 10 سنوات واختر السماكة الأمثل</td>
+              </tr>
+              <tr>
+                <td>تصميم الأرضية بدون عزل في غرف التجميد</td>
+                <td>تجمّد التربة وتشقّق الأرضية خلال سنتين</td>
+                <td>ألزم بعزل الأرضية بـ 100+ مم من XPS في غرف التجميد</td>
+              </tr>
+              <tr>
+                <td>المكثف في مكان ضعيف التهوية</td>
+                <td>ضغط التكثيف يرتفع ويُدمر الكمبروسر</td>
+                <td>المكثف يحتاج مساحة كافية للهواء مع اتجاه واضح للتدفق</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-info">
+            <p>
+              <strong
+                >💡 هل تريد مراجعة تصميم مشروعك الحالي أو المستقبلي؟</strong
+              >
+              فريق الفريدة آيس الهندسي يقدّم خدمة المراجعة الفنية الشاملة
+              (Technical Audit) لمشاريع التبريد قبل وبعد التنفيذ.
+              <a
+                href="../../contact.html"
+                class="text-blue-700 font-bold underline"
+                >تواصل معنا.</a
+              >
+            </p>
+          </div>
+        </section>
+
+        <!-- وسوم -->
+        <div class="mt-10 pt-8 border-t border-slate-100 flex flex-wrap gap-2">
+          <span
+            class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-full"
+            >حمل التبريد</span
+          >
+          <span
+            class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-full"
+            >تصميم غرف التبريد</span
+          >
+          <span
+            class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-full"
+            >Cooling Load</span
+          >
+          <span
+            class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-full"
+            >عزل حراري</span
+          >
+          <span
+            class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-full"
+            >بانل PU</span
+          >
+          <span
+            class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-full"
+            >مستودعات تبريد السعودية</span
+          >
+        </div>
+
+        <!-- مقالات ذات صلة -->
+        <div class="mt-10 pt-8 border-t border-slate-100">
+          <h3 class="text-xl font-black text-slate-800 mb-5">مقالات ذات صلة</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <a
+              href="bitzer-maintenance-ar.html"
+              class="group block bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-2xl p-5 transition-all"
+            >
+              <span
+                class="text-blue-600 text-xs font-bold bg-blue-100 px-2 py-0.5 rounded-full"
+                >صيانة الضواغط</span
+              >
+              <p
+                class="font-black text-slate-800 group-hover:text-blue-900 mt-3 text-sm leading-snug"
+              >
+                صيانة كمبروسر Bitzer: الدليل الهندسي الشامل لإطالة عمر الضاغط
+              </p>
+              <p class="text-blue-600 text-xs mt-2 font-bold">اقرأ المقال ←</p>
+            </a>
+            <a
+              href="../../services.html"
+              class="group block bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-2xl p-5 transition-all"
+            >
+              <span
+                class="text-red-600 text-xs font-bold bg-red-100 px-2 py-0.5 rounded-full"
+                >خدماتنا</span
+              >
+              <p
+                class="font-black text-slate-800 group-hover:text-blue-900 mt-3 text-sm leading-snug"
+              >
+                تصميم وتنفيذ غرف التبريد الصناعية — الفريدة آيس
+              </p>
+              <p class="text-blue-600 text-xs mt-2 font-bold">
+                تعرف على خدماتنا ←
+              </p>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- الشريط الجانبي -->
+      <aside class="article-sidebar">
+        <!-- CTA -->
+        <div
+          class="bg-gradient-to-br from-slate-900 to-red-900 text-white rounded-2xl p-6 text-center col-span-full"
+        >
+          <i class="fas fa-calculator text-3xl mb-3 opacity-80"></i>
+          <h3 class="font-black text-lg mb-2">احتاج دراسة جدوى لمشروعك؟</h3>
+          <p class="text-slate-300 text-sm mb-4">
+            نُعدّ لك حسابات الحمل والمواصفات مجاناً
+          </p>
+          <a
+            href="../../contact.html"
+            class="block w-full bg-white text-slate-900 font-black py-3 rounded-xl hover:bg-slate-100 transition text-sm"
+          >
+            اطلب دراسة مجانية
+          </a>
+          <a
+            href="https://wa.me/966598366214"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-green-500 hover:bg-green-400 text-white font-black py-3 rounded-xl transition text-sm mt-2"
+          >
+            <i class="fab fa-whatsapp ml-1"></i> تواصل واتساب
+          </a>
+        </div>
+
+        <!-- معلومات المقال -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+          <h4 class="font-black text-slate-800 mb-4 text-sm">معلومات المقال</h4>
+          <div class="space-y-3 text-sm text-slate-600">
+            <div class="flex justify-between">
+              <span>تاريخ النشر</span><strong>أبريل 2025</strong>
+            </div>
+            <div class="flex justify-between">
+              <span>آخر تحديث</span><strong>يونيو 2025</strong>
+            </div>
+            <div class="flex justify-between">
+              <span>وقت القراءة</span><strong>22 دقيقة</strong>
+            </div>
+            <div class="flex justify-between">
+              <span>التصنيف</span><strong>تصميم غرف التبريد</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- مشاركة -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+          <h4 class="font-black text-slate-800 mb-4 text-sm">شارك المقال</h4>
+          <div class="flex gap-2 flex-wrap">
+
+</div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ═══ الفوتر ═══ -->
+
+<script>
+      window.addEventListener(
+        "scroll",
+        function () {
+          var el = document.getElementById("readingProgress");
+          var scrollTop = window.scrollY;
+          var docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          el.style.width =
+            (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + "%";
+        },
+        { passive: true },
+      );
+    </script>
+
+        <div id="site-footer"></div>
+  
+        <script src="../../js/lang-switch.js" defer></script>
+    <script src="../../js/site-shell.js" defer></script>
+  </body>
+</html>

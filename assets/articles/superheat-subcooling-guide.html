@@ -1,0 +1,898 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      السوبرهيت والسابكولينج في أنظمة التبريد: الدليل الهندسي الشامل للقياس
+      والتشخيص والضبط | الفريدة آيس
+    </title>
+    <meta
+      name="description"
+      content="دليل هندسي شامل لقياس وتحليل Superheat وSubcooling في أنظمة التبريد والتجميد الصناعي: التعريف، خطوات القياس الموقعي، القيم المرجعية، تشخيص الأعطال، وضبط صمام التمدد في مناخ السعودية."
+    />
+    <meta
+      name="keywords"
+      content="Superheat, Subcooling, السوبرهيت, السابكولينج, صمام التمدد, تشخيص أعطال التبريد, قياس الشحنه, ضبط TXV, تبريد صناعي السعودية, الفريدة آيس"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="author"
+      content="فريق هندسة التبريد — الفريدة آيس للهندسة والتبريد الصناعي"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/ace-logos/elfaridaice.webp"
+    />
+
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html"
+    />
+    <meta
+      property="og:title"
+      content="السوبرهيت والسابكولينج: الدليل الهندسي الشامل للقياس والتشخيص | الفريدة آيس"
+    />
+    <meta
+      property="og:description"
+      content="كيف تقيس Superheat وSubcooling وتستخدمهما لتشخيص نقص الشحنة، انسداد الفلتر، سوء ضبط صمام التمدد، وضعف التكثيف في أنظمة التبريد؟ هذا هو الدليل الهندسي العملي الكامل."
+    />
+    <meta
+      property="og:image"
+      content="https://elfaridaice.com/assets/gallery/control-panel.webp"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="الفريدة آيس" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="twitter:title"
+      content="السوبرهيت والسابكولينج: الدليل الهندسي الشامل | الفريدة آيس"
+    />
+    <meta
+      name="twitter:description"
+      content="المرجع العملي لقياس وتحليل Superheat وSubcooling في أنظمة التبريد الصناعية والتجارية."
+    />
+    <meta
+      name="twitter:image"
+      content="https://elfaridaice.com/assets/gallery/control-panel.webp"
+    />
+    <meta name="geo.region" content="SA-04" />
+    <meta
+      name="geo.placename"
+      content="الدمام، المنطقة الشرقية، المملكة العربية السعودية"
+    />
+    <meta name="geo.position" content="26.4207;50.0888" />
+    <meta name="ICBM" content="26.4207, 50.0888" />
+    <meta name="article:published_time" content="2026-05-07" />
+    <meta name="article:modified_time" content="2026-05-07" />
+    <meta
+      name="article:author"
+      content="الفريدة آيس للهندسة والتبريد الصناعي"
+    />
+    <meta name="article:section" content="تشخيص أنظمة التبريد" />
+
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "السوبرهيت والسابكولينج في أنظمة التبريد: الدليل الهندسي الشامل للقياس والتشخيص والضبط",
+        "description": "دليل هندسي شامل لقياس وتحليل Superheat وSubcooling في أنظمة التبريد والتجميد الصناعي: التعريف، خطوات القياس الموقعي، القيم المرجعية، تشخيص الأعطال، وضبط صمام التمدد في مناخ السعودية.",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://elfaridaice.com/assets/gallery/control-panel.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "الفريدة آيس للهندسة والتبريد الصناعي",
+          "url": "https://elfaridaice.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "الفريدة آيس",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://elfaridaice.com/assets/ace-logos/elfaridaice.webp",
+            "width": 400,
+            "height": 400
+          }
+        },
+        "datePublished": "2026-05-07",
+        "dateModified": "2026-05-07",
+        "mainEntityOfPage": "https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html",
+        "inLanguage": "ar",
+        "keywords": "Superheat, Subcooling, السوبرهيت, السابكولينج, صمام التمدد, تشخيص أعطال التبريد",
+        "articleSection": "تشخيص أنظمة التبريد",
+        "wordCount": "3600",
+        "timeRequired": "PT24M"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://elfaridaice.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "المدونة",
+            "item": "https://elfaridaice.com/blog.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "دليل السوبرهيت والسابكولينج",
+            "item": "https://elfaridaice.com/assets/articles/superheat-subcooling-guide.html"
+          }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما الفرق بين Superheat وSubcooling؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Superheat هو الفرق بين درجة حرارة بخار السحب الفعلية ودرجة التشبع عند ضغط السحب، ويُستخدم لمعرفة ما إذا كان المبخر ممتلئاً بالسائل أو يعاني جفافاً. أما Subcooling فهو الفرق بين درجة تشبع السائل عند ضغط الطرد ودرجة حرارة خط السائل الفعلية، ويُستخدم لتقييم جودة تكثيف المبرّد وكمية الشحنة في المكثف وخط السائل."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما القيمة الطبيعية للسوبرهيت في غرف التبريد؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "في أغلب تطبيقات غرف التبريد ذات صمام التمدد الحراري TXV تكون القيمة الطبيعية عند مخرج المبخر بين 5 و8 درجات مئوية. في بعض التطبيقات التجارية قد تقبل 6 إلى 10 درجات بحسب نوع المبخر وطول خط السحب وطبيعة الحمل، لكن القيمة الدقيقة يجب أن تُراجع مع تصميم المصنع المصنّع."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل انخفاض السابكولينج يعني دائماً نقص شحنة؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ليس دائماً، لكنه مؤشر قوي. انخفاض Subcooling قد يحدث بسبب نقص الشحنة، أو وجود فلاش غاز في خط السائل، أو ضعف أداء المكثف، أو قراءة ضغط غير مستقرة. لذلك يجب ربطه بضغط التكثيف، حالة المكثف، فرق الحرارة عبر الفلتر الجاف، وقراءة السوبرهيت قبل اتخاذ قرار إضافة شحنة."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "متى يكون السوبرهيت المرتفع خطراً على الكمبروسر؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "عندما يرتفع Superheat بشكل مستمر إلى 15 أو 20 درجة مئوية أو أكثر في تطبيقات التبريد العادية، ترتفع حرارة غاز السحب وحرارة الطرد، ويزداد خطر تدهور الزيت وتلف صمامات الكمبروسر وضعف التبريد. هذا شائع مع انسداد الفلتر أو سوء ضبط صمام التمدد أو نقص الشحنة."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "كيف تؤثر حرارة الصيف في السعودية على هذه القراءات؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ارتفاع حرارة الجو الخارجي يرفع ضغط ودرجة تكثيف المبرّد، ويجعل المكثف أكثر حساسية للاتساخ ونقص التهوية. النتيجة قد تكون Subcooling منخفضاً ظاهرياً في بعض الحالات، أو ضغط طرد مرتفعاً مع كفاءة أقل. لذلك يجب القياس بعد استقرار الحمل وتنظيف المكثف ومراجعة تدفق الهواء أولاً."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <link
+      rel="preload"
+      as="image"
+      href="../../assets/gallery/control-panel.webp"
+    />
+
+    
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script src="../../js/seo-injector.js" defer></script>
+    <link rel="stylesheet" href="../../cairo.css" />
+    <link rel="stylesheet" href="../../css/shared.css" />
+    <link rel="stylesheet" href="../../tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/site-shell.css" />
+    <link rel="stylesheet" href="../../css/article.css" />
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <header
+      class="bg-gradient-to-br from-slate-900 via-sky-950 to-slate-900 text-white py-16 md:py-24"
+    >
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span
+            class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+            >تشخيص أنظمة التبريد</span
+          >
+          <span class="text-slate-300 text-sm">24 دقيقة قراءة</span>
+          <span class="text-slate-300 text-sm"
+            >مرجع ميداني للمهندسين والفنيين</span
+          >
+        </div>
+        <h1 class="text-3xl md:text-5xl font-black leading-tight mb-6 text-white">
+          السوبرهيت والسابكولينج:<br />
+          <span class="text-sky-400">الدليل الهندسي الشامل</span><br />
+          للقياس والتشخيص والضبط
+        </h1>
+        <p class="text-slate-300 text-lg leading-relaxed max-w-3xl">
+          كثير من قرارات الصيانة الخاطئة تبدأ من قراءة ضغط فقط. لكن الفني
+          المحترف لا يضيف شحنة ولا يغيّر صمام تمدد قبل أن يقرأ
+          <strong class="text-sky-300">Superheat</strong> و<strong
+            class="text-sky-300"
+            >Subcooling</strong
+          >
+          قراءة صحيحة. في هذا الدليل سنحوّل هاتين القيمتين من أرقام مبعثرة إلى
+          أداة تشخيص دقيقة تكشف نقص الشحنة، وانسداد الفلتر، وسوء ضبط الصمام،
+          وضعف التكثيف.
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" class="article-layout article-layout--no-sidebar">
+    <article class="article-body">
+      <div class="flex flex-wrap gap-3 mb-10">
+        <span class="stat-badge"
+          ><i class="fas fa-gauge-high text-sky-500"></i>أدق مؤشرين
+          للتشخيص</span
+        >
+        <span class="stat-badge"
+          ><i class="fas fa-temperature-half text-red-500"></i>كشف مبكر
+          للأعطال</span
+        >
+        <span class="stat-badge"
+          ><i class="fas fa-screwdriver-wrench text-amber-500"></i>ضبط TXV
+          بثقة</span
+        >
+        <span class="stat-badge"
+          ><i class="fas fa-building text-emerald-500"></i>مناسب لمناخ
+          السعودية</span
+        >
+      </div>
+
+      <figure>
+        <img
+          src="../../assets/gallery/control-panel.webp"
+          alt="لوحة تحكم تبريد صناعي لمراقبة درجات الحرارة والضغوط وتشخيص السوبرهيت والسابكولينج"
+          class="w-full rounded-2xl shadow-xl object-cover"
+          width="1200"
+          height="480"
+          loading="eager"
+        />
+        <figcaption>
+          تحليل Superheat وSubcooling يبدأ من قياس صحيح ومستقر للضغوط ودرجات
+          الحرارة
+        </figcaption>
+      </figure>
+
+      <nav class="toc" aria-labelledby="toc-heading">
+        <h3 id="toc-heading">محتويات الدليل</h3>
+        <ol>
+          <li>
+            <a href="#definitions">ما هو السوبرهيت وما هو السابكولينج؟</a>
+          </li>
+          <li><a href="#why-important">لماذا هما الأهم في تشخيص النظام؟</a></li>
+          <li><a href="#measurement">خطوات القياس الموقعي الصحيحة</a></li>
+          <li><a href="#reference-values">القيم المرجعية حسب التطبيق</a></li>
+          <li><a href="#fault-matrix">مصفوفة تشخيص الأعطال</a></li>
+          <li><a href="#txv">العلاقة مع صمام التمدد TXV وEEV</a></li>
+          <li><a href="#saudi-climate">تأثير مناخ السعودية الحار</a></li>
+          <li><a href="#commissioning">خطة التشغيل والاستلام الفني</a></li>
+          <li><a href="#faq">الأسئلة الشائعة</a></li>
+        </ol>
+      </nav>
+      
+        <section id="definitions">
+          <h2>ما هو السوبرهيت وما هو السابكولينج؟</h2>
+          <p>
+            السوبرهيت هو <strong>الحرارة الزائدة لبخار المبرّد</strong> فوق درجة
+            التشبع المقابلة لضغط السحب. إذا كان ضغط السحب يشير إلى أن درجة تشبع
+            المبرّد داخل المبخر هي 0°م، بينما تقرأ عند مخرج المبخر 7°م، فإن
+            السوبرهيت يساوي 7°م. هذه القيمة تخبرك هل المبخر يتغذى بسائل كافٍ أم
+            أن المبرّد انتهى مبكراً وبدأت الأنابيب تنقل بخاراً جافاً أكثر من
+            اللازم.
+          </p>
+          <p>
+            أما السابكولينج فهو <strong>التبريد الإضافي للسائل</strong> تحت درجة
+            التشبع عند ضغط التكثيف. فإذا كان ضغط خط السائل يعادل درجة تشبع 40°م
+            ودرجة حرارة خط السائل المقاسة 34°م، فالقيمة تساوي 6°م. وهو مؤشر مهم
+            على جودة تكثيف المبرّد واستقرار عمود السائل قبل صمام التمدد.
+          </p>
+
+          <div class="callout callout-info">
+            الفرق الجوهري: <strong>Superheat</strong> يرتبط بجهة المبخر وخط
+            السحب، بينما <strong>Subcooling</strong> يرتبط بجهة المكثف وخط
+            السائل. الأول يحمي الكمبروسر من رجوع السائل، والثاني يحمي صمام
+            التمدد من الفلاش غاز.
+          </div>
+        </section>
+
+        <section id="why-important">
+          <h2>لماذا هما الأهم في تشخيص النظام؟</h2>
+          <p>
+            لأن الضغوط وحدها قد تخدعك. قد ترى ضغط سحب منخفضاً فتظن أن المشكلة
+            نقص شحنة، بينما السبب الحقيقي قد يكون فلتر جاف مسدود أو صمام تمدد
+            مغلق أكثر من اللازم. هنا يظهر الفرق: عندما تقرأ السوبرهيت
+            والسابكولينج معاً، فإنك ترى
+            <strong>قصة حركة المبرّد كاملة</strong> داخل الدائرة.
+          </p>
+          <ul>
+            <li>
+              سوبرهيت مرتفع + سابكولينج منخفض: مؤشر قوي على نقص شحنة أو فلاش
+              غاز.
+            </li>
+            <li>
+              سوبرهيت مرتفع + سابكولينج طبيعي/مرتفع: تغذية ناقصة للمبخر بسبب TXV
+              أو انسداد.
+            </li>
+            <li>
+              سوبرهيت منخفض جداً + سابكولينج طبيعي: خطر رجوع سائل إلى الكمبروسر.
+            </li>
+            <li>
+              سوبرهيت طبيعي + سابكولينج مرتفع جداً: احتمال شحنة زائدة أو امتلاء
+              مكثف زائد.
+            </li>
+          </ul>
+
+          <table>
+            <caption>
+              جدول 1 — ماذا تكشف كل قراءة؟
+            </caption>
+            <thead>
+              <tr>
+                <th>المؤشر</th>
+                <th>يُقاس عند</th>
+                <th>وظيفته التشخيصية</th>
+                <th>الخطر عند الانحراف</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Superheat</td>
+                <td>مخرج المبخر / خط السحب</td>
+                <td>تقييم تغذية المبخر وحماية الكمبروسر</td>
+                <td>جفاف مفرط أو رجوع سائل</td>
+              </tr>
+              <tr>
+                <td>Subcooling</td>
+                <td>مخرج المكثف / خط السائل</td>
+                <td>تقييم جودة الشحنة واستقرار السائل</td>
+                <td>فلاش غاز أو شحنة زائدة</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="measurement">
+          <h2>خطوات القياس الموقعي الصحيحة</h2>
+          <p>
+            القراءة الخاطئة أخطر من عدم القراءة. قبل القياس يجب أن يكون النظام
+            في حالة تشغيل مستقرة لمدة كافية، وأن يكون الحمل قريباً من ظروفه
+            الطبيعية. لا تأخذ قراراً أثناء بدء التشغيل، أو مباشرة بعد إذابة
+            الثلج، أو بينما الأبواب مفتوحة والحرارة غير مستقرة.
+          </p>
+
+          <h3>الخطوات الأساسية لقياس Superheat</h3>
+          <ol>
+            <li>قِس ضغط السحب عند أقرب نقطة عملية لخط السحب.</li>
+            <li>حوّل الضغط إلى درجة تشبع من خلال تطبيق المبرّد أو جدول PT.</li>
+            <li>قِس حرارة ماسورة السحب بترمومتر مثبت جيداً ومعزول عن الجو.</li>
+            <li>
+              اطرح درجة التشبع من درجة حرارة الماسورة لتحصل على Superheat.
+            </li>
+          </ol>
+
+          <h3>الخطوات الأساسية لقياس Subcooling</h3>
+          <ol>
+            <li>قِس ضغط خط السائل أو ضغط الطرد بحسب نقطة القياس المعتمدة.</li>
+            <li>حوّل الضغط إلى درجة تشبع للمبرّد نفسه.</li>
+            <li>قِس حرارة خط السائل بعد المكثف أو بعد الريسيفر حسب التصميم.</li>
+            <li>
+              اطرح درجة حرارة خط السائل من درجة التشبع لتحصل على Subcooling.
+            </li>
+          </ol>
+
+          <div class="callout callout-warn">
+            خطأ شائع: بعض الفنيين يقيسون حرارة خط السحب عند الكمبروسر مباشرة ثم
+            يقارنونها بدرجة تشبع المبخر. هذا يعطي قيمة تُسمى Total Superheat
+            وليس Evaporator Superheat، والفرق بينهما قد يكون كبيراً إذا كان خط
+            السحب طويلاً أو غير معزول جيداً.
+          </div>
+
+          <figure>
+            <img
+              src="../../assets/gallery/evaporator.webp"
+              alt="مبخر تبريد صناعي حيث تُقاس حرارة السحب وضغط المبخر لحساب السوبرهيت"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              width="900"
+              height="420"
+              loading="lazy"
+            />
+            <figcaption>
+              عند المبخر تتضح جودة تغذية المبرّد من خلال السوبرهيت الفعلي وليس
+              الضغط وحده
+            </figcaption>
+          </figure>
+        </section>
+
+        <section id="reference-values">
+          <h2>القيم المرجعية حسب التطبيق</h2>
+          <p>
+            لا توجد قيمة موحّدة لكل الأنظمة. القيم المرجعية تعتمد على نوع صمام
+            التمدد، نوع المبخر، طول خطوط الأنابيب، نوع الحمل، والمبرّد المستخدم.
+            لكن هناك نطاقات ميدانية آمنة يعتمد عليها المهندسون كنقطة بداية.
+          </p>
+
+          <table>
+            <caption>
+              جدول 2 — نطاقات مرجعية شائعة
+            </caption>
+            <thead>
+              <tr>
+                <th>نوع التطبيق</th>
+                <th>Superheat عند المبخر</th>
+                <th>Subcooling</th>
+                <th>ملاحظة تشغيلية</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>غرف تبريد متوسطة الحرارة</td>
+                <td>5 إلى 8°م</td>
+                <td>4 إلى 8°م</td>
+                <td>الأكثر شيوعاً مع TXV</td>
+              </tr>
+              <tr>
+                <td>غرف تجميد منخفضة الحرارة</td>
+                <td>6 إلى 10°م</td>
+                <td>5 إلى 10°م</td>
+                <td>يُفضّل هامش حماية أكبر للكمبروسر</td>
+              </tr>
+              <tr>
+                <td>وحدات تكثيف تجارية صغيرة</td>
+                <td>8 إلى 12°م</td>
+                <td>3 إلى 6°م</td>
+                <td>يتأثر بالطول القصير للخطوط</td>
+              </tr>
+              <tr>
+                <td>أنظمة EEV مضبوطة إلكترونياً</td>
+                <td>4 إلى 7°م</td>
+                <td>4 إلى 9°م</td>
+                <td>أدق استقراراً عند الحمل المتغير</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="fault-matrix">
+          <h2>مصفوفة تشخيص الأعطال من القراءات</h2>
+          <p>
+            القيمة الحقيقية لهذه المؤشرات تظهر عندما تجمعها مع سلوك الضغوط
+            وحرارة الطرد والمنظر البصري لخط السائل والمبخر. الجدول التالي هو
+            أكثر ما يرجع إليه مهندسو الخدمة أثناء المعاينة الميدانية.
+          </p>
+
+          <table>
+            <caption>
+              جدول 3 — مصفوفة تشخيص الأعطال
+            </caption>
+            <thead>
+              <tr>
+                <th>Superheat</th>
+                <th>Subcooling</th>
+                <th>الاحتمال الأقرب</th>
+                <th>الإجراء الصحيح</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>مرتفع</td>
+                <td>منخفض</td>
+                <td>نقص شحنة أو فلاش غاز</td>
+                <td>افحص التسريب، الفقاعات، ووزن الشحنة قبل الإضافة</td>
+              </tr>
+              <tr>
+                <td>مرتفع</td>
+                <td>طبيعي / مرتفع</td>
+                <td>فلتر جاف مسدود أو TXV مخنوق</td>
+                <td>قِس فرق الحرارة عبر الفلتر وافحص بصيلة الصمام</td>
+              </tr>
+              <tr>
+                <td>منخفض جداً</td>
+                <td>طبيعي</td>
+                <td>صمام تمدد مفتوح أكثر من اللازم</td>
+                <td>أعد ضبط الصمام تدريجياً وراقب رجوع السائل</td>
+              </tr>
+              <tr>
+                <td>منخفض</td>
+                <td>مرتفع</td>
+                <td>شحنة زائدة أو امتلاء مكثف زائد</td>
+                <td>راجع وزن الشحنة وتصميم الريسيفر</td>
+              </tr>
+              <tr>
+                <td>طبيعي</td>
+                <td>منخفض</td>
+                <td>ضعف تكثيف أو تهوية مكثف سيئة</td>
+                <td>نظّف المكثف وافحص المراوح وفرق الحرارة</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout-danger">
+            قرار إضافة شحنة من دون قراءة Subcooling أو ضبط TXV من دون قراءة
+            Superheat قد يعالج العرض ويترك السبب الحقيقي. النتيجة غالباً:
+            استهلاك كهرباء أعلى، حرارة طرد مرتفعة، وضعف عمر الكمبروسر.
+          </div>
+        </section>
+
+        <section id="txv">
+          <h2>العلاقة مع صمام التمدد TXV وEEV</h2>
+          <p>
+            وظيفة TXV الأساسية هي المحافظة على Superheat ثابت تقريباً عند مخرج
+            المبخر. لذلك فكل تغيير في إعداد الصمام يجب أن يُقاس أثره على
+            السوبرهيت بعد منح النظام وقتاً كافياً للاستقرار. التعديل السريع
+            والمتكرر يربك النظام ويجعل القراءة عديمة القيمة.
+          </p>
+          <p>
+            في الأنظمة الحديثة التي تستخدم EEV، يقوم المتحكم الإلكتروني بمراجعة
+            القيم بشكل مستمر، لكن هذا لا يلغي أهمية القياس اليدوي أثناء الاستلام
+            والصيانة. أي خطأ في الحساسات أو موضعها سيجعل الخوارزمية تتخذ قراراً
+            خاطئاً بثقة عالية.
+          </p>
+
+          <figure>
+            <img
+              src="../../assets/gallery/danfoss.webp"
+              alt="متحكم دانفوس وصمام تمدد إلكتروني لإدارة السوبرهيت في أنظمة التبريد"
+              class="w-full rounded-2xl shadow-lg object-cover"
+              width="900"
+              height="420"
+              loading="lazy"
+            />
+            <figcaption>
+              في صمامات التمدد الإلكترونية تكون دقة الحساسات ومكان تثبيتها جزءاً
+              من جودة التحكم
+            </figcaption>
+          </figure>
+
+          <table>
+            <caption>
+              جدول 4 — أخطاء شائعة في ضبط الصمام
+            </caption>
+            <thead>
+              <tr>
+                <th>الخطأ</th>
+                <th>الأثر المباشر</th>
+                <th>ما الذي تراه في القراءات؟</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>فتح TXV بسرعة كبيرة</td>
+                <td>خطر رجوع سائل</td>
+                <td>Superheat يهبط سريعاً إلى قيم منخفضة جداً</td>
+              </tr>
+              <tr>
+                <td>إغلاق TXV أكثر من اللازم</td>
+                <td>جوع المبخر وانخفاض الحمل</td>
+                <td>Superheat مرتفع مع ضغط سحب منخفض</td>
+              </tr>
+              <tr>
+                <td>بصيلة غير مثبتة جيداً</td>
+                <td>قراءة مضللة للصمام</td>
+                <td>تذبذب شديد في التغذية والقراءات</td>
+              </tr>
+              <tr>
+                <td>عزل حراري سيئ للبصيلة</td>
+                <td>تأثر بالجو الخارجي</td>
+                <td>فتح غير منطقي للصمام في الأجواء الحارة</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="saudi-climate">
+          <h2>تأثير مناخ السعودية الحار على القراءات</h2>
+          <p>
+            في الدمام والرياض وجدة، قد تعمل الوحدات الخارجية في صيف يتجاوز 45°م.
+            هذا يرفع ضغط التكثيف، ويجعل أي اتساخ بسيط في المكثف أو ضعف في
+            المراوح يظهر فوراً على الأداء. لذلك يجب تفسير Subcooling في ضوء
+            الواقع التشغيلي للموقع، لا كرقم جامد معزول عن الظروف.
+          </p>
+          <ul>
+            <li>تنظيف المكثف قبل القياس خطوة إلزامية لا اختيارية.</li>
+            <li>راجع شدة الأمبير للمراوح والكمبروسر مع القراءات الحرارية.</li>
+            <li>لا تعتمد على قراءة واحدة وسط حمل متذبذب أو باب مفتوح.</li>
+            <li>
+              في الأسقف الساخنة والأسطح المكشوفة، جودة عزل خط السائل تصبح أكثر
+              أهمية.
+            </li>
+          </ul>
+
+          <div class="callout callout-success">
+            في مشاريع الفريدة آيس بالمنطقة الشرقية، أكثر الأخطاء تكراراً ليست
+            نقص الشحنة نفسه، بل <strong>تشخيص نقص شحنة غير موجود</strong> بسبب
+            مكثف متسخ أو فلاتر مهملة أو قياس غير مستقر بعد إذابة الثلج مباشرة.
+          </div>
+        </section>
+
+        <section id="commissioning">
+          <h2>خطة التشغيل والاستلام الفني</h2>
+          <p>
+            عند تشغيل نظام جديد أو بعد صيانة كبيرة، يجب توثيق القيم المرجعية
+            الأساسية للنظام في نموذج استلام. هذه القيم تصبح خط المقارنة المرجعي
+            لأي شكوى لاحقة.
+          </p>
+          <table>
+            <caption>
+              جدول 5 — قائمة استلام وتشغيل أساسية
+            </caption>
+            <thead>
+              <tr>
+                <th>البند</th>
+                <th>ما يجب توثيقه</th>
+                <th>أهمية البند</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>نوع المبرّد ووزن الشحنة</td>
+                <td>اسم المبرّد والوزن الفعلي</td>
+                <td>مرجع أساسي لأي تدخل لاحق</td>
+              </tr>
+              <tr>
+                <td>Superheat</td>
+                <td>عند المبخر وعند الكمبروسر إذا لزم</td>
+                <td>مقارنة سلوك المبخر وخط السحب</td>
+              </tr>
+              <tr>
+                <td>Subcooling</td>
+                <td>بعد المكثف / الريسيفر</td>
+                <td>تأكيد جودة عمود السائل</td>
+              </tr>
+              <tr>
+                <td>الأمبير ودرجات الحرارة</td>
+                <td>كمبروسر، مراوح، هواء داخل/خارج</td>
+                <td>ربط الحمل الميكانيكي بالحالة الحرارية</td>
+              </tr>
+              <tr>
+                <td>حالة العزل والفلتر</td>
+                <td>صور وملاحظات ميدانية</td>
+                <td>تسهيل التشخيص لاحقاً</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section
+          id="faq"
+          aria-labelledby="faq-heading"
+          itemscope
+          itemtype="https://schema.org/FAQPage"
+        >
+          <h2 id="faq-heading">الأسئلة الشائعة</h2>
+          <div class="faq-item">
+            <div class="faq-question">
+              ما الفرق بين Superheat وSubcooling؟
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Superheat يقيس حالة بخار السحب بعد المبخر، بينما Subcooling يقيس
+                جودة السائل الخارج من المكثف. الأول مرتبط بتغذية المبخر، والثاني
+                مرتبط بحالة الشحنة والتكثيف.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              هل السوبرهيت العالي يعني دائماً نقص شحنة؟
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                لا. قد يدل أيضاً على فلتر جاف مسدود، أو TXV مغلق أكثر من اللازم،
+                أو حمل منخفض، أو بصيلة صمام موضوعة بشكل خاطئ.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              ما القيمة الجيدة للسابكولينج؟
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                في كثير من تطبيقات غرف التبريد تكون بين 4 و8 درجات مئوية، لكن
+                المرجع النهائي هو تصميم الشركة المصنّعة وظروف الموقع الفعلية.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              هل أضبط TXV أثناء حمل غير مستقر؟
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                لا. أي ضبط يجب أن يتم بعد استقرار التشغيل وتنظيف المكثف ومرور
+                الوقت الكافي لتثبيت القراءات.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              ما أفضل ممارسة قبل إضافة شحنة؟
+              <i class="fas fa-chevron-down text-sm"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                افحص التسريب، وراجع Subcooling، ونظف المكثف، وتأكد من عدم وجود
+                انسداد في الفلتر الجاف أو خلل في صمام التمدد. إضافة الشحنة ليست
+                أول خطوة بل آخر قرار بعد التشخيص.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>الخلاصة</h2>
+          <p>
+            إذا أردت تشخيصاً محترفاً لأنظمة التبريد، فلا تبدأ من سؤال "كم
+            الضغط؟" فقط، بل من سؤالين أدق:
+            <strong>كم السوبرهيت؟ وكم السابكولينج؟</strong> عندها ستعرف هل
+            المشكلة شحنة، أم تغذية، أم تكثيف، أم قياس خاطئ من الأساس.
+          </p>
+          <div class="callout callout-success">
+            تحتاج مراجعة أداء نظام قائم أو استلام مشروع تبريد جديد؟ فريق الفريدة
+            آيس يقدّم دراسة فنية ميدانية تشمل مراجعة الضغوط، Superheat،
+            Subcooling، جودة الضبط، وكفاءة الاستهلاك.
+          </div>
+        </section>
+      </article>
+
+      <aside class="mt-14 pt-10 border-t border-slate-200 col-span-full">
+        <h2 class="text-xl font-black text-slate-800 mb-6">مقالات ذات صلة</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a href="refrigeration-gas-leak.html" class="related-card">
+            <span
+              class="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full"
+              >كشف التسرب</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              كشف تسرب غاز التبريد: المؤشرات والأدوات وخطة المعالجة
+            </p>
+          </a>
+          <a href="danfoss-controller-setting.html" class="related-card">
+            <span
+              class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-full"
+              >أنظمة التحكم</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              إعداد متحكمات دانفوس للتبريد الصناعي: الدليل العملي
+            </p>
+          </a>
+          <a href="bitzer-maintenance-ar.html" class="related-card">
+            <span
+              class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
+              >الضواغط</span
+            >
+            <p class="font-bold text-slate-800 mt-2 text-sm leading-snug">
+              صيانة كمبروسر بيتزر في المناطق الحارة
+            </p>
+          </a>
+        </div>
+      </aside>
+
+      <div class="article-cta">
+        <h2>هل تحتاج تشخيصاً دقيقاً لنظام التبريد لديك؟</h2>
+        <p>
+          اطلب زيارة فنية أو دراسة أداء من الفريدة آيس لمراجعة الشحنة، ضبط
+          الصمامات، وكفاءة التشغيل.
+        </p>
+        <div class="article-cta__actions">
+          <a
+            href="../../contact.html"
+            class="article-cta__btn article-cta__btn--primary"
+            >اطلب عرضاً فنياً</a
+          >
+          <a
+            href="https://wa.me/966598366214?text=%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D8%AA%D8%B4%D8%AE%D9%8A%D8%B5%20Superheat%20%D9%88Subcooling"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-cta__btn article-cta__btn--whatsapp"
+            >واتساب</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <a
+      href="https://wa.me/966598366214?text=%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%82%D9%8A%D8%A7%D8%B3%20Superheat%20%D9%88Subcooling"
+      class="wa-float-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="تواصل واتساب"
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="white"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"
+        />
+      </svg>
+    </a>
+
+    <script>
+      (function () {
+        const bar = document.getElementById("readingProgress");
+        function update() {
+          const h = document.documentElement;
+          const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+          bar.style.width = Math.min(pct, 100) + "%";
+        }
+        window.addEventListener("scroll", update, { passive: true });
+      })();
+
+      document.querySelectorAll(".faq-question").forEach(function (btn) {
+        const answer = btn.nextElementSibling;
+        btn.addEventListener("click", function () {
+          const isOpen = answer.style.display === "block";
+          document.querySelectorAll(".faq-answer").forEach(function (a) {
+            a.style.display = "none";
+          });
+          if (!isOpen) {
+            answer.style.display = "block";
+          }
+        });
+      });
+    </script>
+
+    <div id="site-footer"></div>
+    <script src="../../js/lang-switch.js" defer></script>
+    <script src="../../js/site-shell.js" defer></script>
+  </body>
+</html>
