@@ -324,19 +324,14 @@
     <noscript>
     </noscript>
 
-    <!-- Non-critical CSS — loaded asynchronously, zero render-blocking -->
-    <link rel="preload" href="css/shared.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" href="tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <!-- Core CSS — blocking (required to prevent CLS) -->
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="tailwind.min.css" />
+    <link rel="stylesheet" href="css/site-shell.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- Font Awesome — non-blocking (icons are decorative, no CLS risk) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" href="css/site-shell.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" href="css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript>
-      <link rel="stylesheet" href="css/shared.css" />
-      <link rel="stylesheet" href="tailwind.min.css" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
-      <link rel="stylesheet" href="css/site-shell.css" />
-      <link rel="stylesheet" href="css/index.css" />
-    </noscript>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" /></noscript>
   </head>
 
   <body class="bg-slate-50 text-right">
