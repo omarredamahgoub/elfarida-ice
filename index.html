@@ -327,7 +327,7 @@
 
     <!-- Core CSS — blocking (required to prevent CLS) -->
     <link rel="stylesheet" href="css/shared.css" />
-    <link rel="stylesheet" href="tailwind.min.css" />
+    <link rel="preload" href="tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" /><noscript><link rel="stylesheet" href="tailwind.min.css" /></noscript>
     <link rel="stylesheet" href="css/site-shell.css" />
     <link rel="stylesheet" href="css/index.css" />
     <!-- Font Awesome — non-blocking (icons are decorative, no CLS risk) -->
