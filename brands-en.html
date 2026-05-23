@@ -396,7 +396,8 @@
     <link rel="stylesheet" href="cairo.css" />
     <link rel="stylesheet" href="css/shared.css" />
     <link rel="stylesheet" href="tailwind.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" /></noscript>
     <link rel="stylesheet" href="css/site-shell.css" />
     <link rel="stylesheet" href="css/brands-en.css" />
 </head>
