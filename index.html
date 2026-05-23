@@ -49,8 +49,9 @@
       @font-face{font-family:'Cairo';src:url('assets/fonts/cairo-arabic.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
       html{font-family:'Cairo',system-ui,sans-serif;scroll-behavior:smooth;overflow-x:hidden}
       body{font-family:'Cairo',system-ui,sans-serif;background:#f8fafc;color:#0f172a;overflow-x:hidden;text-align:right}
-      #site-header{min-height:72px;background:rgba(255,255,255,0.98);position:sticky;top:0;z-index:100}
-      #site-footer{min-height:420px}
+      #site-header{height:72px;min-height:72px;contain:layout style;background:rgba(255,255,255,0.98);position:sticky;top:0;z-index:100}
+      #site-footer{min-height:480px;contain:layout style}
+      @media(min-width:769px){#site-footer{min-height:520px}}
       .skip-to-content{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:#1e40af;color:#fff;padding:.75rem 1.5rem;border-radius:0 0 .5rem .5rem;font-weight:700;z-index:9999;transition:top .2s;text-decoration:none}
       .skip-to-content:focus{top:0}
       .hero-section{position:relative;min-height:85svh;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(rgba(15,23,42,.8),rgba(15,23,42,.8)),url('assets/gallery/1-1-1.webp') center/cover no-repeat}
@@ -1626,6 +1627,6 @@
     <script src="js/index.js" defer></script>
     <div id="site-footer"></div>
     <script src="js/lang-switch.js" defer></script>
-    <script src="js/site-shell.js" defer></script>
+    <script src="js/site-shell.js"></script>
   </body>
 </html>
