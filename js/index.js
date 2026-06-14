@@ -1,1 +1,263 @@
-!function(){"use strict";function e(e){var t=document.getElementById(e.trackId),n=document.getElementById(e.prevBtnId),r=document.getElementById(e.nextBtnId),i=document.getElementById(e.dotsId);if(t&&n&&r&&i&&t.children.length){var s=600,o=Array.from(t.children),a=o.length;o.forEach(function(e){t.appendChild(e.cloneNode(!0))});var c=0,d=null,l=0,u=0,v=!1;n.addEventListener("click",function(){y(),L()}),r.addEventListener("click",function(){g(),L()}),n.addEventListener("keydown",function(e){"Enter"!==e.key&&" "!==e.key||(e.preventDefault(),y(),L())}),r.addEventListener("keydown",function(e){"Enter"!==e.key&&" "!==e.key||(e.preventDefault(),g(),L())});var m,f=t.parentElement;f.addEventListener("mouseenter",function(){clearInterval(d)}),f.addEventListener("mouseleave",function(){L()}),t.addEventListener("touchstart",function(e){l=e.touches[0].clientX,u=0,t.style.transition="none"},{passive:!0}),t.addEventListener("touchmove",function(e){u=e.touches[0].clientX-l;var n=c*h();t.style.transform="translateX(-"+(n-u)+"px)"},{passive:!0}),t.addEventListener("touchend",function(){u>56?y():u<-56?g():p(!0),L()}),window.addEventListener("resize",function(){clearTimeout(m),m=setTimeout(function(){p(!1)},120)}),function(){i.innerHTML="";for(var e=0;e<a;e++)(function(e){var t=document.createElement("button");t.type="button",t.className="carousel-dot",t.setAttribute("aria-label","الشريحة "+(e+1)),0===e&&t.classList.add("active"),t.addEventListener("click",function(){v||(c=e,p(!0),E(),L())}),i.appendChild(t)})(e)}(),p(!1),L()}function h(){var e=t.children[0];return e?e.getBoundingClientRect().width+30:0}function p(e){var n=c*h();t.style.transition=e?"transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1)":"none",t.style.transform="translateX(-"+n+"px)"}function E(){var e=c%a;i.querySelectorAll(".carousel-dot").forEach(function(t,n){t.classList.toggle("active",n===e)})}function g(){v||(v=!0,c++,p(!0),E(),setTimeout(function(){c>=a&&(c=0,p(!1),E()),v=!1},s))}function y(){v||(v=!0,c<=0?(c=a,p(!1),requestAnimationFrame(function(){requestAnimationFrame(function(){c--,p(!0),E(),setTimeout(function(){v=!1},s)})})):(c--,p(!0),E(),setTimeout(function(){v=!1},s)))}function L(){clearInterval(d),d=setInterval(g,3500)}}var t,n,r,i;e({trackId:"partnersTrack",prevBtnId:"partnersPrevBtn",nextBtnId:"partnersNextBtn",dotsId:"partnersDots"}),e({trackId:"clientsTrack",prevBtnId:"clientsPrevBtn",nextBtnId:"clientsNextBtn",dotsId:"clientsDots"}),function(){var e=document.getElementById("hero-quick-form"),t=document.getElementById("hero-submit-btn"),n=document.getElementById("hero-name"),r=document.getElementById("hero-phone"),i=document.getElementById("hero-service-val"),s=document.getElementById("hero-success"),o=document.getElementById("hero-error");if(e&&t){var a=/^[\u0600-\u06FFa-zA-Z\s]{3,60}$/,c=/^(\+966|00966|0)5[0-9]{8}$/;n.addEventListener("input",function(){this.value=this.value.replace(/[0-9\u0660-\u0669!@#$%^&*()\-_+=\[\]{};':"\\|,.<>\/?]/g,"");var e=this.value.trim();0===e.length||a.test(e)?l("err-name"):d("err-name")}),r.addEventListener("input",function(){this.value=this.value.replace(/[^\d+]/g,"");var e=this.value.trim();0===e.length||c.test(e)?l("err-phone"):e.length>3&&d("err-phone")}),e.addEventListener("submit",function(u){u.preventDefault();var v=n.value.trim(),m=r.value.trim(),f=i?i.value:"",h=!0;if(a.test(v)?l("err-name"):(d("err-name"),h=!1),c.test(m)?l("err-phone"):(d("err-phone"),h=!1),f?l("err-service"):(d("err-service"),h=!1),h){s.classList.add("hidden"),o.classList.add("hidden"),t.disabled=!0,t.textContent="جاري الإرسال...";var p={};new FormData(e).forEach(function(e,t){p[t]=e}),fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(p)}).then(function(e){return e.json()}).then(function(t){t.success?(s.classList.remove("hidden"),e.reset()):o.classList.remove("hidden")}).catch(function(){o.classList.remove("hidden")}).finally(function(){t.disabled=!1,t.textContent="أرسل الطلب"})}})}function d(e){var t=document.getElementById(e);t&&t.classList.remove("hidden")}function l(e){var t=document.getElementById(e);t&&t.classList.add("hidden")}}(),t=document.getElementById("svc-trigger"),n=document.getElementById("svc-list"),r=document.getElementById("svc-label"),i=document.getElementById("hero-service-val"),t&&n&&(t.addEventListener("click",function(){var e=n.classList.contains("open");n.classList.toggle("open",!e),t.classList.toggle("open",!e),t.setAttribute("aria-expanded",String(!e))}),n.querySelectorAll(".svc-option").forEach(function(e){e.addEventListener("click",function(){var e=this.getAttribute("data-value");i&&(i.value=e),r&&(r.textContent=this.textContent.trim(),r.style.color="white"),n.querySelectorAll(".svc-option").forEach(function(e){e.classList.remove("selected")}),this.classList.add("selected"),n.classList.remove("open"),t.classList.remove("open"),t.setAttribute("aria-expanded","false");var s=document.getElementById("err-service");s&&s.classList.add("hidden")})}),document.addEventListener("click",function(e){var r=document.getElementById("svc-dropdown");r&&!r.contains(e.target)&&(n.classList.remove("open"),t.classList.remove("open"),t.setAttribute("aria-expanded","false"))}))}();
+!function(){"use strict";
+// ─── Slider Engine (v2 — Zero Forced Reflow) ─────────────────────────────────
+// الإصلاح: استبدال getBoundingClientRect() داخل دورة الأنيميشن بـ cache
+// يُحدَّث فقط عند resize عبر ResizeObserver (async, لا يُسبب reflow)
+function initCarousel(cfg){
+  var track   = document.getElementById(cfg.trackId),
+      btnPrev = document.getElementById(cfg.prevBtnId),
+      btnNext = document.getElementById(cfg.nextBtnId),
+      dotsWrap= document.getElementById(cfg.dotsId);
+  if(!track||!btnPrev||!btnNext||!dotsWrap||!track.children.length)return;
+
+  var ANIM_MS = 600,
+      AUTOPLAY_MS = 3500,
+      slides  = Array.from(track.children),
+      count   = slides.length;
+
+  // نسخ الشرائح للتكرار اللانهائي
+  slides.forEach(function(s){ track.appendChild(s.cloneNode(true)); });
+
+  var idx      = 0,
+      locked   = false,
+      timer    = null,
+      touchX   = 0,
+      touchDx  = 0,
+      _resizeTimer = null,
+      // ▶ cache لعرض الشريحة — يُحدَّث async عبر ResizeObserver فقط
+      _slideW  = 0;
+
+  // ─── حساب العرض المخزَّن (يُستدعى async — لا reflow أثناء render) ─────────
+  function updateSlideWidth(){
+    var first = track.children[0];
+    if(!first) return;
+    // getBoundingClientRect هنا آمن لأنه يُستدعى فقط عند resize وليس داخل rAF
+    _slideW = first.getBoundingClientRect().width + 30;
+  }
+
+  // تهيئة أولية بعد paint
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      updateSlideWidth();
+      moveTo(0, false);
+      startAutoplay();
+    });
+  });
+
+  // ─── ResizeObserver بدلاً من window.resize للدقة وعدم الـ reflow ───────────
+  if(typeof ResizeObserver !== "undefined"){
+    var ro = new ResizeObserver(function(){
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(function(){
+        updateSlideWidth();
+        moveTo(idx, false);
+      }, 120);
+    });
+    ro.observe(track.parentElement);
+  } else {
+    window.addEventListener("resize", function(){
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(function(){
+        updateSlideWidth();
+        moveTo(idx, false);
+      }, 120);
+    });
+  }
+
+  // ─── حركة الـ slider باستخدام transform بدون قراءة layout ────────────────
+  function moveTo(n, animate){
+    track.style.transition = animate
+      ? "transform "+ANIM_MS+"ms cubic-bezier(0.25,0.8,0.25,1)"
+      : "none";
+    track.style.transform = "translateX(-"+(n * _slideW)+"px)";
+    updateDots();
+  }
+
+  function updateDots(){
+    var active = idx % count;
+    dotsWrap.querySelectorAll(".carousel-dot").forEach(function(d,i){
+      d.classList.toggle("active", i === active);
+    });
+  }
+
+  function next(){
+    if(locked) return;
+    locked = true; idx++;
+    moveTo(idx, true);
+    setTimeout(function(){
+      if(idx >= count){ idx = 0; moveTo(0, false); }
+      locked = false;
+    }, ANIM_MS);
+  }
+
+  function prev(){
+    if(locked) return;
+    locked = true;
+    if(idx <= 0){
+      idx = count; moveTo(idx, false);
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          idx--; moveTo(idx, true);
+          setTimeout(function(){ locked = false; }, ANIM_MS);
+        });
+      });
+    } else {
+      idx--; moveTo(idx, true);
+      setTimeout(function(){ locked = false; }, ANIM_MS);
+    }
+  }
+
+  function startAutoplay(){
+    clearInterval(timer);
+    timer = setInterval(next, AUTOPLAY_MS);
+  }
+
+  // ─── Dots ────────────────────────────────────────────────────────────────────
+  dotsWrap.innerHTML = "";
+  for(var i=0; i<count; i++){
+    (function(n){
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "carousel-dot" + (n===0?" active":"");
+      btn.setAttribute("aria-label", "الشريحة "+(n+1));
+      btn.addEventListener("click", function(){
+        if(locked) return;
+        idx = n; moveTo(idx, true); startAutoplay();
+      });
+      dotsWrap.appendChild(btn);
+    })(i);
+  }
+
+  // ─── Buttons ─────────────────────────────────────────────────────────────────
+  btnPrev.addEventListener("click", function(){ prev(); startAutoplay(); });
+  btnNext.addEventListener("click", function(){ next(); startAutoplay(); });
+  ["keydown"].forEach(function(ev){
+    btnPrev.addEventListener(ev, function(e){
+      if(e.key==="Enter"||e.key===" "){ e.preventDefault(); prev(); startAutoplay(); }
+    });
+    btnNext.addEventListener(ev, function(e){
+      if(e.key==="Enter"||e.key===" "){ e.preventDefault(); next(); startAutoplay(); }
+    });
+  });
+
+  // ─── Hover pause ─────────────────────────────────────────────────────────────
+  var wrap = track.parentElement;
+  wrap.addEventListener("mouseenter", function(){ clearInterval(timer); });
+  wrap.addEventListener("mouseleave", startAutoplay);
+
+  // ─── Touch / Swipe (passive — لا reflow) ─────────────────────────────────────
+  track.addEventListener("touchstart", function(e){
+    touchX  = e.touches[0].clientX;
+    touchDx = 0;
+    track.style.transition = "none";
+    clearInterval(timer);
+  }, {passive:true});
+  track.addEventListener("touchmove", function(e){
+    touchDx = e.touches[0].clientX - touchX;
+    // استخدام الـ cached width — لا getBoundingClientRect هنا
+    track.style.transform = "translateX(-"+(idx * _slideW - touchDx)+"px)";
+  }, {passive:true});
+  track.addEventListener("touchend", function(){
+    if(touchDx > 56) prev();
+    else if(touchDx < -56) next();
+    else moveTo(idx, true);
+    startAutoplay();
+  });
+}
+
+initCarousel({trackId:"partnersTrack", prevBtnId:"partnersPrevBtn", nextBtnId:"partnersNextBtn", dotsId:"partnersDots"});
+initCarousel({trackId:"clientsTrack",  prevBtnId:"clientsPrevBtn",  nextBtnId:"clientsNextBtn",  dotsId:"clientsDots"});
+
+// ─── Hero Quick Form ──────────────────────────────────────────────────────────
+(function(){
+  var form    = document.getElementById("hero-quick-form"),
+      btnSub  = document.getElementById("hero-submit-btn"),
+      inpName = document.getElementById("hero-name"),
+      inpPh   = document.getElementById("hero-phone"),
+      inpSvc  = document.getElementById("hero-service-val"),
+      elOk    = document.getElementById("hero-success"),
+      elErr   = document.getElementById("hero-error");
+
+  if(!form||!btnSub) return;
+
+  var reNm = /^[\u0600-\u06FFa-zA-Z\s]{3,60}$/,
+      rePh = /^(\+966|00966|0)5[0-9]{8}$/;
+
+  function hide(id){ var e=document.getElementById(id); e&&e.classList.add("hidden"); }
+  function show(id){ var e=document.getElementById(id); e&&e.classList.remove("hidden"); }
+
+  inpName.addEventListener("input", function(){
+    this.value = this.value.replace(/[0-9\u0660-\u0669!@#$%^&*()\-_+=\[\]{};':"\\|,.<>\/?]/g,"");
+    var v = this.value.trim();
+    (v.length===0||reNm.test(v)) ? hide("err-name") : show("err-name");
+  });
+  inpPh.addEventListener("input", function(){
+    this.value = this.value.replace(/[^\d+]/g,"");
+    var v = this.value.trim();
+    (v.length===0||rePh.test(v)) ? hide("err-phone") : (v.length>3&&show("err-phone"));
+  });
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var nm  = inpName.value.trim(),
+        ph  = inpPh.value.trim(),
+        svc = inpSvc ? inpSvc.value : "",
+        ok  = true;
+    reNm.test(nm)  ? hide("err-name")    : (show("err-name"),    ok=false);
+    rePh.test(ph)  ? hide("err-phone")   : (show("err-phone"),   ok=false);
+    svc            ? hide("err-service") : (show("err-service"),  ok=false);
+    if(!ok) return;
+    hide("hero-success"); hide("hero-error");
+    btnSub.disabled = true; btnSub.textContent = "جاري الإرسال...";
+    var data = {};
+    new FormData(form).forEach(function(v,k){ data[k]=v; });
+    fetch("/api/quote",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify(data)
+    }).then(function(r){ return r.json(); })
+      .then(function(r){ r.success ? (show("hero-success"), form.reset()) : show("hero-error"); })
+      .catch(function(){ show("hero-error"); })
+      .finally(function(){ btnSub.disabled=false; btnSub.textContent="أرسل الطلب"; });
+  });
+})();
+
+// ─── Service Dropdown ─────────────────────────────────────────────────────────
+(function(){
+  var trigger = document.getElementById("svc-trigger"),
+      list    = document.getElementById("svc-list"),
+      label   = document.getElementById("svc-label"),
+      valEl   = document.getElementById("hero-service-val");
+  if(!trigger||!list) return;
+
+  trigger.addEventListener("click", function(){
+    var open = list.classList.contains("open");
+    list.classList.toggle("open", !open);
+    trigger.classList.toggle("open", !open);
+    trigger.setAttribute("aria-expanded", String(!open));
+  });
+
+  list.querySelectorAll(".svc-option").forEach(function(opt){
+    opt.addEventListener("click", function(){
+      var val = this.getAttribute("data-value");
+      if(valEl) valEl.value = val;
+      if(label){ label.textContent = this.textContent.trim(); label.style.color = "white"; }
+      list.querySelectorAll(".svc-option").forEach(function(o){ o.classList.remove("selected"); });
+      this.classList.add("selected");
+      list.classList.remove("open");
+      trigger.classList.remove("open");
+      trigger.setAttribute("aria-expanded","false");
+      var err = document.getElementById("err-service");
+      if(err) err.classList.add("hidden");
+    });
+  });
+
+  document.addEventListener("click", function(e){
+    var dd = document.getElementById("svc-dropdown");
+    if(dd && !dd.contains(e.target)){
+      list.classList.remove("open");
+      trigger.classList.remove("open");
+      trigger.setAttribute("aria-expanded","false");
+    }
+  });
+})();
+}();
