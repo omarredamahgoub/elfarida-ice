@@ -1,0 +1,5 @@
+# Security policy for elfaridaice.com (RFC 9116)
+Contact: mailto:info@elfaridaice.com
+Expires: 2027-06-14T00:00:00.000Z
+Preferred-Languages: ar, en
+Canonical: https://elfaridaice.com/.well-known/security.txt

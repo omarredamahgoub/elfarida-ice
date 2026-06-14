@@ -1,17 +1,14 @@
 {
   "name": "elfarida-ice-deploy",
   "version": "1.0.0",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "private": true,
+  "description": "Static bilingual marketing site for Elfarida Ice Industrial Refrigeration, deployed on Cloudflare Pages.",
+  "author": "Elfarida Ice",
+  "license": "UNLICENSED",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy . --project-name elfarida-ice"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "wrangler": "^4.93.0"
   }

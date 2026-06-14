@@ -9,14 +9,8 @@
 # ─── Default policy: allow all well-behaved crawlers ───
 User-agent: *
 Allow: /
-Disallow: /_backup/
-Disallow: /_backup_optimize/
-Disallow: /_backup_ai/
 Disallow: /node_modules/
-Disallow: /scripts/
-Disallow: /src/
-Disallow: /.github/
-Disallow: /server.js
+Disallow: /*.ps1$
 Disallow: /*.json$
 Allow: /lib/site.config.json
 Allow: /lib/geo-regions.json

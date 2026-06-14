@@ -1,3 +1,12 @@
 node_modules
 .git
 .wrangler
+
+# Dev-only tooling and internal docs — must never be served publicly
+*.ps1
+*.sh
+*.bak
+*.old
+*.md
+fix-index-html.ps1
+optimize-images.ps1
