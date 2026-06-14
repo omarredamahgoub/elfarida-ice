@@ -1,9 +1,0 @@
-name = "elfarida-ice"
-compatibility_date = "2024-11-01"
-pages_build_output_dir = "."
-
-# Durable lead storage for /api/quote (replaces external web3forms).
-[[d1_databases]]
-binding = "DB"
-database_name = "elfarida-leads"
-database_id = "0637575c-303e-4150-9810-e96ea462ad49"
