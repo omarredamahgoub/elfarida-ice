@@ -1,7 +1,7 @@
 /* TEAM */
 
    Company:    Elfarida Ice Industrial Refrigeration Engineering
-   Arabic:     مؤسسة الفريدة آيس للهندسة والتبريد الصناعي
+   Arabic:     شركة الفريدة آيس للهندسة والتبريد الصناعي
    Contact:    info [at] elfaridaice [dot] com
    Phone:      +966 59 836 6214
    Location:   Dammam, Eastern Province, Saudi Arabia
