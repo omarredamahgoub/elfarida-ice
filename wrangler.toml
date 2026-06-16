@@ -1,0 +1,22 @@
+# ═══════════════════════════════════════════════════════════════════
+# wrangler.toml — Infrastructure-as-Code for the elfarida-ice Pages project
+# Purpose: make the project reproducible (bindings + build output) so the
+#          D1 binding is not dashboard-only. Cloudflare Pages reads this
+#          during both CLI deploys and GitHub-integration builds.
+#
+# Deploy (from THIS directory):  npx wrangler pages deploy
+#   The functions/ folder is auto-detected and bundled. Always confirm the
+#   output shows "Uploading Functions bundle" — otherwise Functions are NOT
+#   deployed and /api/quote and /admin/leads will return 405.
+# ═══════════════════════════════════════════════════════════════════
+
+name = "elfarida-ice"
+pages_build_output_dir = "."
+compatibility_date = "2026-06-16"
+
+# Durable storage for quote/contact leads and runtime settings
+# (admin credentials, Resend key, sender, recipients).
+[[d1_databases]]
+binding = "DB"
+database_name = "elfarida-leads"
+database_id = "0637575c-303e-4150-9810-e96ea462ad49"
