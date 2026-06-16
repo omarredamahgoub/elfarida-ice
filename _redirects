@@ -70,7 +70,10 @@
 # ───────────────────────────────────────────────────────────────────
 /ar                       /                   301
 /ar/                      /                   301
-/ar/*                     /blog.html          301
+# NOTE (SEO fix M-1): the /ar/* catch-all was moved to the END of this
+# file (section 13) so the specific encoded Arabic URLs in sections 9–12
+# are matched BEFORE falling back to /blog.html. Cloudflare applies the
+# first matching rule top-to-bottom, so order matters here.
 
 # ───────────────────────────────────────────────────────────────────
 # 5. DATE & TAXONOMY ARCHIVES
@@ -174,3 +177,11 @@
 # 12. WORDPRESS SITEMAP — CATEGORY (category-sitemap.xml)
 # ───────────────────────────────────────────────────────────────────
 /ar/category/%d8%ba%d8%b1%d9%81-%d8%a7%d9%84%d8%aa%d8%a8%d8%b1%d9%8a%d8%af-%d9%88%d8%a7%d9%84%d8%aa%d8%ac%d9%85%d9%8a%d8%af/  /blog.html  301
+
+
+# ───────────────────────────────────────────────────────────────────
+# 13. ARABIC CATCH-ALL — MUST STAY LAST
+# Any /ar/ path not matched by the specific rules above (sections 9–12)
+# falls back to the blog. Keeping this last preserves legacy link equity.
+# ───────────────────────────────────────────────────────────────────
+/ar/*                     /blog.html          301
