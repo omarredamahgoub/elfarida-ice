@@ -10,3 +10,5 @@ node_modules
 *.md
 fix-index-html.ps1
 optimize-images.ps1
+
+backups/
