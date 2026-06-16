@@ -10,12 +10,13 @@
 
 /* SITE */
 
-   Last update:    2026-04-29
+   Last update:    2026-06-16
    Language:       Arabic (primary), English (secondary)
-   Doctype:        HTML5 (Static Site)
+   Doctype:        HTML5 (Static Site + Cloudflare Pages Functions)
    Standards:      HTML5, CSS3, ES2022, WCAG 2.1 AA, Schema.org
-   Components:     Tailwind CSS, Vanilla JavaScript, Cloudflare Pages
-   Software:       Visual Studio Code, Git, GitHub Actions
+   Components:     Tailwind CSS, Vanilla JavaScript, Cairo font,
+                   Cloudflare Pages, Pages Functions, D1 (SQLite), Resend
+   Software:       Visual Studio Code, Git, GitHub
 
 
 /* COMPLIANCE */
