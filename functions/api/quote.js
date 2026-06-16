@@ -37,11 +37,16 @@ export async function onRequestPost(context) {
   // 2) Honeypot — pretend success so bots do not retry.
   if (data.botcheck) return json({ success: true, message: "تمّ الاستلام." });
 
-  // 3) Turnstile (only enforced when configured).
-  if (env.TURNSTILE_SECRET) {
-    const token = data["cf-turnstile-response"] || data.turnstileToken || "";
-    const ok = await verifyTurnstile(env.TURNSTILE_SECRET, token, request.headers.get("CF-Connecting-IP"));
-    if (!ok) return json({ success: false, message: "فشل التحقّق من أنّك لست روبوتًا. حدِّث الصفحة وحاول مجدّدًا." }, 403);
+  // 3) Turnstile — enforced ONLY for the protected quote forms, which send
+  //    protected="1". The newsletter and any other path skip it (they rely on
+  //    the honeypot + per-IP rate limit). Secret lives in D1 (env not injected).
+  if (String(data.protected) === "1") {
+    const tsSecret = await getSetting(env.DB, "turnstile_secret") || env.TURNSTILE_SECRET || "";
+    if (tsSecret) {
+      const token = data["cf-turnstile-response"] || data.turnstileToken || "";
+      const ok = await verifyTurnstile(tsSecret, token, request.headers.get("CF-Connecting-IP"));
+      if (!ok) return json({ success: false, message: "فشل التحقّق من أنّك لست روبوتًا. حدِّث الصفحة وحاول مجدّدًا." }, 403);
+    }
   }
 
   // 4) Minimal validation.
@@ -149,6 +154,16 @@ async function verifyTurnstile(secret, token, ip) {
   const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body });
   const out = await resp.json().catch(() => ({ success: false }));
   return !!out.success;
+}
+
+async function getSetting(db, key) {
+  if (!db) return "";
+  try {
+    const r = await db.prepare("SELECT v FROM settings WHERE k = ?").bind(key).first();
+    return r ? r.v : "";
+  } catch (_) {
+    return "";
+  }
 }
 
 async function loadMailConfig(env) {

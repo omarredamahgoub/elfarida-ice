@@ -565,7 +565,10 @@
             </div>
 
             <!-- ── زر الإرسال ── -->
-            <button
+            
+<input type="hidden" name="protected" value="1" />
+<div class="cf-turnstile" data-sitekey="0x4AAAAAADl1_CXWCl7xyb_g" data-language="auto" style="margin:1rem 0"></div>
+<button
               type="submit"
               id="hero-submit-btn"
               class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
@@ -1642,5 +1645,5 @@
     <div id="site-footer"></div>
     <script src="js/lang-switch.js?v=20260616" defer></script>
     <script src="js/site-shell.js?v=20260616" defer></script>
-  </body>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script></body>
 </html>

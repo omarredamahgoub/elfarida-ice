@@ -29,11 +29,12 @@ export async function onRequest(context) {
 
     const csp = [
       "default-src 'self'",
-      `script-src 'self' 'nonce-${nonce}' https://cdnjs.cloudflare.com https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://static.cloudflareinsights.com`,
+      `script-src 'self' 'nonce-${nonce}' https://cdnjs.cloudflare.com https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://static.cloudflareinsights.com https://challenges.cloudflare.com`,
       `style-src 'self' 'nonce-${nonce}' https://cdnjs.cloudflare.com https://unpkg.com`,
       "img-src 'self' data: https: blob:",
       "font-src 'self' data: https://cdnjs.cloudflare.com",
-      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com",
+      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://challenges.cloudflare.com",
+      "frame-src https://challenges.cloudflare.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
