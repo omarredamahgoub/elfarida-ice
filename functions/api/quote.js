@@ -27,6 +27,13 @@ export async function onRequestPost(context) {
   const data = await parseBody(request);
   if (data === null) return json({ success: false, message: "طلب غير صالح." }, 400);
 
+  // Anti-abuse: reject oversized payloads before any processing.
+  try {
+    if (JSON.stringify(data).length > 8000) {
+      return json({ success: false, message: "حجم الطلب كبير جدًّا." }, 413);
+    }
+  } catch (_) { /* non-serializable → treat as bad request */ }
+
   // 2) Honeypot — pretend success so bots do not retry.
   if (data.botcheck) return json({ success: true, message: "تمّ الاستلام." });
 
@@ -43,6 +50,22 @@ export async function onRequestPost(context) {
   const phone = pick(data, ["phone", "الهاتف", "الجوال", "رقم_الجوال"]);
   if (!name && !phone && !email) return json({ success: false, message: "يرجى إدخال بيانات التواصل." }, 422);
   if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ success: false, message: "صيغة البريد غير صحيحة." }, 422);
+
+  // 4.5) Lightweight per-IP rate limit (anti-flood) backed by D1.
+  // Real visitors almost never submit >5 times in 10 minutes; bots flooding
+  // the endpoint do. Fails open if the check itself errors.
+  const clientIp = request.headers.get("CF-Connecting-IP") || "";
+  if (env.DB && clientIp) {
+    try {
+      const since = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+      const recent = await env.DB.prepare(
+        "SELECT COUNT(*) AS n FROM leads WHERE ip = ? AND created_at > ?"
+      ).bind(clientIp, since).first();
+      if (recent && recent.n >= 5) {
+        return json({ success: false, message: "لقد أرسلت عدّة طلبات للتوّ. يرجى المحاولة بعد قليل." }, 429);
+      }
+    } catch (_) { /* fail open — never block a genuine user on a check error */ }
+  }
 
   // 5) Persist (durable). Never block the user on a storage hiccup.
   let stored = false;
