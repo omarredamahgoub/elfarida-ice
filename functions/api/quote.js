@@ -94,6 +94,11 @@ export async function onRequestPost(context) {
     try { emailed = await sendEmail(cfg, { name, email, data }); } catch (_) { /* ignore */ }
   }
 
+  // 6b) Customer auto-acknowledgement (best-effort, never blocks the response).
+  if (cfg.apiKey && email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    try { await sendCustomerConfirmation(cfg, { name, email }); } catch (_) { /* ignore */ }
+  }
+
   if (!stored && !emailed) {
     return json({ success: false, message: "تعذّر استلام الطلب مؤقّتًا. يرجى المحاولة لاحقًا أو الاتّصال بنا." }, 502);
   }
@@ -179,6 +184,30 @@ async function sendEmail(cfg, { name, email, data }) {
     html,
   };
   if (email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) payload.reply_to = email;
+  const resp = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${cfg.apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  return resp.ok;
+}
+
+async function sendCustomerConfirmation(cfg, { name, email }) {
+  const html = `<div dir="rtl" style="font-family:'Cairo',Tahoma,sans-serif;max-width:600px;margin:auto;color:#1e293b;line-height:1.8">
+    <h2 style="color:#1e3a8a;margin:0 0 12px">شكرًا لتواصلك مع شركة الفريدة آيس</h2>
+    <p>مرحبًا${name ? " " + esc(name) : ""}،</p>
+    <p>تسلّمنا طلبك بنجاح، وسيتواصل معك فريقنا في أقرب وقت ممكن لتزويدك بعرض السعر والتفاصيل المطلوبة.</p>
+    <p>لأيّ استفسار عاجل تواصل معنا على <a href="mailto:info@elfaridaice.com" style="color:#1e3a8a">info@elfaridaice.com</a> أو هاتفيًّا على ‎+966&nbsp;59&nbsp;836&nbsp;6214‎.</p>
+    <hr style="border:none;border-top:1px solid #e2e8f0;margin:16px 0"/>
+    <small style="color:#64748b">شركة الفريدة آيس للهندسة والتبريد الصناعيّ — الدمّام، المملكة العربيّة السعوديّة<br/>elfaridaice.com</small>
+  </div>`;
+  const payload = {
+    from: cfg.from,
+    to: [email],
+    subject: "تمّ استلام طلبك — شركة الفريدة آيس",
+    html,
+    reply_to: "info@elfaridaice.com",
+  };
   const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${cfg.apiKey}`, "Content-Type": "application/json" },
