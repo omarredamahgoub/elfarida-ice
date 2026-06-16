@@ -63,10 +63,12 @@ export async function onRequestPost(context) {
     } catch (_) { /* fall through; email may still deliver */ }
   }
 
-  // 6) Notify (best-effort).
+  // 6) Notify (best-effort). Config lives in D1 (env secrets are not injected
+  // into Functions on this project), with env vars as fallback.
   let emailed = false;
-  if (env.RESEND_API_KEY) {
-    try { emailed = await sendEmail(env, { name, email, data }); } catch (_) { /* ignore */ }
+  const cfg = await loadMailConfig(env);
+  if (cfg.apiKey && cfg.to.length) {
+    try { emailed = await sendEmail(cfg, { name, email, data }); } catch (_) { /* ignore */ }
   }
 
   if (!stored && !emailed) {
@@ -121,7 +123,25 @@ async function verifyTurnstile(secret, token, ip) {
   return !!out.success;
 }
 
-async function sendEmail(env, { name, email, data }) {
+async function loadMailConfig(env) {
+  let row = {};
+  if (env.DB) {
+    try {
+      const res = await env.DB.prepare(
+        "SELECT k, v FROM settings WHERE k IN ('resend_api_key','lead_to','lead_from')"
+      ).all();
+      for (const r of (res?.results || [])) row[r.k] = r.v;
+    } catch (_) { /* fall back to env */ }
+  }
+  const toRaw = row.lead_to || env.LEAD_TO || DEFAULT_TO;
+  return {
+    apiKey: row.resend_api_key || env.RESEND_API_KEY || "",
+    from: row.lead_from || env.LEAD_FROM || DEFAULT_FROM,
+    to: String(toRaw).split(/[,;\s]+/).map((s) => s.trim()).filter(Boolean),
+  };
+}
+
+async function sendEmail(cfg, { name, email, data }) {
   const rows = Object.entries(stripNoise(data))
     .map(([k, v]) => `<tr><td style="padding:6px 10px;border:1px solid #e2e8f0;font-weight:700">${esc(k)}</td><td style="padding:6px 10px;border:1px solid #e2e8f0">${esc(v)}</td></tr>`)
     .join("");
@@ -130,15 +150,15 @@ async function sendEmail(env, { name, email, data }) {
     <table style="border-collapse:collapse;width:100%">${rows}</table>
     <hr/><small style="color:#64748b">elfaridaice.com — نموذج الموقع</small></div>`;
   const payload = {
-    from: env.LEAD_FROM || DEFAULT_FROM,
-    to: [env.LEAD_TO || DEFAULT_TO],
+    from: cfg.from,
+    to: cfg.to,
     subject: pick(data, ["subject", "الموضوع"]) || `طلب جديد${name ? " - " + name : ""}`,
     html,
   };
   if (email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) payload.reply_to = email;
   const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+    headers: { Authorization: `Bearer ${cfg.apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   return resp.ok;
