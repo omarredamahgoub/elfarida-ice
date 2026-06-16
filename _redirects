@@ -200,3 +200,14 @@
 /ar/مشاريعنا/            /projects.html      301
 
 /ar/*                     /blog.html          301
+
+
+# ───────────────────────────────────────────────────────────────────
+# 14. LEGACY 404 RECOVERY — old WordPress URLs surfaced in Search Console
+# (non-/ar paths, so order vs the /ar/* catch-all above does not matter)
+# ───────────────────────────────────────────────────────────────────
+/home                     /                   301
+/our-partners/feed        /brands.html        301
+/wp-content/*             /                   301
+/من-نحن                   /about.html         301
+/من-نحن/                  /about.html         301
