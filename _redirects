@@ -184,4 +184,19 @@
 # Any /ar/ path not matched by the specific rules above (sections 9–12)
 # falls back to the blog. Keeping this last preserves legacy link equity.
 # ───────────────────────────────────────────────────────────────────
+# 12b. LEGACY ARABIC PAGE URLS - decoded form (must precede the catch-all).
+# Cloudflare matches the URL-decoded path; the %xx rules in section 10 never fire.
+/ar/من-نحن               /about.html         301
+/ar/من-نحن/              /about.html         301
+/ar/اتصل-بنا             /contact.html       301
+/ar/اتصل-بنا/            /contact.html       301
+/ar/الرئيسية             /                   301
+/ar/الرئيسية/            /                   301
+/ar/شركاؤنا              /brands.html        301
+/ar/شركاؤنا/             /brands.html        301
+/ar/خدماتنا              /services.html      301
+/ar/خدماتنا/             /services.html      301
+/ar/مشاريعنا             /projects.html      301
+/ar/مشاريعنا/            /projects.html      301
+
 /ar/*                     /blog.html          301
