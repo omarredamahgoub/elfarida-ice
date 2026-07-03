@@ -175,9 +175,15 @@ initCarousel({trackId:"clientsTrack",  prevBtnId:"clientsPrevBtn",  nextBtnId:"c
       inpPh   = document.getElementById("hero-phone"),
       inpSvc  = document.getElementById("hero-service-val"),
       elOk    = document.getElementById("hero-success"),
-      elErr   = document.getElementById("hero-error");
+      elErr   = document.getElementById("hero-error"),
+      errDefaultTxt = elErr ? elErr.textContent : "";
 
   if(!form||!btnSub) return;
+
+  function showError(msg){
+    if(elErr) elErr.textContent = (msg && String(msg).trim()) ? msg : errDefaultTxt;
+    show("hero-error");
+  }
 
   var reNm = /^[\u0600-\u06FFa-zA-Z\s]{3,60}$/,
       rePh = /^(\+966|00966|0)5[0-9]{8}$/;
@@ -215,8 +221,8 @@ initCarousel({trackId:"clientsTrack",  prevBtnId:"clientsPrevBtn",  nextBtnId:"c
       headers:{"Content-Type":"application/json","Accept":"application/json"},
       body:JSON.stringify(data)
     }).then(function(r){ return r.json(); })
-      .then(function(r){ r.success ? (show("hero-success"), form.reset()) : show("hero-error"); })
-      .catch(function(){ show("hero-error"); })
+      .then(function(r){ r.success ? (show("hero-success"), form.reset()) : showError(r && r.message); })
+      .catch(function(){ showError(); })
       .finally(function(){ btnSub.disabled=false; btnSub.textContent="أرسل الطلب"; });
   });
 })();

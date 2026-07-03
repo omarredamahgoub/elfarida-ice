@@ -50,9 +50,9 @@ export async function onRequestPost(context) {
   }
 
   // 4) Minimal validation.
-  const name = pick(data, ["name", "الاسم", "full_name"]);
-  const email = pick(data, ["email", "البريد", "البريد_الإلكتروني"]);
-  const phone = pick(data, ["phone", "الهاتف", "الجوال", "رقم_الجوال"]);
+  const name = pick(data, ["name", "Name", "الاسم", "full_name"]);
+  const email = pick(data, ["email", "Email", "البريد", "البريد_الإلكتروني"]);
+  const phone = pick(data, ["phone", "Phone", "Mobile", "mobile", "الهاتف", "الجوال", "رقم_الجوال"]);
   if (!name && !phone && !email) return json({ success: false, message: "يرجى إدخال بيانات التواصل." }, 422);
   if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ success: false, message: "صيغة البريد غير صحيحة." }, 422);
 
@@ -82,7 +82,7 @@ export async function onRequestPost(context) {
         crypto.randomUUID(),
         new Date().toISOString(),
         name, email, phone,
-        pick(data, ["subject", "الموضوع"]),
+        pick(data, ["subject", "الموضوع", "service", "Service"]),
         JSON.stringify(stripNoise(data)),
         request.headers.get("CF-Connecting-IP") || "",
         request.headers.get("user-agent") || ""
@@ -130,8 +130,14 @@ async function parseBody(request) {
 }
 
 function pick(obj, keys) {
+  // Case-insensitive lookup: form field names vary in casing across pages
+  // (e.g. the homepage hero form sends "Name"/"Phone" while contact.html
+  // sends "الاسم"/"الجوال"), so match keys regardless of case.
+  const lower = {};
+  for (const k in obj) lower[k.toLowerCase()] = obj[k];
   for (const k of keys) {
-    if (obj[k] != null && String(obj[k]).trim() !== "") return String(obj[k]).trim();
+    const v = lower[k.toLowerCase()];
+    if (v != null && String(v).trim() !== "") return String(v).trim();
   }
   return "";
 }
@@ -195,7 +201,7 @@ async function sendEmail(cfg, { name, email, data }) {
   const payload = {
     from: cfg.from,
     to: cfg.to,
-    subject: pick(data, ["subject", "الموضوع"]) || `طلب جديد${name ? " - " + name : ""}`,
+    subject: pick(data, ["subject", "الموضوع", "service", "Service"]) || `طلب جديد${name ? " - " + name : ""}`,
     html,
   };
   if (email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) payload.reply_to = email;
