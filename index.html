@@ -323,13 +323,19 @@
          preloaded then swapped to a stylesheet on load, so it never blocks
          first paint; noscript fallback covers JS-disabled clients. -->
     <link
+      id="fa-preload"
       rel="preload"
       as="style"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <script>
+      document.getElementById("fa-preload").addEventListener("load", function () {
+        this.onload = null;
+        this.rel = "stylesheet";
+      });
+    </script>
     <noscript>
       <link
         rel="stylesheet"
@@ -570,7 +576,7 @@
             <!-- ── زر الإرسال ── -->
             
 <input type="hidden" name="protected" value="1" />
-<div class="cf-turnstile" data-sitekey="0x4AAAAAADl1_CXWCl7xyb_g" data-language="auto" style="margin:1rem 0"></div>
+<div class="cf-turnstile mt-4 mb-4" data-sitekey="0x4AAAAAADl1_CXWCl7xyb_g" data-language="auto"></div>
 <button
               type="submit"
               id="hero-submit-btn"
@@ -1305,10 +1311,9 @@
                   src="assets/clients/al-wataniya.webp"
                   alt="الوطنية للدواجن"
                   loading="lazy"
-                  width="293"
-                  height="172"
-                  class="w-12 h-12 rounded-full ml-4"
-                  style="object-fit:contain;background:#fff"
+                  width="48"
+                  height="48"
+                  class="w-12 h-12 rounded-full ml-4 avatar-contain"
                 />
                 <div>
                   <p class="font-bold text-slate-900">مدير فني</p>

@@ -17,6 +17,7 @@ const MINIFIED_JS = [
   "js/contact.js",
   "js/contact-en.js",
   "js/faq-schema-injector.js",
+  "js/index-en.js",
   "js/lang-switch.js",
   "js/perf.js",
   "js/projects.js",

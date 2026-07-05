@@ -5,12 +5,16 @@
  * `'unsafe-inline'`. For every HTML response it:
  *   1. generates a fresh random nonce,
  *   2. stamps that nonce on every inline <script> (non-JSON-LD) and <style>,
- *   3. emits a CSP header allowing only `'nonce-…'` (no `'unsafe-inline'`).
+ *   3. emits a CSP header allowing only `'nonce-…'` (no `'unsafe-inline'`)
+ *      for script-src and style-src (which governs <style> elements).
  *
  * Inline event-handler attributes (onclick/onload/…) cannot carry a nonce,
  * so they are removed from the markup separately (see js/site-shell.js and
  * the per-page wiring). JSON-LD blocks are data, not executable, so they are
- * left untouched.
+ * left untouched. style-src-attr (the `style="…"` HTML attribute, set either
+ * statically or at runtime via JS) is allowed via `'unsafe-inline'` as a
+ * narrow, deliberate exception — nonces cannot cover it, and script-src is
+ * unaffected, so the XSS-relevant surface stays nonce-only.
  *
  * Fails safe: any error returns the original response unchanged.
  */
@@ -31,6 +35,12 @@ export async function onRequest(context) {
       "default-src 'self'",
       `script-src 'self' 'nonce-${nonce}' https://cdnjs.cloudflare.com https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://static.cloudflareinsights.com https://challenges.cloudflare.com`,
       `style-src 'self' 'nonce-${nonce}' https://cdnjs.cloudflare.com https://unpkg.com`,
+      // style-src-attr is intentionally relaxed (independent of the nonce
+      // above): a small number of elements set the `style` attribute at
+      // runtime with a genuinely dynamic value (e.g. the scroll-reading
+      // progress bar's width percentage), which cannot carry a nonce.
+      // This does not weaken script-src, which remains nonce-only.
+      "style-src-attr 'unsafe-inline'",
       "img-src 'self' data: https: blob:",
       "font-src 'self' data: https://cdnjs.cloudflare.com",
       "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://challenges.cloudflare.com",
