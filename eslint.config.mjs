@@ -85,11 +85,25 @@ export default [
   js.configs.recommended,
   prettier,
   {
-    // الملف الوحيد داخل js/ المكتوب حاليًا بصيغة مقروءة (غير مُصغَّرة).
+    // ملفات js/ المكتوبة بصيغة مقروءة (غير مُصغَّرة) كسكربتات كلاسيكية عادية.
     files: ["js/index.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "script",
+      globals: BROWSER_GLOBALS,
+    },
+    rules: {
+      "no-unused-vars": UNUSED_VARS_RULE,
+    },
+  },
+  {
+    // js/lead-tracking-lib.js: منطق تتبّع generate_lead — وحدة ES حقيقية
+    // (export/import)، مُحمَّلة في المتصفح عبر <script type="module"> وتُستورَد
+    // مباشرة أيضًا من tests/lead-tracking-lib.test.mjs تحت node:test.
+    files: ["js/lead-tracking-lib.js"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
       globals: BROWSER_GLOBALS,
     },
     rules: {
