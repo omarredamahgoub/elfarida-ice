@@ -7,9 +7,18 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "wrangler pages dev .",
-    "deploy": "wrangler pages deploy . --project-name elfarida-ice"
+    "deploy": "wrangler pages deploy . --project-name elfarida-ice",
+    "deploy:full": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1",
+    "lint": "eslint functions js/index.js tests",
+    "format": "prettier --check functions/**/*.js js/index.js tests/**/*.mjs",
+    "format:write": "prettier --write functions/**/*.js js/index.js tests/**/*.mjs",
+    "test": "node --test tests/"
   },
   "devDependencies": {
-    "wrangler": "^4.93.0"
+    "wrangler": "^4.93.0",
+    "eslint": "^10.6.0",
+    "@eslint/js": "^10.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.4"
   }
 }

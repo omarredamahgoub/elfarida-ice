@@ -1,0 +1,36 @@
+# اعتماديات وأدلة أدوات
+node_modules
+backups
+.wrangler
+dist
+
+# ملفات JS مُصغَّرة يدويًا (لا يوجد خط بناء بعد) — راجع eslint.config.mjs لنفس القائمة
+js/a11y-audit.js
+js/about.js
+js/about-en.js
+js/article-shell.js
+js/blog.js
+js/blog-en.js
+js/brands.js
+js/brands-en.js
+js/company-profile.js
+js/contact.js
+js/contact-en.js
+js/faq-schema-injector.js
+js/index-en.js
+js/lang-switch.js
+js/perf.js
+js/projects.js
+js/projects-en.js
+js/seo-injector.js
+js/services-deep-content.js
+js/services.js
+js/services-en.js
+js/shared.js
+js/site-shell.js
+js/web-vitals-monitor.js
+
+# خارج نطاق أداة التنسيق حاليًا — HTML/CSS مكتوبة يدويًا، لم تُدرَج بعد ضمن هذا الإعداد
+*.html
+*.css
+*.md

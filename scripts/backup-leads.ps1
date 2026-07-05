@@ -15,12 +15,44 @@
 #   D:\elfarida-ice-deploy\backups\leads-YYYYMMDD-HHmm.json
 #   D:\elfarida-ice-deploy\backups\settings\settings-YYYYMMDD-HHmm.json
 # Retention: keeps the last 26 backups of each (~6 months of weekly runs).
+#
+# Optional secondary copy (single point of failure mitigation):
+#   $secondaryBackupPath below is empty by default, meaning backups only
+#   live on this machine's disk (D:\elfarida-ice-deploy\backups). Set it
+#   to any writable folder path — e.g. a OneDrive/Google Drive/Dropbox
+#   synced folder, a mapped network drive, or a USB drive — to also copy
+#   every backup there. This script does not assume or configure any
+#   specific cloud provider; it only copies files to whatever local path
+#   you point it at (syncing that path elsewhere is up to your own setup).
+#   Leave it empty ('') to keep today's on-disk-only behaviour unchanged.
 # ═══════════════════════════════════════════════════════════════════
 $ErrorActionPreference = 'Stop'
 $root    = 'D:\elfarida-ice-deploy'
 Set-Location $root   # wrangler writes its cache to the CWD; must be writable
 $bakDir  = Join-Path $root 'backups'
 New-Item -ItemType Directory -Force -Path $bakDir | Out-Null
+
+# Set this to enable a secondary copy, e.g.:
+#   $secondaryBackupPath = 'C:\Users\<you>\OneDrive\elfarida-ice-backups'
+$secondaryBackupPath = ''
+
+function Copy-ToSecondary {
+    param(
+        [Parameter(Mandatory)][string]$SourceFile,
+        [Parameter(Mandatory)][string]$RelativeSubfolder
+    )
+    if ([string]::IsNullOrWhiteSpace($secondaryBackupPath)) { return }
+    try {
+        $destDir = Join-Path $secondaryBackupPath $RelativeSubfolder
+        New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+        Copy-Item -Path $SourceFile -Destination $destDir -Force
+        "secondary copy written: $(Join-Path $destDir (Split-Path $SourceFile -Leaf))"
+    } catch {
+        # Never fail the whole backup run just because the secondary
+        # destination is unreachable (drive unplugged, path renamed, etc.).
+        "WARNING: secondary backup copy failed ($RelativeSubfolder): $($_.Exception.Message)"
+    }
+}
 
 $stamp = (Get-Date).ToString('yyyyMMdd-HHmm')
 $out   = Join-Path $bakDir "leads-$stamp.json"
@@ -37,6 +69,7 @@ Get-ChildItem $bakDir -Filter 'leads-*.json' |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
 "backup written: $out"
+Copy-ToSecondary -SourceFile $out -RelativeSubfolder '.'
 
 # ── Settings table (sensitive: admin_pwd_hash, resend_api_key, turnstile_secret) ──
 # Kept in its own subfolder so it's obviously distinct from routine lead
@@ -56,3 +89,4 @@ Get-ChildItem $settingsDir -Filter 'settings-*.json' |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
 "backup written: $settingsOut"
+Copy-ToSecondary -SourceFile $settingsOut -RelativeSubfolder 'settings'

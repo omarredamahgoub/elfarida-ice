@@ -214,13 +214,8 @@ initCarousel({trackId:"clientsTrack",  prevBtnId:"clientsPrevBtn",  nextBtnId:"c
     if(!ok) return;
     hide("hero-success"); hide("hero-error");
     btnSub.disabled = true; btnSub.textContent = "جاري الإرسال...";
-    var data = {};
-    new FormData(form).forEach(function(v,k){ data[k]=v; });
-    fetch("/api/quote",{
-      method:"POST",
-      headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body:JSON.stringify(data)
-    }).then(function(r){ return r.json(); })
+    // منطق الإرسال موحَّد عبر SiteShell.postLead (site-shell.js يُحمَّل دائماً قبل التفاعل الفعلي مع الصفحة)
+    window.SiteShell.postLead(form)
       .then(function(r){ r.success ? (show("hero-success"), form.reset()) : showError(r && r.message); })
       .catch(function(){ showError(); })
       .finally(function(){ btnSub.disabled=false; btnSub.textContent="أرسل الطلب"; });
