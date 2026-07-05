@@ -1,1 +1,0 @@
-!function(){"use strict";document.addEventListener("DOMContentLoaded",function(){"undefined"!=typeof AOS&&AOS.init({duration:1e3,once:!0})})}();

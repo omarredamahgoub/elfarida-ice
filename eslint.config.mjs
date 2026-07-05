@@ -8,10 +8,7 @@ import prettier from "eslint-config-prettier";
  * عن الناتج المضغوط. لا تُعِد تهيئة أو تنسيق هذه الملفات يدويًا.
  */
 const MINIFIED_JS = [
-  "js/a11y-audit.js",
   "js/about.js",
-  "js/about-en.js",
-  "js/article-shell.js",
   "js/blog.js",
   "js/blog-en.js",
   "js/brands.js",
@@ -20,7 +17,6 @@ const MINIFIED_JS = [
   "js/contact.js",
   "js/contact-en.js",
   "js/faq-schema-injector.js",
-  "js/index-en.js",
   "js/lang-switch.js",
   "js/perf.js",
   "js/projects.js",
@@ -31,7 +27,6 @@ const MINIFIED_JS = [
   "js/services-en.js",
   "js/shared.js",
   "js/site-shell.js",
-  "js/web-vitals-monitor.js",
 ];
 
 const BROWSER_GLOBALS = {
