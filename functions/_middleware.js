@@ -69,6 +69,18 @@ export async function onRequest(context) {
       .transform(response);
 
     transformed.headers.set("Content-Security-Policy", csp);
+
+    // Cloudflare's "Speed Brain" zone feature auto-injects a
+    // Speculation-Rules header instructing Chrome to speculatively
+    // prefetch same-origin links. On this zone those prefetch requests are
+    // then refused at Cloudflare's edge (response: 503, header
+    // `cf-speculation-refused: prefetch refused: not eligible`), which
+    // Chrome logs as a console error and Lighthouse flags under Best
+    // Practices. Stripping the header here prevents Chrome from attempting
+    // prefetches that the edge will reject anyway; it has no effect on
+    // normal navigation, which is unaffected either way.
+    transformed.headers.delete("Speculation-Rules");
+
     return transformed;
   } catch (_) {
     return response;
