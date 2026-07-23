@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <link rel="stylesheet" href="/cairo.css?v=20260617" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      أنظمة الراك (Rack) متعددة الضواغط: الدليل الهندسي الشامل | الفريدة آيس
+    </title>
+    <meta
+      name="description"
+      content="دليل هندسي مُفصّل لأنظمة الراك متعددة الضواغط في التبريد الصناعي: مبدأ توزيع الحمل، التحكم بضغط الرأس العائم، إدارة الزيت، ومقارنة الموثوقية والكفاءة مقابل الوحدات المستقلة."
+    />
+    <meta
+      name="keywords"
+      content="نظام راك تبريد، ضواغط متعددة راك، Compressor Rack System، تصميم راك تبريد صناعي، توزيع الحمل ضواغط، السعودية"
+    />
+    <link
+      rel="canonical"
+      href="https://elfaridaice.com/assets/articles/compressor-rack-systems.html"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/ace-logos/elfaridaice.webp"
+    />
+    <link
+      rel="alternate"
+      hreflang="ar"
+      href="https://elfaridaice.com/assets/articles/compressor-rack-systems.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://elfaridaice.com/assets/articles/compressor-rack-systems-en.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://elfaridaice.com/assets/articles/compressor-rack-systems.html"
+    />
+    <meta
+      property="og:title"
+      content="أنظمة الراك (Rack) متعددة الضواغط: الدليل الهندسي الشامل"
+    />
+    <meta
+      property="og:description"
+      content="لماذا تتفوق أنظمة الراك متعددة الضواغط على الوحدات المستقلة في المستودعات الكبرى ومصانع الأغذية؟ دليل هندسي في التصميم والتشغيل والصيانة."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://elfaridaice.com/assets/articles/compressor-rack-systems.html"
+    />
+    <meta
+      property="og:image"
+      content="https://elfaridaice.com/assets/gallery/rack-3-bitzer-compressors.webp"
+    />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="الفريدة آيس" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EngMoha64468185" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta name="author" content="فريق هندسة التبريد — الفريدة آيس" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "أنظمة الراك (Rack) متعددة الضواغط: الدليل الهندسي الشامل",
+        "description": "دليل هندسي لأنظمة الراك متعددة الضواغط في التبريد الصناعي: التصميم والتشغيل والصيانة",
+        "author": { "@type": "Organization", "name": "الفريدة آيس" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "الفريدة آيس",
+          "url": "https://elfaridaice.com"
+        },
+        "url": "https://elfaridaice.com/assets/articles/compressor-rack-systems.html",
+        "inLanguage": "ar",
+        "datePublished": "2026-07-23",
+        "dateModified": "2026-07-23",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://elfaridaice.com/assets/gallery/rack-3-bitzer-compressors.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": "https://elfaridaice.com/assets/articles/compressor-rack-systems.html",
+        "articleSection": "أنظمة التبريد الصناعي",
+        "keywords": "راك تبريد, ضواغط متعددة, توزيع الحمل, ضغط الرأس العائم"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://elfaridaice.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "المدونة",
+            "item": "https://elfaridaice.com/blog.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "أنظمة الراك متعددة الضواغط",
+            "item": "https://elfaridaice.com/assets/articles/compressor-rack-systems.html"
+          }
+        ]
+      }
+    </script>
+
+    <!-- ═══ PWA + Resource Hints + Schema Injector ═══ -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <script src="../../js/seo-injector.js" defer></script>
+    <link rel="stylesheet" href="../../css/shared.css" />
+    <link rel="stylesheet" href="../../tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../css/site-shell.css" />
+<link rel="stylesheet" href="../../css/article.css" />
+  <style>.site-header__logo{block-size:clamp(2.75rem,4.4vw,3.85rem);inline-size:auto;display:block;max-block-size:4rem}</style></head>
+  <body class="bg-slate-50 text-right" dir="rtl">
+    <div id="site-header"></div>
+    <div id="read-progress"></div>
+
+    <div class="bg-white border-b border-slate-200">
+      <div class="max-w-5xl mx-auto px-4 py-12">
+        <div
+          class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-bold"
+        >
+          <a href="../../index.html" class="hover:text-blue-600">الرئيسية</a
+          ><span>›</span>
+          <a href="../../blog.html" class="hover:text-blue-600"
+            >المدونة الهندسية</a
+          ><span>›</span>
+          <span class="text-slate-600">أنظمة التبريد الصناعي</span>
+        </div>
+        <span
+          class="inline-block bg-purple-50 text-purple-600 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
+          >أنظمة التبريد الصناعي</span
+        >
+        <h1
+          class="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-5 article-h1-tight"
+        >
+          أنظمة الراك متعددة الضواغط<br class="hidden md:block" />
+          الدليل الهندسي الشامل
+        </h1>
+        <p
+          class="text-xl text-slate-500 font-light leading-relaxed max-w-3xl mb-8"
+        >
+          حين يتجاوز حجم المشروع قدرة وحدة تكثيف مستقلة واحدة، يصبح نظام الراك
+          متعدد الضواغط الخيار الهندسي الأنسب من حيث الموثوقية والكفاءة
+          وسهولة الصيانة.
+        </p>
+        <div class="flex flex-wrap items-center gap-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center text-white font-black text-sm"
+            >
+              م.أ
+            </div>
+            <div>
+              <p class="text-sm font-black text-slate-800 leading-none mb-0.5">
+                م. أحمد الغامدي
+              </p>
+              <p class="text-xs text-slate-400 font-bold">
+                مهندس أنظمة التبريد · خبرة +15 سنة
+              </p>
+            </div>
+          </div>
+          <div class="w-px h-8 bg-slate-200 hidden sm:block"></div>
+          <div class="text-sm text-slate-400 font-bold">
+            <span class="text-slate-600">23 يوليو 2026</span><br />وقت
+            القراءة: 11 دقيقة
+          </div>
+          <div class="flex items-center gap-3 mr-auto">
+            <span class="text-xs text-slate-400 font-bold">شارك:</span>
+            <a
+              href="#"
+              aria-label="مشاركة عبر واتساب"
+              class="text-green-500 text-xl"
+              ><i class="fab fa-whatsapp" aria-hidden="true"></i
+            ></a>
+            <a
+              href="#"
+              aria-label="مشاركة عبر تويتر"
+              class="text-blue-500 text-xl"
+              ><i class="fab fa-twitter" aria-hidden="true"></i
+            ></a>
+            <a
+              href="#"
+              aria-label="مشاركة عبر لينكدإين"
+              class="text-blue-800 text-xl"
+              ><i class="fab fa-linkedin" aria-hidden="true"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="grid lg:grid-cols-[1fr_300px] gap-14 items-start">
+        <article class="prose-article" data-aos="fade-up">
+          <div class="rounded-3xl overflow-hidden shadow-2xl mb-10">
+            <img
+              src="../gallery/rack-3-bitzer-compressors.webp"
+              alt="نظام راك بثلاثة ضواغط بيتزر في التبريد الصناعي"
+              class="w-full h-72 object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <p>
+            في المشاريع الصناعية الكبرى — المستودعات اللوجستية متعددة الأقسام،
+            مصانع تعبئة الأغذية، أو منشآت التجزئة الغذائية الكبيرة — لا تكفي
+            وحدة تكثيف واحدة لتغطية الحمل الحراري الكلي، ولا يكون تركيب عدة
+            وحدات مستقلة تماماً هو الحل الأمثل اقتصادياً وتشغيلياً. هنا يأتي
+            دور نظام الراك (Compressor Rack)، وهو منظومة تجمع عدة ضواغط على
+            هيكل واحد يتشاركون خط سحب مشترك وخط تفريغ مشترك، ويعملان تحت لوحة
+            تحكم مركزية واحدة تُدير تتابع التشغيل حسب الحِمل الفعلي.
+          </p>
+
+          <p>
+            نستعرض في هذا الدليل مبدأ عمل أنظمة الراك، مكوناتها الأساسية،
+            وأهم اعتبارات التصميم والصيانة التي نطبقها في مشاريع الفريدة آيس
+            لمستودعات التبريد والتجميد بمختلف الأحجام.
+          </p>
+
+          <h2 id="concept">ما هو نظام الراك ولماذا نستخدمه؟</h2>
+          <p>
+            بدلاً من تركيب وحدة تكثيف بسعة واحدة ثابتة، يجمع نظام الراك عدة
+            ضواغط (غالباً من 2 إلى 6 ضواغط) بأحجام متفاوتة أو متساوية على
+            إطار واحد، متصلة بخط سحب مشترك (Common Suction Manifold) وخط
+            تفريغ مشترك (Common Discharge Manifold)، مع مكثف مشترك أو عدة
+            مكثفات تعمل بالتوازي. الفكرة الأساسية هي تقسيم السعة الكلية
+            المطلوبة على عدة وحدات صغيرة بدلاً من الاعتماد على وحدة ضخمة
+            واحدة.
+          </p>
+          <p>
+            هذا التقسيم يمنح النظام قدرة على تشغيل عدد الضواغط الذي يطابق
+            الحِمل الفعلي فقط، بدلاً من تشغيل وحدة كبيرة بكامل طاقتها حتى في
+            أوقات الحِمل المنخفض — وهذا هو مصدر التوفير الأكبر في الطاقة
+            مقارنة بالوحدات المستقلة التقليدية.
+          </p>
+
+          <h2 id="components">المكونات الأساسية لنظام الراك</h2>
+
+          <div class="tip-card">
+            <div class="tip-number">01</div>
+            <div class="tip-body">
+              <h3>مجموعة الضواغط (Compressor Bank)</h3>
+              <p>
+                عادة ما تُصمم بمزيج من ضاغط أو ضاغطين "قائدين" (Lead) بسعة
+                متغيرة عبر VFD للتحكم الدقيق بالحمل الجزئي، وضواغط "تابعة"
+                (Lag) ثابتة السرعة تدخل الخدمة تدريجياً مع ارتفاع الطلب. هذا
+                التوزيع يحمي الضواغط من التشغيل والإيقاف المتكرر (Short
+                Cycling) الذي يُقصّر عمرها.
+              </p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-number">02</div>
+            <div class="tip-body">
+              <h3>فاصل الزيت المشترك (Common Oil Separator)</h3>
+              <p>
+                نظراً لأن الضواغط تتشارك خط تفريغ واحداً، يلزم فاصل زيت
+                مركزي عالي الكفاءة يمنع هجرة الزيت خارج النظام، إلى جانب
+                نظام موازنة زيت (Oil Equalization) يضمن توزيعاً متساوياً
+                لمستوى الزيت بين كرانكيس الضواغط المختلفة — وهي نقطة الفشل
+                الأكثر شيوعاً في أنظمة الراك سيئة الصيانة.
+              </p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-number">03</div>
+            <div class="tip-body">
+              <h3>وحدة التحكم المركزية (Rack Controller)</h3>
+              <p>
+                لوحة تحكم واحدة (مثل Danfoss AK-PC أو ما يعادلها) تراقب ضغط
+                السحب وتُقرر تلقائياً عدد الضواغط الواجب تشغيلها، وترتيب
+                تدويرها (Compressor Rotation) لتوزيع ساعات التشغيل بالتساوي
+                بين جميع الوحدات وإطالة عمرها الافتراضي مجتمعة.
+              </p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-number">04</div>
+            <div class="tip-body">
+              <h3>صمامات العزل الفردية (Isolation Valves)</h3>
+              <p>
+                كل ضاغط مُجهّز بصمامات سحب وتفريغ منفصلة تسمح بعزله بالكامل
+                عن الشبكة لإجراء الصيانة أو الاستبدال دون إيقاف بقية النظام
+                — وهذه إحدى أهم مزايا الراك عملياً في بيئة تشغيل مستمرة.
+              </p>
+            </div>
+          </div>
+
+          <h2 id="head-pressure">التحكم بضغط الرأس العائم (Floating Head Pressure)</h2>
+          <p>
+            من أهم مزايا أنظمة الراك الحديثة قدرتها على تفعيل استراتيجية
+            "ضغط الرأس العائم"، أي السماح لضغط التكثيف بالانخفاض تلقائياً مع
+            انخفاض درجة حرارة الهواء المحيط بدلاً من تثبيته عند قيمة عليا
+            ثابتة طوال العام. في مناخ المملكة حيث تتراوح درجات الحرارة
+            الخارجية بين 45°م صيفاً وأقل من 15°م شتاءً وليلاً، يعني هذا فرق
+            طاقة كبير يمكن استثماره بضبط صحيح لمنحنى التحكم دون الإخلال
+            بأداء صمام التمدد.
+          </p>
+
+          <h2 id="advantages">الراك مقابل الوحدات المستقلة: مقارنة عملية</h2>
+          <div
+            class="rounded-2xl overflow-hidden border border-slate-200 shadow-lg my-6"
+          >
+            <table class="article-table">
+              <thead>
+                <tr>
+                  <th>المعيار</th>
+                  <th>وحدات مستقلة متعددة</th>
+                  <th>نظام راك مركزي</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>الاحتياطي عند العطل</td>
+                  <td>يتطلب وحدة احتياطية كاملة منفصلة</td>
+                  <td>N+1 ضمن نفس الراك بدون تجهيزات إضافية</td>
+                </tr>
+                <tr>
+                  <td>مطابقة الحِمل الجزئي</td>
+                  <td>ضعيفة — تشغيل/إيقاف متكرر</td>
+                  <td>دقيقة عبر تدرج تشغيل الضواغط</td>
+                </tr>
+                <tr>
+                  <td>سهولة الصيانة</td>
+                  <td>إيقاف كامل للخط أثناء الصيانة</td>
+                  <td>عزل ضاغط واحد دون إيقاف المنظومة</td>
+                </tr>
+                <tr>
+                  <td>مساحة التركيب</td>
+                  <td>أكبر — وحدات متفرقة</td>
+                  <td>أصغر — تجميع مركزي</td>
+                </tr>
+                <tr>
+                  <td>التكلفة الأولية</td>
+                  <td>أقل للمشاريع الصغيرة</td>
+                  <td>أفضل اقتصادياً للأحمال الكبيرة والمتعددة</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="applications">التطبيقات الأنسب لأنظمة الراك</h2>
+          <p>
+            تبرز أنظمة الراك بقوة في المستودعات اللوجستية الكبرى التي تحتاج
+            خدمة عدة غرف بدرجات حرارة مختلفة (Multi-Temp) من منظومة واحدة —
+            مثلاً غرفة تبريد +2°م وغرفة تجميد −18°م على نفس الراك عبر خطوط
+            تمدد منفصلة لكل غرفة. كذلك في مصانع تعبئة الدواجن واللحوم حيث
+            الحِمل الحراري يتذبذب بشدة بين نوبات التشغيل، وفي مراكز التوزيع
+            الغذائي التي تعمل بأنظمة تحميل وتفريغ مستمرة على مدار الساعة.
+          </p>
+
+          <div class="callout callout-success">
+            <span class="callout-icon">✓</span>
+            <div class="callout-body">
+              <strong>قاعدة تصميم أساسية</strong>
+              احسب دائماً السعة الكلية المطلوبة بهامش تصميم 15 إلى 20% فوق
+              الحِمل الفعلي، ثم وزّع هذه السعة على 3 إلى 4 ضواغط كحد أدنى
+              لضمان مرونة تشغيلية حقيقية عند العطل الجزئي أو الصيانة.
+            </div>
+          </div>
+
+          <h2 id="maintenance">صيانة أنظمة الراك: نقاط لا يجوز إغفالها</h2>
+          <p>
+            الصيانة الدورية لنظام الراك تختلف عن صيانة الوحدة المستقلة في
+            عدة نقاط جوهرية. أولاً، فحص توازن مستوى الزيت بين كرانكيس جميع
+            الضواغط أسبوعياً — أي فارق ملحوظ يشير لمشكلة في خط الموازنة أو
+            في فاصل الزيت المركزي. ثانياً، مراجعة سجل تدوير تشغيل الضواغط
+            (Rotation Log) للتأكد من أن لوحة التحكم توزّع ساعات التشغيل
+            بالتساوي وليست تُحمّل ضاغطاً واحداً بشكل دائم. ثالثاً، اختبار كل
+            صمام عزل فردي دورياً للتأكد من إحكام الغلق قبل الحاجة الفعلية له
+            في حالة طارئة.
+          </p>
+
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠</span>
+            <div class="callout-body">
+              <strong>تحذير هندسي</strong>
+              تجاهل موازنة الزيت بين الضواغط لفترة طويلة يؤدي غالباً إلى
+              تلف كرانك شافت أحد الضواغط بسبب نقص التشحيم بينما تبدو بقية
+              الضواغط في حالة طبيعية — وهو عطل مكلف يمكن تفاديه بالكامل
+              بفحص دوري بسيط.
+            </div>
+          </div>
+
+          <h2 id="conclusion">الخلاصة</h2>
+          <p>
+            نظام الراك متعدد الضواغط ليس مجرد بديل للوحدات المستقلة، بل هو
+            استثمار هندسي يعيد التوازن بين الموثوقية وكفاءة الطاقة وسهولة
+            التشغيل طويل المدى. اختيار عدد الضواغط الصحيح، واستراتيجية
+            التحكم المناسبة، وبرنامج صيانة يراعي خصوصية الراك — هي العناصر
+            الثلاثة التي تحدد نجاح المشروع أو تكلفته الخفية على المدى
+            الطويل.
+          </p>
+
+          <div
+            class="bg-blue-900 text-white rounded-3xl p-8 mt-10 text-center"
+          >
+            <h3 class="text-2xl font-black mb-3">
+              تخطط لمشروع تبريد بأحمال كبيرة أو متعددة الدرجات؟
+            </h3>
+            <p class="text-blue-200 mb-6 font-light">
+              فريق الفريدة آيس يُصمم أنظمة الراك بدقة هندسية وفق حِملك
+              الفعلي ومتطلبات التشغيل المستمر
+            </p>
+            <a
+              href="../../contact.html"
+              class="inline-block bg-white text-blue-900 font-black px-10 py-4 rounded-2xl hover:bg-blue-50 transition shadow-xl"
+              >اطلب استشارة هندسية</a
+            >
+          </div>
+        </article>
+
+        <aside
+          class="sidebar-sticky hidden lg:block"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              محتويات المقال
+            </div>
+            <div class="p-4"></div>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              أرقام سريعة
+            </div>
+            <div class="p-4">
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >عدد الضواغط النموذجي</span
+                ><span class="font-mono-tech font-bold text-blue-800 text-sm"
+                  >3 – 6</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >هامش التصميم</span
+                ><span class="font-mono-tech font-bold text-blue-800 text-sm"
+                  >15 – 20%</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >فحص توازن الزيت</span
+                ><span class="font-mono-tech font-bold text-green-700 text-sm"
+                  >أسبوعي</span
+                >
+              </div>
+              <div class="quick-row">
+                <span class="text-slate-500 text-xs font-bold"
+                  >احتياطي عند العطل</span
+                ><span class="font-mono-tech font-bold text-green-700 text-sm"
+                  >N+1</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mb-6"
+          >
+            <div
+              class="bg-slate-900 text-white px-5 py-4 text-sm font-black tracking-wide"
+            >
+              الوسوم
+            </div>
+            <div class="p-4 flex flex-wrap gap-2">
+              <span
+                class="text-xs bg-purple-100 text-purple-700 font-bold px-3 py-1.5 rounded-full"
+                >نظام راك</span
+              >
+              <span
+                class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1.5 rounded-full"
+                >توزيع الحمل</span
+              >
+              <span
+                class="text-xs bg-blue-100 text-blue-700 font-bold px-3 py-1.5 rounded-full"
+                >ضغط الرأس العائم</span
+              >
+            </div>
+          </div>
+          <div class="bg-blue-800 text-white rounded-2xl p-5 text-center">
+            <i class="fas fa-phone-alt text-blue-300 text-2xl mb-3 block"></i>
+            <p class="font-black text-sm mb-1">استشارة هندسية مجانية</p>
+            <p class="text-blue-300 text-xs mb-4">فريقنا جاهز لمساعدتك</p>
+            <a
+              href="tel:0598366214"
+              class="block bg-white text-blue-900 font-black text-sm py-2.5 rounded-xl hover:bg-blue-50 transition"
+              >اتصل الآن</a
+            >
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <section class="py-20 bg-white border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <h2 class="text-3xl font-black text-slate-900">مقالات ذات صلة</h2>
+            <p class="text-slate-500 mt-1">من المدونة الهندسية للفريدة آيس</p>
+          </div>
+          <a
+            href="../../blog.html"
+            class="hidden md:block text-blue-700 font-bold border-b-2 border-blue-700"
+            >تصفح الكل</a
+          >
+        </div>
+        <div class="grid md:grid-cols-3 gap-10">
+          <article class="blog-card group" data-aos="fade-up">
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/bitzer-compressor-components.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-blue-600 font-black text-sm">صيانة الضواغط</span>
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="bitzer-maintenance-ar.html"
+                >دليل صيانة كمبروسر Bitzer</a
+              >
+            </h3>
+          </article>
+          <article
+            class="blog-card group"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/13.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-red-600 font-black text-sm">أنظمة التحكم</span>
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="danfoss-controller-setting.html"
+                >ضبط كنترولر دانفوس EKC لغرف التبريد</a
+              >
+            </h3>
+          </article>
+          <article
+            class="blog-card group"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="rounded-3xl overflow-hidden shadow-xl mb-6">
+              <img
+                src="../gallery/copeland-outdoor-units.webp"
+                alt=""
+                class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-purple-600 font-black text-sm">مقارنة تقنية</span>
+            <h3 class="text-xl font-extrabold mt-3 group-hover:text-blue-700">
+              <a href="copeland-scroll-vs-recip.html"
+                >كوبلاند سكرول vs الترددي</a
+              >
+            </h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
+      window.addEventListener("scroll", () => {
+        const d = document.documentElement;
+        document.getElementById("read-progress").style.width =
+          Math.min(
+            (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100,
+            100,
+          ) + "%";
+      });
+      const secs = document.querySelectorAll("h2[id]"),
+        tocs = document.querySelectorAll(".toc-link");
+      window.addEventListener("scroll", () => {
+        let cur = "";
+        secs.forEach((s) => {
+          if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+        });
+        tocs.forEach((a) => {
+          a.classList.toggle(
+            "text-blue-700",
+            a.getAttribute("href") === "#" + cur,
+          );
+          a.classList.toggle(
+            "font-black",
+            a.getAttribute("href") === "#" + cur,
+          );
+        });
+      });
+    </script>
+    <div id="site-footer"></div>
+
+    <script src="../../js/lang-switch.js" defer></script>
+    <script src="../../js/site-shell.js" defer></script>
+  </body>
+</html>

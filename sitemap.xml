@@ -908,6 +908,26 @@
   </url>
 
   <url>
+    <loc>https://elfaridaice.com/assets/articles/chiller-preventive-maintenance.html</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/chiller-preventive-maintenance.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/chiller-preventive-maintenance-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/chiller-preventive-maintenance.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/compressor-rack-systems.html</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/compressor-rack-systems.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/compressor-rack-systems-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/compressor-rack-systems.html" />
+  </url>
+
+  <url>
     <loc>https://elfaridaice.com/assets/articles/energy-saving-tips.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
@@ -1060,6 +1080,26 @@
     <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html" />
     <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/danfoss-controller-setting-en.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/danfoss-controller-setting.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/chiller-preventive-maintenance-en.html</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/chiller-preventive-maintenance.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/chiller-preventive-maintenance-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/chiller-preventive-maintenance.html" />
+  </url>
+
+  <url>
+    <loc>https://elfaridaice.com/assets/articles/compressor-rack-systems-en.html</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="ar"       href="https://elfaridaice.com/assets/articles/compressor-rack-systems.html" />
+    <xhtml:link rel="alternate" hreflang="en"       href="https://elfaridaice.com/assets/articles/compressor-rack-systems-en.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elfaridaice.com/assets/articles/compressor-rack-systems.html" />
   </url>
 
   <url>
