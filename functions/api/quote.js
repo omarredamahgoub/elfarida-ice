@@ -32,7 +32,9 @@ export async function onRequestPost(context) {
     if (JSON.stringify(data).length > 8000) {
       return json({ success: false, message: "حجم الطلب كبير جدًّا." }, 413);
     }
-  } catch (_) { /* non-serializable → treat as bad request */ }
+  } catch (_) {
+    /* non-serializable → treat as bad request */
+  }
 
   // 2) Honeypot — pretend success so bots do not retry.
   if (data.botcheck) return json({ success: true, message: "تمّ الاستلام." });
@@ -41,20 +43,37 @@ export async function onRequestPost(context) {
   //    protected="1". The newsletter and any other path skip it (they rely on
   //    the honeypot + per-IP rate limit). Secret lives in D1 (env not injected).
   if (String(data.protected) === "1") {
-    const tsSecret = await getSetting(env.DB, "turnstile_secret") || env.TURNSTILE_SECRET || "";
+    const tsSecret = (await getSetting(env.DB, "turnstile_secret")) || env.TURNSTILE_SECRET || "";
     if (tsSecret) {
       const token = data["cf-turnstile-response"] || data.turnstileToken || "";
       const ok = await verifyTurnstile(tsSecret, token, request.headers.get("CF-Connecting-IP"));
-      if (!ok) return json({ success: false, message: "فشل التحقّق من أنّك لست روبوتًا. حدِّث الصفحة وحاول مجدّدًا." }, 403);
+      if (!ok)
+        return json(
+          {
+            success: false,
+            message: "فشل التحقّق من أنّك لست روبوتًا. حدِّث الصفحة وحاول مجدّدًا.",
+          },
+          403
+        );
     }
   }
 
   // 4) Minimal validation.
   const name = pick(data, ["name", "Name", "الاسم", "full_name"]);
   const email = pick(data, ["email", "Email", "البريد", "البريد_الإلكتروني"]);
-  const phone = pick(data, ["phone", "Phone", "Mobile", "mobile", "الهاتف", "الجوال", "رقم_الجوال"]);
-  if (!name && !phone && !email) return json({ success: false, message: "يرجى إدخال بيانات التواصل." }, 422);
-  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ success: false, message: "صيغة البريد غير صحيحة." }, 422);
+  const phone = pick(data, [
+    "phone",
+    "Phone",
+    "Mobile",
+    "mobile",
+    "الهاتف",
+    "الجوال",
+    "رقم_الجوال",
+  ]);
+  if (!name && !phone && !email)
+    return json({ success: false, message: "يرجى إدخال بيانات التواصل." }, 422);
+  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
+    return json({ success: false, message: "صيغة البريد غير صحيحة." }, 422);
 
   // 4.5) Lightweight per-IP rate limit (anti-flood) backed by D1.
   // Real visitors almost never submit >5 times in 10 minutes; bots flooding
@@ -65,11 +84,18 @@ export async function onRequestPost(context) {
       const since = new Date(Date.now() - 10 * 60 * 1000).toISOString();
       const recent = await env.DB.prepare(
         "SELECT COUNT(*) AS n FROM leads WHERE ip = ? AND created_at > ?"
-      ).bind(clientIp, since).first();
+      )
+        .bind(clientIp, since)
+        .first();
       if (recent && recent.n >= 5) {
-        return json({ success: false, message: "لقد أرسلت عدّة طلبات للتوّ. يرجى المحاولة بعد قليل." }, 429);
+        return json(
+          { success: false, message: "لقد أرسلت عدّة طلبات للتوّ. يرجى المحاولة بعد قليل." },
+          429
+        );
       }
-    } catch (_) { /* fail open — never block a genuine user on a check error */ }
+    } catch (_) {
+      /* fail open — never block a genuine user on a check error */
+    }
   }
 
   // 5) Persist (durable). Never block the user on a storage hiccup.
@@ -78,17 +104,23 @@ export async function onRequestPost(context) {
     try {
       await env.DB.prepare(
         "INSERT INTO leads (id, created_at, name, email, phone, subject, payload, ip, ua) VALUES (?,?,?,?,?,?,?,?,?)"
-      ).bind(
-        crypto.randomUUID(),
-        new Date().toISOString(),
-        name, email, phone,
-        pick(data, ["subject", "الموضوع", "service", "Service"]),
-        JSON.stringify(stripNoise(data)),
-        request.headers.get("CF-Connecting-IP") || "",
-        request.headers.get("user-agent") || ""
-      ).run();
+      )
+        .bind(
+          crypto.randomUUID(),
+          new Date().toISOString(),
+          name,
+          email,
+          phone,
+          pick(data, ["subject", "الموضوع", "service", "Service"]),
+          JSON.stringify(stripNoise(data)),
+          request.headers.get("CF-Connecting-IP") || "",
+          request.headers.get("user-agent") || ""
+        )
+        .run();
       stored = true;
-    } catch (_) { /* fall through; email may still deliver */ }
+    } catch (_) {
+      /* fall through; email may still deliver */
+    }
   }
 
   // 6) Notify (best-effort). Config lives in D1 (env secrets are not injected
@@ -96,22 +128,36 @@ export async function onRequestPost(context) {
   let emailed = false;
   const cfg = await loadMailConfig(env);
   if (cfg.apiKey && cfg.to.length) {
-    try { emailed = await sendEmail(cfg, { name, email, data }); } catch (_) { /* ignore */ }
+    try {
+      emailed = await sendEmail(cfg, { name, email, data });
+    } catch (_) {
+      /* ignore */
+    }
   }
 
   // 6b) Customer auto-acknowledgement (best-effort, never blocks the response).
   if (cfg.apiKey && email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    try { await sendCustomerConfirmation(cfg, { name, email }); } catch (_) { /* ignore */ }
+    try {
+      await sendCustomerConfirmation(cfg, { name, email });
+    } catch (_) {
+      /* ignore */
+    }
   }
 
   if (!stored && !emailed) {
-    return json({ success: false, message: "تعذّر استلام الطلب مؤقّتًا. يرجى المحاولة لاحقًا أو الاتّصال بنا." }, 502);
+    return json(
+      {
+        success: false,
+        message: "تعذّر استلام الطلب مؤقّتًا. يرجى المحاولة لاحقًا أو الاتّصال بنا.",
+      },
+      502
+    );
   }
   return json({ success: true, message: "تمّ استلام طلبك بنجاح، وسنتواصل معك في أقرب وقت." });
 }
 
 export async function onRequestOptions() {
-  return new Response(null, { status: 204, headers: { "Allow": "POST, OPTIONS" } });
+  return new Response(null, { status: 204, headers: { Allow: "POST, OPTIONS" } });
 }
 
 /* ── helpers ───────────────────────────────────────────────── */
@@ -157,7 +203,10 @@ async function verifyTurnstile(secret, token, ip) {
   body.append("secret", secret);
   body.append("response", token);
   if (ip) body.append("remoteip", ip);
-  const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body });
+  const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    body,
+  });
   const out = await resp.json().catch(() => ({ success: false }));
   return !!out.success;
 }
@@ -179,20 +228,28 @@ async function loadMailConfig(env) {
       const res = await env.DB.prepare(
         "SELECT k, v FROM settings WHERE k IN ('resend_api_key','lead_to','lead_from')"
       ).all();
-      for (const r of (res?.results || [])) row[r.k] = r.v;
-    } catch (_) { /* fall back to env */ }
+      for (const r of res?.results || []) row[r.k] = r.v;
+    } catch (_) {
+      /* fall back to env */
+    }
   }
   const toRaw = row.lead_to || env.LEAD_TO || DEFAULT_TO;
   return {
     apiKey: row.resend_api_key || env.RESEND_API_KEY || "",
     from: row.lead_from || env.LEAD_FROM || DEFAULT_FROM,
-    to: String(toRaw).split(/[,;\s]+/).map((s) => s.trim()).filter(Boolean),
+    to: String(toRaw)
+      .split(/[,;\s]+/)
+      .map((s) => s.trim())
+      .filter(Boolean),
   };
 }
 
 async function sendEmail(cfg, { name, email, data }) {
   const rows = Object.entries(stripNoise(data))
-    .map(([k, v]) => `<tr><td style="padding:6px 10px;border:1px solid #e2e8f0;font-weight:700">${esc(k)}</td><td style="padding:6px 10px;border:1px solid #e2e8f0">${esc(v)}</td></tr>`)
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding:6px 10px;border:1px solid #e2e8f0;font-weight:700">${esc(k)}</td><td style="padding:6px 10px;border:1px solid #e2e8f0">${esc(v)}</td></tr>`
+    )
     .join("");
   const html = `<div dir="rtl" style="font-family:sans-serif;max-width:640px;margin:auto">
     <h2 style="color:#1e3a8a">طلب عرض سعر / تواصل جديد</h2>
@@ -201,7 +258,9 @@ async function sendEmail(cfg, { name, email, data }) {
   const payload = {
     from: cfg.from,
     to: cfg.to,
-    subject: pick(data, ["subject", "الموضوع", "service", "Service"]) || `طلب جديد${name ? " - " + name : ""}`,
+    subject:
+      pick(data, ["subject", "الموضوع", "service", "Service"]) ||
+      `طلب جديد${name ? " - " + name : ""}`,
     html,
   };
   if (email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) payload.reply_to = email;
@@ -246,5 +305,8 @@ function json(obj, status = 200) {
 
 function esc(s) {
   return String(s == null ? "" : s)
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }

@@ -55,10 +55,7 @@ describe("shouldTrackLead", () => {
   });
   test("false when the server reports failure", () => {
     const fd = fakeFormData({ Name: "Omar", botcheck: "" });
-    assert.equal(
-      shouldTrackLead({ success: false, message: "خطأ" }, fd),
-      false,
-    );
+    assert.equal(shouldTrackLead({ success: false, message: "خطأ" }, fd), false);
   });
   test("false when the honeypot was filled, even though the server said success:true", () => {
     const fd = fakeFormData({ Name: "Omar", botcheck: "spam" });
@@ -256,7 +253,7 @@ describe("trackLeadFromResponse (full orchestration)", () => {
         responseJson: { success: true },
         formData: fakeFormData({ botcheck: "" }),
         formId: "contact-form",
-      }),
+      })
     );
   });
   test("returns false and does nothing for an empty/undefined context", () => {

@@ -61,9 +61,10 @@ const WORKER_GLOBALS = {
   crypto: "readonly",
   URL: "readonly",
   URLSearchParams: "readonly",
+  FormData: "readonly",
+  HTMLRewriter: "readonly",
   TextEncoder: "readonly",
   TextDecoder: "readonly",
-  HTMLRewriter: "readonly",
   btoa: "readonly",
   atob: "readonly",
   escape: "readonly",
@@ -71,8 +72,6 @@ const WORKER_GLOBALS = {
   console: "readonly",
 };
 
-// تُستخدم عبر دوال functions/ بكثرة: catch (_) { /* تجاهل متعمَّد */ } — نمط
-// مقصود لتفويت الفشل بأمان (fail open)، وليس متغيّرًا منسيًّا.
 const UNUSED_VARS_RULE = [
   "warn",
   { argsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" },
@@ -85,7 +84,6 @@ export default [
   js.configs.recommended,
   prettier,
   {
-    // ملفات js/ المكتوبة بصيغة مقروءة (غير مُصغَّرة) كسكربتات كلاسيكية عادية.
     files: ["js/index.js"],
     languageOptions: {
       ecmaVersion: 2022,
@@ -97,9 +95,6 @@ export default [
     },
   },
   {
-    // js/lead-tracking-lib.js: منطق تتبّع generate_lead — وحدة ES حقيقية
-    // (export/import)، مُحمَّلة في المتصفح عبر <script type="module"> وتُستورَد
-    // مباشرة أيضًا من tests/lead-tracking-lib.test.mjs تحت node:test.
     files: ["js/lead-tracking-lib.js"],
     languageOptions: {
       ecmaVersion: 2022,
@@ -111,7 +106,6 @@ export default [
     },
   },
   {
-    // دوال Cloudflare Pages Functions (Workers runtime، وحدات ES).
     files: ["functions/**/*.js"],
     languageOptions: {
       ecmaVersion: 2022,
@@ -123,7 +117,6 @@ export default [
     },
   },
   {
-    // اختبارات node:test — بيئة Node قياسية، وحدات ES.
     files: ["tests/**/*.mjs"],
     languageOptions: {
       ecmaVersion: 2022,

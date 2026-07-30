@@ -85,10 +85,7 @@ describe("isValidUuid", () => {
 
 describe("esc", () => {
   test("escapes the five HTML-sensitive characters", () => {
-    assert.equal(
-      esc(`<a href="x">&'</a>`),
-      "&lt;a href=&quot;x&quot;&gt;&amp;'&lt;/a&gt;",
-    );
+    assert.equal(esc(`<a href="x">&'</a>`), "&lt;a href=&quot;x&quot;&gt;&amp;'&lt;/a&gt;");
   });
   test("treats null/undefined as an empty string", () => {
     assert.equal(esc(null), "");
@@ -106,21 +103,21 @@ describe("isRateLimited", () => {
 
   test("false when there are fewer attempts than the threshold", () => {
     const attempts = Array.from({ length: 4 }, (_, i) =>
-      new Date(now.getTime() - i * 60 * 1000).toISOString(),
+      new Date(now.getTime() - i * 60 * 1000).toISOString()
     );
     assert.equal(isRateLimited(attempts, now, windowMs, maxAttempts), false);
   });
 
   test("true once attempts reach the threshold inside the window", () => {
     const attempts = Array.from({ length: 5 }, (_, i) =>
-      new Date(now.getTime() - i * 60 * 1000).toISOString(),
+      new Date(now.getTime() - i * 60 * 1000).toISOString()
     );
     assert.equal(isRateLimited(attempts, now, windowMs, maxAttempts), true);
   });
 
   test("attempts outside the window are ignored", () => {
     const attempts = Array.from({ length: 10 }, (_, i) =>
-      new Date(now.getTime() - (windowMs + i * 60 * 1000)).toISOString(),
+      new Date(now.getTime() - (windowMs + i * 60 * 1000)).toISOString()
     );
     assert.equal(isRateLimited(attempts, now, windowMs, maxAttempts), false);
   });
@@ -188,17 +185,11 @@ describe("matchesStatus", () => {
 
 describe("toRiyadhDisplay", () => {
   test("converts a UTC midnight timestamp to Riyadh time (UTC+3)", () => {
-    assert.equal(
-      toRiyadhDisplay("2026-01-01T00:00:00.000Z"),
-      "01/01/2026 03:00",
-    );
+    assert.equal(toRiyadhDisplay("2026-01-01T00:00:00.000Z"), "01/01/2026 03:00");
   });
 
   test("rolls over to the next day near midnight", () => {
-    assert.equal(
-      toRiyadhDisplay("2026-01-01T21:30:00.000Z"),
-      "02/01/2026 00:30",
-    );
+    assert.equal(toRiyadhDisplay("2026-01-01T21:30:00.000Z"), "02/01/2026 00:30");
   });
 
   test("returns the raw input for an unparsable timestamp", () => {
@@ -224,9 +215,7 @@ describe("isRecent", () => {
   });
 
   test("respects a custom hours window", () => {
-    const twoHoursAgo = new Date(
-      now.getTime() - 2 * 60 * 60 * 1000,
-    ).toISOString();
+    const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString();
     assert.equal(isRecent(twoHoursAgo, now, 1), false);
     assert.equal(isRecent(twoHoursAgo, now, 3), true);
   });
@@ -406,7 +395,7 @@ describe("sortRows", () => {
     const sorted = sortRows(rows, "created_at", "desc");
     assert.deepEqual(
       sorted.map((r) => r.name),
-      ["amal", "Bilal", "Zaid"],
+      ["amal", "Bilal", "Zaid"]
     );
   });
 
@@ -414,7 +403,7 @@ describe("sortRows", () => {
     const sorted = sortRows(rows, "created_at", "asc");
     assert.deepEqual(
       sorted.map((r) => r.name),
-      ["Zaid", "Bilal", "amal"],
+      ["Zaid", "Bilal", "amal"]
     );
   });
 
@@ -422,7 +411,7 @@ describe("sortRows", () => {
     const sorted = sortRows(rows, "name", "asc");
     assert.deepEqual(
       sorted.map((r) => r.name),
-      ["amal", "Bilal", "Zaid"],
+      ["amal", "Bilal", "Zaid"]
     );
   });
 
@@ -430,7 +419,7 @@ describe("sortRows", () => {
     const sorted = sortRows(rows, "status", "asc");
     assert.deepEqual(
       sorted.map((r) => r.status),
-      ["closed", "contacted", "new"],
+      ["closed", "contacted", "new"]
     );
   });
 
@@ -438,7 +427,7 @@ describe("sortRows", () => {
     const sorted = sortRows(rows, "email", "sideways");
     assert.deepEqual(
       sorted.map((r) => r.name),
-      ["amal", "Bilal", "Zaid"],
+      ["amal", "Bilal", "Zaid"]
     );
   });
 
@@ -451,7 +440,7 @@ describe("sortRows", () => {
     const sorted = sortRows(tied, "created_at", "desc");
     assert.deepEqual(
       sorted.map((r) => r.name),
-      ["A", "B", "C"],
+      ["A", "B", "C"]
     );
   });
 

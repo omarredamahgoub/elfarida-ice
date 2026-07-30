@@ -92,19 +92,17 @@ export async function onRequestGet(context) {
   const returnQs = returnParams.toString();
 
   const { results } = await env.DB.prepare(
-    "SELECT id, created_at, name, email, phone, subject, ip, status, notes FROM leads ORDER BY created_at DESC LIMIT 500",
+    "SELECT id, created_at, name, email, phone, subject, ip, status, notes FROM leads ORDER BY created_at DESC LIMIT 500"
   ).all();
   const rows = results || [];
   const stats = computeStats(rows, new Date());
   const decorated = markDuplicates(rows);
-  const filtered = decorated.filter(
-    (r) => matchesQuery(r, q) && matchesStatus(r, statusFilter),
-  );
+  const filtered = decorated.filter((r) => matchesQuery(r, q) && matchesStatus(r, statusFilter));
 
   if (fmt === "json")
     return new Response(
       JSON.stringify(filtered, null, 2),
-      noStore("application/json; charset=utf-8"),
+      noStore("application/json; charset=utf-8")
     );
   if (fmt === "csv") return csv(filtered);
 
@@ -120,7 +118,7 @@ export async function onRequestGet(context) {
       page: currentPage,
       totalPages,
       returnQs,
-    }),
+    })
   );
 }
 
@@ -133,11 +131,7 @@ export async function onRequestPost(context) {
   const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
 
   // ── authenticated row actions: change status / notes / delete a lead ──
-  if (
-    action === "update_status" ||
-    action === "update_notes" ||
-    action === "delete"
-  ) {
+  if (action === "update_status" || action === "update_notes" || action === "delete") {
     const cred = await getCred(env);
     if (!cred || !(await validSession(request, cred))) {
       return htmlResp(loginPage("انتهت الجلسة، سجّل الدخول مرة أخرى."), 401);
@@ -150,15 +144,11 @@ export async function onRequestPost(context) {
       await env.DB.prepare("DELETE FROM leads WHERE id = ?").bind(id).run();
     } else if (action === "update_notes") {
       const notes = (form.get("notes") || "").toString().slice(0, 2000);
-      await env.DB.prepare("UPDATE leads SET notes = ? WHERE id = ?")
-        .bind(notes, id)
-        .run();
+      await env.DB.prepare("UPDATE leads SET notes = ? WHERE id = ?").bind(notes, id).run();
     } else {
       const status = (form.get("status") || "").toString();
       if (!isValidStatus(status)) return text("حالة غير صالحة.", 400);
-      await env.DB.prepare("UPDATE leads SET status = ? WHERE id = ?")
-        .bind(status, id)
-        .run();
+      await env.DB.prepare("UPDATE leads SET status = ? WHERE id = ?").bind(status, id).run();
     }
     return new Response(null, {
       status: 303,
@@ -178,26 +168,18 @@ export async function onRequestPost(context) {
     const current = (form.get("current_password") || "").toString();
     const next = (form.get("new_password") || "").toString();
     if (!safeEq(await sha256(current), cred.hash)) {
-      return htmlResp(
-        securityPage("كلمة المرور الحالية غير صحيحة.", true),
-        401,
-      );
+      return htmlResp(securityPage("كلمة المرور الحالية غير صحيحة.", true), 401);
     }
     if (!isValidNewPassword(next)) {
-      return htmlResp(
-        securityPage("كلمة المرور الجديدة يجب ألا تقل عن 8 أحرف.", true),
-        422,
-      );
+      return htmlResp(securityPage("كلمة المرور الجديدة يجب ألا تقل عن 8 أحرف.", true), 422);
     }
     const newHash = await sha256(next);
-    await env.DB.prepare(
-      "INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ?)",
-    )
+    await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ?)")
       .bind(newHash)
       .run();
     return redirectWithSession(
       await makeSession(cred.user, newHash),
-      "/admin/leads?settings=1&ok=1",
+      "/admin/leads?settings=1&ok=1"
     );
   }
 
@@ -212,14 +194,10 @@ export async function onRequestPost(context) {
     if (!isValidNewPassword(pass))
       return htmlResp(setupPage("كلمة المرور يجب ألا تقل عن 8 أحرف."), 422);
     const hash = await sha256(pass);
-    await env.DB.prepare(
-      "INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_user', ?)",
-    )
+    await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_user', ?)")
       .bind(u)
       .run();
-    await env.DB.prepare(
-      "INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ?)",
-    )
+    await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ?)")
       .bind(hash)
       .run();
     return redirectWithSession(await makeSession(u, hash));
@@ -229,9 +207,9 @@ export async function onRequestPost(context) {
     const minutes = Math.ceil(LOGIN_WINDOW_MS / 60000);
     return htmlResp(
       loginPage(
-        `محاولات دخول كثيرة وفاشلة من هذا العنوان. يرجى الانتظار ${minutes} دقيقة والمحاولة مجددًا.`,
+        `محاولات دخول كثيرة وفاشلة من هذا العنوان. يرجى الانتظار ${minutes} دقيقة والمحاولة مجددًا.`
       ),
-      429,
+      429
     );
   }
 
@@ -244,36 +222,28 @@ export async function onRequestPost(context) {
 
 /* ── auth ─────────────────────────────────────────────────── */
 async function ensure(env) {
+  await env.DB.prepare("CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT)").run();
   await env.DB.prepare(
-    "CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT)",
-  ).run();
-  await env.DB.prepare(
-    "CREATE TABLE IF NOT EXISTS admin_login_attempts (ip TEXT NOT NULL, attempted_at TEXT NOT NULL)",
+    "CREATE TABLE IF NOT EXISTS admin_login_attempts (ip TEXT NOT NULL, attempted_at TEXT NOT NULL)"
   ).run();
   try {
-    await env.DB.prepare(
-      "ALTER TABLE leads ADD COLUMN status TEXT NOT NULL DEFAULT 'new'",
-    ).run();
+    await env.DB.prepare("ALTER TABLE leads ADD COLUMN status TEXT NOT NULL DEFAULT 'new'").run();
   } catch (_) {
     // Column already exists from a previous deploy — safe to ignore.
   }
   try {
-    await env.DB.prepare(
-      "ALTER TABLE leads ADD COLUMN notes TEXT NOT NULL DEFAULT ''",
-    ).run();
+    await env.DB.prepare("ALTER TABLE leads ADD COLUMN notes TEXT NOT NULL DEFAULT ''").run();
   } catch (_) {
     // Column already exists from a previous deploy — safe to ignore.
   }
 }
 async function getCred(env) {
   const { results } = await env.DB.prepare(
-    "SELECT k, v FROM settings WHERE k IN ('admin_user','admin_pwd_hash')",
+    "SELECT k, v FROM settings WHERE k IN ('admin_user','admin_pwd_hash')"
   ).all();
   const m = {};
   for (const r of results || []) m[r.k] = r.v;
-  return m.admin_pwd_hash
-    ? { user: m.admin_user || "admin", hash: m.admin_pwd_hash }
-    : null;
+  return m.admin_pwd_hash ? { user: m.admin_user || "admin", hash: m.admin_pwd_hash } : null;
 }
 async function makeSession(user, keyHex) {
   const exp = Date.now() + MAXAGE * 1000;
@@ -315,7 +285,7 @@ async function hmac(msg, keyHex) {
     enc(keyHex),
     { name: "HMAC", hash: "SHA-256" },
     false,
-    ["sign"],
+    ["sign"]
   );
   return hex(await crypto.subtle.sign("HMAC", key, enc(msg)));
 }
@@ -323,9 +293,7 @@ function enc(s) {
   return new TextEncoder().encode(s);
 }
 function hex(buf) {
-  return [...new Uint8Array(buf)]
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 function b64u(s) {
   return btoa(unescape(encodeURIComponent(s)))
@@ -335,9 +303,7 @@ function b64u(s) {
 }
 function ub64(s) {
   try {
-    return decodeURIComponent(
-      escape(atob(s.replace(/-/g, "+").replace(/_/g, "/"))),
-    );
+    return decodeURIComponent(escape(atob(s.replace(/-/g, "+").replace(/_/g, "/"))));
   } catch {
     return "";
   }
@@ -356,16 +322,14 @@ async function isLoginRateLimited(env, ip) {
   const now = new Date();
   const cutoffIso = new Date(now.getTime() - LOGIN_WINDOW_MS).toISOString();
   try {
-    await env.DB.prepare(
-      "DELETE FROM admin_login_attempts WHERE attempted_at <= ?",
-    )
+    await env.DB.prepare("DELETE FROM admin_login_attempts WHERE attempted_at <= ?")
       .bind(cutoffIso)
       .run();
   } catch (_) {
     /* non-fatal housekeeping */
   }
   const { results } = await env.DB.prepare(
-    "SELECT attempted_at FROM admin_login_attempts WHERE ip = ? AND attempted_at > ?",
+    "SELECT attempted_at FROM admin_login_attempts WHERE ip = ? AND attempted_at > ?"
   )
     .bind(ip, cutoffIso)
     .all();
@@ -373,9 +337,7 @@ async function isLoginRateLimited(env, ip) {
   return isRateLimited(timestamps, now, LOGIN_WINDOW_MS, MAX_LOGIN_ATTEMPTS);
 }
 async function recordFailedLoginAttempt(env, ip) {
-  await env.DB.prepare(
-    "INSERT INTO admin_login_attempts (ip, attempted_at) VALUES (?, ?)",
-  )
+  await env.DB.prepare("INSERT INTO admin_login_attempts (ip, attempted_at) VALUES (?, ?)")
     .bind(ip, new Date().toISOString())
     .run();
 }
@@ -400,23 +362,10 @@ function htmlResp(h, s = 200) {
   });
 }
 function csv(rows) {
-  const cols = [
-    "created_at",
-    "status",
-    "name",
-    "email",
-    "phone",
-    "subject",
-    "ip",
-    "notes",
-  ];
+  const cols = ["created_at", "status", "name", "email", "phone", "subject", "ip", "notes"];
   const out = [cols.join(",")]
     .concat(
-      rows.map((r) =>
-        cols
-          .map((c) => `"${String(r[c] ?? "").replace(/"/g, '""')}"`)
-          .join(","),
-      ),
+      rows.map((r) => cols.map((c) => `"${String(r[c] ?? "").replace(/"/g, '""')}"`).join(","))
     )
     .join("\n");
   return new Response("﻿" + out, {
@@ -430,7 +379,7 @@ function csv(rows) {
 
 const SHELL = (
   title,
-  inner,
+  inner
 ) => `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${title}</title>
 <style>
@@ -501,7 +450,7 @@ function loginPage(msg) {
   ${msg ? `<p class="err">${esc(msg)}</p>` : ""}
   <form method="POST"><label>اسم المستخدم</label><input name="username" autocomplete="username">
   <label>كلمة المرور</label><input name="password" type="password" autocomplete="current-password" required>
-  <div style="margin-top:18px"><button type="submit">دخول</button></div></form></div>`,
+  <div style="margin-top:18px"><button type="submit">دخول</button></div></form></div>`
   );
 }
 function setupPage(err) {
@@ -512,7 +461,7 @@ function setupPage(err) {
   ${err ? `<p class="err">${esc(err)}</p>` : ""}
   <form method="POST"><label>اسم المستخدم</label><input name="username" value="admin" autocomplete="username">
   <label>كلمة المرور (8 أحرف على الأقل)</label><input name="password" type="password" autocomplete="new-password" required>
-  <div style="margin-top:18px"><button type="submit">حفظ وتفعيل</button></div></form></div>`,
+  <div style="margin-top:18px"><button type="submit">حفظ وتفعيل</button></div></form></div>`
   );
 }
 
@@ -528,7 +477,7 @@ function securityPage(msg, isError) {
     <div style="margin-top:18px"><button type="submit">تحديث كلمة المرور</button></div>
   </form>
   <p style="margin-top:20px"><a class="btn" href="/admin/leads">رجوع للطلبات</a></p>
-  </div>`,
+  </div>`
   );
 }
 
@@ -551,27 +500,14 @@ function paginationControls(filters, page, totalPages) {
   if (totalPages <= 1) return "";
   const prevQs = buildQueryString({ ...filters, page: page - 1 });
   const nextQs = buildQueryString({ ...filters, page: page + 1 });
-  const prev =
-    page > 1
-      ? `<a class="btn" href="${esc("/admin/leads?" + prevQs)}">السابق</a>`
-      : "";
+  const prev = page > 1 ? `<a class="btn" href="${esc("/admin/leads?" + prevQs)}">السابق</a>` : "";
   const next =
-    page < totalPages
-      ? `<a class="btn" href="${esc("/admin/leads?" + nextQs)}">التالي</a>`
-      : "";
+    page < totalPages ? `<a class="btn" href="${esc("/admin/leads?" + nextQs)}">التالي</a>` : "";
   return `<div class="pagination">${prev}<span class="stat">صفحة ${page} من ${totalPages}</span>${next}</div>`;
 }
 
 function tablePage(rows, view) {
-  const {
-    stats,
-    filters,
-    filteredCount,
-    rawTotalCount,
-    page,
-    totalPages,
-    returnQs,
-  } = view;
+  const { stats, filters, filteredCount, rawTotalCount, page, totalPages, returnQs } = view;
   const now = new Date();
   const q = filters.q || "";
   const status = filters.status || "";
@@ -579,7 +515,7 @@ function tablePage(rows, view) {
 
   const statusOptionsHtml = STATUS_OPTIONS.map(
     (s) =>
-      `<option value="${s}"${s === status ? " selected" : ""}>${esc(STATUS_LABELS_AR[s])}</option>`,
+      `<option value="${s}"${s === status ? " selected" : ""}>${esc(STATUS_LABELS_AR[s])}</option>`
   ).join("");
 
   const filterForm = `<form method="GET" action="/admin/leads" class="filters">
@@ -607,7 +543,7 @@ function tablePage(rows, view) {
       const statusVal = r.status || DEFAULT_STATUS;
       const rowStatusOptions = STATUS_OPTIONS.map(
         (s) =>
-          `<option value="${s}"${s === statusVal ? " selected" : ""}>${esc(STATUS_LABELS_AR[s])}</option>`,
+          `<option value="${s}"${s === statusVal ? " selected" : ""}>${esc(STATUS_LABELS_AR[s])}</option>`
       ).join("");
       const returnField = `<input type="hidden" name="_return" value="${esc(returnQs)}">`;
       const dupBadge = r.isDuplicate
@@ -672,6 +608,6 @@ function tablePage(rows, view) {
     <th>البريد</th><th>الهاتف</th><th>الموضوع</th><th>IP</th><th>ملاحظات</th><th>إجراءات</th>
   </tr></thead>
   <tbody>${trs || '<tr><td colspan="9" class="muted">لا توجد طلبات مطابقة.</td></tr>'}</tbody></table>
-  ${paginationControls(filters, page, totalPages)}`,
+  ${paginationControls(filters, page, totalPages)}`
   );
 }

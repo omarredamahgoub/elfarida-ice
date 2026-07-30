@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
+    <!-- Google Ads conversion tracking (bridges the existing generate_lead dataLayer event) -->
+    <script src="js/ads-conversion-bridge.js?v=202607110900"></script>
     <link rel="stylesheet" href="/cairo.css?v=20260617" />
     <meta charset="UTF-8" />
     <style>:root{--shell-ink:#0b1320;--shell-navy:#0f2746;--shell-navy-50:#f3f7fc;--shell-cardinal:#b91c2c;--shell-gold:#dc2230;--shell-paper:#ffffff;--shell-border:#d8dde6;--shell-on-primary:#ffffff;--shell-bg:var(--shell-paper);--shell-bg-translucent:rgb(255 255 255/.92);--shell-z-header:100;--shell-ease-out:cubic-bezier(.22,1,.36,1);--shell-ease-soft:cubic-bezier(.4,0,.2,1);--shell-dur-fast:140ms;--shell-dur-base:220ms;--shell-dur-slow:320ms;--shell-container:80rem;--shell-pad-i:clamp(1rem,2.5vw,1.75rem);--shell-radius-xs:.25rem;--shell-radius-sm:.375rem;--shell-radius-md:.5rem;--shell-font-body:"Cairo",system-ui,-apple-system,sans-serif;--shell-font-display:"Cairo",Georgia,serif;--shell-tracking-caps:.12em;--shell-tracking-tight:-.005em}body,html{font-family:Cairo,sans-serif;overflow-x:hidden}:focus-visible{outline:3px solid #3b82f6;outline-offset:3px;border-radius:2px}:focus:not(:focus-visible){outline:0}.site-header{position:sticky;inset-block-start:0;z-index:var(--shell-z-header);background:var(--shell-bg-translucent);border-block-end:1px solid var(--shell-border);-webkit-backdrop-filter:saturate(180%) blur(10px);backdrop-filter:saturate(180%) blur(10px)}.site-header__inner{max-inline-size:var(--shell-container);margin-inline:auto;padding-block:clamp(.85rem,1.4vw,1.15rem);padding-inline:var(--shell-pad-i);display:flex;align-items:center;justify-content:space-between;gap:1.25rem}.site-header__logo{block-size:clamp(2.75rem,4.4vw,3.85rem);inline-size:auto;display:block}.site-header__nav{display:none}@media(min-width:1024px){.site-header__nav{display:flex}}.site-header__toggle{display:inline-flex;align-items:center;justify-content:center;inline-size:2.75rem;block-size:2.75rem;border:1px solid var(--shell-border);border-radius:var(--shell-radius-sm);background:0 0;cursor:pointer}@media(min-width:1024px){.site-header__toggle{display:none}}.site-header__mobile{overflow:hidden;max-block-size:0;opacity:0;pointer-events:none}</style>
@@ -602,9 +604,9 @@
                       >Length (m)</label
                     >
                     <input
-                      type="number"
-                      step="0.1"
-                      min="1"
+                      type="text"
+                      inputmode="decimal"
+                      pattern="[0-9]*\.?[0-9]*"
                       name="Length"
                       id="dim-l"
                       required
@@ -619,9 +621,9 @@
                       >Width (m)</label
                     >
                     <input
-                      type="number"
-                      step="0.1"
-                      min="1"
+                      type="text"
+                      inputmode="decimal"
+                      pattern="[0-9]*\.?[0-9]*"
                       name="Width"
                       id="dim-w"
                       required
@@ -636,9 +638,9 @@
                       >Height (m)</label
                     >
                     <input
-                      type="number"
-                      step="0.1"
-                      min="1"
+                      type="text"
+                      inputmode="decimal"
+                      pattern="[0-9]*\.?[0-9]*"
                       name="Height"
                       id="dim-h"
                       required
@@ -680,6 +682,99 @@
                       <option value="no">No insulation (concrete)</option>
                       <option value="yes">Yes (panel insulation)</option>
                     </select>
+                  </div>
+                </div>
+
+                <div class="pt-2 space-y-4">
+                  <p
+                    class="text-sm font-black text-slate-500 uppercase tracking-widest"
+                  >
+                    Door Specifications
+                  </p>
+                  <div class="grid md:grid-cols-3 gap-4">
+                    <div class="space-y-2">
+                      <label
+                        for="door-type"
+                        class="text-sm font-black text-slate-700"
+                        >Door Type</label
+                      >
+                      <select
+                        name="Door_Type"
+                        id="door-type"
+                        class="form-input w-full p-4 rounded-2xl font-bold bg-slate-50 border"
+                      >
+                        <option value="Hinged">Hinged</option>
+                        <option value="Sliding">Sliding</option>
+                      </select>
+                    </div>
+
+                    <div class="space-y-2">
+                      <label class="text-sm font-black text-slate-700"
+                        >Door Width (cm)</label
+                      >
+                      <div class="flex items-center gap-2">
+                        <button
+                          type="button"
+                          id="door-w-dec"
+                          class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-100 hover:bg-blue-100 text-slate-700 font-black text-lg transition-all active:scale-95"
+                          aria-label="Decrease door width"
+                        >
+                          −
+                        </button>
+                        <input
+                          type="text"
+                          id="door-width-display"
+                          name="Door_Width_cm"
+                          inputmode="numeric"
+                          pattern="[0-9]*"
+                          value="70"
+                          aria-label="Door width in centimetres"
+                          class="form-input w-full p-4 rounded-2xl text-center font-bold bg-blue-50/30 border border-slate-200"
+                        />
+                        <button
+                          type="button"
+                          id="door-w-inc"
+                          class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-100 hover:bg-blue-100 text-slate-700 font-black text-lg transition-all active:scale-95"
+                          aria-label="Increase door width"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="space-y-2">
+                      <label class="text-sm font-black text-slate-700"
+                        >Door Height (cm)</label
+                      >
+                      <div class="flex items-center gap-2">
+                        <button
+                          type="button"
+                          id="door-h-dec"
+                          class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-100 hover:bg-blue-100 text-slate-700 font-black text-lg transition-all active:scale-95"
+                          aria-label="Decrease door height"
+                        >
+                          −
+                        </button>
+                        <input
+                          type="text"
+                          id="door-height-display"
+                          name="Door_Height_cm"
+                          inputmode="numeric"
+                          pattern="[0-9]*"
+                          value="170"
+                          aria-label="Door height in centimetres"
+                          class="form-input w-full p-4 rounded-2xl text-center font-bold bg-blue-50/30 border border-slate-200"
+                        />
+                        <button
+                          type="button"
+                          id="door-h-inc"
+                          class="w-10 h-10 flex-shrink-0 rounded-xl bg-slate-100 hover:bg-blue-100 text-slate-700 font-black text-lg transition-all active:scale-95"
+                          aria-label="Increase door height"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -835,10 +930,11 @@
       </div>
     </aside>
 
-    <script src="js/contact-en.js?v=20260706" defer></script>
+    <script src="js/contact-en.js?v=202607061545" defer></script>
     <div id="site-footer"></div>
 
     <script src="js/lang-switch.js?v=20260616" defer></script>
     <script type="module" src="js/lead-tracking-lib.js?v=20260706"></script>
-    <script src="js/site-shell.js?v=20260706" defer></script>
-  <script src="https://challeng
+    <script src="js/site-shell.js?v=202607061415" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script></body>
+</html>

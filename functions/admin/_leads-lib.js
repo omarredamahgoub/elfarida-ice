@@ -23,8 +23,7 @@ export function isValidStatus(status) {
   return STATUS_OPTIONS.includes(status);
 }
 
-const UUID_RE =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export function isValidUuid(id) {
   return typeof id === "string" && UUID_RE.test(id);
@@ -120,7 +119,7 @@ export function computeStats(rows, now) {
   const riyadhMidnightUtc = Date.UTC(
     riyadhNow.getUTCFullYear(),
     riyadhNow.getUTCMonth(),
-    riyadhNow.getUTCDate(),
+    riyadhNow.getUTCDate()
   );
   const startOfDayUtc = riyadhMidnightUtc - RIYADH_OFFSET_MS;
   const weekAgoUtc = now.getTime() - 7 * 24 * 60 * 60 * 1000;
@@ -176,14 +175,10 @@ export const DEFAULT_PAGE_SIZE = 25;
  */
 export function paginate(rows, page, pageSize = DEFAULT_PAGE_SIZE) {
   const list = rows || [];
-  const size =
-    Number.isFinite(pageSize) && pageSize > 0
-      ? Math.floor(pageSize)
-      : DEFAULT_PAGE_SIZE;
+  const size = Number.isFinite(pageSize) && pageSize > 0 ? Math.floor(pageSize) : DEFAULT_PAGE_SIZE;
   const totalPages = Math.max(1, Math.ceil(list.length / size));
   const rawPage = Number.parseInt(page, 10);
-  const current =
-    Number.isFinite(rawPage) && rawPage > 0 ? Math.min(rawPage, totalPages) : 1;
+  const current = Number.isFinite(rawPage) && rawPage > 0 ? Math.min(rawPage, totalPages) : 1;
   const start = (current - 1) * size;
   return {
     pageRows: list.slice(start, start + size),
@@ -272,17 +267,14 @@ export function markDuplicates(rows) {
   for (const r of list) {
     const phoneKey = normalizeContactKey(r.phone);
     const emailKey = normalizeContactKey(r.email);
-    if (phoneKey)
-      phoneCounts.set(phoneKey, (phoneCounts.get(phoneKey) || 0) + 1);
-    if (emailKey)
-      emailCounts.set(emailKey, (emailCounts.get(emailKey) || 0) + 1);
+    if (phoneKey) phoneCounts.set(phoneKey, (phoneCounts.get(phoneKey) || 0) + 1);
+    if (emailKey) emailCounts.set(emailKey, (emailCounts.get(emailKey) || 0) + 1);
   }
   return list.map((r) => {
     const phoneKey = normalizeContactKey(r.phone);
     const emailKey = normalizeContactKey(r.email);
     const isDuplicate = Boolean(
-      (phoneKey && phoneCounts.get(phoneKey) > 1) ||
-      (emailKey && emailCounts.get(emailKey) > 1),
+      (phoneKey && phoneCounts.get(phoneKey) > 1) || (emailKey && emailCounts.get(emailKey) > 1)
     );
     return { ...r, isDuplicate };
   });

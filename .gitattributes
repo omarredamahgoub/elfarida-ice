@@ -1,0 +1,14 @@
+# فرض نهايات أسطر Unix (LF) على كل ملفات المصدر النصية، بصرف النظر عن إعداد
+# core.autocrlf المحلي على أي جهاز (Windows/macOS/Linux). يمنع هذا الملف تكرار
+# مشكلة انقلاب آلاف الأسطر إلى CRLF محليًا وتضخّم الفروقات (diffs) بلا داعٍ.
+* text=auto eol=lf
+
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.pdf binary
+*.docx binary
