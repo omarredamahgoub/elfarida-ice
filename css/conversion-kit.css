@@ -64,6 +64,17 @@ a.inline-block.text-blue-800 {
 /* Carousel dots render as a 22×32 box — below the size a thumb reliably hits.
    The pseudo-element enlarges only the hit area, so the dots look unchanged
    and stay narrower than their 42px pitch, which keeps them distinguishable. */
+/* The dot rows carry 16 dots at a 32px pitch — 512px of controls in a 360px
+   viewport, with `flex-wrap: nowrap` and a parent that clips. Twelve of the
+   32 dots on the homepage sat outside the screen entirely and could not be
+   reached at all on a phone. Wrapping puts every dot back in reach. */
+@media (max-width: 767px) {
+  .carousel-dots {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+}
+
 .carousel-dot { position: relative; }
 .carousel-dot::after {
   content: "";

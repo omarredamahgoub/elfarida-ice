@@ -19,6 +19,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { join, relative, extname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { stamp } from "../scripts/stamp-assets.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SKIP = new Set(["node_modules", ".git", "backups", ".wrangler", "dist", "assets"]);
@@ -62,35 +63,25 @@ test("the single active number is the one published in the config", () => {
   assert.equal(cfg.contact.phoneWhatsapp.e164, cfg.contact.phonePrimary.e164);
 });
 
-test("every local script and stylesheet shares one cache-busting token", () => {
-  // _headers serves /*.css and /*.js as `max-age=31536000, immutable`, so a
-  // reference without a token — or pinned to an older one — leaves returning
-  // visitors on the previous file for a year with no way to recover.
-  // Checking only the handful of files being edited is what left
-  // css/maintenance-contracts.css stranded on a stale token after its colours
-  // changed, so this covers every local reference and requires them to agree.
-  const REF = /((?:src|href)="(?!https?:|\/\/)[^"]*?\.(?:css|js))(\?v=([^"]*))?"/g;
-  const tokens = new Map();
-  const untokened = [];
-
-  for (const file of HTML_FILES) {
-    for (const m of readFileSync(file, "utf8").matchAll(REF)) {
-      if (!m[3]) {
-        untokened.push(relative(ROOT, file) + " -> " + m[1]);
-        continue;
-      }
-      const list = tokens.get(m[3]) || [];
-      if (list.length < 3) list.push(relative(ROOT, file));
-      tokens.set(m[3], list);
-    }
-  }
-
-  assert.deepEqual(untokened.slice(0, 10), [], "local asset reference without a ?v= token");
-  assert.equal(
-    tokens.size,
-    1,
-    "assets are pinned to different tokens: " +
-      [...tokens.entries()].map(([t, f]) => t + " (" + f.join(", ") + ")").join(" | ")
+test("every asset reference is stamped with the current content hash", () => {
+  // _headers serves /*.css and /*.js as `max-age=31536000, immutable`, so a URL
+  // the browser has already fetched is never revalidated. A stale token is
+  // therefore invisible: the deploy succeeds, the origin has the new file, and
+  // every returning visitor keeps the old one for a year.
+  //
+  // This project hit that twice — once leaving css/maintenance-contracts.css
+  // pinned to an old date after its colours changed, and once when two
+  // consecutive deploys reused the same date, so the second stylesheet reached
+  // nobody. Both were caught only by measuring the live site.
+  //
+  // scripts/stamp-assets.mjs derives the token from the assets' own bytes, so
+  // the question stops being "did I remember to bump it" and becomes an
+  // assertion. Run `npm run stamp` to fix a failure here.
+  const { stale, token } = stamp({ check: true });
+  assert.deepEqual(
+    stale.slice(0, 15),
+    [],
+    `${stale.length} reference(s) are not stamped with ${token} — run: npm run stamp`
   );
 });
 

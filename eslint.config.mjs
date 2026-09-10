@@ -116,6 +116,24 @@ export default [
     },
   },
   {
+    files: ["scripts/**/*.mjs"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        URL: "readonly",
+        Buffer: "readonly",
+        TextEncoder: "readonly",
+        TextDecoder: "readonly",
+      },
+    },
+    rules: {
+      "no-unused-vars": UNUSED_VARS_RULE,
+    },
+  },
+  {
     files: ["tests/**/*.mjs"],
     languageOptions: {
       ecmaVersion: 2022,
