@@ -54,10 +54,44 @@ button.bg-green-500:focus-visible {
    that carry the social proof. */
 p.text-slate-500.text-lg { color: #475569; }
 
+/* slate-400 (#94a3b8) is a border and placeholder tone, not a text tone: on
+   white it measures 2.56:1. It was carrying real content on 40+ pages — the
+   article breadcrumbs, the author credit line, the "شارك:" share label, the
+   glossary term counts and a comparison-table cell on /about. slate-500 reads
+   the same way at 4.76:1. Only text elements are touched, so borders,
+   dividers and icons using the same utility are unaffected. */
+p.text-slate-400,
+span.text-slate-400,
+a.text-slate-400,
+li.text-slate-400,
+td.text-slate-400,
+th.text-slate-400,
+small.text-slate-400 { color: #64748b; }
+
+/* Article category chips use a different spelling from the blog's: the colour
+   utility sits next to its own bg-*-50 rather than next to text-xs/font-bold. */
+.bg-green-50.text-green-600 { color: #15803d; }
+.bg-orange-50.text-orange-600 { color: #c2410c; }
+.bg-cyan-50.text-cyan-600 { color: #0e7490; }
+.bg-blue-50.text-blue-600 { color: #1d4ed8; }
+.bg-red-50.text-red-600 { color: #b91c1c; }
+.bg-sky-50.text-sky-600 { color: #0369a1; }
+.bg-emerald-600.text-white { background-color: #047857; }
+
+/* Glossary letter links measured 8×20 — a two-character target. */
+a.text-slate-300.text-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 40px;
+  min-block-size: 40px;
+}
+
 /* "Read more" on the blog cards measured 86×27, and the equivalent links on
    the homepage service and article cards 30px: each is the only route from a
    card into the page behind it, and all were short of a comfortable tap. */
 a.inline-block.text-blue-800,
+a.text-blue-800.text-xl,
 a.text-blue-400.font-bold {
   padding-block: 6px;
   min-block-size: 40px;
