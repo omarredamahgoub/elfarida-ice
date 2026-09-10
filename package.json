@@ -9,6 +9,7 @@
     "dev": "wrangler pages dev .",
     "deploy": "wrangler pages deploy . --project-name elfarida-ice",
     "deploy:full": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1",
+    "admin:reset": "node scripts/reset-admin-password.mjs",
     "lint": "eslint functions js/index.js js/lead-tracking-lib.js js/conversion-kit.js js/maintenance-estimator.js tests",
     "format": "prettier --check functions/**/*.js js/index.js js/lead-tracking-lib.js tests/**/*.mjs",
     "format:write": "prettier --write functions/**/*.js js/index.js js/lead-tracking-lib.js tests/**/*.mjs",
