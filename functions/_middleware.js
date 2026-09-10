@@ -43,7 +43,15 @@ export async function onRequest(context) {
       "style-src-attr 'unsafe-inline'",
       "img-src 'self' data: https: blob:",
       "font-src 'self' data: https://cdnjs.cloudflare.com",
-      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://cloudflareinsights.com https://challenges.cloudflare.com",
+      // GA4 and Google Ads do not post to the hostnames their loader script is
+      // served from. Measured on the live site, every measurement request was
+      // refused by this directive: analytics.google.com, www.google.com/g/collect,
+      // stats.g.doubleclick.net for GA4, and www.google.com/ccm/collect plus
+      // ad.doubleclick.net for the Ads conversion tag. The tags loaded, ran, and
+      // then had every hit dropped — so the site was paying for Ads while
+      // reporting no conversions, and the generate_lead events fired by
+      // js/conversion-kit.js never reached the property at all.
+      "connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://www.google.com https://*.g.doubleclick.net https://ad.doubleclick.net https://cloudflareinsights.com https://static.cloudflareinsights.com https://challenges.cloudflare.com",
       "frame-src https://challenges.cloudflare.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",

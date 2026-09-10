@@ -137,6 +137,60 @@ test("page-context patterns match the extensionless URLs Pages actually serves",
   }
 });
 
+test("no page ships a syntactically invalid inline script", () => {
+  // Twelve Arabic industry pages shipped
+  //   document.addEventListener('DOMContentLoaded',()=>{if(window.AOS)});
+  // which the parser rejects, so the browser discarded the whole <script> and
+  // logged an uncaught SyntaxError on every visit. Their English twins were
+  // correct, which is exactly why nobody noticed.
+  const offenders = [];
+  for (const file of HTML_FILES) {
+    const text = readFileSync(file, "utf8");
+    for (const m of text.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)) {
+      const body = m[1];
+      if (!body.trim()) continue;
+      // JSON-LD blocks are data, not script.
+      if (/application\/(ld\+json|json)/.test(m[0])) continue;
+      try {
+        new Function(body);
+      } catch (err) {
+        offenders.push(relative(ROOT, file) + " :: " + err.message);
+        break;
+      }
+    }
+  }
+  assert.deepEqual(offenders, [], "inline script does not parse");
+});
+
+test("the honeypot cannot create horizontal overflow", () => {
+  // Left at its static position the 1px field sat past the inline end of an
+  // RTL form and made the document 37px wider than the phone screen, giving
+  // every page that carries the capture block a sideways scroll.
+  const css = readFileSync(join(ROOT, "css", "conversion-kit.css"), "utf8");
+  const block = css.slice(css.indexOf(".efi-hp {"));
+  assert.match(block, /inset-inline-start:\s*0/, "honeypot is not pinned to the inline start");
+  assert.match(block, /inset-block-start:\s*0/, "honeypot is not pinned to the block start");
+  assert.match(css, /\.efi-cap-form,\s*\n?\s*\.efi-calc-form \{[^}]*position:\s*relative/,
+    "the forms provide no positioning context for the pinned honeypot");
+});
+
+test("CSP allows the endpoints GA4 and Google Ads actually post to", () => {
+  // The tags loaded and ran, then had every measurement hit refused by
+  // connect-src — so the site reported no conversions at all.
+  const mw = readFileSync(join(ROOT, "functions", "_middleware.js"), "utf8");
+  const line = mw.split("\n").find((l) => l.includes("connect-src"));
+  assert.ok(line, "connect-src directive not found");
+  for (const host of [
+    "https://analytics.google.com",
+    "https://www.google.com",
+    "https://*.g.doubleclick.net",
+    "https://ad.doubleclick.net",
+    "https://*.google-analytics.com",
+  ]) {
+    assert.ok(line.includes(host), `connect-src is missing ${host}`);
+  }
+});
+
 test("no Arabic text is double-encoded (mojibake)", () => {
   // The signature of UTF-8 read as Latin-1 and re-encoded: Ø or Ù followed by
   // another high byte. Genuine Arabic never produces this sequence.
