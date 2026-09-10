@@ -54,11 +54,17 @@ button.bg-green-500:focus-visible {
    that carry the social proof. */
 p.text-slate-500.text-lg { color: #475569; }
 
-/* "Read more" on the blog cards measured 86×27: the only way into an article
-   from the listing, and too short to hit reliably on a phone. */
-a.inline-block.text-blue-800 {
+/* "Read more" on the blog cards measured 86×27, and the equivalent links on
+   the homepage service and article cards 30px: each is the only route from a
+   card into the page behind it, and all were short of a comfortable tap. */
+a.inline-block.text-blue-800,
+a.text-blue-400.font-bold {
   padding-block: 6px;
   min-block-size: 40px;
+}
+a.text-blue-400.font-bold {
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Carousel dots render as a 22×32 box — below the size a thumb reliably hits.
