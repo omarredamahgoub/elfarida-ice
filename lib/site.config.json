@@ -9,37 +9,85 @@
     "legalNameEn": "Elfarida Ice Industrial Refrigeration Engineering",
     "shortNameAr": "الفريدة آيس",
     "shortNameEn": "Elfarida Ice",
-    "foundingYear": 2004,
-    "yearsOfExperience": 20,
     "completedProjects": 550,
-    "supportPolicy": "24/7",
+    "supportPolicy": "24/7 emergency for maintenance-contract clients",
     "logo": "/assets/ace-logos/elfaridaice.webp",
     "ogImage": "/og-image.webp",
     "primaryColor": "#1e3a8a",
     "accentColor": "#dc2626"
   },
 
+  "// experience": "Experience is attributed to the ENGINEERING TEAM, not to the age of the legal entity. The Commercial Registration dates to 2022 (see registration.crIssueDate), so a company-age claim is not defensible; the same years are defensible as team experience. Schema foundingDate is emitted from crIssueDate for the same reason.",
+  "experience": {
+    "basis": "engineering-team",
+    "years": 20,
+    "label": {
+      "ar": "خبرة الفريق الهندسي",
+      "en": "Engineering team experience"
+    }
+  },
+
   "contact": {
     "phonePrimary": { "display": "0598366214", "e164": "+966598366214" },
-    "phoneWhatsapp": { "display": "0548113865", "e164": "+966548113865" },
+    "phoneWhatsapp": { "display": "0598366214", "e164": "+966598366214" },
     "email": "info@elfaridaice.com",
     "website": "https://elfaridaice.com"
   },
 
+  "registration": {
+    "registeredName": {
+      "ar": "شركة الفريدة ايس للتبريد والتكييف",
+      "en": "Elfarida Ice Refrigeration & Air Conditioning Co."
+    },
+    "legalForm": {
+      "ar": "شركة ذات مسؤولية محدودة (شخص واحد)",
+      "en": "Limited Liability Company (single shareholder)"
+    },
+    "commercialRegistration": "7028430937",
+    "nationalUnifiedNumber": "7028430937",
+    "vatNumber": "314282530700003",
+    "taxIdentificationNumber": "3142825307",
+    "crIssueDate": "2022-03-24",
+    "nationalAddress": {
+      "shortAddress": "EDJA7384",
+      "buildingNumber": "7384",
+      "secondaryNumber": "3333",
+      "district": { "ar": "حي البادية", "en": "Al Badiyah District" },
+      "city": { "ar": "الدمام", "en": "Dammam" },
+      "postalCode": "32243"
+    }
+  },
+
+  "emergency": {
+    "enabled": true,
+    "scope": "maintenance-contract-clients",
+    "label": {
+      "ar": "خط طوارئ 24/7 — لعملاء عقود الصيانة",
+      "en": "24/7 emergency line — maintenance-contract clients"
+    },
+    "phone": { "display": "0598366214", "e164": "+966598366214" }
+  },
+
+  "responsePromise": {
+    "quoteHours": 24,
+    "callbackMinutes": 15,
+    "engineeringQuoteHours": 48
+  },
+
   "headquarters": {
     "ar": {
-      "streetAddress": "حي البادية",
+      "streetAddress": "مبنى 7384، شارع 2، حي البادية",
       "addressLocality": "الدمام",
       "addressRegion": "المنطقة الشرقية",
       "addressCountry": "المملكة العربية السعودية"
     },
     "en": {
-      "streetAddress": "Al-Badiya District",
+      "streetAddress": "Building 7384, Street 2, Al Badiyah District",
       "addressLocality": "Dammam",
       "addressRegion": "Eastern Province",
       "addressCountry": "Saudi Arabia"
     },
-    "postalCode": "32253",
+    "postalCode": "32243",
     "geo": { "lat": 26.4207, "lng": 50.0888 }
   },
 
@@ -61,7 +109,7 @@
   ],
 
   "openingHours": [
-    { "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "08:00", "closes": "17:00" },
+    { "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "08:00", "closes": "17:00" },
     { "dayOfWeek": ["Saturday"], "opens": "08:00", "closes": "14:00" }
   ],
 
@@ -228,6 +276,121 @@
       }
     }
   ],
+
+  "maintenance": {
+    "disclaimer": {
+      "ar": "الأسعار الظاهرة تقديرية أولية تُحتسب من المعادلة المعلنة أدناه، والسعر النهائي يصدر بعد المعاينة الميدانية ومراجعة حالة المعدات.",
+      "en": "Prices shown are preliminary estimates derived from the published formula below. The final price is issued after an on-site survey and equipment condition review."
+    },
+    "unitBasePriceSar": {
+      "cold-room": { "ar": "غرفة تبريد (+2 إلى +8°م)", "en": "Cold room (+2 to +8°C)", "base": 3500 },
+      "freezer-room": { "ar": "غرفة تجميد (-18 إلى -25°م)", "en": "Freezer room (-18 to -25°C)", "base": 4800 },
+      "blast-freezer": { "ar": "تجميد صاعق / عميق (حتى -40°م)", "en": "Blast / deep freezer (to -40°C)", "base": 7500 },
+      "chiller": { "ar": "مبرد صناعي (Chiller)", "en": "Industrial chiller", "base": 9500 },
+      "rack-system": { "ar": "نظام راك مركزي", "en": "Central rack system", "base": 12000 }
+    },
+    "regionFactor": {
+      "eastern": { "ar": "المنطقة الشرقية", "en": "Eastern Province", "factor": 1 },
+      "riyadh": { "ar": "منطقة الرياض", "en": "Riyadh Region", "factor": 1.05 },
+      "other": { "ar": "باقي مناطق المملكة", "en": "Other regions", "factor": 1.15 }
+    },
+    "estimateSpreadPercent": 15,
+    "plans": [
+      {
+        "id": "essential",
+        "factor": 1,
+        "name": { "ar": "الأساسية", "en": "Essential" },
+        "tagline": { "ar": "للمنشآت الصغيرة ذات الأحمال المستقرة", "en": "For small facilities with stable loads" },
+        "visitsPerYear": 2,
+        "responseHours": 48,
+        "emergency247": false,
+        "sparePartsIncluded": false,
+        "features": {
+          "ar": [
+            "زيارتان وقائيتان سنوياً",
+            "فحص الضاغط وقياس ضغوط السحب والطرد",
+            "تنظيف المبخر والمكثف",
+            "قياس شحنة غاز التبريد وكشف التسريب الظاهري",
+            "تقرير حالة فني بعد كل زيارة",
+            "أولوية جدولة على العملاء غير المتعاقدين"
+          ],
+          "en": [
+            "Two preventive visits per year",
+            "Compressor inspection, suction and discharge pressure readings",
+            "Evaporator and condenser cleaning",
+            "Refrigerant charge check and visual leak detection",
+            "Technical condition report after each visit",
+            "Scheduling priority over non-contract clients"
+          ]
+        }
+      },
+      {
+        "id": "professional",
+        "factor": 1.6,
+        "recommended": true,
+        "name": { "ar": "الاحترافية", "en": "Professional" },
+        "tagline": { "ar": "الأنسب للمطاعم والسوبرماركت والمستودعات المتوسطة", "en": "Best fit for restaurants, supermarkets and mid-size warehouses" },
+        "visitsPerYear": 4,
+        "responseHours": 24,
+        "emergency247": false,
+        "sparePartsIncluded": false,
+        "features": {
+          "ar": [
+            "أربع زيارات وقائية سنوياً",
+            "كل ما في الباقة الأساسية",
+            "معايرة متحكمات Danfoss وضبط دورات الديفروست",
+            "فحص لوحة التحكم والتوصيلات الكهربائية",
+            "ضبط السوبر هيت والساب كولنج",
+            "استجابة للأعطال خلال 24 ساعة في أيام العمل",
+            "خصم 10% على قطع الغيار الأصلية",
+            "تقرير كفاءة طاقة سنوي"
+          ],
+          "en": [
+            "Four preventive visits per year",
+            "Everything in Essential",
+            "Danfoss controller calibration and defrost cycle tuning",
+            "Control panel and electrical connection inspection",
+            "Superheat and subcooling adjustment",
+            "24-hour fault response on working days",
+            "10% discount on genuine spare parts",
+            "Annual energy efficiency report"
+          ]
+        }
+      },
+      {
+        "id": "total",
+        "factor": 2.8,
+        "name": { "ar": "الشاملة 24/7", "en": "Total Care 24/7" },
+        "tagline": { "ar": "للمنشآت التي يعني توقفها خسارة مخزون", "en": "For facilities where downtime means lost stock" },
+        "visitsPerYear": 12,
+        "responseHours": 4,
+        "emergency247": true,
+        "sparePartsIncluded": true,
+        "features": {
+          "ar": [
+            "زيارة وقائية شهرية (12 زيارة سنوياً)",
+            "كل ما في الباقة الاحترافية",
+            "خط طوارئ 24/7 على مدار الأسبوع",
+            "استجابة ميدانية خلال 4 ساعات داخل المنطقة الشرقية",
+            "قطع الغيار الاستهلاكية مشمولة (فلاتر · سيور · كونتاكتورات · حساسات)",
+            "عمرة ضاغط واحدة مشمولة خلال مدة العقد",
+            "مراقبة درجات الحرارة وسجل قابل للتدقيق",
+            "خصم 20% على قطع الغيار الرئيسية"
+          ],
+          "en": [
+            "Monthly preventive visit (12 per year)",
+            "Everything in Professional",
+            "24/7 emergency line, all week",
+            "On-site response within 4 hours inside the Eastern Province",
+            "Consumable spares included (filters, belts, contactors, sensors)",
+            "One compressor overhaul included within the contract term",
+            "Temperature monitoring with an auditable log",
+            "20% discount on major spare parts"
+          ]
+        }
+      }
+    ]
+  },
 
   "geoFaqTemplates": [
     {

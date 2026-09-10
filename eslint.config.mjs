@@ -84,7 +84,7 @@ export default [
   js.configs.recommended,
   prettier,
   {
-    files: ["js/index.js"],
+    files: ["js/index.js", "js/conversion-kit.js", "js/maintenance-estimator.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "script",

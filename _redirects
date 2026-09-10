@@ -211,3 +211,16 @@
 /wp-content/*             /                   301
 /من-نحن                   /about.html         301
 /من-نحن/                  /about.html         301
+
+# ───────────────────────────────────────────────────────────────────
+# 15. MAINTENANCE CONTRACTS — short, memorable slugs for print/WhatsApp
+#
+# NOTE: do NOT add a `/maintenance-contracts -> /maintenance-contracts.html`
+# rule. Cloudflare already normalises `/x.html` to `/x`, so such a rule creates
+# an infinite redirect loop. The extensionless URL is served natively.
+# ───────────────────────────────────────────────────────────────────
+/maintenance              /maintenance-contracts.html      301
+/maintenance/             /maintenance-contracts.html      301
+/service-contract         /maintenance-contracts.html      301
+/عقود-الصيانة              /maintenance-contracts.html      301
+/en/maintenance           /maintenance-contracts-en.html   301
