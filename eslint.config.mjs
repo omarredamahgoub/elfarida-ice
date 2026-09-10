@@ -39,6 +39,8 @@ const BROWSER_GLOBALS = {
   fetch: "readonly",
   FormData: "readonly",
   URLSearchParams: "readonly",
+  crypto: "readonly",
+  Blob: "readonly",
   requestAnimationFrame: "readonly",
   cancelAnimationFrame: "readonly",
   ResizeObserver: "readonly",

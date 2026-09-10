@@ -49,6 +49,17 @@ import {
   isValidNewPassword,
   buildQueryString,
 } from "./_leads-lib.js";
+import {
+  CHANNELS,
+  CHANNEL_LABELS_AR,
+  channelLabel,
+  locationLabel,
+  matchesContactQuery,
+  matchesChannel,
+  channelBreakdown,
+  topPages,
+  deviceHint,
+} from "./_contacts-lib.js";
 
 const COOKIE = "efi_admin";
 const MAXAGE = 28800; // 8h
@@ -79,6 +90,12 @@ export async function onRequestGet(context) {
   if (url.searchParams.get("settings") === "1") {
     const ok = url.searchParams.get("ok") === "1";
     return htmlResp(securityPage(ok ? "تم تحديث كلمة المرور بنجاح." : ""));
+  }
+
+  // Contact-intent view: WhatsApp and click-to-call taps recorded by
+  // js/conversion-kit.js. Shares this route's session so the owner signs in once.
+  if (url.searchParams.get("view") === "contacts") {
+    return contactsView(env, url);
   }
 
   const fmt = url.searchParams.get("format");
@@ -120,6 +137,73 @@ export async function onRequestGet(context) {
       returnQs,
     })
   );
+}
+
+/**
+ * Renders the contact-intent log: every WhatsApp / click-to-call tap made from
+ * the site, with the reference code that also travels inside the visitor's own
+ * WhatsApp message.
+ */
+async function contactsView(env, url) {
+  const q = url.searchParams.get("q") || "";
+  const channelFilter = url.searchParams.get("channel") || "";
+  const page = url.searchParams.get("page");
+  const fmt = url.searchParams.get("format");
+
+  let rows;
+  try {
+    const { results } = await env.DB.prepare(
+      "SELECT id, created_at, ref, channel, location, page, page_title, lang, context, ip, ua FROM contact_events ORDER BY created_at DESC LIMIT 1000"
+    ).all();
+    rows = results || [];
+  } catch (_) {
+    // Table absent until migration 0002 is applied — show an empty, explained state.
+    return htmlResp(contactsPage([], { pending: true }));
+  }
+
+  const stats = computeStats(rows, new Date());
+  const breakdown = channelBreakdown(rows);
+  const pages = topPages(rows, 8);
+  const filtered = rows.filter(
+    (r) => matchesContactQuery(r, q) && matchesChannel(r, channelFilter)
+  );
+
+  if (fmt === "json")
+    return new Response(
+      JSON.stringify(filtered, null, 2),
+      noStore("application/json; charset=utf-8")
+    );
+  if (fmt === "csv") return contactsCsv(filtered);
+
+  const { pageRows, page: currentPage, totalPages } = paginate(filtered, page);
+
+  return htmlResp(
+    contactsPage(pageRows, {
+      stats,
+      breakdown,
+      pages,
+      filters: { q, channel: channelFilter },
+      filteredCount: filtered.length,
+      rawTotalCount: rows.length,
+      page: currentPage,
+      totalPages,
+    })
+  );
+}
+
+function contactsCsv(rows) {
+  const head = ["created_at", "ref", "channel", "location", "page", "page_title", "context", "ip"];
+  const esq = (v) => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
+  const body = rows
+    .map((r) => head.map((k) => esq(k === "created_at" ? toRiyadhDisplay(r[k]) : r[k])).join(","))
+    .join("\n");
+  return new Response("﻿" + head.join(",") + "\n" + body, {
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Content-Disposition": 'attachment; filename="contact-events.csv"',
+      "Cache-Control": "no-store",
+    },
+  });
 }
 
 export async function onRequestPost(context) {
@@ -223,6 +307,17 @@ export async function onRequestPost(context) {
 /* ── auth ─────────────────────────────────────────────────── */
 async function ensure(env) {
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT)").run();
+  // Mirrors migrations/0002_contact_events.sql so the contact log works on first
+  // load without a manual migration step.
+  await env.DB.prepare(
+    "CREATE TABLE IF NOT EXISTS contact_events (id TEXT PRIMARY KEY, created_at TEXT NOT NULL, ref TEXT, channel TEXT NOT NULL, location TEXT, page TEXT, page_title TEXT, lang TEXT, context TEXT, referrer TEXT, ip TEXT, ua TEXT)"
+  ).run();
+  await env.DB.prepare(
+    "CREATE INDEX IF NOT EXISTS idx_contact_events_created_at ON contact_events (created_at)"
+  ).run();
+  await env.DB.prepare(
+    "CREATE INDEX IF NOT EXISTS idx_contact_events_ref ON contact_events (ref)"
+  ).run();
   await env.DB.prepare(
     "CREATE TABLE IF NOT EXISTS admin_login_attempts (ip TEXT NOT NULL, attempted_at TEXT NOT NULL)"
   ).run();
@@ -506,6 +601,139 @@ function paginationControls(filters, page, totalPages) {
   return `<div class="pagination">${prev}<span class="stat">صفحة ${page} من ${totalPages}</span>${next}</div>`;
 }
 
+/** Tab strip shared by both views, so each is one click from the other. */
+function viewNav(active) {
+  const tab = (href, label, key) =>
+    `<a class="btn ${active === key ? "" : "btn-secondary"}" href="${href}">${label}</a>`;
+  return `<div class="toolbar">
+    ${tab("/admin/leads", "طلبات النماذج", "leads")}
+    ${tab("/admin/leads?view=contacts", "واتساب ومكالمات", "contacts")}
+    <div class="toolbar-account">
+      <a class="btn btn-secondary" href="/admin/leads?settings=1">الأمان</a>
+      <a class="btn btn-secondary" href="/admin/leads?logout=1">خروج</a>
+    </div>
+  </div>`;
+}
+
+function contactsPage(rows, view) {
+  if (view.pending) {
+    return SHELL(
+      "واتساب ومكالمات",
+      `<h1>واتساب ومكالمات</h1>${viewNav("contacts")}
+      <div class="panel">
+        <p>جدول <code>contact_events</code> غير موجود بعد.</p>
+        <p class="muted">نفّذ الأمر التالي مرة واحدة لتفعيل تسجيل نقرات الواتساب والمكالمات:</p>
+        <p><code>npx wrangler d1 execute elfarida-leads --remote --file=migrations/0002_contact_events.sql</code></p>
+      </div>`
+    );
+  }
+
+  const { stats, breakdown, pages, filters, filteredCount, rawTotalCount, page, totalPages } = view;
+  const q = filters.q || "";
+  const channel = filters.channel || "";
+  const isFiltered = Boolean(q || channel);
+  const now = new Date();
+
+  const channelOptions = CHANNELS.map(
+    (c) =>
+      `<option value="${c}"${c === channel ? " selected" : ""}>${esc(CHANNEL_LABELS_AR[c])}</option>`
+  ).join("");
+
+  const filterForm = `<form method="GET" action="/admin/leads" class="filters">
+    <input type="hidden" name="view" value="contacts">
+    <input type="text" name="q" value="${esc(q)}" placeholder="ابحث برمز المرجع (مثال: EFI-7K3M) أو الصفحة">
+    <select name="channel"><option value="">كل القنوات</option>${channelOptions}</select>
+    <button type="submit">بحث</button>
+    ${isFiltered ? '<a class="btn" href="/admin/leads?view=contacts">إعادة تعيين</a>' : ""}
+  </form>`;
+
+  const statsBar = `<div class="panel stats">
+    <span class="stat"><b>${stats.today}</b> اليوم</span>
+    <span class="stat"><b>${stats.week}</b> هذا الأسبوع</span>
+    <span class="stat"><b>${breakdown.whatsapp}</b> واتساب</span>
+    <span class="stat"><b>${breakdown.phone}</b> مكالمة</span>
+    <span class="stat"><b>${stats.total}</b> الإجمالي</span>
+    ${isFiltered ? `<span class="stat">عرض <b>${filteredCount}</b> من ${rawTotalCount}</span>` : ""}
+  </div>`;
+
+  const topPagesHtml = pages.length
+    ? `<div class="panel">
+        <p class="muted" style="margin:0 0 10px">الصفحات التي تجلب أكثر تواصل</p>
+        <div class="stats">${pages
+          .map(
+            (p) =>
+              `<span class="stat"><b>${p.count}</b> ${esc(p.title || p.page)}</span>`
+          )
+          .join("")}</div>
+      </div>`
+    : "";
+
+  const trs = rows
+    .map((r) => {
+      const recent = isRecent(r.created_at, now, 24);
+      const isWa = r.channel === "whatsapp";
+      return `<tr class="${recent ? "row--new" : ""}">
+      <td data-label="التاريخ">${esc(toRiyadhDisplay(r.created_at))}</td>
+      <td data-label="المرجع">${r.ref ? `<code>${esc(r.ref)}</code>` : '<span class="muted">—</span>'}</td>
+      <td data-label="القناة"><span class="status-badge status-badge--${isWa ? "contacted" : "new"}">${esc(channelLabel(r.channel))}</span></td>
+      <td data-label="من أين">${esc(locationLabel(r.location))}</td>
+      <td data-label="الصفحة">${
+        r.page
+          ? `<a href="${esc(r.page)}" target="_blank" rel="noopener">${esc(r.page_title || r.page)}</a>`
+          : '<span class="muted">—</span>'
+      }</td>
+      <td data-label="السياق">${r.context ? esc(r.context) : '<span class="muted">—</span>'}</td>
+      <td data-label="الجهاز"><span class="muted">${esc(deviceHint(r.ua))}</span></td>
+    </tr>`;
+    })
+    .join("");
+
+  const pager = paginationControlsFor("contacts", filters, page, totalPages);
+
+  return SHELL(
+    "واتساب ومكالمات",
+    `<h1>واتساب ومكالمات</h1>
+    ${viewNav("contacts")}
+    ${statsBar}
+    ${topPagesHtml}
+    <div class="panel">${filterForm}</div>
+    <div class="toolbar">
+      <a class="btn btn-secondary" href="/admin/leads?view=contacts&format=csv${channel ? "&channel=" + encodeURIComponent(channel) : ""}${q ? "&q=" + encodeURIComponent(q) : ""}">تصدير CSV</a>
+      <a class="btn btn-secondary" href="/admin/leads?view=contacts&format=json">JSON</a>
+    </div>
+    <div class="panel" style="padding:12px 16px">
+      <p class="muted" style="margin:0;font-size:13px">
+        كل رسالة واتساب تُفتح من الموقع تحمل رمزاً مثل <code>EFI-7K3M</code>. حين تصلك الرسالة،
+        ابحث بالرمز هنا لتعرف من أي صفحة جاء العميل وفي أي لحظة وما الذي كان يقرأه.
+      </p>
+    </div>
+    ${
+      rows.length
+        ? `<table><thead><tr>
+            <th>التاريخ</th><th>المرجع</th><th>القناة</th><th>من أين</th>
+            <th>الصفحة</th><th>السياق</th><th>الجهاز</th>
+          </tr></thead><tbody>${trs}</tbody></table>${pager}`
+        : `<div class="panel"><p class="muted">${
+            isFiltered ? "لا نتائج مطابقة." : "لا توجد نقرات مسجّلة بعد."
+          }</p></div>`
+    }`
+  );
+}
+
+/** Pagination links that keep the current view and filters. */
+function paginationControlsFor(view, filters, page, totalPages) {
+  if (totalPages <= 1) return "";
+  const link = (p, label) =>
+    `<a class="btn btn-secondary" href="/admin/leads?${buildQueryString({
+      view,
+      ...filters,
+      page: p,
+    })}">${label}</a>`;
+  const prev = page > 1 ? link(page - 1, "السابق") : "";
+  const next = page < totalPages ? link(page + 1, "التالي") : "";
+  return `<div class="pagination">${prev}<span class="stat">صفحة ${page} من ${totalPages}</span>${next}</div>`;
+}
+
 function tablePage(rows, view) {
   const { stats, filters, filteredCount, rawTotalCount, page, totalPages, returnQs } = view;
   const now = new Date();
@@ -591,6 +819,7 @@ function tablePage(rows, view) {
   return SHELL(
     "طلبات الموقع",
     `<h1>طلبات الموقع (${filteredCount})</h1>
+  ${viewNav("leads")}
   <div class="toolbar">
     <a class="btn" href="${esc("/admin/leads?format=csv" + (returnQs ? "&" + returnQs : ""))}">تنزيل CSV</a>
     <a class="btn" href="${esc("/admin/leads" + (returnQs ? "?" + returnQs : ""))}">تحديث</a>

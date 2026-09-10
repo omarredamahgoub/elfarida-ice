@@ -12,7 +12,7 @@
     "lint": "eslint functions js/index.js js/lead-tracking-lib.js js/conversion-kit.js js/maintenance-estimator.js tests",
     "format": "prettier --check functions/**/*.js js/index.js js/lead-tracking-lib.js tests/**/*.mjs",
     "format:write": "prettier --write functions/**/*.js js/index.js js/lead-tracking-lib.js tests/**/*.mjs",
-    "test": "node --test tests/"
+    "test": "node --test \"tests/**/*.test.mjs\""
   },
   "devDependencies": {
     "wrangler": "^4.93.0",

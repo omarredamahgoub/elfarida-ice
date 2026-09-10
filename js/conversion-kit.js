@@ -28,6 +28,36 @@
 
   var CONFIG_URL = "/lib/site.config.json";
   var QUOTE_ENDPOINT = "/api/quote";
+  var EVENT_ENDPOINT = "/api/contact-event";
+
+  /* ─────────────────── contact reference code ─────────────────── */
+
+  /**
+   * A short code minted once per page view and embedded in every pre-filled
+   * WhatsApp message sent from that page.
+   *
+   * A WhatsApp tap is otherwise anonymous: the owner sees a message arrive with
+   * no idea which page produced it. Because the visitor's own message carries
+   * this code, the owner can look it up in the admin panel and recover the
+   * page, the moment and the context (a calculator result, for example).
+   *
+   * Alphabet excludes 0/O/1/I/L so a code read aloud or retyped is unambiguous.
+   */
+  var REF_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
+
+  var pageRef = (function () {
+    var out = "";
+    try {
+      var buf = new Uint8Array(4);
+      crypto.getRandomValues(buf);
+      for (var i = 0; i < 4; i++) out += REF_ALPHABET[buf[i] % REF_ALPHABET.length];
+    } catch (_) {
+      for (var j = 0; j < 4; j++) {
+        out += REF_ALPHABET[Math.floor(Math.random() * REF_ALPHABET.length)];
+      }
+    }
+    return "EFI-" + out;
+  })();
 
   /* ─────────────────────────── helpers ─────────────────────────── */
 
@@ -73,6 +103,7 @@
       gtagPush("event", "contact_click", {
         contact_channel: channel,
         contact_location: location,
+        contact_ref: pageRef,
         page_path: window.location.pathname,
         page_language: lang(),
       });
@@ -86,13 +117,70 @@
     } catch (_) {
       /* analytics must never break a contact action */
     }
+
+    recordContactEvent(channel, location);
+  }
+
+  /**
+   * Persists the tap to the site's own database, so the owner can read it in
+   * /admin/leads rather than only as an aggregate count in GA4.
+   *
+   * `sendBeacon` is used because the browser is already navigating to WhatsApp
+   * or the dialer: a normal fetch would be cancelled mid-flight. It queues the
+   * request with the browser, which delivers it regardless. `fetch` with
+   * keepalive is the fallback for the few engines without sendBeacon.
+   */
+  function recordContactEvent(channel, location) {
+    var payload = {
+      channel: channel,
+      location: location || "inline",
+      ref: pageRef,
+      page: window.location.pathname,
+      pageTitle: (document.title || "").split("|")[0].trim(),
+      lang: lang(),
+      context: lastCalcContext || "",
+    };
+
+    try {
+      var body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(EVENT_ENDPOINT, new Blob([body], { type: "application/json" }));
+        return;
+      }
+      fetch(EVENT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: body,
+        keepalive: true,
+      }).catch(function () {});
+    } catch (_) {
+      /* never block the visitor's click */
+    }
+  }
+
+  /**
+   * The most recent calculator result on this page, carried into the contact
+   * record so a WhatsApp tap from the calculator is stored with the numbers the
+   * visitor was looking at.
+   */
+  var lastCalcContext = "";
+
+  /**
+   * Appends the page's reference code to every outgoing WhatsApp message.
+   * The visitor sends it without thinking about it; the owner reads it in the
+   * received message and looks it up in the admin panel.
+   */
+  function withRef(message) {
+    if (!message) return message;
+    return message + "\n\n" + t("مرجع: ", "Ref: ") + pageRef;
   }
 
   function waLink(e164, message) {
+    var text = withRef(message);
     return (
       "https://wa.me/" +
       String(e164).replace(/[^\d]/g, "") +
-      (message ? "?text=" + encodeURIComponent(message) : "")
+      (text ? "?text=" + encodeURIComponent(text) : "")
     );
   }
 
@@ -396,6 +484,10 @@
   function buildCalcCapture(cfg, host) {
     var result = readCalcResult();
     if (!result) return;
+
+    // Carried into the stored contact event, so a tap from here is recorded
+    // together with the load the visitor had just calculated.
+    lastCalcContext = result.kw + " kW / " + result.rt + " / " + result.vol;
 
     var existing = host.querySelector(".efi-calc-capture");
     if (existing) {
