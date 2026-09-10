@@ -1,0 +1,199 @@
+/* ═══════════════════════════════════════════════════════════════════
+   css/conversion-kit.css
+   Styles for the conversion layer rendered by js/conversion-kit.js.
+
+   These live in a real stylesheet rather than being injected at runtime:
+   the site's Content-Security-Policy sets `style-src 'self' 'nonce-…'`
+   with no 'unsafe-inline', so a <style> element created in JavaScript is
+   inserted into the DOM but never applied (element.sheet stays null).
+   A same-origin file satisfies 'self', is cached, and cannot silently fail.
+
+   Logical properties throughout, so one file serves the RTL and LTR pages.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── header click-to-call ────────────────────────────────────────── */
+.efi-hdr-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+  padding: 6px 10px;
+  border-radius: 8px;
+  direction: ltr;
+}
+.efi-hdr-tel:hover { background: rgb(30 58 138 / 0.1); }
+.efi-hdr-tel svg { inline-size: 18px; block-size: 18px; fill: currentColor; flex: none; }
+@media (max-width: 900px) { .efi-hdr-tel { display: none; } }
+
+/* ── calculator result capture ───────────────────────────────────── */
+.efi-calc-capture {
+  margin-block-start: 14px;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgb(56 189 248 / 0.08);
+  border: 1px solid rgb(56 189 248 / 0.28);
+  text-align: start;
+}
+.efi-calc-capture h3 { margin: 0 0 6px; font-size: 1rem; font-weight: 800; color: inherit; }
+.efi-calc-capture p { margin: 0 0 14px; font-size: 0.83rem; opacity: 0.85; line-height: 1.65; }
+.efi-calc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-block-end: 16px; }
+.efi-calc-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  font: 700 0.85rem/1 inherit;
+  text-decoration: none;
+  color: #fff;
+}
+.efi-calc-actions a svg { inline-size: 18px; block-size: 18px; fill: currentColor; flex: none; }
+.efi-calc-actions a.wa { background: #25d366; color: #06301a; }
+.efi-calc-actions a.tel { background: #1e3a8a; }
+.efi-calc-form { display: grid; gap: 9px; }
+.efi-calc-form input,
+.efi-calc-form button { font-family: inherit; font-size: 0.85rem; }
+.efi-calc-form input {
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid rgb(148 163 184 / 0.4);
+  background: rgb(255 255 255 / 0.06);
+  color: inherit;
+  inline-size: 100%;
+}
+.efi-calc-form input::placeholder { color: inherit; opacity: 0.5; }
+.efi-calc-form button {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 0;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+.efi-calc-form button[disabled] { opacity: 0.6; cursor: progress; }
+.efi-calc-msg { font-size: 0.82rem; margin: 0; line-height: 1.6; }
+.efi-calc-msg.ok { color: #16a34a; }
+.efi-calc-msg.err { color: #dc2626; }
+
+/* ── in-page lead capture ────────────────────────────────────────── */
+.efi-capture {
+  max-inline-size: 52rem;
+  margin: 48px auto 56px;
+  padding: clamp(20px, 4vw, 32px);
+  border-radius: 18px;
+  background: linear-gradient(150deg, #0b1c33 0%, #0d2748 60%, #123362 100%);
+  border: 1px solid rgb(56 189 248 / 0.3);
+  box-shadow: 0 18px 50px -20px rgb(0 0 0 / 0.6);
+  color: #eef6ff;
+  text-align: start;
+}
+.efi-cap-title {
+  margin: 0 0 8px;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+.efi-cap-body { margin: 0 0 18px; font-size: 0.9rem; line-height: 1.75; color: #a8c8e8; }
+.efi-cap-quick { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-block-end: 18px; }
+.efi-cap-wa,
+.efi-cap-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+.efi-cap-wa { background: #25d366; color: #06301a; }
+.efi-cap-tel { background: rgb(255 255 255 / 0.1); color: #eef6ff; border: 1px solid rgb(255 255 255 / 0.22); }
+.efi-cap-link { font-size: 0.84rem; font-weight: 700; color: #7dd3fc; text-decoration: none; }
+.efi-cap-link:hover { text-decoration: underline; }
+.efi-cap-form { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.efi-cap-form input,
+.efi-cap-form button { font-family: inherit; font-size: 0.87rem; }
+.efi-cap-form input {
+  padding: 12px 14px;
+  border-radius: 11px;
+  border: 1px solid rgb(148 163 184 / 0.35);
+  background: rgb(4 12 24 / 0.6);
+  color: #eef6ff;
+  inline-size: 100%;
+}
+.efi-cap-form input::placeholder { color: #7f9ec0; }
+.efi-cap-form input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgb(56 189 248 / 0.16);
+}
+.efi-cap-form button {
+  padding: 12px 20px;
+  border-radius: 11px;
+  border: 0;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.efi-cap-form button[disabled] { opacity: 0.6; cursor: progress; }
+.efi-cap-msg { grid-column: 1 / -1; margin: 0; font-size: 0.83rem; line-height: 1.6; color: #a8c8e8; }
+.efi-cap-msg.ok { color: #34d399; }
+.efi-cap-msg.err { color: #fb7185; }
+@media (max-width: 520px) {
+  .efi-capture { margin-inline: 16px; }
+  .efi-cap-form { grid-template-columns: 1fr; }
+}
+
+/* ── legal identity bar (footer) ─────────────────────────────────── */
+.efi-legal {
+  margin-block-start: 14px;
+  padding-block: 14px 4px;
+  border-block-start: 1px solid rgb(255 255 255 / 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 0;
+  font-size: 0.76rem;
+  line-height: 1.9;
+  opacity: 0.75;
+  text-align: center;
+}
+.efi-legal__item { white-space: nowrap; }
+/* A dot separator drawn by CSS keeps the markup free of decorative text. */
+.efi-legal__item + .efi-legal__item::before {
+  content: "·";
+  margin-inline: 10px;
+  opacity: 0.5;
+}
+/* Registry numbers are Latin digits inside Arabic prose: isolate each one so
+   the bidirectional algorithm cannot merge it with the neighbouring label. */
+.efi-legal bdi {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 700px) {
+  .efi-legal { font-size: 0.72rem; line-height: 1.8; }
+  .efi-legal__item { white-space: normal; }
+  .efi-legal__item + .efi-legal__item::before { margin-inline: 7px; }
+}
+
+/* ── honeypot ────────────────────────────────────────────────────── */
+.efi-hp {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

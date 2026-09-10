@@ -184,97 +184,6 @@
     );
   }
 
-  /* ─────────────────────────── styles ─────────────────────────── */
-
-  var CSS = [
-    ".efi-dock{position:fixed;inset-block-end:16px;inset-inline-end:16px;z-index:9990;",
-    "display:flex;flex-direction:column;gap:10px;align-items:flex-end}",
-    ".efi-dock__btn{display:inline-flex;align-items:center;gap:9px;height:52px;padding:0 18px;",
-    "border-radius:999px;font:600 14px/1 inherit;text-decoration:none;color:#fff;",
-    "box-shadow:0 6px 20px -6px rgba(0,0,0,.45);transition:transform .18s ease,box-shadow .18s ease;",
-    "white-space:nowrap;border:0;cursor:pointer;font-family:inherit}",
-    ".efi-dock__btn:hover,.efi-dock__btn:focus-visible{transform:translateY(-2px);",
-    "box-shadow:0 10px 26px -8px rgba(0,0,0,.55)}",
-    ".efi-dock__btn:focus-visible{outline:3px solid #38bdf8;outline-offset:3px}",
-    ".efi-dock__btn--wa{background:#25d366;color:#06301a}",
-    ".efi-dock__btn--tel{background:#1e3a8a}",
-    ".efi-dock__ico{width:20px;height:20px;flex:none;fill:currentColor}",
-    "@media (max-width:520px){.efi-dock{inset-block-end:12px;inset-inline-end:12px;gap:8px}",
-    ".efi-dock__btn{height:48px;padding:0 15px;font-size:13px}",
-    ".efi-dock__btn--tel .efi-dock__label{display:none}",
-    ".efi-dock__btn--tel{padding:0 14px}}",
-    "@media (prefers-reduced-motion:reduce){.efi-dock__btn{transition:none}}",
-
-    ".efi-hdr-tel{display:inline-flex;align-items:center;gap:7px;font-weight:700;",
-    "text-decoration:none;color:inherit;padding:6px 10px;border-radius:8px;direction:ltr}",
-    ".efi-hdr-tel:hover{background:rgba(30,58,138,.1)}",
-    "@media (max-width:900px){.efi-hdr-tel{display:none}}",
-
-    ".efi-calc-capture{margin-top:14px;padding:18px;border-radius:16px;",
-    "background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.28);text-align:start}",
-    ".efi-calc-capture h3{margin:0 0 6px;font-size:1rem;font-weight:800;color:inherit}",
-    ".efi-calc-capture p{margin:0 0 14px;font-size:.83rem;opacity:.85;line-height:1.65}",
-    ".efi-calc-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}",
-    ".efi-calc-actions a{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;",
-    "border-radius:12px;font:700 .85rem/1 inherit;text-decoration:none;color:#fff}",
-    ".efi-calc-actions a.wa{background:#25d366;color:#06301a}",
-    ".efi-calc-actions a.tel{background:#1e3a8a}",
-    ".efi-calc-form{display:grid;gap:9px}",
-    ".efi-calc-form input,.efi-calc-form button{font-family:inherit;font-size:.85rem}",
-    ".efi-calc-form input{padding:11px 13px;border-radius:10px;border:1px solid rgba(148,163,184,.4);",
-    "background:rgba(255,255,255,.06);color:inherit;width:100%}",
-    ".efi-calc-form input::placeholder{color:inherit;opacity:.5}",
-    ".efi-calc-form button{padding:12px 16px;border-radius:10px;border:0;background:#dc2626;",
-    "color:#fff;font-weight:800;cursor:pointer}",
-    ".efi-calc-form button[disabled]{opacity:.6;cursor:progress}",
-    ".efi-calc-msg{font-size:.82rem;margin:0;line-height:1.6}",
-    ".efi-calc-msg.ok{color:#16a34a}.efi-calc-msg.err{color:#dc2626}",
-    ".efi-hp{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);",
-    "white-space:nowrap;border:0}",
-
-    ".efi-capture{max-width:52rem;margin:48px auto 56px;padding:clamp(20px,4vw,32px);",
-    "border-radius:18px;background:linear-gradient(150deg,#0b1c33 0%,#0d2748 60%,#123362 100%);",
-    "border:1px solid rgba(56,189,248,.3);box-shadow:0 18px 50px -20px rgba(0,0,0,.6);",
-    "color:#eef6ff;text-align:start}",
-    ".efi-cap-title{margin:0 0 8px;font-size:clamp(1.15rem,3vw,1.5rem);font-weight:900;",
-    "color:#fff;line-height:1.35;text-wrap:balance}",
-    ".efi-cap-body{margin:0 0 18px;font-size:.9rem;line-height:1.75;color:#a8c8e8}",
-    ".efi-cap-quick{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}",
-    ".efi-cap-wa,.efi-cap-tel{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;",
-    "border-radius:12px;font-weight:800;font-size:.86rem;text-decoration:none}",
-    ".efi-cap-wa{background:#25d366;color:#06301a}",
-    ".efi-cap-tel{background:rgba(255,255,255,.1);color:#eef6ff;border:1px solid rgba(255,255,255,.22)}",
-    ".efi-cap-link{font-size:.84rem;font-weight:700;color:#7dd3fc;text-decoration:none}",
-    ".efi-cap-link:hover{text-decoration:underline}",
-    ".efi-cap-form{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}",
-    ".efi-cap-form input,.efi-cap-form button{font-family:inherit;font-size:.87rem}",
-    ".efi-cap-form input{padding:12px 14px;border-radius:11px;border:1px solid rgba(148,163,184,.35);",
-    "background:rgba(4,12,24,.6);color:#eef6ff;width:100%}",
-    ".efi-cap-form input::placeholder{color:#7f9ec0}",
-    ".efi-cap-form input:focus{outline:none;border-color:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,.16)}",
-    ".efi-cap-form button{padding:12px 20px;border-radius:11px;border:0;background:#dc2626;",
-    "color:#fff;font-weight:900;cursor:pointer;white-space:nowrap}",
-    ".efi-cap-form button[disabled]{opacity:.6;cursor:progress}",
-    ".efi-cap-msg{grid-column:1/-1;margin:0;font-size:.83rem;line-height:1.6;color:#a8c8e8}",
-    ".efi-cap-msg.ok{color:#34d399}.efi-cap-msg.err{color:#fb7185}",
-    "@media (max-width:520px){.efi-capture{margin-inline:16px}",
-    ".efi-cap-form{grid-template-columns:1fr}}",
-
-    ".efi-legal{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;",
-    "padding:14px 16px 18px;font-size:.75rem;line-height:1.7;opacity:.72;text-align:center}",
-    ".efi-legal span{white-space:nowrap}",
-    "@media (max-width:600px){.efi-legal{font-size:.7rem;gap:4px 12px}",
-    ".efi-legal span{white-space:normal}}",
-  ].join("");
-
-  function injectStyles() {
-    if (document.getElementById("efi-conversion-kit-css")) return;
-    var s = document.createElement("style");
-    s.id = "efi-conversion-kit-css";
-    s.textContent = CSS;
-    document.head.appendChild(s);
-  }
-
   /* ─────────────────────────── icons ─────────────────────────── */
 
   var WA_PATH =
@@ -285,7 +194,12 @@
   function icon(path) {
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
-    svg.setAttribute("class", "efi-dock__ico");
+    // Explicit dimensions, not only CSS: if a stylesheet ever fails to apply,
+    // an SVG with no intrinsic size expands to fill its container. That is
+    // exactly how these icons once rendered 746px tall on the live site.
+    svg.setAttribute("width", "18");
+    svg.setAttribute("height", "18");
+    svg.setAttribute("fill", "currentColor");
     svg.setAttribute("aria-hidden", "true");
     svg.setAttribute("focusable", "false");
     var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -294,64 +208,56 @@
     return svg;
   }
 
-  /* ─────────────────── 1. persistent contact dock ─────────────────── */
+  /* ─────────────────── 1. the site's own WhatsApp button ─────────────────── */
 
   /**
-   * Builds the WhatsApp message that opens with the visitor's actual context,
-   * so the sales team receives a qualified message instead of a bare "hello".
+   * site-shell.js already renders a floating WhatsApp button (.wa-fab) with its
+   * own balloon and badge. This module must not add a second one — it enhances
+   * the existing button instead:
+   *
+   *   - rewrites its href so the outgoing message carries the page reference
+   *     code, the same code the admin panel indexes;
+   *   - tags it so the delegated click listener records the tap with a precise
+   *     location instead of the generic "inline".
+   *
+   * The delegated listener already matches any wa.me link, so tracking works
+   * even if this runs before site-shell has rendered; this only improves the
+   * detail. Bounded retries cover the async render.
    */
+  function enhanceSiteWhatsApp() {
+    var fab = document.querySelector("a.wa-fab");
+    if (!fab || fab.getAttribute("data-efi-contact")) return true;
+
+    var href = fab.getAttribute("href") || "";
+    if (/wa\.me|api\.whatsapp\.com/.test(href)) {
+      var base = href.split("?")[0];
+      var existing = "";
+      var qs = href.indexOf("?text=");
+      if (qs > -1) {
+        try {
+          existing = decodeURIComponent(href.slice(qs + 6));
+        } catch (_) {
+          existing = "";
+        }
+      }
+      // Never stack the reference twice if this runs again.
+      if (existing.indexOf(pageRef) === -1) {
+        var message = withRef(existing || contextMessage());
+        fab.setAttribute("href", base + "?text=" + encodeURIComponent(message));
+      }
+    }
+
+    fab.setAttribute("data-efi-contact", "whatsapp");
+    fab.setAttribute("data-efi-location", "floating-button");
+    return true;
+  }
+
+  /** Fallback message when the site button carries no pre-filled text. */
   function contextMessage() {
     var title = (document.title || "").split("|")[0].trim();
     return t(
       "السلام عليكم، أتواصل معكم بخصوص: " + title,
       "Hello, I'm contacting you regarding: " + title
-    );
-  }
-
-  function buildDock(cfg) {
-    if (document.querySelector(".efi-dock")) return;
-
-    var wa = cfg.contact.phoneWhatsapp.e164;
-    var tel = cfg.contact.phonePrimary.e164;
-
-    var waBtn = el(
-      "a",
-      {
-        class: "efi-dock__btn efi-dock__btn--wa",
-        href: waLink(wa, contextMessage()),
-        target: "_blank",
-        rel: "noopener",
-        "aria-label": t("تواصل عبر واتساب", "Contact us on WhatsApp"),
-        "data-efi-contact": "whatsapp",
-        "data-efi-location": "dock",
-      },
-      [icon(WA_PATH), el("span", { class: "efi-dock__label", text: t("واتساب", "WhatsApp") })]
-    );
-
-    var telBtn = el(
-      "a",
-      {
-        class: "efi-dock__btn efi-dock__btn--tel",
-        href: "tel:" + tel,
-        "aria-label": t("اتصل بنا الآن", "Call us now"),
-        "data-efi-contact": "phone",
-        "data-efi-location": "dock",
-      },
-      [
-        icon(TEL_PATH),
-        el("span", {
-          class: "efi-dock__label",
-          text: cfg.contact.phonePrimary.display,
-          dir: "ltr",
-        }),
-      ]
-    );
-
-    document.body.appendChild(
-      el("div", { class: "efi-dock", role: "complementary", "aria-label": t("تواصل سريع", "Quick contact") }, [
-        waBtn,
-        telBtn,
-      ])
     );
   }
 
@@ -395,25 +301,49 @@
 
     var l = lang();
     var na = reg.nationalAddress || {};
-    var parts = [
-      reg.registeredName ? reg.registeredName[l] : "",
-      reg.legalForm ? reg.legalForm[l] : "",
-      t("سجل تجاري: ", "CR: ") + reg.commercialRegistration,
-      t("الرقم الضريبي: ", "VAT: ") + reg.vatNumber,
-      na.shortAddress
-        ? t("العنوان الوطني: ", "National Address: ") +
-          na.shortAddress +
+
+    /**
+     * Each entry is either plain text, or a label plus a registry number.
+     * The number is wrapped in <bdi> so the bidirectional algorithm isolates
+     * it: without that, Latin digits sitting next to Arabic run together and
+     * read as one string ("7028430937الرقم الضريبي").
+     */
+    var items = [
+      { text: reg.registeredName ? reg.registeredName[l] : "" },
+      { text: reg.legalForm ? reg.legalForm[l] : "" },
+      { label: t("سجل تجاري", "CR"), value: reg.commercialRegistration },
+      { label: t("الرقم الضريبي", "VAT"), value: reg.vatNumber },
+    ];
+
+    if (na.shortAddress) {
+      items.push({
+        label: t("العنوان الوطني", "National Address"),
+        value: na.shortAddress,
+        after:
           " — " +
           (na.district ? na.district[l] + "، " : "") +
           (na.city ? na.city[l] : "") +
-          " " +
-          (na.postalCode || "")
-        : "",
-    ].filter(Boolean);
+          (na.postalCode ? " " + na.postalCode : ""),
+      });
+    }
 
     var bar = el("div", { class: "efi-legal" });
-    parts.forEach(function (p) {
-      bar.appendChild(el("span", { text: p, dir: /^\d/.test(p) ? "ltr" : "auto" }));
+
+    items.forEach(function (item) {
+      if (!item.text && !item.value) return;
+      var span = el("span", { class: "efi-legal__item" });
+
+      if (item.text) {
+        span.appendChild(document.createTextNode(item.text));
+      } else {
+        span.appendChild(document.createTextNode(item.label + ": "));
+        var bdi = document.createElement("bdi");
+        bdi.textContent = item.value;
+        span.appendChild(bdi);
+        if (item.after) span.appendChild(document.createTextNode(item.after));
+      }
+
+      bar.appendChild(span);
     });
 
     footer.appendChild(bar);
@@ -984,8 +914,7 @@
 
   function start(cfg) {
     if (!cfg || !cfg.contact || !cfg.contact.phonePrimary) return;
-    injectStyles();
-    buildDock(cfg);
+    enhanceSiteWhatsApp();
     buildHeaderPhone(cfg);
     buildLegalBar(cfg);
     buildCapture(cfg);
@@ -995,9 +924,13 @@
     // both exist, then stop. Bounded so a page without a shell never spins.
     var tries = 0;
     var timer = setInterval(function () {
+      enhanceSiteWhatsApp();
       buildHeaderPhone(cfg);
       buildLegalBar(cfg);
-      var done = document.querySelector(".efi-hdr-tel") && document.querySelector(".efi-legal");
+      var done =
+        document.querySelector(".efi-hdr-tel") &&
+        document.querySelector(".efi-legal") &&
+        document.querySelector("a.wa-fab[data-efi-contact]");
       if (++tries > 20 || done) clearInterval(timer);
     }, 250);
   }
