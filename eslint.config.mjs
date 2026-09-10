@@ -74,10 +74,7 @@ const WORKER_GLOBALS = {
   console: "readonly",
 };
 
-const UNUSED_VARS_RULE = [
-  "warn",
-  { argsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" },
-];
+const UNUSED_VARS_RULE = ["warn", { argsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" }];
 
 export default [
   {
@@ -123,7 +120,7 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
-      globals: { console: "readonly", process: "readonly" },
+      globals: { console: "readonly", process: "readonly", URL: "readonly" },
     },
     rules: {
       "no-unused-vars": UNUSED_VARS_RULE,

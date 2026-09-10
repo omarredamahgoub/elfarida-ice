@@ -98,6 +98,13 @@ export async function onRequestGet(context) {
     return contactsView(env, url);
   }
 
+  // Newsletter subscribers. These used to be written into `leads`, which made
+  // the lead count meaningless; moving them out would have hidden them from the
+  // owner entirely, so they get their own view instead.
+  if (url.searchParams.get("view") === "newsletter") {
+    return newsletterView(env, url);
+  }
+
   const fmt = url.searchParams.get("format");
   const q = url.searchParams.get("q") || "";
   const statusFilter = url.searchParams.get("status") || "";
@@ -188,6 +195,134 @@ async function contactsView(env, url) {
       page: currentPage,
       totalPages,
     })
+  );
+}
+
+/** Renders the newsletter subscriber list. */
+async function newsletterView(env, url) {
+  const q = (url.searchParams.get("q") || "").trim().toLowerCase();
+  const page = url.searchParams.get("page");
+  const fmt = url.searchParams.get("format");
+
+  let rows;
+  try {
+    const { results } = await env.DB.prepare(
+      "SELECT id, created_at, email, lang, page, status FROM newsletter_subscribers ORDER BY created_at DESC LIMIT 2000"
+    ).all();
+    rows = results || [];
+  } catch (_) {
+    // Table absent until migration 0003 is applied — show an explained state
+    // rather than a stack trace.
+    return htmlResp(newsletterPage([], { pending: true }));
+  }
+
+  const stats = computeStats(rows, new Date());
+  const filtered = q
+    ? rows.filter((r) =>
+        String(r.email || "")
+          .toLowerCase()
+          .includes(q)
+      )
+    : rows;
+
+  if (fmt === "json")
+    return new Response(
+      JSON.stringify(filtered, null, 2),
+      noStore("application/json; charset=utf-8")
+    );
+  if (fmt === "csv") return newsletterCsv(filtered);
+
+  const { pageRows, page: currentPage, totalPages } = paginate(filtered, page);
+
+  return htmlResp(
+    newsletterPage(pageRows, {
+      stats,
+      filters: { q },
+      filteredCount: filtered.length,
+      rawTotalCount: rows.length,
+      page: currentPage,
+      totalPages,
+    })
+  );
+}
+
+function newsletterCsv(rows) {
+  const head = ["created_at", "email", "lang", "page", "status"];
+  const esq = (v) => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
+  const body = rows
+    .map((r) => head.map((k) => esq(k === "created_at" ? toRiyadhDisplay(r[k]) : r[k])).join(","))
+    .join("\n");
+  return new Response("﻿" + head.join(",") + "\n" + body, {
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Content-Disposition": 'attachment; filename="newsletter-subscribers.csv"',
+      "Cache-Control": "no-store",
+    },
+  });
+}
+
+function newsletterPage(rows, view) {
+  if (view.pending) {
+    return SHELL(
+      "النشرة البريدية",
+      `<h1>النشرة البريدية</h1>${viewNav("newsletter")}
+      <div class="panel">
+        <p>جدول <code>newsletter_subscribers</code> غير موجود بعد.</p>
+        <p class="muted">نفّذ الأمر التالي مرة واحدة لتفعيل فصل النشرة عن طلبات العملاء:</p>
+        <p><code>npx wrangler d1 execute elfarida-leads --remote --file=migrations/0003_newsletter_subscribers.sql</code></p>
+      </div>`
+    );
+  }
+
+  const { stats, filters, filteredCount, rawTotalCount, page, totalPages } = view;
+  const q = filters.q || "";
+  const now = new Date();
+
+  const trs = rows
+    .map(
+      (r) => `<tr class="${isRecent(r.created_at, now, 24) ? "row--new" : ""}">
+      <td data-label="التاريخ">${esc(toRiyadhDisplay(r.created_at))}</td>
+      <td data-label="البريد"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
+      <td data-label="اللغة">${esc(r.lang || "—")}</td>
+      <td data-label="الحالة">${esc(r.status || "subscribed")}</td>
+    </tr>`
+    )
+    .join("");
+
+  return SHELL(
+    "النشرة البريدية",
+    `<h1>النشرة البريدية</h1>
+    ${viewNav("newsletter")}
+    <div class="panel stats">
+      <span class="stat"><b>${stats.today}</b> اليوم</span>
+      <span class="stat"><b>${stats.week}</b> هذا الأسبوع</span>
+      <span class="stat"><b>${stats.total}</b> الإجمالي</span>
+      ${q ? `<span class="stat">عرض <b>${filteredCount}</b> من ${rawTotalCount}</span>` : ""}
+    </div>
+    <div class="panel">
+      <form method="GET" action="/admin/leads" class="filters">
+        <input type="hidden" name="view" value="newsletter">
+        <input type="text" name="q" value="${esc(q)}" placeholder="ابحث ببريد إلكتروني">
+        <button type="submit">بحث</button>
+        ${q ? '<a class="btn" href="/admin/leads?view=newsletter">إعادة تعيين</a>' : ""}
+      </form>
+    </div>
+    <div class="toolbar">
+      <a class="btn btn-secondary" href="/admin/leads?view=newsletter&format=csv${q ? "&q=" + encodeURIComponent(q) : ""}">تصدير CSV</a>
+      <a class="btn btn-secondary" href="/admin/leads?view=newsletter&format=json">JSON</a>
+    </div>
+    <div class="panel" style="padding:12px 16px">
+      <p class="muted" style="margin:0;font-size:13px">
+        المشتركون في النشرة لم يطلبوا عرض سعر. فصلهم عن جدول العملاء يجعل عدد
+        الطلبات في الصفحة الأولى رقماً حقيقياً يمكن الاعتماد عليه.
+      </p>
+    </div>
+    ${
+      rows.length
+        ? `<table><thead><tr><th>التاريخ</th><th>البريد</th><th>اللغة</th><th>الحالة</th></tr></thead>
+           <tbody>${trs}</tbody></table>${paginationControlsFor("newsletter", filters, page, totalPages)}`
+        : `<div class="panel"><p class="muted">${q ? "لا نتائج مطابقة." : "لا يوجد مشتركون بعد."}</p></div>`
+    }`
   );
 }
 
@@ -317,6 +452,13 @@ async function ensure(env) {
   ).run();
   await env.DB.prepare(
     "CREATE INDEX IF NOT EXISTS idx_contact_events_ref ON contact_events (ref)"
+  ).run();
+  // Mirrors migrations/0003_newsletter_subscribers.sql, for the same reason.
+  await env.DB.prepare(
+    "CREATE TABLE IF NOT EXISTS newsletter_subscribers (id TEXT PRIMARY KEY, created_at TEXT NOT NULL, email TEXT NOT NULL UNIQUE, lang TEXT, page TEXT, status TEXT NOT NULL DEFAULT 'subscribed', ip TEXT, ua TEXT)"
+  ).run();
+  await env.DB.prepare(
+    "CREATE INDEX IF NOT EXISTS idx_newsletter_created_at ON newsletter_subscribers (created_at)"
   ).run();
   await env.DB.prepare(
     "CREATE TABLE IF NOT EXISTS admin_login_attempts (ip TEXT NOT NULL, attempted_at TEXT NOT NULL)"
@@ -601,13 +743,14 @@ function paginationControls(filters, page, totalPages) {
   return `<div class="pagination">${prev}<span class="stat">صفحة ${page} من ${totalPages}</span>${next}</div>`;
 }
 
-/** Tab strip shared by both views, so each is one click from the other. */
+/** Tab strip shared by every view, so each is one click from the others. */
 function viewNav(active) {
   const tab = (href, label, key) =>
     `<a class="btn ${active === key ? "" : "btn-secondary"}" href="${href}">${label}</a>`;
   return `<div class="toolbar">
     ${tab("/admin/leads", "طلبات النماذج", "leads")}
     ${tab("/admin/leads?view=contacts", "واتساب ومكالمات", "contacts")}
+    ${tab("/admin/leads?view=newsletter", "النشرة البريدية", "newsletter")}
     <div class="toolbar-account">
       <a class="btn btn-secondary" href="/admin/leads?settings=1">الأمان</a>
       <a class="btn btn-secondary" href="/admin/leads?logout=1">خروج</a>
@@ -660,10 +803,7 @@ function contactsPage(rows, view) {
     ? `<div class="panel">
         <p class="muted" style="margin:0 0 10px">الصفحات التي تجلب أكثر تواصل</p>
         <div class="stats">${pages
-          .map(
-            (p) =>
-              `<span class="stat"><b>${p.count}</b> ${esc(p.title || p.page)}</span>`
-          )
+          .map((p) => `<span class="stat"><b>${p.count}</b> ${esc(p.title || p.page)}</span>`)
           .join("")}</div>
       </div>`
     : "";

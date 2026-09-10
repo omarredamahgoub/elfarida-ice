@@ -42,19 +42,31 @@ export async function onRequestPost(context) {
   // 3) Turnstile — enforced ONLY for the protected quote forms, which send
   //    protected="1". The newsletter and any other path skip it (they rely on
   //    the honeypot + per-IP rate limit). Secret lives in D1 (env not injected).
+  //
+  //    Degradation rule: a MISSING token is never a rejection. The widget is
+  //    loaded from a third-party origin with `async`, so it is absent whenever
+  //    the visitor is on a slow mobile connection, behind a corporate proxy, or
+  //    running a content blocker — exactly the buyers this site exists for.
+  //    Rejecting them turned a completed form into a dead end with no recovery
+  //    path. A token that is PRESENT but fails verification is still rejected:
+  //    that is a forged or replayed challenge, not a loading failure. Requests
+  //    with no token remain covered by the honeypot, the payload-size cap and
+  //    the per-IP rate limit below.
   if (String(data.protected) === "1") {
-    const tsSecret = (await getSetting(env.DB, "turnstile_secret")) || env.TURNSTILE_SECRET || "";
-    if (tsSecret) {
-      const token = data["cf-turnstile-response"] || data.turnstileToken || "";
-      const ok = await verifyTurnstile(tsSecret, token, request.headers.get("CF-Connecting-IP"));
-      if (!ok)
-        return json(
-          {
-            success: false,
-            message: "فشل التحقّق من أنّك لست روبوتًا. حدِّث الصفحة وحاول مجدّدًا.",
-          },
-          403
-        );
+    const token = data["cf-turnstile-response"] || data.turnstileToken || "";
+    if (token) {
+      const tsSecret = (await getSetting(env.DB, "turnstile_secret")) || env.TURNSTILE_SECRET || "";
+      if (tsSecret) {
+        const ok = await verifyTurnstile(tsSecret, token, request.headers.get("CF-Connecting-IP"));
+        if (!ok)
+          return json(
+            {
+              success: false,
+              message: "فشل التحقّق من أنّك لست روبوتًا. حدِّث الصفحة وحاول مجدّدًا.",
+            },
+            403
+          );
+      }
     }
   }
 

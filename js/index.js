@@ -234,8 +234,28 @@
       show("hero-error");
     }
 
-    var reNm = /^[\u0600-\u06FFa-zA-Z\s]{3,60}$/,
-      rePh = /^(\+966|00966|0)5[0-9]{8}$/;
+    // ── Input validation policy ───────────────────
+    // Deliberately permissive. Every keystroke rejected here is a lost lead:
+    // real buyers write names such as "عبد الله آل-سعود" or "M. Al-Qahtani", and they
+    // dial from company switchboards ("013 812 3456") and foreign numbers.
+    // The Worker performs the authoritative validation, so the browser only
+    // blocks input that could not possibly be a name or a phone number.
+    var reNm =
+        /^[\u0600-\u06FF\u0750-\u077Fa-zA-Z][\u0600-\u06FF\u0750-\u077Fa-zA-Z\s.'\u2019-]{1,59}$/,
+      rePh = /^\+?\d{9,15}$/;
+
+    /** Arabic-Indic digits to Latin, then every human separator removed. */
+    function normPhone(value) {
+      return String(value)
+        .replace(/[\u0660-\u0669]/g, function (d) {
+          return String.fromCharCode(d.charCodeAt(0) - 0x0630);
+        })
+        .replace(/[^\d+]/g, "");
+    }
+
+    function validPhone(value) {
+      return rePh.test(normPhone(value));
+    }
 
     function hide(id) {
       var e = document.getElementById(id);
@@ -247,14 +267,18 @@
     }
 
     inpName.addEventListener("input", function () {
-      this.value = this.value.replace(/[0-9\u0660-\u0669!@#$%^&*()\-_+=[\]{};':"\\|,.<>/?]/g, "");
+      // Dots, hyphens and apostrophes are legitimate inside names; only
+      // digits and characters that can never appear in one are stripped.
+      this.value = this.value.replace(/[0-9\u0660-\u0669!@#$%^&*()_+=[\]{};:"\\|,<>/?]/g, "");
       var v = this.value.trim();
       v.length === 0 || reNm.test(v) ? hide("err-name") : show("err-name");
     });
     inpPh.addEventListener("input", function () {
-      this.value = this.value.replace(/[^\d+]/g, "");
+      // Spaces, dashes and parentheses are kept so the visitor can type the
+      // number the way it is printed on their card; normPhone strips them.
+      this.value = this.value.replace(/[^\d+\u0660-\u0669\s()-]/g, "");
       var v = this.value.trim();
-      v.length === 0 || rePh.test(v) ? hide("err-phone") : v.length > 3 && show("err-phone");
+      v.length === 0 || validPhone(v) ? hide("err-phone") : v.length > 3 && show("err-phone");
     });
 
     form.addEventListener("submit", function (ev) {
@@ -264,7 +288,7 @@
         svc = inpSvc ? inpSvc.value : "",
         ok = true;
       reNm.test(nm) ? hide("err-name") : (show("err-name"), (ok = false));
-      rePh.test(ph) ? hide("err-phone") : (show("err-phone"), (ok = false));
+      validPhone(ph) ? hide("err-phone") : (show("err-phone"), (ok = false));
       svc ? hide("err-service") : (show("err-service"), (ok = false));
       if (!ok) return;
       hide("hero-success");

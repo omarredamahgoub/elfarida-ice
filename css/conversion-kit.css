@@ -11,6 +11,43 @@
    Logical properties throughout, so one file serves the RTL and LTR pages.
    ═══════════════════════════════════════════════════════════════════ */
 
+/* ── floating click-to-call ──────────────────────────────────────── */
+/* Sibling of .wa-fab inside #wa-widget, which is already a fixed flex
+   column with its own gap and z-index. Nothing here positions the button:
+   adding a second fixed container is what previously made the two controls
+   overlap. Dimensions are matched to .wa-fab in css/site-shell.css. */
+.efi-call-fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 3.5rem;
+  block-size: 3.5rem;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%);
+  box-shadow: 0 10px 26px rgb(30 58 138 / 0.42);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.efi-call-fab svg {
+  inline-size: 1.65rem;
+  block-size: 1.65rem;
+  fill: currentColor;
+  flex: none;
+}
+.efi-call-fab:hover,
+.efi-call-fab:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgb(30 58 138 / 0.55);
+}
+.efi-call-fab:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .efi-call-fab { transition: none; }
+  .efi-call-fab:hover, .efi-call-fab:focus-visible { transform: none; }
+}
+
 /* ── header click-to-call ────────────────────────────────────────── */
 .efi-hdr-tel {
   display: inline-flex;
@@ -26,6 +63,89 @@
 .efi-hdr-tel:hover { background: rgb(30 58 138 / 0.1); }
 .efi-hdr-tel svg { inline-size: 18px; block-size: 18px; fill: currentColor; flex: none; }
 @media (max-width: 900px) { .efi-hdr-tel { display: none; } }
+
+/* ── post-submission next steps ──────────────────────────────────── */
+/* Appended inside whatever success state a form shows, so it inherits that
+   container's width and alignment. Colours are fixed rather than inherited:
+   the homepage success line sits on a dark hero, the contact page's on white. */
+.efi-next {
+  margin-block-start: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0f172a;
+  text-align: start;
+}
+.efi-next__title { margin: 0 0 10px; font-size: 0.95rem; font-weight: 900; color: #0c4a6e; }
+.efi-next__steps {
+  margin: 0 0 14px;
+  padding-inline-start: 1.35em;
+  display: grid;
+  gap: 6px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #334155;
+}
+.efi-next__urgent { margin: 0 0 10px; font-size: 0.85rem; font-weight: 800; color: #0f172a; }
+.efi-next__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.efi-next__actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font: 700 0.85rem/1 inherit;
+  text-decoration: none;
+  color: #fff;
+}
+.efi-next__actions a svg { inline-size: 18px; block-size: 18px; fill: currentColor; flex: none; }
+.efi-next__actions a.wa { background: #25d366; color: #06301a; }
+.efi-next__actions a.tel { background: #1e3a8a; }
+
+/* ── contact details panel (contact pages) ───────────────────────── */
+.efi-contact-panel {
+  margin-block: 28px 0;
+  padding: 24px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+  text-align: start;
+}
+.efi-contact-panel h2 {
+  margin: 0 0 16px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #1e3a8a;
+}
+.efi-contact-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.efi-contact-list li {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, max-content) 1fr;
+  gap: 4px 14px;
+  align-items: start;
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+.efi-contact-label { font-weight: 800; color: #475569; }
+.efi-contact-list a { color: #1d4ed8; font-weight: 700; text-decoration: none; }
+.efi-contact-list a:hover { text-decoration: underline; }
+.efi-contact-value { color: #0f172a; }
+.efi-contact-value small { display: inline-block; color: #64748b; font-size: 0.8rem; }
+.efi-contact-map { display: inline-block; margin-block-start: 6px; }
+.efi-contact-promise {
+  margin: 18px 0 0;
+  padding-block-start: 14px;
+  border-block-start: 1px dashed #cbd5e1;
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.75;
+}
+@media (max-width: 640px) {
+  .efi-contact-panel { padding: 18px; }
+  .efi-contact-list li { grid-template-columns: 1fr; }
+}
 
 /* ── calculator result capture ───────────────────────────────────── */
 .efi-calc-capture {
@@ -90,15 +210,27 @@
   color: #eef6ff;
   text-align: start;
 }
-.efi-cap-title {
+/* Selectors are scoped to .efi-capture rather than written bare: the article
+   pages style their own headings and paragraphs, and a bare `.efi-cap-title`
+   lost to `.article-body h2` — which painted the heading dark navy on this
+   block's dark navy background, leaving it unreadable. */
+.efi-capture .efi-cap-title {
   margin: 0 0 8px;
   font-size: clamp(1.15rem, 3vw, 1.5rem);
   font-weight: 900;
   color: #fff;
   line-height: 1.35;
   text-wrap: balance;
+  border: 0;
+  padding: 0;
+  background: none;
 }
-.efi-cap-body { margin: 0 0 18px; font-size: 0.9rem; line-height: 1.75; color: #a8c8e8; }
+.efi-capture .efi-cap-body {
+  margin: 0 0 18px;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #a8c8e8;
+}
 .efi-cap-quick { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-block-end: 18px; }
 .efi-cap-wa,
 .efi-cap-tel {
