@@ -67,6 +67,12 @@ li.text-slate-400,
 td.text-slate-400,
 th.text-slate-400,
 small.text-slate-400 { color: #64748b; }
+/* The article breadcrumb sets the tone on its wrapper, so the links inside it
+   inherit rather than carry the class — 44 pages where "الرئيسية" sat at
+   2.56:1 and an element-scoped rule could not see it. */
+div.text-slate-400 a,
+nav.text-slate-400 a,
+p.text-slate-400 a { color: #64748b; }
 
 /* …but the same utility is also light text on the dark service cards, where
    darkening it made things worse (3.07:1, measured after the rule above
@@ -86,7 +92,22 @@ small.text-slate-400 { color: #64748b; }
 [class*="from-slate-9"] p.text-slate-400,
 [class*="from-slate-8"] p.text-slate-400,
 [class*="from-blue-9"] p.text-slate-400,
-[class*="to-slate-9"] p.text-slate-400 { color: #cbd5e1; }
+[class*="to-slate-9"] p.text-slate-400,
+.bg-blue-900 th.text-slate-400,
+.bg-blue-900 td.text-slate-400,
+.bg-slate-900 th.text-slate-400,
+.bg-slate-800 th.text-slate-400 { color: #cbd5e1; }
+
+/* Share links are a bare icon: 18-20px wide, the smallest targets left. */
+a.text-blue-500.text-xl,
+a.text-blue-800.text-xl,
+a.text-blue-400.text-xl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 40px;
+  min-block-size: 40px;
+}
 
 /* Article category chips use a different spelling from the blog's: the colour
    utility sits next to its own bg-*-50 rather than next to text-xs/font-bold. */
@@ -97,6 +118,7 @@ small.text-slate-400 { color: #64748b; }
 .bg-red-50.text-red-600 { color: #b91c1c; }
 .bg-sky-50.text-sky-600 { color: #0369a1; }
 .bg-emerald-600.text-white { background-color: #047857; }
+.bg-sky-600.text-white { background-color: #0369a1; }
 
 /* Glossary letter links measured 8×20 — a two-character target. */
 a.text-slate-300.text-sm {
