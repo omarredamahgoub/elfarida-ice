@@ -281,6 +281,39 @@
           <p>Convert the result from kJ/day to kW for compressor sizing:</p>
           <div class="formula-box">
             Q<sub>kW</sub> = Q<sub>kJ/day</sub> ÷ (3,600 × operating hours per day)
+            <br /><br />
+            <span class="comment"
+              >// operating hours = the hours the compressor is expected to run,
+              not 24</span
+            >
+            <br /><span class="comment"
+              >// 16&ndash;18 h/day is common practice, leaving margin for defrost
+              and pull-down recovery</span
+            >
+          </div>
+          <p>
+            The divisor is where preliminary estimates most often go wrong.
+            Dividing the daily heat by 24 hours assumes the compressor never
+            stops — which leaves nothing in reserve for defrost cycles, for door
+            traffic at intake, or for the hottest week of the year. Dividing by
+            16&ndash;18 running hours instead sizes the plant so it can recover
+            after a disturbance rather than merely keeping up on an average day.
+            The trade-off is real: a shorter assumed run time means a larger and
+            more expensive machine, so the figure should be a stated design
+            decision rather than a default.
+          </p>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠</span>
+            <div class="callout-body">
+              <strong>Not every surface sees the same ΔT</strong>
+              Applying one temperature difference to the whole envelope is a
+              simplification suitable for a first pass only. In the final design
+              the floor is calculated against ground temperature, the roof
+              against a sol-air temperature that accounts for solar gain, and any
+              surface adjacent to a conditioned space against its own actual
+              difference. Rooms that fail in their second summer are very often
+              rooms whose roof was calculated as if it were a shaded wall.
+            </div>
           </div>
 
           <h2>4. Worked Example: 100 m² Meat Chilling Room</h2>
@@ -307,12 +340,39 @@
           <div class="formula-box">
             Q<sub>tr</sub> = 0.38 × 340 × (45 − 2) = <strong>5,539 W ≈ 5.5 kW</strong><br /><br />
             Q<sub>pr</sub> = 2,000 × 3.52 × (20 − 2) ÷ 86,400 = <strong>1.47 kW</strong><br /><br />
-            Q<sub>inf</sub> ≈ 0.8 kW (medium traffic — ASHRAE tables)<br /><br />
+            Q<sub>inf</sub> = (400 × 5 × 1.2 × 85) ÷ 86,400 = <strong>2.36 kW</strong><br />
+            <span class="comment">// volume × air changes/day × air density × enthalpy difference</span><br />
+            <span class="comment">// N = 5 changes/day for a 400 m³ room on medium door traffic</span><br />
+            <span class="comment">// Δh = 85 kJ/kg between ambient and room air at the coincident wet-bulb condition</span><br /><br />
             Q<sub>int</sub> = 100 × 5 W/m² (LED) + 270 W (1 person) = <strong>0.77 kW</strong><br /><br />
-            Q<sub>eq</sub> ≈ 0.5 kW (fan motors + defrost allowance)<br /><br />
+            Q<sub>eq</sub> ≈ 0.5 kW provisional (fan motors + defrost allowance)<br />
+            <span class="comment">// replace with the actual fan rating from the evaporator data sheet before selection</span><br /><br />
             ──────────────────────────────────────────────────<br />
-            Q<sub>subtotal</sub> = 9.04 kW<br />
-            Q<sub>total</sub> = 9.04 × 1.12 = <strong>≈ 10.1 kW</strong> → select 12 kW compressor
+            Q<sub>subtotal</sub> = 5.54 + 2.36 + 1.47 + 0.77 + 0.50 = <strong>10.64 kW</strong><br />
+            Q<sub>total</sub> = 10.64 × 1.12 = <strong>≈ 11.9 kW</strong> → around 12 kW (≈ 3.4 TR)
+          </div>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠</span>
+            <div class="callout-body">
+              <strong>Assumptions and limits of this example</strong>
+              This worked example is educational and approximates the method
+              rather than replacing a design. It assumes a 24-hour product
+              pull-down (Q<sub>pr</sub> divided by 86,400 s) — a chilling room
+              required to pull the same intake down in 8 hours would carry
+              roughly three times that product load. It applies a single ΔT of
+              43&nbsp;K across the whole envelope, whereas the final design must
+              treat floor, roof and walls separately. Door-opening load is
+              absorbed into the assumed air-change rate rather than calculated
+              separately, which is not adequate for a high-traffic room. The fan
+              load is provisional and must be replaced with the evaporator data
+              sheet figure. Finally, 50&nbsp;mm panel is thin for Saudi ambient:
+              75&ndash;100&nbsp;mm is usually the economic optimum once
+              fifteen-year energy cost is counted — see
+              <a href="sandwich-panel-specs-en.html" class="underline"
+                >insulation panel specifications</a
+              >. Recalculate with actual site data and have a qualified engineer
+              review the result before any equipment is purchased.
+            </div>
           </div>
 
           <div class="callout callout-info">
@@ -381,6 +441,9 @@
             <li><strong>Ignoring evaporator fan motor heat:</strong> Fans run continuously — 100% of their electrical input becomes heat inside the room.</li>
             <li><strong>Applying temperate infiltration tables to Saudi conditions:</strong> Higher ambient humidity dramatically increases enthalpy difference — use local psychrometric data.</li>
             <li><strong>No safety factor:</strong> Equipment degrades, products vary, and calculation models are approximations. Always apply at least 10%.</li>
+            <li><strong>Guessing the fan load instead of reading it:</strong> Evaporator fan power is fixed by the unit you actually select, and in a small room it can be 10&ndash;20% of the total load. Carrying a placeholder into the purchase decision is how a room ends up marginally undersized on the day it is commissioned.</li>
+            <li><strong>Overstating internal loads:</strong> The mirror image of the same error. Lighting at 15 W/m² and four oversized fans can push internal gains past 30% of the total, which contradicts the 5&ndash;15% that a normally occupied cold room actually shows, and inflates the plant the client pays for.</li>
+            <li><strong>Dividing by 24 running hours:</strong> Sizing on a 24-hour compressor day leaves no reserve for defrost, intake peaks or the hottest week of the year.</li>
           </ul>
 
           <h2>7. Use the Free Online Calculator</h2>
@@ -389,6 +452,15 @@
             Ice's free online refrigeration load calculator — it implements all
             five load components, applies the latent heat formula automatically,
             and generates a detailed breakdown.
+          </p>
+          <p>
+            Treat its output as a first-pass indication, not a specification. Any
+            calculator works from typical coefficients and the figures you type
+            in; it cannot see your roof orientation, your actual door traffic, or
+            the fan rating of the evaporator you end up buying. Use it to
+            establish the order of magnitude and to sanity-check a supplier's
+            number, then confirm the design with a calculation built on measured
+            site data before committing to equipment.
           </p>
 
           <h2>8. When to Consult a Specialist</h2>

@@ -304,6 +304,32 @@
 
           <h2 id="td-vs-dt1">Understanding TD and Delta-T in Selection</h2>
           <p>
+            TD (or &Delta;T1) is the difference between the room air entering the
+            coil and the refrigerant evaporating temperature inside it. It is the
+            single number that makes two evaporator quotations comparable — or
+            makes them meaningless when it differs between them.
+          </p>
+          <p>
+            Capacity scales roughly in proportion to TD, so a unit rated
+            20&nbsp;kW at TD&nbsp;=&nbsp;10&nbsp;K delivers in the region of
+            10&nbsp;kW at TD&nbsp;=&nbsp;5&nbsp;K, not 12&nbsp;kW. This is the
+            most expensive misreading in evaporator selection: a supplier quoting
+            at a high TD shows a larger capacity for a smaller and cheaper unit,
+            and the shortfall only appears once the room cannot hold its
+            setpoint. Always take the exact figure from the manufacturer's
+            correction factors rather than scaling by eye.
+          </p>
+          <p>
+            Choosing the TD is a humidity decision as much as a capacity one. A
+            low TD of 4&ndash;6&nbsp;K keeps the coil closer to room temperature,
+            so less moisture condenses out and produce stays turgid — which is
+            why fresh fruit, vegetables and unwrapped meat rooms are designed
+            that way, at the cost of a physically larger coil. A higher TD of
+            7&ndash;10&nbsp;K buys a smaller, cheaper unit and is perfectly
+            acceptable for packaged and frozen goods, where dehydration is not a
+            concern.
+          </p>
+          <p>
             TD is the difference between room air temperature and refrigerant
             evaporating temperature. Lower TD generally supports higher room
             humidity, which is essential for many fresh-food applications.
@@ -324,6 +350,44 @@
           </div>
 
           <h2 id="defrost">Defrost Strategy: Cooling vs Freezing Rooms</h2>
+          <p>
+            Defrost type is selected by room temperature, and getting it wrong is
+            the most common cause of an evaporator that ices progressively until
+            it stops absorbing heat at all.
+          </p>
+          <ul>
+            <li>
+              <strong>Hot gas defrost</strong> diverts discharge gas through the
+              coil. It is the fastest and most energy-efficient option for
+              freezing rooms, and it puts the heat where it is needed without
+              adding electrical load, but it requires additional valves and
+              piping and a system designed for it from the start.
+            </li>
+            <li>
+              <strong>Electric defrost</strong> uses resistance elements in the
+              coil block. It is simpler to install and to retrofit, which is why
+              it dominates smaller freezer rooms, but every watt it consumes is
+              paid for twice — once at the element and once by the compressor
+              that must remove that heat from the room afterwards.
+            </li>
+            <li>
+              <strong>Off-cycle (air) defrost</strong> simply stops the
+              refrigerant and lets room air melt the frost with the fans running.
+              It is free, but it only works where room temperature stays
+              comfortably above freezing — practically, at
+              +2&nbsp;°C&nbsp;and&nbsp;above. Specifying it for a room that dips
+              below that is how a coil ends up permanently blocked.
+            </li>
+          </ul>
+          <p>
+            Whatever the type, the drain line decides whether the defrost
+            actually clears. Fit a P-trap outside the room to stop cold air
+            drawing back up the line, slope the drain at roughly 1&ndash;2% away
+            from the unit, and fit heater tape on any drain that passes through a
+            space that can fall below 0&nbsp;°C. Meltwater that refreezes in the
+            drain returns to the tray and builds an ice block that no defrost
+            cycle can shift.
+          </p>
           <p>
             In freezing rooms, frost accumulation reduces heat-transfer
             efficiency over time. Friga-Bohn supports multiple defrost
@@ -432,6 +496,11 @@
           </div>
 
           <h2 id="installation">Installation and Orientation Best Practices</h2>
+          <p>
+            Selection decides what the unit can do; installation decides what it
+            actually does. The points below are the ones that most often separate
+            a coil performing to its data sheet from one that never reaches it.
+          </p>
           <p>
             Even a correctly selected unit underperforms with poor installation.
             Key practices include:

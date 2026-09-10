@@ -490,29 +490,82 @@
           </div>
 
           <p>
-            In practice, better lambda and greater thickness reduce U-value and
-            directly lower compressor load.
+            In practice the core term dominates: the two metal facings and the
+            surface films contribute very little resistance compared with the
+            insulation itself, so U-value is governed almost entirely by
+            thickness divided by lambda. That is why a quotation stating a
+            thickness without stating a lambda is not a specification — the same
+            100&nbsp;mm can deliver anything from a good U-value to a poor one
+            depending on the core actually supplied.
+          </p>
+          <p>
+            Typical declared lambda values sit near 0.022&nbsp;W/m&middot;K for
+            PIR and 0.023&nbsp;W/m&middot;K for good PUR, so a 100&nbsp;mm panel
+            lands around 0.22&nbsp;W/m²&middot;K and a 150&nbsp;mm PIR panel
+            around 0.14&nbsp;W/m²&middot;K. Ask for the declared value and the
+            standard it was measured to; an undeclared lambda is the most common
+            place for a cheaper core to hide.
           </p>
 
           <h3>Daily heat loss calculation</h3>
           <p>
-            A quick estimation can be performed using envelope area, U-value,
-            and total temperature difference.
+            The envelope gain follows directly from U-value, area and temperature
+            difference:
           </p>
           <div class="formula-box">
-            Q_loss = U x A_total x DeltaT x 24
+            Q_loss (W) = U &times; A_total &times; ΔT
+            <br />
+            Daily energy (kWh) = Q_loss &times; 24 ÷ 1000
             <br /><br />
             <span class="comment"
-              >// Daily energy impact scales strongly with both U and
-              DeltaT.</span
+              >// Worked case: 100 m² freezer room (10 × 10 × 5 m)</span
+            >
+            <br />A_total = (2 × 10 × 10) + (4 × 10 × 5) = 200 + 200 =
+            <strong>400 m²</strong>
+            <br />ΔT = 48&nbsp;°C ambient &minus; (&minus;20&nbsp;°C) internal =
+            <strong>68&nbsp;K</strong>
+            <br /><br />
+            <span class="comment">// 150 mm PIR, U = 0.143 W/m²·K:</span>
+            <br />Q_loss = 0.143 × 400 × 68 = 3,890 W ≈ 3.89 kW → 93.4 kWh/day
+            <br /><br />
+            <span class="comment">// 100 mm PUR, U ≈ 0.23 W/m²·K:</span>
+            <br />Q_loss = 0.23 × 400 × 68 = 6,256 W → 150 kWh/day
+            <br /><br />
+            <span class="comment"
+              >// Difference = 57 kWh/day × 365 = 20,805 kWh/year</span
+            >
+            <br /><span class="comment"
+              >// ≈ SAR 4,160/year at 0.20 SAR/kWh — ≈ SAR 6,240/year at 0.30
+              SAR/kWh</span
+            >
+            <br /><span class="comment"
+              >// those are the published commercial brackets; the industrial
+              tariff is lower. Use your own tariff from the bill</span
             >
           </div>
 
           <div class="callout callout-info">
             <p>
-              <strong>Meaning in operation:</strong> reduced daily thermal gain
-              accumulates into major annual electricity savings, often exceeding
-              initial panel upgrade cost over project lifetime.
+              <strong>What the numbers mean:</strong> a 57&nbsp;kWh/day
+              difference in envelope gain is roughly 20,800&nbsp;kWh a year for a
+              freezer room of this specification — about SAR 4,200 to 6,200
+              annually depending on the commercial bracket applied, and less
+              again on the industrial tariff. Over fifteen years, assuming a
+              stable tariff and stable operating conditions, the cumulative
+              difference falls in the region of SAR 62,000 to 94,000, which
+              usually exceeds the cost of upgrading panel thickness at the start
+              of the project.
+              <br /><br />
+              <strong>Limits of this example:</strong> it assumes continuous
+              24-hour operation, a constant 68&nbsp;K difference across the whole
+              envelope, and a fixed system coefficient of performance. It ignores
+              infiltration and door-opening load, solar gain on the roof
+              (sol-air) and insulation ageing over time. The real figure moves
+              with any of those inputs, and should only be adopted after a
+              <a href="cold-room-load-calculation-en.html" class="underline"
+                >detailed load calculation</a
+              >
+              using your own site data.
             </p>
           </div>
         </section>

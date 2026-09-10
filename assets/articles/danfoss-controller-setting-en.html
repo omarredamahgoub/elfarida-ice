@@ -574,6 +574,33 @@
 
           <h2 id="calibration">Sensor Calibration</h2>
           <p>
+            Every setting in this guide is only as good as the sensor feeding it.
+            A probe reading 1.5&nbsp;K high does not announce itself: the
+            controller simply holds the room 1.5&nbsp;K colder than you intended,
+            every hour of every day, and the cost appears on the electricity bill
+            rather than on an alarm log. In a freezer room that error is
+            equivalent to several percent of running cost, permanently.
+          </p>
+          <p>
+            Check the probe against a calibrated reference thermometer placed at
+            the same point, with the system stable and the door closed, and apply
+            the controller's offset parameter to correct the difference rather
+            than adjusting the setpoint to compensate — an adjusted setpoint
+            hides the fault and misleads the next technician. Where the offset
+            needed exceeds a couple of kelvin, replace the probe instead of
+            correcting it in software: that much drift usually indicates moisture
+            ingress at the sensor head or a damaged cable, and both get worse.
+          </p>
+          <p>
+            Probe placement matters as much as calibration. A room probe in the
+            return air stream reads the room; one placed near the door, above a
+            light fitting, or in the discharge air does not, and no amount of
+            parameter tuning will make its readings represent the product. Where
+            product temperature is what the specification actually governs,
+            record it with a separate product-simulant probe rather than
+            inferring it from air temperature.
+          </p>
+          <p>
             When controller reading differs from validated field measurement,
             use the proper offset parameter (model-dependent) to calibrate
             display and control behavior.
