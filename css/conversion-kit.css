@@ -68,6 +68,26 @@ td.text-slate-400,
 th.text-slate-400,
 small.text-slate-400 { color: #64748b; }
 
+/* …but the same utility is also light text on the dark service cards, where
+   darkening it made things worse (3.07:1, measured after the rule above
+   shipped). Inside a dark container it goes the other way instead. */
+.bg-slate-800 p.text-slate-400,
+.bg-slate-800 span.text-slate-400,
+.bg-slate-800 li.text-slate-400,
+.bg-slate-900 p.text-slate-400,
+.bg-slate-900 span.text-slate-400,
+.bg-slate-900 li.text-slate-400,
+.bg-slate-950 p.text-slate-400,
+.bg-slate-950 span.text-slate-400,
+.bg-blue-900 p.text-slate-400,
+.bg-blue-900 span.text-slate-400,
+.bg-blue-950 p.text-slate-400,
+.bg-blue-950 span.text-slate-400,
+[class*="from-slate-9"] p.text-slate-400,
+[class*="from-slate-8"] p.text-slate-400,
+[class*="from-blue-9"] p.text-slate-400,
+[class*="to-slate-9"] p.text-slate-400 { color: #cbd5e1; }
+
 /* Article category chips use a different spelling from the blog's: the colour
    utility sits next to its own bg-*-50 rather than next to text-xs/font-bold. */
 .bg-green-50.text-green-600 { color: #15803d; }
