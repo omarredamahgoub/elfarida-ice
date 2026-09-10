@@ -170,8 +170,11 @@ test("the honeypot cannot create horizontal overflow", () => {
   const block = css.slice(css.indexOf(".efi-hp {"));
   assert.match(block, /inset-inline-start:\s*0/, "honeypot is not pinned to the inline start");
   assert.match(block, /inset-block-start:\s*0/, "honeypot is not pinned to the block start");
-  assert.match(css, /\.efi-cap-form,\s*\n?\s*\.efi-calc-form \{[^}]*position:\s*relative/,
-    "the forms provide no positioning context for the pinned honeypot");
+  assert.match(
+    css,
+    /\.efi-cap-form,\s*\n?\s*\.efi-calc-form \{[^}]*position:\s*relative/,
+    "the forms provide no positioning context for the pinned honeypot"
+  );
 });
 
 test("CSP allows the endpoints GA4 and Google Ads actually post to", () => {
@@ -189,6 +192,47 @@ test("CSP allows the endpoints GA4 and Google Ads actually post to", () => {
   ]) {
     assert.ok(line.includes(host), `connect-src is missing ${host}`);
   }
+});
+
+test("the site serves a real favicon.ico", () => {
+  // Browsers request /favicon.ico implicitly on every page whether or not a
+  // <link> exists. The site had no such file, so every page load ended in a
+  // 404, and the declared icon was a .webp of the wide logo lockup — an
+  // illegible smudge at 16px, and unusable by consumers that ignore the tag.
+  const ico = readFileSync(join(ROOT, "favicon.ico"));
+  assert.equal(ico.readUInt16LE(0), 0, "not an ICO: reserved field");
+  assert.equal(ico.readUInt16LE(2), 1, "not an ICO: type must be 1");
+  const count = ico.readUInt16LE(4);
+  assert.ok(count >= 3, `expected at least three sizes, found ${count}`);
+
+  const sizes = [];
+  for (let i = 0; i < count; i++) {
+    const entry = 6 + 16 * i;
+    sizes.push(ico.readUInt8(entry) || 256);
+    const length = ico.readUInt32LE(entry + 8);
+    const offset = ico.readUInt32LE(entry + 12);
+    assert.ok(offset + length <= ico.length, "image data runs past end of file");
+    // Each entry is an embedded PNG; check its signature.
+    assert.equal(
+      ico.subarray(offset, offset + 4).toString("hex"),
+      "89504e47",
+      "entry is not a PNG"
+    );
+  }
+  assert.deepEqual(
+    sizes.sort((a, b) => a - b),
+    [16, 32, 48]
+  );
+});
+
+test("no page declares the logo lockup as its icon", () => {
+  const offenders = [];
+  for (const file of HTML_FILES) {
+    for (const tag of readFileSync(file, "utf8").match(/<link\b[\s\S]*?>/g) || []) {
+      if (/icon/.test(tag) && /\.webp/.test(tag)) offenders.push(relative(ROOT, file));
+    }
+  }
+  assert.deepEqual([...new Set(offenders)], [], "icon link still points at a .webp");
 });
 
 test("no Arabic text is double-encoded (mojibake)", () => {

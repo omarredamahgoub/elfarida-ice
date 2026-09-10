@@ -11,6 +11,56 @@
    Logical properties throughout, so one file serves the RTL and LTR pages.
    ═══════════════════════════════════════════════════════════════════ */
 
+/* ═══ accessibility corrections measured on the live site ═══════════
+   Contrast ratios below were read from the published pages with the
+   WCAG formula, not estimated. Each rule raises a real failure to the
+   AA threshold (4.5:1 for normal text, 3:1 for large text) while
+   keeping the colour recognisably the same.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* WhatsApp calls-to-action ship as Tailwind `bg-green-500` with white text:
+   2.28:1, so the label on the site's second-most-important button was the
+   hardest text on the page to read — including the one that renders the phone
+   number. green-700 keeps the WhatsApp identity and reaches 5.0:1. */
+a.bg-green-500,
+button.bg-green-500 {
+  background-color: #15803d !important;
+}
+a.bg-green-500:hover,
+a.bg-green-500:focus-visible,
+button.bg-green-500:hover,
+button.bg-green-500:focus-visible {
+  background-color: #166534 !important;
+}
+
+/* Category chips on the blog and article cards: small bold labels on their own
+   tinted background, all between 3.0:1 and 4.4:1. Scoped to the chip pattern so
+   the same Tailwind colours keep their normal value elsewhere. */
+.text-xs.font-bold.text-green-600,
+.text-sm.font-bold.text-green-600 { color: #15803d; }
+.text-xs.font-bold.text-orange-600,
+.text-sm.font-bold.text-orange-600 { color: #c2410c; }
+.text-xs.font-bold.text-cyan-600,
+.text-sm.font-bold.text-cyan-600 { color: #0e7490; }
+.text-xs.font-bold.text-blue-600,
+.text-sm.font-bold.text-blue-600 { color: #1d4ed8; }
+.text-xs.font-bold.text-red-600,
+.text-sm.font-bold.text-red-600 { color: #b91c1c; }
+
+/* Carousel dots render as a 22×32 box — below the size a thumb reliably hits.
+   The pseudo-element enlarges only the hit area, so the dots look unchanged
+   and stay narrower than their 42px pitch, which keeps them distinguishable. */
+.carousel-dot { position: relative; }
+.carousel-dot::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+}
+
 /* ── floating click-to-call ──────────────────────────────────────── */
 /* Sibling of .wa-fab inside #wa-widget, which is already a fixed flex
    column with its own gap and z-index. Nothing here positions the button:
@@ -129,11 +179,26 @@
   line-height: 1.75;
 }
 .efi-contact-label { font-weight: 800; color: #475569; }
-.efi-contact-list a { color: #1d4ed8; font-weight: 700; text-decoration: none; }
+/* Each value is a phone, WhatsApp or e-mail link — the actions this panel
+   exists for. At the panel's font size the anchors were only 26px tall, so
+   they were the smallest tap targets on the page that converts. */
+.efi-contact-list a {
+  display: inline-block;
+  color: #1d4ed8;
+  font-weight: 700;
+  text-decoration: none;
+  padding-block: 7px;
+  min-block-size: 40px;
+}
 .efi-contact-list a:hover { text-decoration: underline; }
 .efi-contact-value { color: #0f172a; }
 .efi-contact-value small { display: inline-block; color: #64748b; font-size: 0.8rem; }
-.efi-contact-map { display: inline-block; margin-block-start: 6px; }
+.efi-contact-map {
+  display: inline-block;
+  margin-block-start: 6px;
+  padding-block: 7px;
+  min-block-size: 40px;
+}
 .efi-contact-promise {
   margin: 18px 0 0;
   padding-block-start: 14px;
