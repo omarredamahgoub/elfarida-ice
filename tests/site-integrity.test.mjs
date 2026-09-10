@@ -62,27 +62,36 @@ test("the single active number is the one published in the config", () => {
   assert.equal(cfg.contact.phoneWhatsapp.e164, cfg.contact.phonePrimary.e164);
 });
 
-test("every reference to a versioned asset carries a cache-busting token", () => {
-  // Assets served immutable for a year; a stale copy is unrecoverable without
-  // the visitor clearing their cache.
-  const assets = [
-    "js/site-shell.js",
-    "js/conversion-kit.js",
-    "css/conversion-kit.css",
-    "js/index.js",
-    "js/index-en.js",
-  ];
-  const offenders = [];
+test("every local script and stylesheet shares one cache-busting token", () => {
+  // _headers serves /*.css and /*.js as `max-age=31536000, immutable`, so a
+  // reference without a token — or pinned to an older one — leaves returning
+  // visitors on the previous file for a year with no way to recover.
+  // Checking only the handful of files being edited is what left
+  // css/maintenance-contracts.css stranded on a stale token after its colours
+  // changed, so this covers every local reference and requires them to agree.
+  const REF = /((?:src|href)="(?!https?:|\/\/)[^"]*?\.(?:css|js))(\?v=([^"]*))?"/g;
+  const tokens = new Map();
+  const untokened = [];
+
   for (const file of HTML_FILES) {
-    const text = readFileSync(file, "utf8");
-    for (const asset of assets) {
-      const escaped = asset.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
-      if (new RegExp('(?:src|href)="[^"]*?' + escaped + '"').test(text)) {
-        offenders.push(relative(ROOT, file) + " -> " + asset);
+    for (const m of readFileSync(file, "utf8").matchAll(REF)) {
+      if (!m[3]) {
+        untokened.push(relative(ROOT, file) + " -> " + m[1]);
+        continue;
       }
+      const list = tokens.get(m[3]) || [];
+      if (list.length < 3) list.push(relative(ROOT, file));
+      tokens.set(m[3], list);
     }
   }
-  assert.deepEqual(offenders, [], "asset reference without ?v= token");
+
+  assert.deepEqual(untokened.slice(0, 10), [], "local asset reference without a ?v= token");
+  assert.equal(
+    tokens.size,
+    1,
+    "assets are pinned to different tokens: " +
+      [...tokens.entries()].map(([t, f]) => t + " (" + f.join(", ") + ")").join(" | ")
+  );
 });
 
 test("the newsletter form does not post into the sales-lead pipeline", () => {

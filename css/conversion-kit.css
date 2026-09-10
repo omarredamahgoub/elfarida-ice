@@ -46,6 +46,20 @@ button.bg-green-500:focus-visible {
 .text-sm.font-bold.text-blue-600 { color: #1d4ed8; }
 .text-xs.font-bold.text-red-600,
 .text-sm.font-bold.text-red-600 { color: #b91c1c; }
+.text-xs.font-bold.text-sky-600,
+.text-sm.font-bold.text-sky-600 { color: #0369a1; }
+
+/* The two lead paragraphs under the client and partner logos sat at 4.34:1 on
+   the section's slate tint — just under the threshold, and they are the lines
+   that carry the social proof. */
+p.text-slate-500.text-lg { color: #475569; }
+
+/* "Read more" on the blog cards measured 86×27: the only way into an article
+   from the listing, and too short to hit reliably on a phone. */
+a.inline-block.text-blue-800 {
+  padding-block: 6px;
+  min-block-size: 40px;
+}
 
 /* Carousel dots render as a 22×32 box — below the size a thumb reliably hits.
    The pseudo-element enlarges only the hit area, so the dots look unchanged
