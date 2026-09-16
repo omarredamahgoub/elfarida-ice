@@ -44,7 +44,7 @@
     <meta name="twitter:description" content="Step-by-step engineering guide to calculating industrial cold room refrigeration loads — formulas, insulation, and equipment sizing." />
     <meta name="twitter:image" content="https://elfaridaice.com/assets/gallery/cold-room-aluminum-floor.webp" />
     <meta name="article:published_time" content="2025-04-20" />
-    <meta name="article:modified_time" content="2026-09-10" />
+    <meta name="article:modified_time" content="2026-09-16" />
     <meta name="article:author" content="Al Farida Ice Engineering Team" />
     <meta name="article:section" content="Cold Room Design" />
 
@@ -78,7 +78,7 @@
           }
         },
         "datePublished": "2025-04-20",
-        "dateModified": "2026-09-10",
+        "dateModified": "2026-09-16",
         "mainEntityOfPage": "https://elfaridaice.com/assets/articles/cold-room-load-calculation-en.html",
         "inLanguage": "en",
         "keywords": "cold room load calculation, refrigeration load, cooling load, cold storage design, insulation panel",
@@ -155,6 +155,26 @@
           </p>
 
           <h2>1. Why Accurate Load Calculation Matters</h2>
+          <p>
+            The load calculation is the one decision every other decision
+            inherits. Compressor, evaporator, condenser, expansion valve, panel
+            thickness and electrical supply are all sized from it, so an error
+            here is not corrected later — it is multiplied.
+          </p>
+          <p>
+            The two failure modes cost differently, and it is worth being clear
+            about which risk you are taking. <strong>Undersizing</strong> shows
+            up in the first summer: the room cannot reach setpoint on the hottest
+            days, the compressor runs continuously, and the product spends hours
+            outside its specification — the expensive part is rarely the
+            equipment, it is the consignment. <strong>Oversizing</strong> fails
+            more quietly: the plant short-cycles, which wears the compressor and
+            raises starting current, humidity control degrades because the coil
+            never runs long enough to dehumidify, and the client has paid for
+            capacity that never gets used. Neither is fixed by a larger safety
+            factor; both are avoided by calculating each load component from
+            actual site data.
+          </p>
           <p>
             A refrigeration system must remove heat continuously to maintain the
             design temperature. That heat originates from multiple independent
@@ -422,6 +442,43 @@
                 <tr><td>Long-term Frozen</td><td>−25 °C and below</td><td>200 mm PIR</td><td>150 mm PIR</td></tr>
               </tbody>
             </table>
+          </div>
+
+          <p>
+            Read that table as <strong>minima, not recommendations</strong>. The
+            minimum is what keeps the room at temperature; the economic optimum
+            is usually one grade thicker, because the extra panel is bought once
+            while the heat it stops is paid for every hour for fifteen years. The
+            way to settle it is not a rule of thumb but a comparison: calculate
+            the envelope gain at each thickness, price the difference in annual
+            energy at your own tariff, and weigh it against the one-time cost of
+            the upgrade — the method is worked through in
+            <a href="sandwich-panel-specs-en.html" class="underline"
+              >the insulation panel guide</a
+            >.
+          </p>
+          <p>
+            Two details decide whether the specified panel performs as specified.
+            First, insist on a declared lambda alongside the thickness: a
+            100&nbsp;mm panel with an undeclared core can be anywhere from good
+            to poor, and thickness alone is not a specification. Second, budget
+            for joint and penetration detailing — an untreated thermal bridge at
+            a corner or a pipe crossing cancels much of the benefit of the panel
+            around it, and it will not show on a visual inspection.
+          </p>
+          <div class="callout callout-warn">
+            <span class="callout-icon">⚠</span>
+            <div class="callout-body">
+              <strong>Freezer floors need more than panel</strong>
+              Below about &minus;25&nbsp;°C, the ground under the slab freezes
+              progressively, the ice expands, and it lifts the floor — producing
+              structural cracking that can reach beyond the room itself. The
+              standard remedy is layered and must be installed at build stage:
+              rigid insulation beneath the floor panel, a damp-proof membrane,
+              and embedded electric or warm-water under-floor heating. None of it
+              can be retrofitted without taking the floor out, so it belongs in
+              the load calculation stage, not in the snag list.
+            </div>
           </div>
 
           <div class="callout callout-tip">
