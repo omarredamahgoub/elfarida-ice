@@ -60,6 +60,18 @@ import {
   topPages,
   deviceHint,
 } from "./_contacts-lib.js";
+import {
+  shortDayLabel,
+  combinedSeries,
+  windowCounts,
+  hourHistogram,
+  weekdayHistogram,
+  busiest,
+  hourRangeLabel,
+  normalizeRef,
+  findByRef,
+  shareOf,
+} from "./_overview-lib.js";
 
 const COOKIE = "efi_admin";
 const MAXAGE = 28800; // 8h
@@ -105,6 +117,13 @@ export async function onRequestGet(context) {
     return newsletterView(env, url);
   }
 
+  // The landing view. A list answers "who contacted us"; the owner opening the
+  // panel first needs "is demand rising, when do people actually call, and
+  // which page produced it" — questions a table cannot answer at a glance.
+  if (!url.searchParams.get("view")) {
+    return overviewView(env, url);
+  }
+
   const fmt = url.searchParams.get("format");
   const q = url.searchParams.get("q") || "";
   const statusFilter = url.searchParams.get("status") || "";
@@ -113,6 +132,10 @@ export async function onRequestGet(context) {
   const page = url.searchParams.get("page");
   const returnParams = new URLSearchParams(url.searchParams);
   returnParams.delete("format");
+  // The table is no longer the landing view, so a row action must carry the
+  // view back with it — otherwise saving a status drops the owner on the
+  // overview and loses the filter, sort and page he was working through.
+  returnParams.set("view", "leads");
   const returnQs = returnParams.toString();
 
   const { results } = await env.DB.prepare(
@@ -142,6 +165,78 @@ export async function onRequestGet(context) {
       page: currentPage,
       totalPages,
       returnQs,
+    })
+  );
+}
+
+/**
+ * Builds the monitoring overview: the three demand streams on one screen.
+ *
+ * Both tables are read in full over the window rather than aggregated in SQL,
+ * because D1 has no timezone support — grouping by `substr(created_at,1,10)`
+ * would cut every bucket at UTC midnight and move Riyadh evening traffic into
+ * the following day. The volumes here are small enough that bucketing in JS
+ * costs nothing and keeps the logic testable.
+ */
+async function overviewView(env, url) {
+  const now = new Date();
+  const since = new Date(now.getTime() - 31 * 86400000).toISOString();
+
+  const { results: leadRows } = await env.DB.prepare(
+    "SELECT id, created_at, name, phone, subject, status FROM leads WHERE created_at >= ? ORDER BY created_at DESC LIMIT 2000"
+  )
+    .bind(since)
+    .all();
+  const quotes = leadRows || [];
+
+  let contacts = [];
+  let contactsPending = false;
+  try {
+    const { results } = await env.DB.prepare(
+      "SELECT id, created_at, ref, channel, location, page, page_title, context FROM contact_events WHERE created_at >= ? ORDER BY created_at DESC LIMIT 5000"
+    )
+      .bind(since)
+      .all();
+    contacts = results || [];
+  } catch (_) {
+    contactsPending = true;
+  }
+
+  const whatsapp = contacts.filter((r) => r.channel === "whatsapp");
+  const phone = contacts.filter((r) => r.channel === "phone");
+
+  // The reference lookup searches the full table, not just the window: a
+  // WhatsApp conversation can surface weeks after the tap that started it.
+  const refQuery = (url.searchParams.get("ref") || "").trim();
+  let refMatches = [];
+  if (refQuery && !contactsPending) {
+    const normalized = normalizeRef(refQuery);
+    if (normalized) {
+      const { results } = await env.DB.prepare(
+        "SELECT id, created_at, ref, channel, location, page, page_title, context, ua FROM contact_events WHERE UPPER(ref) = ? ORDER BY created_at DESC LIMIT 25"
+      )
+        .bind(normalized)
+        .all();
+      refMatches = findByRef(results || [], normalized);
+    }
+  }
+
+  return htmlResp(
+    overviewPage({
+      now,
+      contactsPending,
+      refQuery,
+      refNormalized: normalizeRef(refQuery),
+      refMatches,
+      counts: {
+        quotes: windowCounts(quotes, now),
+        whatsapp: windowCounts(whatsapp, now),
+        phone: windowCounts(phone, now),
+      },
+      series: combinedSeries({ quotes, whatsapp, phone }, 30, now),
+      hours: hourHistogram(contacts.concat(quotes)),
+      weekdays: weekdayHistogram(contacts.concat(quotes)),
+      pages: topPages(contacts, 8),
     })
   );
 }
@@ -669,6 +764,41 @@ td a:hover,td a:focus-visible{color:var(--link-hover);border-bottom-color:var(--
 .wa-link{color:#4fae86;font-size:11.5px;margin-inline-start:6px;white-space:nowrap;border-bottom:none}
 .dup-badge{background:#5c3a1e;color:#e3b98d;font-size:10.5px;padding:2px 6px;border-radius:999px;margin-inline-start:6px;white-space:nowrap;font-weight:600}
 .pagination{display:flex;gap:10px;align-items:center;margin:20px 0 0}
+/* ── overview ── */
+h2{font-size:15px;font-weight:600;margin:0;color:var(--text)}
+.panel__head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.panel__head .muted{font-size:12.5px}
+.refbox{margin-bottom:20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:20px}
+.kpi{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px 14px}
+.kpi__dot{position:absolute;inset-block-start:16px;inset-inline-end:16px;width:10px;height:10px;border-radius:50%}
+.kpi__head{color:var(--muted);font-size:13px;margin-bottom:10px}
+.kpi__today{font-size:13px;color:var(--muted);margin-bottom:10px}
+.kpi__today b{color:var(--text);font-size:28px;font-weight:700;margin-inline-end:6px;line-height:1}
+.kpi__row{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);padding-top:7px;border-top:1px solid var(--border)}
+.kpi__row b{color:var(--text);font-size:14px;margin-inline-start:auto}
+.kpi__row .trend{margin-inline-start:0}
+.trend{font-size:11.5px;font-weight:600;white-space:nowrap}
+.trend--up{color:#6fbf98}
+.trend--down{color:#e09b9b}
+.trend--flat{color:var(--muted)}
+[data-stream=quotes]{background:#5a8fce}
+[data-stream=whatsapp]{background:#4fae86}
+[data-stream=phone]{background:#e0a458}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart .ax{fill:#8a97a8;font-size:11px;font-family:system-ui,Tahoma,sans-serif}
+.chart .grid{stroke:#2c3b52;stroke-width:1}
+.chart-note{font-size:12px;margin:10px 0 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--muted)}
+.legend__item{display:inline-flex;align-items:center;gap:6px}
+.legend__item i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.sharebar{display:flex;height:34px;border-radius:8px;overflow:hidden;background:var(--panel-2);border:1px solid var(--border)}
+.sharebar__seg{display:flex;align-items:center;justify-content:center;min-width:0}
+.sharebar__seg b{color:#0e1522;font-size:12px;font-weight:700;padding:0 4px;white-space:nowrap}
+/* URLs and reference codes are Latin runs inside Arabic text: without bidi
+   isolation the leading slash of a path is reordered to the end, so
+   /cold-rooms-dammam is displayed to the owner as cold-rooms-dammam/ */
+.path{display:inline-block;unicode-bidi:isolate;direction:ltr;font-size:12px}
 @media (max-width:768px){
   table,thead,tbody,th,td,tr{display:block}
   thead{display:none}
@@ -713,7 +843,7 @@ function securityPage(msg, isError) {
     <label>كلمة المرور الجديدة (8 أحرف على الأقل)</label><input name="new_password" type="password" autocomplete="new-password" required>
     <div style="margin-top:18px"><button type="submit">تحديث كلمة المرور</button></div>
   </form>
-  <p style="margin-top:20px"><a class="btn" href="/admin/leads">رجوع للطلبات</a></p>
+  <p style="margin-top:20px"><a class="btn" href="/admin/leads">رجوع للوحة</a></p>
   </div>`
   );
 }
@@ -721,6 +851,7 @@ function securityPage(msg, isError) {
 function sortHeader(label, field, filters) {
   const nextDir = toggleSortDir(filters.sort, filters.dir, field);
   const qs = buildQueryString({
+    view: "leads",
     ...filters,
     sort: field,
     dir: nextDir,
@@ -735,8 +866,8 @@ function sortHeader(label, field, filters) {
 
 function paginationControls(filters, page, totalPages) {
   if (totalPages <= 1) return "";
-  const prevQs = buildQueryString({ ...filters, page: page - 1 });
-  const nextQs = buildQueryString({ ...filters, page: page + 1 });
+  const prevQs = buildQueryString({ view: "leads", ...filters, page: page - 1 });
+  const nextQs = buildQueryString({ view: "leads", ...filters, page: page + 1 });
   const prev = page > 1 ? `<a class="btn" href="${esc("/admin/leads?" + prevQs)}">السابق</a>` : "";
   const next =
     page < totalPages ? `<a class="btn" href="${esc("/admin/leads?" + nextQs)}">التالي</a>` : "";
@@ -748,7 +879,8 @@ function viewNav(active) {
   const tab = (href, label, key) =>
     `<a class="btn ${active === key ? "" : "btn-secondary"}" href="${href}">${label}</a>`;
   return `<div class="toolbar">
-    ${tab("/admin/leads", "طلبات النماذج", "leads")}
+    ${tab("/admin/leads", "المراقبة", "overview")}
+    ${tab("/admin/leads?view=leads", "طلبات النماذج", "leads")}
     ${tab("/admin/leads?view=contacts", "واتساب ومكالمات", "contacts")}
     ${tab("/admin/leads?view=newsletter", "النشرة البريدية", "newsletter")}
     <div class="toolbar-account">
@@ -756,6 +888,253 @@ function viewNav(active) {
       <a class="btn btn-secondary" href="/admin/leads?logout=1">خروج</a>
     </div>
   </div>`;
+}
+
+/* ── overview rendering ───────────────────────────────────── */
+
+const STREAM_COLORS = { quotes: "#5a8fce", whatsapp: "#4fae86", phone: "#e0a458" };
+const STREAM_LABELS = { quotes: "طلبات النماذج", whatsapp: "واتساب", phone: "مكالمات" };
+
+/** A signed, coloured change indicator, or a dash when there is no baseline. */
+function trendBadge(pct) {
+  if (pct == null) return '<span class="trend trend--flat">—</span>';
+  if (pct === 0) return '<span class="trend trend--flat">بلا تغيّر</span>';
+  const up = pct > 0;
+  return `<span class="trend trend--${up ? "up" : "down"}">${up ? "▲" : "▼"} ${Math.abs(pct)}%</span>`;
+}
+
+/**
+ * Stacked daily volume for the last 30 days.
+ *
+ * Stacked rather than grouped: the owner's first question is whether total
+ * demand is moving, and the second is which channel moved it. Grouped bars
+ * answer the second well and the first badly.
+ */
+function dailyChart(series) {
+  const W = 960;
+  const H = 230;
+  const padTop = 14;
+  const padBottom = 30;
+  const plot = H - padTop - padBottom;
+  const max = Math.max(1, ...series.map((d) => d.total));
+  const slot = W / Math.max(1, series.length);
+  const barW = Math.min(20, slot * 0.62);
+
+  const bars = series
+    .map((d, i) => {
+      const cx = slot * i + slot / 2;
+      const x = cx - barW / 2;
+      let y = padTop + plot;
+      const seg = (value, fill) => {
+        if (!value) return "";
+        const h = (value / max) * plot;
+        y -= h;
+        return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${fill}" rx="2"><title>${esc(d.key)} — ${value}</title></rect>`;
+      };
+      return (
+        seg(d.phone, STREAM_COLORS.phone) +
+        seg(d.whatsapp, STREAM_COLORS.whatsapp) +
+        seg(d.quotes, STREAM_COLORS.quotes)
+      );
+    })
+    .join("");
+
+  const labels = series
+    .map((d, i) =>
+      i % 5 === 0 || i === series.length - 1
+        ? `<text x="${(slot * i + slot / 2).toFixed(1)}" y="${H - 10}" class="ax" text-anchor="middle">${esc(shortDayLabel(d.key))}</text>`
+        : ""
+    )
+    .join("");
+
+  const grid = [0, 0.5, 1]
+    .map((f) => {
+      const y = padTop + plot - f * plot;
+      return `<line x1="0" y1="${y.toFixed(1)}" x2="${W}" y2="${y.toFixed(1)}" class="grid"/><text x="${W - 4}" y="${(y - 4).toFixed(1)}" class="ax" text-anchor="end">${Math.round(f * max)}</text>`;
+    })
+    .join("");
+
+  return `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="حجم التواصل اليومي خلال آخر 30 يوماً">${grid}${bars}${labels}</svg>`;
+}
+
+/** A single-series histogram used for both the hour and weekday breakdowns. */
+function histogramChart(buckets, labelFor, fill, ariaLabel, highlightIndex) {
+  const W = 960;
+  const H = 150;
+  const padTop = 10;
+  const padBottom = 26;
+  const plot = H - padTop - padBottom;
+  const max = Math.max(1, ...buckets.map((b) => b.count));
+  const slot = W / Math.max(1, buckets.length);
+  const barW = Math.min(46, slot * 0.66);
+
+  const bars = buckets
+    .map((b, i) => {
+      const h = (b.count / max) * plot;
+      const x = slot * i + (slot - barW) / 2;
+      const y = padTop + plot - h;
+      const dim = b.count === 0;
+      return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(h, dim ? 2 : h).toFixed(1)}" fill="${i === highlightIndex ? "#d4e3f5" : fill}" opacity="${dim ? 0.18 : 1}" rx="2"><title>${esc(labelFor(b))} — ${b.count}</title></rect>`;
+    })
+    .join("");
+
+  const labels = buckets
+    .map((b, i) =>
+      buckets.length <= 8 || i % 2 === 0
+        ? `<text x="${(slot * i + slot / 2).toFixed(1)}" y="${H - 8}" class="ax" text-anchor="middle">${esc(labelFor(b, true))}</text>`
+        : ""
+    )
+    .join("");
+
+  return `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="${esc(ariaLabel)}">${bars}${labels}</svg>`;
+}
+
+function overviewPage(view) {
+  const { counts, series, hours, weekdays, pages, refQuery, refNormalized, refMatches } = view;
+
+  const window30 = {
+    quotes: counts.quotes.last30,
+    whatsapp: counts.whatsapp.last30,
+    phone: counts.phone.last30,
+  };
+  const shares = shareOf(window30);
+  const total30 = window30.quotes + window30.whatsapp + window30.phone;
+
+  const kpi = (key) => {
+    const c = counts[key];
+    return `<div class="kpi">
+      <span class="kpi__dot" data-stream="${key}"></span>
+      <div class="kpi__head">${esc(STREAM_LABELS[key])}</div>
+      <div class="kpi__today"><b>${c.today}</b> اليوم</div>
+      <div class="kpi__row"><span>آخر 7 أيام</span><b>${c.last7}</b> ${trendBadge(c.trend)}</div>
+      <div class="kpi__row"><span>آخر 30 يوماً</span><b>${c.last30}</b></div>
+    </div>`;
+  };
+
+  const shareBar = total30
+    ? `<div class="sharebar" role="img" aria-label="توزيع قنوات التواصل خلال 30 يوماً">
+        ${shares
+          .filter((s) => s.pct > 0)
+          .map(
+            (s) =>
+              `<span class="sharebar__seg" data-stream="${s.key}" style="width:${s.pct}%"><b>${s.pct}%</b></span>`
+          )
+          .join("")}
+      </div>
+      <div class="legend">${shares
+        .map(
+          (s) =>
+            `<span class="legend__item"><i data-stream="${s.key}"></i>${esc(STREAM_LABELS[s.key])} — ${s.value}</span>`
+        )
+        .join("")}</div>`
+    : '<p class="muted">لا توجد بيانات في آخر 30 يوماً بعد.</p>';
+
+  const peakHour = busiest(hours);
+  const peakDay = busiest(weekdays);
+
+  const refPanel = `<form method="GET" action="/admin/leads" class="filters refbox">
+    <input type="text" name="ref" value="${esc(refQuery || "")}" placeholder="ألصق رمز المرجع من رسالة واتساب (مثال: EFI-7K3M)">
+    <button type="submit">ابحث عن الرمز</button>
+    ${refQuery ? '<a class="btn btn-secondary" href="/admin/leads">مسح</a>' : ""}
+  </form>`;
+
+  const refResult = !refQuery
+    ? ""
+    : refMatches.length
+      ? `<div class="panel">
+          <p class="muted">الرمز <bdi><b>${esc(refNormalized)}</b></bdi> — ${refMatches.length} ${refMatches.length === 1 ? "ضغطة" : "ضغطات"}:</p>
+          <table><thead><tr><th>الوقت</th><th>القناة</th><th>من أين</th><th>الصفحة</th><th>السياق</th></tr></thead><tbody>
+          ${refMatches
+            .map(
+              (r) => `<tr>
+              <td data-label="الوقت">${esc(toRiyadhDisplay(r.created_at))}</td>
+              <td data-label="القناة">${esc(channelLabel(r.channel))}</td>
+              <td data-label="من أين">${esc(locationLabel(r.location))}</td>
+              <td data-label="الصفحة">${esc(r.page_title || "")}${r.page ? `<br><bdi class="muted path">${esc(r.page)}</bdi>` : ""}${!r.page_title && !r.page ? "—" : ""}</td>
+              <td data-label="السياق">${esc(r.context || "—")}</td>
+            </tr>`
+            )
+            .join("")}
+          </tbody></table>
+        </div>`
+      : `<div class="panel"><p class="muted">لا توجد ضغطة مسجّلة بالرمز <b>${esc(refNormalized || refQuery)}</b>. تأكد من نسخ الرمز كاملاً كما ورد في الرسالة.</p></div>`;
+
+  const pagesTable = pages.length
+    ? `<table><thead><tr><th>الصفحة</th><th>عدد التواصلات</th></tr></thead><tbody>
+      ${pages
+        .map(
+          (p) => `<tr>
+          <td data-label="الصفحة">${esc(p.title || p.page || "—")}<br><bdi class="muted path">${esc(p.page || "")}</bdi></td>
+          <td data-label="عدد التواصلات"><b>${p.count}</b></td>
+        </tr>`
+        )
+        .join("")}
+    </tbody></table>`
+    : '<p class="muted">لم تُسجَّل أي ضغطة بعد.</p>';
+
+  const pendingNotice = view.contactsPending
+    ? `<div class="panel"><p>جدول <code>contact_events</code> غير موجود بعد، لذلك لا تظهر ضغطات الواتساب والمكالمات.</p>
+       <p class="muted"><code>npx wrangler d1 execute elfarida-leads --remote --file=migrations/0002_contact_events.sql</code></p></div>`
+    : "";
+
+  return SHELL(
+    "لوحة المراقبة",
+    `<h1>لوحة المراقبة</h1>${viewNav("overview")}
+    ${pendingNotice}
+    ${refPanel}
+    ${refResult}
+
+    <div class="kpis">${kpi("quotes")}${kpi("whatsapp")}${kpi("phone")}</div>
+
+    <div class="panel">
+      <div class="panel__head"><h2>حجم التواصل اليومي — آخر 30 يوماً</h2>
+        <span class="muted">من الأقدم (يسار) إلى اليوم (يمين)</span></div>
+      ${dailyChart(series)}
+      <div class="legend">${["quotes", "whatsapp", "phone"]
+        .map(
+          (k) =>
+            `<span class="legend__item"><i data-stream="${k}"></i>${esc(STREAM_LABELS[k])}</span>`
+        )
+        .join("")}</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h2>توزيع القنوات — آخر 30 يوماً</h2>
+        <span class="muted">إجمالي ${total30}</span></div>
+      ${shareBar}
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h2>ساعات الذروة</h2>
+        <span class="muted">${peakHour ? `الأكثر ازدحاماً: ${esc(hourRangeLabel(peakHour.hour))}` : "لا توجد بيانات كافية"}</span></div>
+      ${histogramChart(
+        hours,
+        (b, short) => (short ? String(b.hour) : hourRangeLabel(b.hour)),
+        "#5a8fce",
+        "عدد التواصلات بحسب ساعة اليوم بتوقيت الرياض",
+        peakHour ? peakHour.hour : -1
+      )}
+      <p class="muted chart-note">بتوقيت الرياض. يفيد في تحديد من يرد على الهاتف والواتساب في أي ساعة.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h2>أيام الأسبوع</h2>
+        <span class="muted">${peakDay ? `الأنشط: ${esc(peakDay.label)}` : "لا توجد بيانات كافية"}</span></div>
+      ${histogramChart(
+        weekdays,
+        (b) => b.label,
+        "#4fae86",
+        "عدد التواصلات بحسب يوم الأسبوع",
+        peakDay ? peakDay.weekday : -1
+      )}
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h2>الصفحات الأكثر توليداً للتواصل</h2>
+        <span class="muted">آخر 30 يوماً</span></div>
+      ${pagesTable}
+    </div>`
+  );
 }
 
 function contactsPage(rows, view) {
@@ -887,12 +1266,13 @@ function tablePage(rows, view) {
   ).join("");
 
   const filterForm = `<form method="GET" action="/admin/leads" class="filters">
+    <input type="hidden" name="view" value="leads">
     <input type="text" name="q" value="${esc(q)}" placeholder="ابحث بالاسم أو البريد أو الهاتف أو الموضوع">
     <select name="status"><option value="">كل الحالات</option>${statusOptionsHtml}</select>
     <input type="hidden" name="sort" value="${esc(filters.sort)}">
     <input type="hidden" name="dir" value="${esc(filters.dir)}">
     <button type="submit">بحث</button>
-    ${isFiltered ? '<a class="btn" href="/admin/leads">إعادة تعيين</a>' : ""}
+    ${isFiltered ? '<a class="btn" href="/admin/leads?view=leads">إعادة تعيين</a>' : ""}
   </form>`;
 
   const statsBar = `<div class="panel stats">
