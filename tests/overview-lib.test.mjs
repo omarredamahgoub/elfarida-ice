@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   RIYADH_OFFSET_MS,
   WEEKDAY_LABELS_AR,
+  WEEKDAY_SHORT_AR,
   riyadhDate,
   dayKey,
   hourOf,
@@ -20,6 +21,13 @@ import {
   normalizeRef,
   findByRef,
   shareOf,
+  WINDOW_OPTIONS,
+  DEFAULT_WINDOW,
+  normalizeWindow,
+  peakClaim,
+  breakdownBy,
+  uniqueCount,
+  repeatRatio,
 } from "../functions/admin/_overview-lib.js";
 
 const at = (iso) => ({ created_at: iso });
@@ -146,8 +154,15 @@ test("windowCounts", async (t) => {
     assert.equal(w.today, 2);
     assert.equal(w.last7, 3);
     assert.equal(w.prev7, 1);
-    assert.equal(w.last30, 4);
+    assert.equal(w.window, 4);
     assert.equal(w.total, 5);
+  });
+
+  await t.test("the window count follows the selected period", () => {
+    // The July row sits 58 days back: inside 90 days, outside 30 and 7.
+    assert.equal(windowCounts(rows, now, 7).window, 3);
+    assert.equal(windowCounts(rows, now, 30).window, 4);
+    assert.equal(windowCounts(rows, now, 90).window, 5);
   });
 
   await t.test("the trend compares this week against the one before it", () => {
@@ -217,6 +232,16 @@ test("weekdayHistogram", async (t) => {
   await t.test("counts land on the Riyadh weekday", () => {
     const w = weekdayHistogram([at("2026-09-13T09:00:00Z")]);
     assert.equal(w[0].count, 1);
+  });
+
+  await t.test("carries an axis-length short name for every bucket", () => {
+    const w = weekdayHistogram([]);
+    assert.equal(w.length, WEEKDAY_SHORT_AR.length);
+    for (const b of w) {
+      assert.equal(b.short, WEEKDAY_SHORT_AR[b.weekday]);
+      assert.ok(b.short.length < b.label.length);
+      assert.ok(b.label.endsWith(b.short.slice(-2)));
+    }
   });
 });
 
@@ -331,5 +356,129 @@ test("shareOf", async (t) => {
 
   await t.test("missing input yields an empty list", () => {
     assert.deepEqual(shareOf(undefined), []);
+  });
+});
+
+test("normalizeWindow", async (t) => {
+  await t.test("accepts only the windows we offer", () => {
+    assert.equal(normalizeWindow("7"), 7);
+    assert.equal(normalizeWindow(90), 90);
+    assert.deepEqual(WINDOW_OPTIONS, [7, 30, 90]);
+  });
+
+  await t.test("anything else falls back to the default", () => {
+    assert.equal(normalizeWindow("365"), DEFAULT_WINDOW);
+    assert.equal(normalizeWindow("abc"), DEFAULT_WINDOW);
+    assert.equal(normalizeWindow(null), DEFAULT_WINDOW);
+    assert.equal(normalizeWindow("7; DROP TABLE leads"), 7);
+  });
+});
+
+test("peakClaim", async (t) => {
+  const spread = (counts) => counts.map((count, hour) => ({ hour, count }));
+
+  await t.test("refuses to name a peak from a thin sample", () => {
+    // 23 taps over 24 buckets: the winner holds two events, which is chance.
+    const thin = spread([2, 1, 1, 0, 1, 2, 1, 0, 1, 2, 1, 1, 0, 1, 2, 1, 1, 0, 1, 1, 1, 1, 1, 0]);
+    const claim = peakClaim(thin);
+    assert.equal(claim.reliable, false);
+    assert.equal(claim.total, 23);
+    assert.ok(claim.top, "the busiest bucket is still returned for display");
+  });
+
+  await t.test("names a peak once the sample can carry it", () => {
+    const solid = spread([1, 1, 1, 1, 2, 2, 3, 4, 9, 6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    const claim = peakClaim(solid);
+    assert.equal(claim.reliable, true);
+    assert.equal(claim.top.hour, 8);
+  });
+
+  await t.test("a flat distribution is not a peak however large the total", () => {
+    // 44 events but the winning bucket holds only two: nothing stands out.
+    const flat = Array.from({ length: 24 }, (_, hour) => ({ hour, count: hour < 20 ? 2 : 1 }));
+    const claim = peakClaim(flat);
+    assert.equal(claim.total, 44);
+    assert.equal(claim.reliable, false);
+  });
+
+  await t.test("empty input reports no peak and no total", () => {
+    const claim = peakClaim([]);
+    assert.equal(claim.top, null);
+    assert.equal(claim.total, 0);
+    assert.equal(claim.reliable, false);
+  });
+
+  await t.test("thresholds are overridable for smaller bucket sets", () => {
+    const week = [
+      { weekday: 0, count: 4 },
+      { weekday: 1, count: 1 },
+    ];
+    assert.equal(peakClaim(week).reliable, false);
+    assert.equal(peakClaim(week, 5, 3).reliable, true);
+  });
+});
+
+test("breakdownBy", async (t) => {
+  const rows = [
+    { location: "dock" },
+    { location: "dock" },
+    { location: "header" },
+    { location: "" },
+    { location: null },
+    {},
+  ];
+
+  await t.test("counts by field, largest first", () => {
+    const b = breakdownBy(rows, "location");
+    assert.deepEqual(
+      b.map((x) => x.count),
+      [3, 2, 1]
+    );
+    assert.equal(b.find((x) => x.key === "dock").count, 2);
+    assert.equal(b.find((x) => x.key === "header").count, 1);
+  });
+
+  await t.test("empty values are grouped, not silently dropped", () => {
+    const b = breakdownBy(rows, "location");
+    const unknown = b.find((x) => x.key === "—");
+    assert.equal(unknown.count, 3);
+    assert.equal(
+      b.reduce((n, x) => n + x.count, 0),
+      rows.length
+    );
+  });
+
+  await t.test("ties break alphabetically so the order is stable", () => {
+    const b = breakdownBy([{ k: "b" }, { k: "a" }], "k");
+    assert.deepEqual(
+      b.map((x) => x.key),
+      ["a", "b"]
+    );
+  });
+
+  await t.test("respects the limit and tolerates empty input", () => {
+    assert.equal(breakdownBy(rows, "location", 1).length, 1);
+    assert.deepEqual(breakdownBy([], "location"), []);
+    assert.deepEqual(breakdownBy(undefined, "location"), []);
+  });
+});
+
+test("uniqueCount and repeatRatio", async (t) => {
+  const rows = [{ ip: "1.1.1.1" }, { ip: "1.1.1.1" }, { ip: "2.2.2.2" }, { ip: "" }, {}];
+
+  await t.test("counts distinct non-empty values", () => {
+    assert.equal(uniqueCount(rows, "ip"), 2);
+    assert.equal(uniqueCount([], "ip"), 0);
+    assert.equal(uniqueCount(undefined, "ip"), 0);
+  });
+
+  await t.test("separates many people from one persistent person", () => {
+    assert.equal(repeatRatio(rows), 2.5);
+    assert.equal(repeatRatio([{ ip: "a" }, { ip: "b" }]), 1);
+  });
+
+  await t.test("no data yields null rather than a misleading 0.0", () => {
+    assert.equal(repeatRatio([]), null);
+    assert.equal(repeatRatio([{}, {}]), null);
   });
 });

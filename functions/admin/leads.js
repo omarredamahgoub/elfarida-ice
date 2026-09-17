@@ -66,11 +66,16 @@ import {
   windowCounts,
   hourHistogram,
   weekdayHistogram,
-  busiest,
   hourRangeLabel,
   normalizeRef,
   findByRef,
   shareOf,
+  WINDOW_OPTIONS,
+  normalizeWindow,
+  peakClaim,
+  breakdownBy,
+  uniqueCount,
+  repeatRatio,
 } from "./_overview-lib.js";
 
 const COOKIE = "efi_admin";
@@ -180,10 +185,16 @@ export async function onRequestGet(context) {
  */
 async function overviewView(env, url) {
   const now = new Date();
-  const since = new Date(now.getTime() - 31 * 86400000).toISOString();
+  const days = normalizeWindow(url.searchParams.get("days"));
+  const since = new Date(now.getTime() - (days + 1) * 86400000).toISOString();
+
+  // A silently truncated read would understate every number on the page while
+  // still looking authoritative, so the cap is surfaced rather than hidden.
+  const LEAD_CAP = 5000;
+  const EVENT_CAP = 20000;
 
   const { results: leadRows } = await env.DB.prepare(
-    "SELECT id, created_at, name, phone, subject, status FROM leads WHERE created_at >= ? ORDER BY created_at DESC LIMIT 2000"
+    `SELECT id, created_at, name, phone, subject, status, ip FROM leads WHERE created_at >= ? ORDER BY created_at DESC LIMIT ${LEAD_CAP}`
   )
     .bind(since)
     .all();
@@ -193,7 +204,7 @@ async function overviewView(env, url) {
   let contactsPending = false;
   try {
     const { results } = await env.DB.prepare(
-      "SELECT id, created_at, ref, channel, location, page, page_title, context FROM contact_events WHERE created_at >= ? ORDER BY created_at DESC LIMIT 5000"
+      `SELECT id, created_at, ref, channel, location, page, page_title, context, ip FROM contact_events WHERE created_at >= ? ORDER BY created_at DESC LIMIT ${EVENT_CAP}`
     )
       .bind(since)
       .all();
@@ -202,6 +213,7 @@ async function overviewView(env, url) {
     contactsPending = true;
   }
 
+  const truncated = quotes.length >= LEAD_CAP || contacts.length >= EVENT_CAP;
   const whatsapp = contacts.filter((r) => r.channel === "whatsapp");
   const phone = contacts.filter((r) => r.channel === "phone");
 
@@ -221,22 +233,40 @@ async function overviewView(env, url) {
     }
   }
 
+  // The hour and weekday histograms answer a staffing question — who must be
+  // free to pick up the phone and reply on WhatsApp — so they count live
+  // contact attempts only. Folding in form submissions, which wait politely in
+  // a table until someone opens it, would blur exactly that signal.
+  const hours = hourHistogram(contacts);
+  const weekdays = weekdayHistogram(contacts);
+
   return htmlResp(
     overviewPage({
       now,
+      days,
+      truncated,
       contactsPending,
       refQuery,
       refNormalized: normalizeRef(refQuery),
       refMatches,
       counts: {
-        quotes: windowCounts(quotes, now),
-        whatsapp: windowCounts(whatsapp, now),
-        phone: windowCounts(phone, now),
+        quotes: windowCounts(quotes, now, days),
+        whatsapp: windowCounts(whatsapp, now, days),
+        phone: windowCounts(phone, now, days),
       },
-      series: combinedSeries({ quotes, whatsapp, phone }, 30, now),
-      hours: hourHistogram(contacts.concat(quotes)),
-      weekdays: weekdayHistogram(contacts.concat(quotes)),
+      people: {
+        contacts: uniqueCount(contacts, "ip"),
+        repeat: repeatRatio(contacts, "ip"),
+      },
+      series: combinedSeries({ quotes, whatsapp, phone }, days, now),
+      hours,
+      weekdays,
+      hourPeak: peakClaim(hours),
+      // Seven buckets, not twenty-four: the same total is far denser per
+      // bucket, so the bar for a believable winner is lower.
+      dayPeak: peakClaim(weekdays, 20, 4),
       pages: topPages(contacts, 8),
+      locations: breakdownBy(contacts, "location", 8),
     })
   );
 }
@@ -782,19 +812,46 @@ h2{font-size:15px;font-weight:600;margin:0;color:var(--text)}
 .trend--up{color:#6fbf98}
 .trend--down{color:#e09b9b}
 .trend--flat{color:var(--muted)}
-[data-stream=quotes]{background:#5a8fce}
-[data-stream=whatsapp]{background:#4fae86}
-[data-stream=phone]{background:#e0a458}
+[data-stream=quotes]{background:#3987e5}
+[data-stream=whatsapp]{background:#199e70}
+[data-stream=phone]{background:#d95926}
+.panel__bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.panel__bar .muted{font-size:12.5px}
+.windowpick{display:flex;gap:6px}
+.people{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.people .muted{font-size:12px}
+.peak{color:var(--text)}
+.countlink{color:var(--link);text-decoration:none;white-space:nowrap}
+.ranked{display:flex;flex-direction:column;gap:9px}
+.ranked__row{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;align-items:center;gap:12px}
+.ranked__label{font-size:13px;color:var(--text)}
+.ranked__track{background:var(--panel-2);border-radius:4px;height:14px;overflow:hidden}
+/* Logical radii: the bar grows from the inline start, so the rounded end must
+   follow the data end — which is the left edge in this RTL panel. */
+.ranked__fill{display:block;height:100%;border-start-start-radius:0;border-end-start-radius:0;border-start-end-radius:4px;border-end-end-radius:4px}
+.ranked__value{font-size:13px;color:var(--text);min-width:2ch;text-align:start}
+@media (max-width:600px){.ranked__row{grid-template-columns:1fr auto;gap:4px}.ranked__track{grid-column:1/-1}}
+.plot{display:block}
 .chart{width:100%;height:auto;display:block;overflow:visible}
 .chart .ax{fill:#8a97a8;font-size:11px;font-family:system-ui,Tahoma,sans-serif}
 .chart .grid{stroke:#2c3b52;stroke-width:1}
+/* The plot's x axis runs oldest-to-newest left-to-right in SVG user space, which
+   no page direction changes; the tick row has to follow it, not the page. */
+.ticks{display:flex;margin-top:6px;direction:ltr}
+.ticks__t{flex:1 1 0;min-width:0;text-align:center;font-size:11px;line-height:1.3;color:#8a97a8;white-space:nowrap;font-variant-numeric:tabular-nums}
 .chart-note{font-size:12px;margin:10px 0 0}
+@media(max-width:720px){
+.chart .ax{font-size:34px}
+.ticks__t:not(.ticks__t--keep){visibility:hidden}
+}
 .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--muted)}
 .legend__item{display:inline-flex;align-items:center;gap:6px}
 .legend__item i{width:10px;height:10px;border-radius:3px;display:inline-block}
-.sharebar{display:flex;height:34px;border-radius:8px;overflow:hidden;background:var(--panel-2);border:1px solid var(--border)}
-.sharebar__seg{display:flex;align-items:center;justify-content:center;min-width:0}
-.sharebar__seg b{color:#0e1522;font-size:12px;font-weight:700;padding:0 4px;white-space:nowrap}
+/* Values live in the legend beneath, in text ink — never as coloured text on
+   a coloured fill, where the contrast depends on which segment it lands in. */
+.sharebar{display:flex;height:16px;border-radius:6px;overflow:hidden;background:var(--panel-2);gap:2px}
+.sharebar__seg{min-width:2px}
+.legend__item b{color:var(--text)}
 /* URLs and reference codes are Latin runs inside Arabic text: without bidi
    isolation the leading slash of a path is reordered to the end, so
    /cold-rooms-dammam is displayed to the owner as cold-rooms-dammam/ */
@@ -892,8 +949,53 @@ function viewNav(active) {
 
 /* ── overview rendering ───────────────────────────────────── */
 
-const STREAM_COLORS = { quotes: "#5a8fce", whatsapp: "#4fae86", phone: "#e0a458" };
+/**
+ * Categorical slots 1–3 of the design palette, stepped for a dark surface and
+ * validated as a set against this panel's own background (#1a2436): lightness
+ * band, chroma floor, adjacent CVD separation (worst ΔE 9.4), normal-vision
+ * separation (worst ΔE 20.9) and 3:1 contrast all pass. The previous ad-hoc
+ * trio failed the lightness band and left orange and green only ΔE 6.6 apart
+ * under protanopia — the two channels the owner most needs to tell apart.
+ *
+ * Aqua carries WhatsApp because it is both the validated slot and the colour a
+ * reader already associates with it; colour follows the stream, never its rank,
+ * so filtering or a quiet channel never repaints the others.
+ */
+const STREAM_COLORS = { quotes: "#3987e5", whatsapp: "#199e70", phone: "#d95926" };
 const STREAM_LABELS = { quotes: "طلبات النماذج", whatsapp: "واتساب", phone: "مكالمات" };
+const BAR_RADIUS = 4;
+const SEG_GAP = 2;
+
+/** A bar with its data end rounded and its baseline end square. */
+function barPath(x, y, w, h, r) {
+  const n = (v) => v.toFixed(1);
+  const rr = Math.max(0, Math.min(r, w / 2, h));
+  if (rr <= 0) return `M${n(x)} ${n(y)}h${n(w)}v${n(h)}h${n(-w)}Z`;
+  return (
+    `M${n(x)} ${n(y + h)}L${n(x)} ${n(y + rr)}Q${n(x)} ${n(y)} ${n(x + rr)} ${n(y)}` +
+    `L${n(x + w - rr)} ${n(y)}Q${n(x + w)} ${n(y)} ${n(x + w)} ${n(y + rr)}` +
+    `L${n(x + w)} ${n(y + h)}Z`
+  );
+}
+
+/**
+ * X-axis ticks, rendered as HTML rather than inside the viewBox.
+ *
+ * An SVG scales its own text down with the plot, so a 11px axis label becomes a
+ * 5px smudge on a phone. Equal-width flex cells sit on the same slot grid as the
+ * bars, so the labels stay aligned while keeping a real CSS font size. `wide` is
+ * the desktop label interval and `narrow` the one a phone can fit; the cells in
+ * between are still emitted, so the grid never shifts.
+ */
+function axisTicks(items, textFor, wide, narrow) {
+  return `<div class="ticks" aria-hidden="true">${items
+    .map((item, i) => {
+      if (i % wide !== 0) return '<span class="ticks__t"></span>';
+      const keep = i % narrow === 0 ? " ticks__t--keep" : "";
+      return `<span class="ticks__t${keep}">${esc(textFor(item))}</span>`;
+    })
+    .join("")}</div>`;
+}
 
 /** A signed, coloured change indicator, or a dash when there is no baseline. */
 function trendBadge(pct) {
@@ -904,7 +1006,7 @@ function trendBadge(pct) {
 }
 
 /**
- * Stacked daily volume for the last 30 days.
+ * Stacked daily volume over the selected window.
  *
  * Stacked rather than grouped: the owner's first question is whether total
  * demand is moving, and the second is which channel moved it. Grouped bars
@@ -912,40 +1014,40 @@ function trendBadge(pct) {
  */
 function dailyChart(series) {
   const W = 960;
-  const H = 230;
+  const H = 200;
   const padTop = 14;
-  const padBottom = 30;
+  const padBottom = 6;
   const plot = H - padTop - padBottom;
   const max = Math.max(1, ...series.map((d) => d.total));
   const slot = W / Math.max(1, series.length);
-  const barW = Math.min(20, slot * 0.62);
+  const barW = Math.max(3, Math.min(20, slot - SEG_GAP * 2));
 
   const bars = series
     .map((d, i) => {
-      const cx = slot * i + slot / 2;
-      const x = cx - barW / 2;
+      const x = slot * i + (slot - barW) / 2;
+      const stack = [
+        ["phone", d.phone],
+        ["whatsapp", d.whatsapp],
+        ["quotes", d.quotes],
+      ].filter(([, v]) => v > 0);
+
       let y = padTop + plot;
-      const seg = (value, fill) => {
-        if (!value) return "";
-        const h = (value / max) * plot;
-        y -= h;
-        return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${fill}" rx="2"><title>${esc(d.key)} — ${value}</title></rect>`;
-      };
-      return (
-        seg(d.phone, STREAM_COLORS.phone) +
-        seg(d.whatsapp, STREAM_COLORS.whatsapp) +
-        seg(d.quotes, STREAM_COLORS.quotes)
-      );
+      return stack
+        .map(([key, value], idx) => {
+          const raw = (value / max) * plot;
+          y -= raw;
+          // A 2px surface gap keeps adjacent fills from reading as one block.
+          const gap = idx < stack.length - 1 ? SEG_GAP : 0;
+          const h = Math.max(1.5, raw - gap);
+          const top = idx === stack.length - 1 ? BAR_RADIUS : 0;
+          return `<path d="${barPath(x, y + gap, barW, h, top)}" fill="${STREAM_COLORS[key]}"><title>${esc(shortDayLabel(d.key))} — ${esc(STREAM_LABELS[key])}: ${value}</title></path>`;
+        })
+        .join("");
     })
     .join("");
 
-  const labels = series
-    .map((d, i) =>
-      i % 5 === 0 || i === series.length - 1
-        ? `<text x="${(slot * i + slot / 2).toFixed(1)}" y="${H - 10}" class="ax" text-anchor="middle">${esc(shortDayLabel(d.key))}</text>`
-        : ""
-    )
-    .join("");
+  const wide = series.length > 40 ? 10 : series.length > 14 ? 5 : 2;
+  const narrow = series.length > 40 ? 30 : series.length > 14 ? 10 : 2;
 
   const grid = [0, 0.5, 1]
     .map((f) => {
@@ -954,51 +1056,93 @@ function dailyChart(series) {
     })
     .join("");
 
-  return `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="حجم التواصل اليومي خلال آخر 30 يوماً">${grid}${bars}${labels}</svg>`;
+  return `<div class="plot"><svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="حجم التواصل اليومي">${grid}${bars}</svg>${axisTicks(series, (d) => shortDayLabel(d.key), wide, narrow)}</div>`;
 }
 
 /** A single-series histogram used for both the hour and weekday breakdowns. */
-function histogramChart(buckets, labelFor, fill, ariaLabel, highlightIndex) {
+function histogramChart(buckets, labelFor, fill, ariaLabel, highlight, narrow) {
   const W = 960;
-  const H = 150;
+  const H = 124;
   const padTop = 10;
-  const padBottom = 26;
+  const padBottom = 4;
   const plot = H - padTop - padBottom;
   const max = Math.max(1, ...buckets.map((b) => b.count));
   const slot = W / Math.max(1, buckets.length);
-  const barW = Math.min(46, slot * 0.66);
+  const barW = Math.max(4, Math.min(46, slot - SEG_GAP * 2));
 
   const bars = buckets
     .map((b, i) => {
-      const h = (b.count / max) * plot;
+      const empty = b.count === 0;
+      const h = empty ? 2 : Math.max(2, (b.count / max) * plot);
       const x = slot * i + (slot - barW) / 2;
       const y = padTop + plot - h;
-      const dim = b.count === 0;
-      return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(h, dim ? 2 : h).toFixed(1)}" fill="${i === highlightIndex ? "#d4e3f5" : fill}" opacity="${dim ? 0.18 : 1}" rx="2"><title>${esc(labelFor(b))} — ${b.count}</title></rect>`;
+      // The peak is emphasised by opacity, never by a second hue: a value ramp
+      // on nominal buckets would double-encode the height the bar already shows.
+      const opacity = empty ? 0.16 : i === highlight ? 1 : 0.62;
+      return `<path d="${barPath(x, y, barW, h, empty ? 0 : BAR_RADIUS)}" fill="${fill}" opacity="${opacity}"><title>${esc(labelFor(b))} — ${b.count}</title></path>`;
     })
     .join("");
 
-  const labels = buckets
-    .map((b, i) =>
-      buckets.length <= 8 || i % 2 === 0
-        ? `<text x="${(slot * i + slot / 2).toFixed(1)}" y="${H - 8}" class="ax" text-anchor="middle">${esc(labelFor(b, true))}</text>`
-        : ""
-    )
-    .join("");
+  const wide = buckets.length <= 8 ? 1 : 2;
 
-  return `<svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="${esc(ariaLabel)}">${bars}${labels}</svg>`;
+  return `<div class="plot"><svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="${esc(ariaLabel)}">${bars}</svg>${axisTicks(buckets, (b) => labelFor(b, true), wide, narrow)}</div>`;
+}
+
+/** Horizontal ranked bars — the readable form for named categories. */
+function rankedBars(rows, labelFor, fill) {
+  const max = Math.max(1, ...rows.map((r) => r.count));
+  return `<div class="ranked">${rows
+    .map(
+      (r) => `<div class="ranked__row">
+      <span class="ranked__label">${esc(labelFor(r))}</span>
+      <span class="ranked__track"><span class="ranked__fill" style="width:${Math.max(2, Math.round((r.count / max) * 100))}%;background:${fill}"></span></span>
+      <b class="ranked__value">${r.count}</b>
+    </div>`
+    )
+    .join("")}</div>`;
+}
+
+/** The peak line: a claim when the sample supports one, an honest gap when not. */
+function peakLine(claim, describe, noun) {
+  if (!claim.top) return `<span class="muted">لا توجد بيانات بعد</span>`;
+  if (!claim.reliable) {
+    return `<span class="muted">العيّنة صغيرة (${claim.total} ${noun}) — لا تكفي لتحديد ذروة موثوقة بعد</span>`;
+  }
+  return `<span class="muted">الأكثر ازدحاماً: <b class="peak">${esc(describe(claim.top))}</b> · من ${claim.total} ${noun}</span>`;
 }
 
 function overviewPage(view) {
-  const { counts, series, hours, weekdays, pages, refQuery, refNormalized, refMatches } = view;
+  const {
+    counts,
+    people,
+    series,
+    hours,
+    weekdays,
+    hourPeak,
+    dayPeak,
+    pages,
+    locations,
+    days,
+    truncated,
+    refQuery,
+    refNormalized,
+    refMatches,
+  } = view;
 
-  const window30 = {
-    quotes: counts.quotes.last30,
-    whatsapp: counts.whatsapp.last30,
-    phone: counts.phone.last30,
+  const windowTotals = {
+    quotes: counts.quotes.window,
+    whatsapp: counts.whatsapp.window,
+    phone: counts.phone.window,
   };
-  const shares = shareOf(window30);
-  const total30 = window30.quotes + window30.whatsapp + window30.phone;
+  const shares = shareOf(windowTotals);
+  const windowTotal = windowTotals.quotes + windowTotals.whatsapp + windowTotals.phone;
+  const qs = (extra) =>
+    esc("/admin/leads?" + buildQueryString({ days, ref: refQuery || "", ...extra }));
+
+  const windowPicker = `<div class="windowpick">${WINDOW_OPTIONS.map(
+    (d) =>
+      `<a class="btn ${d === days ? "" : "btn-secondary"} btn-sm" href="${esc("/admin/leads?" + buildQueryString({ days: d, ref: refQuery || "" }))}">${d} يوم</a>`
+  ).join("")}</div>`;
 
   const kpi = (key) => {
     const c = counts[key];
@@ -1007,35 +1151,42 @@ function overviewPage(view) {
       <div class="kpi__head">${esc(STREAM_LABELS[key])}</div>
       <div class="kpi__today"><b>${c.today}</b> اليوم</div>
       <div class="kpi__row"><span>آخر 7 أيام</span><b>${c.last7}</b> ${trendBadge(c.trend)}</div>
-      <div class="kpi__row"><span>آخر 30 يوماً</span><b>${c.last30}</b></div>
+      <div class="kpi__row"><span>خلال ${days} يوماً</span><b>${c.window}</b></div>
     </div>`;
   };
 
-  const shareBar = total30
-    ? `<div class="sharebar" role="img" aria-label="توزيع قنوات التواصل خلال 30 يوماً">
+  const peopleLine =
+    people.contacts > 0
+      ? `<div class="panel people">
+          <span class="stat"><b>${people.contacts}</b> شخصاً مختلفاً تواصل خلال ${days} يوماً</span>
+          <span class="stat"><b>${people.repeat}</b> ضغطة لكل شخص في المتوسط</span>
+          <span class="muted">يُقاس بعنوان الـ IP تقريبياً؛ عشر ضغطات من شخص واحد ليست عشرة عملاء.</span>
+        </div>`
+      : "";
+
+  const shareBar = windowTotal
+    ? `<div class="sharebar" role="img" aria-label="توزيع قنوات التواصل">
         ${shares
           .filter((s) => s.pct > 0)
           .map(
             (s) =>
-              `<span class="sharebar__seg" data-stream="${s.key}" style="width:${s.pct}%"><b>${s.pct}%</b></span>`
+              `<span class="sharebar__seg" data-stream="${s.key}" style="width:${s.pct}%"></span>`
           )
           .join("")}
       </div>
       <div class="legend">${shares
         .map(
           (s) =>
-            `<span class="legend__item"><i data-stream="${s.key}"></i>${esc(STREAM_LABELS[s.key])} — ${s.value}</span>`
+            `<span class="legend__item"><i data-stream="${s.key}"></i>${esc(STREAM_LABELS[s.key])} — <b>${s.value}</b> (${s.pct}%)</span>`
         )
         .join("")}</div>`
-    : '<p class="muted">لا توجد بيانات في آخر 30 يوماً بعد.</p>';
-
-  const peakHour = busiest(hours);
-  const peakDay = busiest(weekdays);
+    : '<p class="muted">لا توجد بيانات في هذه الفترة بعد.</p>';
 
   const refPanel = `<form method="GET" action="/admin/leads" class="filters refbox">
+    <input type="hidden" name="days" value="${days}">
     <input type="text" name="ref" value="${esc(refQuery || "")}" placeholder="ألصق رمز المرجع من رسالة واتساب (مثال: EFI-7K3M)">
     <button type="submit">ابحث عن الرمز</button>
-    ${refQuery ? '<a class="btn btn-secondary" href="/admin/leads">مسح</a>' : ""}
+    ${refQuery ? `<a class="btn btn-secondary" href="${qs({ ref: "" })}">مسح</a>` : ""}
   </form>`;
 
   const refResult = !refQuery
@@ -1057,7 +1208,7 @@ function overviewPage(view) {
             .join("")}
           </tbody></table>
         </div>`
-      : `<div class="panel"><p class="muted">لا توجد ضغطة مسجّلة بالرمز <b>${esc(refNormalized || refQuery)}</b>. تأكد من نسخ الرمز كاملاً كما ورد في الرسالة.</p></div>`;
+      : `<div class="panel"><p class="muted">لا توجد ضغطة مسجّلة بالرمز <bdi><b>${esc(refNormalized || refQuery)}</b></bdi>. تأكد من نسخ الرمز كاملاً كما ورد في الرسالة.</p></div>`;
 
   const pagesTable = pages.length
     ? `<table><thead><tr><th>الصفحة</th><th>عدد التواصلات</th></tr></thead><tbody>
@@ -1065,11 +1216,16 @@ function overviewPage(view) {
         .map(
           (p) => `<tr>
           <td data-label="الصفحة">${esc(p.title || p.page || "—")}<br><bdi class="muted path">${esc(p.page || "")}</bdi></td>
-          <td data-label="عدد التواصلات"><b>${p.count}</b></td>
+          <td data-label="عدد التواصلات"><a class="countlink" href="${esc("/admin/leads?" + buildQueryString({ view: "contacts", q: p.page || "" }))}"><b>${p.count}</b> ↗</a></td>
         </tr>`
         )
         .join("")}
     </tbody></table>`
+    : '<p class="muted">لم تُسجَّل أي ضغطة بعد.</p>';
+
+  const locationPanel = locations.length
+    ? `${rankedBars(locations, (r) => locationLabel(r.key), STREAM_COLORS.whatsapp)}
+       <p class="muted chart-note">أي زر يضغطه الزائر فعلاً. الزر الذي لا يُضغط مكانه خاطئ أو صياغته لا تقنع.</p>`
     : '<p class="muted">لم تُسجَّل أي ضغطة بعد.</p>';
 
   const pendingNotice = view.contactsPending
@@ -1077,17 +1233,30 @@ function overviewPage(view) {
        <p class="muted"><code>npx wrangler d1 execute elfarida-leads --remote --file=migrations/0002_contact_events.sql</code></p></div>`
     : "";
 
+  const truncNotice = truncated
+    ? `<div class="panel"><p class="err">بلغت القراءة الحد الأقصى للصفوف، لذلك قد تكون الأرقام أقل من الواقع. قلّل الفترة أو راجع التبويبات التفصيلية.</p></div>`
+    : "";
+
+  const emptyNotice =
+    windowTotal === 0 && !view.contactsPending
+      ? `<div class="panel"><p class="muted">لا يوجد نشاط مسجّل في هذه الفترة. إن كان الموقع يستقبل زواراً، جرّب فترة أطول من الأزرار أعلاه.</p></div>`
+      : "";
+
   return SHELL(
     "لوحة المراقبة",
     `<h1>لوحة المراقبة</h1>${viewNav("overview")}
     ${pendingNotice}
+    ${truncNotice}
     ${refPanel}
     ${refResult}
+    <div class="panel__bar">${windowPicker}<span class="muted">البيانات حتى ${esc(toRiyadhDisplay(view.now.toISOString()))} بتوقيت الرياض</span></div>
+    ${emptyNotice}
 
     <div class="kpis">${kpi("quotes")}${kpi("whatsapp")}${kpi("phone")}</div>
+    ${peopleLine}
 
     <div class="panel">
-      <div class="panel__head"><h2>حجم التواصل اليومي — آخر 30 يوماً</h2>
+      <div class="panel__head"><h2>حجم التواصل اليومي — ${days} يوماً</h2>
         <span class="muted">من الأقدم (يسار) إلى اليوم (يمين)</span></div>
       ${dailyChart(series)}
       <div class="legend">${["quotes", "whatsapp", "phone"]
@@ -1099,39 +1268,44 @@ function overviewPage(view) {
     </div>
 
     <div class="panel">
-      <div class="panel__head"><h2>توزيع القنوات — آخر 30 يوماً</h2>
-        <span class="muted">إجمالي ${total30}</span></div>
+      <div class="panel__head"><h2>توزيع القنوات</h2><span class="muted">إجمالي ${windowTotal}</span></div>
       ${shareBar}
     </div>
 
     <div class="panel">
       <div class="panel__head"><h2>ساعات الذروة</h2>
-        <span class="muted">${peakHour ? `الأكثر ازدحاماً: ${esc(hourRangeLabel(peakHour.hour))}` : "لا توجد بيانات كافية"}</span></div>
+        ${peakLine(hourPeak, (b) => hourRangeLabel(b.hour), "تواصل")}</div>
       ${histogramChart(
         hours,
         (b, short) => (short ? String(b.hour) : hourRangeLabel(b.hour)),
-        "#5a8fce",
-        "عدد التواصلات بحسب ساعة اليوم بتوقيت الرياض",
-        peakHour ? peakHour.hour : -1
+        STREAM_COLORS.quotes,
+        "عدد محاولات التواصل بحسب ساعة اليوم بتوقيت الرياض",
+        hourPeak.reliable ? hourPeak.top.hour : -1,
+        6
       )}
-      <p class="muted chart-note">بتوقيت الرياض. يفيد في تحديد من يرد على الهاتف والواتساب في أي ساعة.</p>
+      <p class="muted chart-note">واتساب ومكالمات فقط — وهي ما يحتاج رداً فورياً. بتوقيت الرياض.</p>
     </div>
 
     <div class="panel">
       <div class="panel__head"><h2>أيام الأسبوع</h2>
-        <span class="muted">${peakDay ? `الأنشط: ${esc(peakDay.label)}` : "لا توجد بيانات كافية"}</span></div>
+        ${peakLine(dayPeak, (b) => b.label, "تواصل")}</div>
       ${histogramChart(
         weekdays,
-        (b) => b.label,
-        "#4fae86",
-        "عدد التواصلات بحسب يوم الأسبوع",
-        peakDay ? peakDay.weekday : -1
+        (b, short) => (short ? b.short : b.label),
+        STREAM_COLORS.whatsapp,
+        "عدد محاولات التواصل بحسب يوم الأسبوع",
+        dayPeak.reliable ? dayPeak.top.weekday : -1,
+        1
       )}
     </div>
 
     <div class="panel">
-      <div class="panel__head"><h2>الصفحات الأكثر توليداً للتواصل</h2>
-        <span class="muted">آخر 30 يوماً</span></div>
+      <div class="panel__head"><h2>من أي زر يأتي التواصل</h2><span class="muted">${days} يوماً</span></div>
+      ${locationPanel}
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h2>الصفحات الأكثر توليداً للتواصل</h2><span class="muted">${days} يوماً</span></div>
       ${pagesTable}
     </div>`
   );

@@ -34,6 +34,13 @@ export const WEEKDAY_LABELS_AR = [
 ];
 
 /**
+ * Axis-tick weekday names: the same seven days without the definite article.
+ * Seven full names do not clear each other on a 320px axis; the full form stays
+ * in the tooltip and the peak sentence, where there is room for it.
+ */
+export const WEEKDAY_SHORT_AR = ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"];
+
+/**
  * Shifts an instant into Riyadh local time.
  *
  * Returns a Date whose UTC getters read as Riyadh wall-clock values, so
@@ -129,7 +136,7 @@ function within(rows, hours, now) {
  * The comparison window matters more than the raw number: "19 this week" means
  * nothing until you know last week was 31.
  */
-export function windowCounts(rows, now = new Date()) {
+export function windowCounts(rows, now = new Date(), days = 30) {
   const todayKey = dayKey(now);
   let today = 0;
   for (const r of rows || []) {
@@ -144,7 +151,9 @@ export function windowCounts(rows, now = new Date()) {
     today,
     last7,
     prev7,
-    last30: within(rows, 24 * 30, now),
+    // The count over whichever window the owner selected, so every number on
+    // the page describes the same period as the chart beside it.
+    window: within(rows, 24 * (Number(days) || 30), now),
     total: (rows || []).length,
     trend: deltaPct(last7, prev7),
   };
@@ -176,7 +185,12 @@ export function hourHistogram(rows) {
 
 /** Counts per Riyadh weekday, Sunday first, always 7 buckets. */
 export function weekdayHistogram(rows) {
-  const buckets = WEEKDAY_LABELS_AR.map((label, weekday) => ({ weekday, label, count: 0 }));
+  const buckets = WEEKDAY_LABELS_AR.map((label, weekday) => ({
+    weekday,
+    label,
+    short: WEEKDAY_SHORT_AR[weekday],
+    count: 0,
+  }));
   for (const r of rows || []) {
     const d = weekdayOf(r && r.created_at);
     if (d != null) buckets[d].count += 1;
@@ -264,4 +278,85 @@ export function shareOf(values) {
     out[biggest].pct += remainder;
   }
   return out;
+}
+
+/* ── window selection ─────────────────────────────────────── */
+
+/** Windows the owner can switch between. 90 days covers a Saudi summer peak. */
+export const WINDOW_OPTIONS = [7, 30, 90];
+export const DEFAULT_WINDOW = 30;
+
+/** Clamps a user-supplied window to one we actually offer. */
+export function normalizeWindow(input) {
+  const n = Number.parseInt(String(input == null ? "" : input), 10);
+  return WINDOW_OPTIONS.includes(n) ? n : DEFAULT_WINDOW;
+}
+
+/* ── reliability of a claimed peak ────────────────────────── */
+
+/**
+ * A peak is only reported when the sample can carry it.
+ *
+ * With 23 taps spread over 24 hourly buckets the busiest bucket holds one or
+ * two events, and naming it "the busiest hour" states chance as fact. The
+ * thresholds below are deliberately blunt: enough total events that the
+ * distribution means something, and a winning bucket that is not a single
+ * stray tap. Everything else reports honestly that it does not know yet.
+ */
+export const PEAK_MIN_TOTAL = 30;
+export const PEAK_MIN_BUCKET = 3;
+
+export function peakClaim(buckets, minTotal = PEAK_MIN_TOTAL, minBucket = PEAK_MIN_BUCKET) {
+  const list = buckets || [];
+  const total = list.reduce((n, b) => n + ((b && b.count) || 0), 0);
+  const top = busiest(list);
+  const reliable = Boolean(top && total >= minTotal && top.count >= minBucket);
+  return { top, total, reliable };
+}
+
+/* ── generic grouping ─────────────────────────────────────── */
+
+/**
+ * Counts rows by one field, largest first.
+ *
+ * Rows whose field is empty are grouped under `emptyKey` rather than dropped:
+ * a large "unknown" bucket is itself a finding about the tracking, and
+ * silently discarding it would make the totals disagree with the KPI cards.
+ */
+export function breakdownBy(rows, field, limit = 8, emptyKey = "—") {
+  const counts = new Map();
+  for (const r of rows || []) {
+    const raw = r && r[field];
+    const key = raw == null || String(raw).trim() === "" ? emptyKey : String(raw);
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([key, count]) => ({ key, count }))
+    .sort((a, b) => b.count - a.count || a.key.localeCompare(b.key))
+    .slice(0, Math.max(0, limit));
+}
+
+/**
+ * Distinct non-empty values of a field — used to separate "ten people tapped"
+ * from "one person tapped ten times", which are the same number and opposite
+ * situations.
+ */
+export function uniqueCount(rows, field) {
+  const seen = new Set();
+  for (const r of rows || []) {
+    const v = r && r[field];
+    if (v != null && String(v).trim() !== "") seen.add(String(v));
+  }
+  return seen.size;
+}
+
+/**
+ * Taps per distinct person, to one decimal. Null when there is nothing to
+ * divide — a ratio printed as 0.0 would read as a finding rather than a gap.
+ */
+export function repeatRatio(rows, field = "ip") {
+  const people = uniqueCount(rows, field);
+  const taps = (rows || []).length;
+  if (!people || !taps) return null;
+  return Math.round((taps / people) * 10) / 10;
 }
