@@ -13,6 +13,13 @@
 export const STATUS_OPTIONS = ["new", "contacted", "closed"];
 export const DEFAULT_STATUS = "new";
 
+/**
+ * The status a one-click "we replied" action writes. Named separately from the
+ * literal so the overview's reply button and the table's dropdown cannot drift
+ * apart into two different meanings of "answered".
+ */
+export const ANSWERED_STATUS = "contacted";
+
 export const STATUS_LABELS_AR = {
   new: "جديد",
   contacted: "تم التواصل",

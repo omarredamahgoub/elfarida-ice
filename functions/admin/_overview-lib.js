@@ -360,3 +360,170 @@ export function repeatRatio(rows, field = "ip") {
   if (!people || !taps) return null;
   return Math.round((taps / people) * 10) / 10;
 }
+
+/* ── response tracking ────────────────────────────────────── */
+
+/**
+ * How long a request may sit untouched before the panel calls it overdue.
+ *
+ * Deliberately a full day rather than an office-hours figure: a buyer who
+ * submits at 21:00 does not expect an answer at 21:30, but one still waiting
+ * the next evening has almost certainly asked someone else by then.
+ */
+export const SLA_HOURS = 24;
+
+/** A lead counts as answered once it leaves the `new` status. */
+export function isAnswered(row) {
+  if (!row) return false;
+  if (row.answered_at) return true;
+  const s = String(row.status || "new");
+  return s !== "" && s !== "new";
+}
+
+/** Hours between two instants, or null when either is unusable. */
+export function hoursBetween(from, to) {
+  const a = Date.parse(String(from || ""));
+  const b = to instanceof Date ? to.getTime() : Date.parse(String(to || ""));
+  if (!Number.isFinite(a) || !Number.isFinite(b) || b < a) return null;
+  return (b - a) / 3600000;
+}
+
+/**
+ * Leads still waiting for a reply, longest wait first.
+ *
+ * Sorted oldest-first on purpose: the list is a work queue, and the request
+ * that has been waiting longest is the one closest to being lost.
+ */
+export function pendingLeads(rows, now = new Date()) {
+  return (rows || [])
+    .filter((r) => !isAnswered(r))
+    .map((r) => ({ ...r, waitedHours: hoursBetween(r.created_at, now) }))
+    .filter((r) => r.waitedHours != null)
+    .sort((a, b) => b.waitedHours - a.waitedHours);
+}
+
+/** Median of a numeric list, or null when empty. Even lengths average the pair. */
+export function median(values) {
+  const list = (values || []).filter((v) => Number.isFinite(v)).sort((a, b) => a - b);
+  if (!list.length) return null;
+  const mid = Math.floor(list.length / 2);
+  return list.length % 2 ? list[mid] : (list[mid - 1] + list[mid]) / 2;
+}
+
+/**
+ * The reply picture over a set of leads.
+ *
+ * Median rather than mean: one request answered a week late would drag an
+ * average far past anything the owner recognises, while the median keeps
+ * saying what a typical buyer actually experienced.
+ *
+ * `median` is null until MIN_RESPONSE_SAMPLE replies exist — the same rule the
+ * peak charts follow, for the same reason.
+ */
+export const MIN_RESPONSE_SAMPLE = 5;
+
+export function responseStats(rows, now = new Date(), slaHours = SLA_HOURS) {
+  const list = rows || [];
+  const pending = pendingLeads(list, now);
+  const overdue = pending.filter((r) => r.waitedHours >= slaHours);
+  const answeredTimes = list
+    .filter((r) => r.answered_at)
+    .map((r) => hoursBetween(r.created_at, r.answered_at))
+    .filter((h) => h != null);
+  const withinSla = answeredTimes.filter((h) => h < slaHours).length;
+  return {
+    total: list.length,
+    pending: pending.length,
+    overdue: overdue.length,
+    oldest: pending.length ? pending[0] : null,
+    answered: answeredTimes.length,
+    median: answeredTimes.length >= MIN_RESPONSE_SAMPLE ? median(answeredTimes) : null,
+    withinSla,
+    slaPct: answeredTimes.length ? Math.round((withinSla / answeredTimes.length) * 100) : null,
+    slaHours,
+  };
+}
+
+/**
+ * A counted noun in Arabic, which does not simply take a plural.
+ *
+ * One and two are carried by the noun's own form with no numeral, three to ten
+ * take the broken plural, and eleven upward returns to the singular. Writing
+ * "5 ساعة" or "2 ساعات" reads as machine output and quietly costs the panel its
+ * credibility, so the rule is encoded once here rather than at each call site.
+ */
+export function arabicCount(n, forms) {
+  const v = Math.abs(Math.round(Number(n) || 0));
+  if (v === 1) return forms.one;
+  if (v === 2) return forms.two;
+  if (v >= 3 && v <= 10) return `${v} ${forms.few}`;
+  return `${v} ${forms.many}`;
+}
+
+const MINUTE_FORMS = { one: "دقيقة", two: "دقيقتين", few: "دقائق", many: "دقيقة" };
+const HOUR_FORMS = { one: "ساعة", two: "ساعتين", few: "ساعات", many: "ساعة" };
+const DAY_FORMS = { one: "يوم", two: "يومين", few: "أيام", many: "يوماً" };
+const REPLY_FORMS = { one: "ردّ واحد", two: "ردّان", few: "ردود", many: "رداً" };
+const PERSON_FORMS = { one: "شخص واحد", two: "شخصان", few: "أشخاص", many: "شخصاً" };
+const TAP_FORMS = { one: "ضغطة واحدة", two: "ضغطتان", few: "ضغطات", many: "ضغطة" };
+const REQUEST_FORMS = { one: "طلب واحد", two: "طلبان", few: "طلبات", many: "طلباً" };
+
+/** A duration in the coarsest unit that still carries the urgency. */
+export function waitLabel(hours) {
+  if (hours == null || !Number.isFinite(hours)) return "";
+  if (hours < 1) return arabicCount(Math.max(1, hours * 60), MINUTE_FORMS);
+  if (hours < 24) return arabicCount(hours, HOUR_FORMS);
+  return arabicCount(Math.floor(hours / 24), DAY_FORMS);
+}
+
+/**
+ * A threshold, always in hours.
+ *
+ * waitLabel would render 24 as "يوم", which reads well after "انتظر" and badly
+ * after "تجاوز" or "منذ أكثر من", where the counted noun is expected. The two
+ * phrasings are kept apart rather than one being bent to cover both.
+ */
+export function hoursLabel(n) {
+  return arabicCount(n, HOUR_FORMS);
+}
+
+export function repliesLabel(n) {
+  return arabicCount(n, REPLY_FORMS);
+}
+
+export function peopleLabel(n) {
+  return arabicCount(n, PERSON_FORMS);
+}
+
+export function tapsLabel(n) {
+  return arabicCount(n, TAP_FORMS);
+}
+
+export function requestsLabel(n) {
+  return arabicCount(n, REQUEST_FORMS);
+}
+
+/* ── tap → request attribution ────────────────────────────── */
+
+/**
+ * Which contact taps turned into a submitted form.
+ *
+ * The reference code is minted once per page view and travels into both the
+ * WhatsApp message and any form submitted from that same view, so a shared
+ * code is real evidence that one visitor did both — unlike matching on IP,
+ * which collapses everyone behind a mobile carrier's NAT into one person.
+ *
+ * Only taps are counted as the denominator: a form submitted without a tap
+ * never had a tap to convert.
+ */
+export function tapConversion(leads, events) {
+  const leadRefs = new Set((leads || []).map((r) => normalizeRef(r && r.ref)).filter((v) => v));
+  const tapRefs = new Set((events || []).map((r) => normalizeRef(r && r.ref)).filter((v) => v));
+  let converted = 0;
+  for (const ref of tapRefs) if (leadRefs.has(ref)) converted += 1;
+  return {
+    taps: tapRefs.size,
+    converted,
+    pct: tapRefs.size ? Math.round((converted / tapRefs.size) * 100) : null,
+  };
+}

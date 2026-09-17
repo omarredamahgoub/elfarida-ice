@@ -45,6 +45,9 @@
    */
   var REF_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
 
+  /** Field name the reference travels under in a form body; read by /api/quote. */
+  var REF_FIELD = "contact_ref";
+
   var pageRef = (function () {
     var out = "";
     try {
@@ -1148,6 +1151,9 @@
           subject: t("طلب من ", "Request from ") + document.title.split("|")[0].trim(),
           source: ctx.kind + ":" + ctx.slug,
           page: window.location.pathname,
+          // This form builds its own body instead of reading the DOM, so the
+          // hidden field stamped into every form never reaches it.
+          contact_ref: pageRef,
           botcheck: fields.hp.value,
         }),
       })
@@ -1559,8 +1565,51 @@
     }, 250);
   }
 
+  /**
+   * Stamps this page view's reference code into every form on the page.
+   *
+   * Without it a WhatsApp tap and a form submission from the same visit are
+   * two unrelated rows, and the owner cannot tell whether the conversation he
+   * is having is the request he is reading. The code is already minted and
+   * already travels inside the outgoing WhatsApp message; a hidden field is
+   * all it takes for it to travel with the form too.
+   *
+   * Every form handler on the site builds its body from FormData, so the field
+   * is picked up without any of them knowing it exists. Forms added later by
+   * script are covered by the observer rather than by a timer.
+   */
+  function stampFormsWithRef(root) {
+    var forms = (root || document).querySelectorAll("form");
+    for (var i = 0; i < forms.length; i++) {
+      var form = forms[i];
+      if (form.querySelector('input[name="' + REF_FIELD + '"]')) continue;
+      var field = document.createElement("input");
+      field.type = "hidden";
+      field.name = REF_FIELD;
+      field.value = pageRef;
+      form.appendChild(field);
+    }
+  }
+
+  function watchForms() {
+    stampFormsWithRef(document);
+    if (typeof MutationObserver !== "function") return;
+    new MutationObserver(function (records) {
+      for (var i = 0; i < records.length; i++) {
+        var added = records[i].addedNodes;
+        for (var j = 0; j < added.length; j++) {
+          var node = added[j];
+          if (node.nodeType !== 1) continue;
+          if (node.tagName === "FORM") stampFormsWithRef(node.parentNode || document);
+          else if (node.querySelector && node.querySelector("form")) stampFormsWithRef(node);
+        }
+      }
+    }).observe(document.documentElement, { childList: true, subtree: true });
+  }
+
   function boot() {
     bindTracking();
+    watchForms();
     fetch(CONFIG_URL, { credentials: "omit" })
       .then(function (res) {
         if (!res.ok) throw new Error("config " + res.status);

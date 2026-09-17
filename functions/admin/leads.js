@@ -21,14 +21,25 @@
  *   - Internal per-lead notes, editable inline.
  *   - Admin password change from within the panel (/admin/leads?settings=1).
  *
+ * Updated 2026-09-17:
+ *   - A waiting queue at the top of the overview: every request still unanswered,
+ *     longest wait first, with the buyer's own number and a one-tap "replied".
+ *   - Reply-time tracking on leads.answered_at, stamped on the first move away
+ *     from `new` and cleared if the lead is reopened.
+ *   - Tap-to-request attribution: the page-view reference code now travels into
+ *     form submissions as well as WhatsApp messages (leads.ref).
+ *   - A unified recent-activity feed and a plain-text daily digest with a
+ *     WhatsApp share link.
+ *
  * All schema changes are self-migrating inside ensure(env): the
- * "leads.status", "leads.notes" columns and the "admin_login_attempts"
- * table are created on first use after deploy, idempotently. No manual
- * wrangler command is required for this update.
+ * "leads.status", "leads.notes", "leads.answered_at" and "leads.ref" columns
+ * and the "admin_login_attempts" table are created on first use after deploy,
+ * idempotently. No manual wrangler command is required for this update.
  */
 import {
   STATUS_OPTIONS,
   DEFAULT_STATUS,
+  ANSWERED_STATUS,
   STATUS_LABELS_AR,
   isValidStatus,
   isValidUuid,
@@ -58,6 +69,7 @@ import {
   matchesChannel,
   channelBreakdown,
   topPages,
+  mergeTimeline,
   deviceHint,
 } from "./_contacts-lib.js";
 import {
@@ -76,7 +88,19 @@ import {
   breakdownBy,
   uniqueCount,
   repeatRatio,
+  responseStats,
+  pendingLeads,
+  hoursBetween,
+  waitLabel,
+  hoursLabel,
+  repliesLabel,
+  peopleLabel,
+  tapsLabel,
+  requestsLabel,
+  tapConversion,
+  SLA_HOURS,
 } from "./_overview-lib.js";
+import { dailyDigest, digestStamp } from "./_digest-lib.js";
 
 const COOKIE = "efi_admin";
 const MAXAGE = 28800; // 8h
@@ -144,7 +168,7 @@ export async function onRequestGet(context) {
   const returnQs = returnParams.toString();
 
   const { results } = await env.DB.prepare(
-    "SELECT id, created_at, name, email, phone, subject, ip, status, notes FROM leads ORDER BY created_at DESC LIMIT 500"
+    "SELECT id, created_at, name, email, phone, subject, ip, status, notes, answered_at, ref FROM leads ORDER BY created_at DESC LIMIT 500"
   ).all();
   const rows = results || [];
   const stats = computeStats(rows, new Date());
@@ -194,11 +218,20 @@ async function overviewView(env, url) {
   const EVENT_CAP = 20000;
 
   const { results: leadRows } = await env.DB.prepare(
-    `SELECT id, created_at, name, phone, subject, status, ip FROM leads WHERE created_at >= ? ORDER BY created_at DESC LIMIT ${LEAD_CAP}`
+    `SELECT id, created_at, name, email, phone, subject, status, answered_at, ref, ip FROM leads WHERE created_at >= ? ORDER BY created_at DESC LIMIT ${LEAD_CAP}`
   )
     .bind(since)
     .all();
   const quotes = leadRows || [];
+
+  // The waiting queue deliberately ignores the selected window. A request from
+  // six weeks ago that nobody answered is the most expensive row in the table,
+  // and hiding it behind a date filter is how it stays unanswered.
+  const { results: openRows } = await env.DB.prepare(
+    `SELECT id, created_at, name, email, phone, subject, status, answered_at FROM leads WHERE status = ? ORDER BY created_at ASC LIMIT 200`
+  )
+    .bind(DEFAULT_STATUS)
+    .all();
 
   let contacts = [];
   let contactsPending = false;
@@ -240,12 +273,24 @@ async function overviewView(env, url) {
   const hours = hourHistogram(contacts);
   const weekdays = weekdayHistogram(contacts);
 
+  // Response quality is measured over the window (so it tracks how the shop is
+  // doing lately), while the queue below it is measured over everything still
+  // open (so nothing falls off the bottom).
+  const response = responseStats(quotes, now);
+  const open = responseStats(openRows || [], now);
+
   return htmlResp(
     overviewPage({
       now,
       days,
       truncated,
       contactsPending,
+      response,
+      queue: pendingLeads(openRows || [], now).slice(0, 8),
+      open,
+      conversion: tapConversion(quotes, contacts),
+      timeline: mergeTimeline(quotes, contacts).slice(0, 12),
+      digest: dailyDigest(quotes, contacts, now),
       refQuery,
       refNormalized: normalizeRef(refQuery),
       refMatches,
@@ -475,7 +520,12 @@ export async function onRequestPost(context) {
   const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
 
   // ── authenticated row actions: change status / notes / delete a lead ──
-  if (action === "update_status" || action === "update_notes" || action === "delete") {
+  if (
+    action === "update_status" ||
+    action === "update_notes" ||
+    action === "delete" ||
+    action === "mark_answered"
+  ) {
     const cred = await getCred(env);
     if (!cred || !(await validSession(request, cred))) {
       return htmlResp(loginPage("انتهت الجلسة، سجّل الدخول مرة أخرى."), 401);
@@ -490,9 +540,10 @@ export async function onRequestPost(context) {
       const notes = (form.get("notes") || "").toString().slice(0, 2000);
       await env.DB.prepare("UPDATE leads SET notes = ? WHERE id = ?").bind(notes, id).run();
     } else {
-      const status = (form.get("status") || "").toString();
+      const status =
+        action === "mark_answered" ? ANSWERED_STATUS : (form.get("status") || "").toString();
       if (!isValidStatus(status)) return text("حالة غير صالحة.", 400);
-      await env.DB.prepare("UPDATE leads SET status = ? WHERE id = ?").bind(status, id).run();
+      await setLeadStatus(env, id, status);
     }
     return new Response(null, {
       status: 303,
@@ -564,6 +615,29 @@ export async function onRequestPost(context) {
   return htmlResp(loginPage("اسم المستخدم أو كلمة المرور غير صحيحة."), 401);
 }
 
+/**
+ * Writes a lead's status and keeps `answered_at` honest alongside it.
+ *
+ * The timestamp is stamped only on the FIRST move away from `new`, so a lead
+ * later reopened and closed again still reports the wait the buyer actually
+ * experienced rather than the last time someone touched the row. Putting a
+ * lead back to `new` clears it: the panel would otherwise show a request that
+ * is both waiting and already answered.
+ */
+async function setLeadStatus(env, id, status) {
+  if (status === DEFAULT_STATUS) {
+    await env.DB.prepare("UPDATE leads SET status = ?, answered_at = NULL WHERE id = ?")
+      .bind(status, id)
+      .run();
+    return;
+  }
+  await env.DB.prepare(
+    "UPDATE leads SET status = ?, answered_at = COALESCE(answered_at, ?) WHERE id = ?"
+  )
+    .bind(status, new Date().toISOString(), id)
+    .run();
+}
+
 /* ── auth ─────────────────────────────────────────────────── */
 async function ensure(env) {
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT)").run();
@@ -598,6 +672,20 @@ async function ensure(env) {
   } catch (_) {
     // Column already exists from a previous deploy — safe to ignore.
   }
+  // Mirrors migrations/0004_response_and_ref.sql. Nullable with no default:
+  // an un-answered lead must be distinguishable from one answered at the epoch.
+  try {
+    await env.DB.prepare("ALTER TABLE leads ADD COLUMN answered_at TEXT").run();
+  } catch (_) {
+    // Column already exists from a previous deploy — safe to ignore.
+  }
+  try {
+    await env.DB.prepare("ALTER TABLE leads ADD COLUMN ref TEXT").run();
+  } catch (_) {
+    // Column already exists from a previous deploy — safe to ignore.
+  }
+  await env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_leads_status ON leads (status)").run();
+  await env.DB.prepare("CREATE INDEX IF NOT EXISTS idx_leads_ref ON leads (ref)").run();
 }
 async function getCred(env) {
   const { results } = await env.DB.prepare(
@@ -751,8 +839,12 @@ body{font-family:system-ui,Tahoma,sans-serif;-webkit-font-smoothing:antialiased;
 h1{color:var(--text);margin:0 0 20px;font-size:21px;font-weight:600}
 a.btn,button{background:var(--primary);color:#eef2f8;border:0;text-decoration:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-size:14px;line-height:1.2;display:inline-flex;align-items:center}
 a.btn:hover,button:hover{background:var(--primary-hover)}
-.btn-secondary{background:var(--panel-alt);border:1px solid var(--border)}
-.btn-secondary:hover{background:#202c42}
+/* a.btn is more specific than .btn-secondary, so an anchor carrying both
+   rendered as a primary button — which is why the window picker highlighted
+   every option. The anchor form is spelled out rather than the rule reordered,
+   because reordering would only move the collision somewhere else. */
+.btn-secondary,a.btn.btn-secondary{background:var(--panel-alt);border:1px solid var(--border)}
+.btn-secondary:hover,a.btn.btn-secondary:hover{background:#202c42}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
 .toolbar-account{display:flex;gap:8px;margin-inline-start:auto}
 .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px}
@@ -782,13 +874,16 @@ td a{color:var(--link);text-decoration:none;border-bottom:1px dotted rgba(127,16
 td a:visited{color:var(--link)}
 td a:hover,td a:focus-visible{color:var(--link-hover);border-bottom-color:var(--link-hover)}
 .status-badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600;margin-bottom:6px;white-space:nowrap}
+.wait{font-size:11.5px;display:inline-block;margin-top:3px}
+.wait--late{color:#f0a9a9;font-weight:600}
 .status-badge--new{background:#1f3a63;color:#a9c6ea}
 .status-badge--contacted{background:#5c4423;color:#e3c78d}
 .status-badge--closed{background:#33404f;color:#adb9c7}
 .inline-form{display:flex;gap:6px;align-items:center;margin:0;flex-wrap:wrap}
 .inline-form select,.inline-form input[type=text]{padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--panel-2);color:var(--text);font-size:12.5px;width:auto;margin:0}
-.btn-sm{background:var(--primary);color:#eef2f8;border:0;border-radius:6px;padding:6px 10px;font-size:12.5px;cursor:pointer;margin:0}
-.btn-sm:hover{background:var(--primary-hover)}
+/* Size only. Colour comes from button / a.btn / .btn-secondary, so a small
+   secondary button stays secondary instead of being repainted primary here. */
+.btn-sm,a.btn.btn-sm,button.btn-sm{border-radius:6px;padding:6px 10px;font-size:12.5px;margin:0}
 .btn-danger{background:#5f2323}
 .btn-danger:hover{background:#7a2d2d}
 .wa-link{color:#4fae86;font-size:11.5px;margin-inline-start:6px;white-space:nowrap;border-bottom:none}
@@ -835,6 +930,36 @@ h2{font-size:15px;font-weight:600;margin:0;color:var(--text)}
 .chart{width:100%;height:auto;display:block;overflow:visible}
 .chart .ax{fill:#8a97a8;font-size:11px;font-family:system-ui,Tahoma,sans-serif}
 .chart .grid{stroke:#2c3b52;stroke-width:1}
+/* The waiting queue is the page's one call to action, so it is the only panel
+   allowed an accent border; everything else reports and stays quiet. */
+.panel--queue{border-color:#3d5a86}
+.queue{display:flex;flex-direction:column;gap:10px}
+.queue__row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.queue__row--late{border-color:#7a3b3b;background:#241a1c}
+.queue__who{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:13.5px}
+.queue__who b{color:var(--text)}
+.queue__who .muted{font-size:12.5px}
+.queue__wait{display:flex;flex-direction:column;align-items:flex-end;white-space:nowrap;font-size:12.5px}
+.queue__wait b{color:var(--text);font-size:14.5px}
+.queue__act{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.queue__done{margin:0}
+.peak--alert{color:#f0a9a9;font-weight:600}
+@media(max-width:600px){
+.queue__row{grid-template-columns:1fr auto}
+.queue__act{grid-column:1/-1}
+}
+.feed{display:flex;flex-direction:column}
+.feed__row{display:grid;grid-template-columns:10px 1fr auto auto;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.feed__row:last-child{border-bottom:0}
+.feed__dot{width:8px;height:8px;border-radius:50%;align-self:center}
+.feed__what{min-width:0;overflow-wrap:anywhere}
+.feed__where{font-size:12px}
+.feed__when{white-space:nowrap;font-size:12px}
+@media(max-width:600px){
+.feed__row{grid-template-columns:10px 1fr}
+.feed__where,.feed__when{grid-column:2/-1}
+}
+.digest{width:100%;max-width:none;font-family:inherit;font-size:13.5px;line-height:1.8;background:var(--panel-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;resize:vertical}
 /* The plot's x axis runs oldest-to-newest left-to-right in SVG user space, which
    no page direction changes; the tick row has to follow it, not the page. */
 .ticks{display:flex;margin-top:6px;direction:ltr}
@@ -1111,6 +1236,134 @@ function peakLine(claim, describe, noun) {
   return `<span class="muted">الأكثر ازدحاماً: <b class="peak">${esc(describe(claim.top))}</b> · من ${claim.total} ${noun}</span>`;
 }
 
+/**
+ * The waiting queue — the only panel on this page that asks for an action
+ * rather than reporting a number.
+ *
+ * It sits above the charts because a request nobody answered costs more than
+ * every insight below it combined, and it carries the buyer's own phone number
+ * so answering is one tap rather than a trip through the table.
+ */
+function queuePanelHtml(queue, open, backQs) {
+  if (!queue || !queue.length) {
+    return `<div class="panel">
+      <div class="panel__head"><h2>بانتظار الرد</h2></div>
+      <p class="muted">لا يوجد طلب بانتظار الرد. كل ما وصل تم التعامل معه.</p>
+    </div>`;
+  }
+
+  const overdue = open.overdue;
+  const rows = queue
+    .map((r) => {
+      const late = r.waitedHours >= SLA_HOURS;
+      const wa = buildWaHref(r.phone);
+      const tel = buildTelHref(r.phone);
+      const who = r.name || r.phone || r.email || "بدون اسم";
+      return `<div class="queue__row${late ? " queue__row--late" : ""}">
+        <div class="queue__who">
+          <b>${esc(who)}</b>
+          ${r.subject ? `<span class="muted">${esc(r.subject)}</span>` : ""}
+          <span class="muted">${esc(toRiyadhDisplay(r.created_at))}</span>
+        </div>
+        <div class="queue__wait"><b>${esc(waitLabel(r.waitedHours))}</b><span class="muted">انتظاراً</span></div>
+        <div class="queue__act">
+          ${wa ? `<a class="btn btn-sm" href="${esc(wa)}" target="_blank" rel="noopener">واتساب</a>` : ""}
+          ${tel ? `<a class="btn btn-secondary btn-sm" href="${esc(tel)}">اتصال</a>` : ""}
+          <form method="POST" action="/admin/leads" class="queue__done">
+            <input type="hidden" name="_action" value="mark_answered">
+            <input type="hidden" name="id" value="${esc(r.id)}">
+            <input type="hidden" name="_return" value="${esc(backQs)}">
+            <button type="submit" class="btn btn-secondary btn-sm">تم الرد</button>
+          </form>
+        </div>
+      </div>`;
+    })
+    .join("");
+
+  const headline = overdue
+    ? `<span class="peak peak--alert">${overdue} منها بلا رد منذ أكثر من ${esc(hoursLabel(SLA_HOURS))}</span>`
+    : `<span class="peak">${esc(requestsLabel(open.pending))} بانتظار الرد، ولا شيء منها تجاوز ${esc(hoursLabel(SLA_HOURS))}</span>`;
+
+  const more =
+    open.pending > queue.length
+      ? `<p class="muted chart-note">تُعرض أقدم ${queue.length} من ${open.pending}. البقية في <a class="countlink" href="${esc("/admin/leads?" + buildQueryString({ view: "leads", status: DEFAULT_STATUS }))}">تبويب طلبات النماذج ↗</a></p>`
+      : "";
+
+  return `<div class="panel panel--queue">
+    <div class="panel__head"><h2>بانتظار الرد</h2>${headline}</div>
+    <div class="queue">${rows}</div>
+    ${more}
+  </div>`;
+}
+
+/** Reply speed, stated only once enough replies exist to mean anything. */
+function responsePanelHtml(response) {
+  const body =
+    response.median != null
+      ? `<div class="panel people">
+          <span class="stat"><b>${esc(waitLabel(response.median))}</b> وسيط زمن الرد</span>
+          <span class="stat"><b>${response.slaPct}%</b> من الردود خلال ${esc(hoursLabel(SLA_HOURS))}</span>
+          <span class="muted">محسوب على ${esc(repliesLabel(response.answered))} مسجّلة. الوسيط وليس المتوسط: ردٌّ متأخر واحد لا يشوّه الصورة.</span>
+        </div>`
+      : `<div class="panel people">
+          <span class="muted">سُجِّل ${esc(repliesLabel(response.answered))} حتى الآن — أقل من أن يُحسب منه زمن رد موثوق. يُحتسب الزمن تلقائياً كلما ضغطت «تم الرد».</span>
+        </div>`;
+  return body;
+}
+
+/** How many taps became a submitted request, via the shared reference code. */
+function conversionPanelHtml(conversion) {
+  if (!conversion || !conversion.taps) return "";
+  return `<div class="panel people">
+    <span class="stat"><b>${conversion.converted}</b> من ${esc(tapsLabel(conversion.taps))} أرسل أصحابها نموذجاً أيضاً</span>
+    ${conversion.pct != null ? `<span class="stat"><b>${conversion.pct}%</b></span>` : ""}
+    <span class="muted">يُربط برمز المرجع المشترك بين الرسالة والنموذج، لا بعنوان الـ IP.</span>
+  </div>`;
+}
+
+/** Every way a visitor reached out, newest first, in one list. */
+function timelinePanelHtml(timeline) {
+  if (!timeline || !timeline.length) return "";
+  const rows = timeline
+    .map((e) => {
+      const isLead = e.kind === "lead";
+      const stream = isLead ? "quotes" : e.channel === "phone" ? "phone" : "whatsapp";
+      // A form lead is named by the person who sent it; a tap has no name, so
+      // it is named by its channel and the label carries that already.
+      const detail = (isLead ? [e.label, e.detail] : [e.detail]).filter(Boolean).join(" — ");
+      return `<div class="feed__row">
+      <span class="feed__dot" data-stream="${stream}"></span>
+      <span class="feed__what"><b>${esc(isLead ? "نموذج" : e.label)}</b>${detail ? ` — ${esc(detail)}` : ""}</span>
+      <span class="feed__where">${e.page ? `<bdi class="muted path">${esc(e.page)}</bdi>` : ""}${e.ref ? ` <bdi class="muted">${esc(e.ref)}</bdi>` : ""}</span>
+      <span class="feed__when muted">${esc(toRiyadhDisplay(e.created_at))}</span>
+    </div>`;
+    })
+    .join("");
+  return `<div class="panel">
+    <div class="panel__head"><h2>آخر النشاط</h2><span class="muted">أحدث ${timeline.length}</span></div>
+    <div class="feed">${rows}</div>
+  </div>`;
+}
+
+/**
+ * The day in one message.
+ *
+ * Delivered as a WhatsApp link rather than a copy button because the panel
+ * carries no JavaScript at all, and because the owner reads this on a phone:
+ * tapping straight through to WhatsApp is fewer steps than any clipboard
+ * dance. The textarea beside it covers the desktop case.
+ */
+function digestPanelHtml(digest, now) {
+  return `<div class="panel">
+    <div class="panel__head"><h2>الملخص اليومي</h2><span class="muted">${esc(digestStamp(now))}</span></div>
+    <textarea class="digest" rows="12" readonly aria-label="نص الملخص اليومي">${esc(digest)}</textarea>
+    <div class="panel__bar">
+      <a class="btn btn-sm" href="${esc("https://wa.me/?text=" + encodeURIComponent(digest))}" target="_blank" rel="noopener">إرساله عبر واتساب</a>
+      <span class="muted">يفتح واتساب بالنص جاهزاً — اختر المستلم فقط.</span>
+    </div>
+  </div>`;
+}
+
 function overviewPage(view) {
   const {
     counts,
@@ -1158,7 +1411,7 @@ function overviewPage(view) {
   const peopleLine =
     people.contacts > 0
       ? `<div class="panel people">
-          <span class="stat"><b>${people.contacts}</b> شخصاً مختلفاً تواصل خلال ${days} يوماً</span>
+          <span class="stat"><b>${esc(peopleLabel(people.contacts))}</b> تواصلوا خلال ${days} يوماً</span>
           <span class="stat"><b>${people.repeat}</b> ضغطة لكل شخص في المتوسط</span>
           <span class="muted">يُقاس بعنوان الـ IP تقريبياً؛ عشر ضغطات من شخص واحد ليست عشرة عملاء.</span>
         </div>`
@@ -1242,6 +1495,13 @@ function overviewPage(view) {
       ? `<div class="panel"><p class="muted">لا يوجد نشاط مسجّل في هذه الفترة. إن كان الموقع يستقبل زواراً، جرّب فترة أطول من الأزرار أعلاه.</p></div>`
       : "";
 
+  const backQs = buildQueryString({ days });
+  const queuePanel = queuePanelHtml(view.queue, view.open, backQs);
+  const responsePanel = responsePanelHtml(view.response);
+  const conversionPanel = conversionPanelHtml(view.conversion);
+  const timelinePanel = timelinePanelHtml(view.timeline);
+  const digestPanel = digestPanelHtml(view.digest, view.now);
+
   return SHELL(
     "لوحة المراقبة",
     `<h1>لوحة المراقبة</h1>${viewNav("overview")}
@@ -1249,11 +1509,14 @@ function overviewPage(view) {
     ${truncNotice}
     ${refPanel}
     ${refResult}
+    ${queuePanel}
     <div class="panel__bar">${windowPicker}<span class="muted">البيانات حتى ${esc(toRiyadhDisplay(view.now.toISOString()))} بتوقيت الرياض</span></div>
     ${emptyNotice}
 
     <div class="kpis">${kpi("quotes")}${kpi("whatsapp")}${kpi("phone")}</div>
+    ${responsePanel}
     ${peopleLine}
+    ${conversionPanel}
 
     <div class="panel">
       <div class="panel__head"><h2>حجم التواصل اليومي — ${days} يوماً</h2>
@@ -1307,7 +1570,10 @@ function overviewPage(view) {
     <div class="panel">
       <div class="panel__head"><h2>الصفحات الأكثر توليداً للتواصل</h2><span class="muted">${days} يوماً</span></div>
       ${pagesTable}
-    </div>`
+    </div>
+
+    ${timelinePanel}
+    ${digestPanel}`
   );
 }
 
@@ -1472,8 +1738,21 @@ function tablePage(rows, view) {
         ? '<span class="dup-badge" title="نفس الهاتف أو البريد ورد من قبل">مكرر</span>'
         : "";
 
+      // The wait is shown on open rows and the achieved reply time on closed
+      // ones, so one column answers both "how late am I" and "how did we do".
+      const waited = hoursBetween(r.created_at, r.answered_at || now);
+      const waitTag =
+        waited == null
+          ? ""
+          : r.answered_at
+            ? `<span class="muted wait">رُدَّ بعد ${esc(waitLabel(waited))}</span>`
+            : `<span class="wait${waited >= SLA_HOURS ? " wait--late" : ""}">منتظر ${esc(waitLabel(waited))}</span>`;
+      const refTag = r.ref
+        ? `<a class="countlink" href="${esc("/admin/leads?" + buildQueryString({ ref: r.ref }))}" title="الضغطات التي تحمل الرمز نفسه"><bdi>${esc(r.ref)}</bdi> ↗</a>`
+        : "";
+
       return `<tr class="${recent ? "row--new" : ""}">
-      <td data-label="التاريخ">${esc(toRiyadhDisplay(r.created_at))}</td>
+      <td data-label="التاريخ">${esc(toRiyadhDisplay(r.created_at))}${waitTag ? `<br>${waitTag}` : ""}${refTag ? `<br>${refTag}` : ""}</td>
       <td data-label="الحالة">
         <span class="status-badge status-badge--${statusVal}">${esc(STATUS_LABELS_AR[statusVal])}</span>
         <form method="POST" class="inline-form">

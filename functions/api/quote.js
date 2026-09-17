@@ -21,6 +21,14 @@
 const DEFAULT_TO = "info@elfaridaice.com";
 const DEFAULT_FROM = "Elfarida Ice <no-reply@elfaridaice.com>";
 
+/** Same shape /api/contact-event stores, so the two tables join on equal terms. */
+const REF_RE = /^EFI-[0-9A-Z]{4}$/;
+
+function validRef(value) {
+  const s = String(value || "").toUpperCase();
+  return REF_RE.test(s) ? s : "";
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -114,11 +122,12 @@ export async function onRequestPost(context) {
   let stored = false;
   if (env.DB) {
     try {
+      const id = crypto.randomUUID();
       await env.DB.prepare(
         "INSERT INTO leads (id, created_at, name, email, phone, subject, payload, ip, ua) VALUES (?,?,?,?,?,?,?,?,?)"
       )
         .bind(
-          crypto.randomUUID(),
+          id,
           new Date().toISOString(),
           name,
           email,
@@ -130,6 +139,23 @@ export async function onRequestPost(context) {
         )
         .run();
       stored = true;
+
+      // The page-view reference, which also travels inside any WhatsApp message
+      // sent from the same view — it is what lets the admin panel say that one
+      // visitor both messaged and submitted.
+      //
+      // Written separately and best-effort on purpose: `leads.ref` is added by
+      // migration 0004, and folding it into the INSERT would mean a deploy that
+      // lands before the migration silently drops every form submission. A
+      // missing attribution is a gap in a report; a dropped lead is lost money.
+      const ref = validRef(pick(data, ["contact_ref"]));
+      if (ref) {
+        try {
+          await env.DB.prepare("UPDATE leads SET ref = ? WHERE id = ?").bind(ref, id).run();
+        } catch (_) {
+          /* column not migrated yet — the lead itself is already safe */
+        }
+      }
     } catch (_) {
       /* fall through; email may still deliver */
     }
@@ -203,7 +229,15 @@ function pick(obj, keys) {
 function stripNoise(data) {
   const out = {};
   for (const [k, v] of Object.entries(data)) {
-    if (k === "botcheck" || k === "cf-turnstile-response" || k === "access_key") continue;
+    // contact_ref is promoted to its own column; keeping a copy in the payload
+    // blob would give the panel two places to read the same value from.
+    if (
+      k === "botcheck" ||
+      k === "cf-turnstile-response" ||
+      k === "access_key" ||
+      k === "contact_ref"
+    )
+      continue;
     out[k] = v;
   }
   return out;
