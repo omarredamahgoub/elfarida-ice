@@ -18,8 +18,56 @@
  *
  * Fails safe: any error returns the original response unchanged.
  */
+/**
+ * Repository paths that are not part of the website.
+ *
+ * The Pages build output directory is the repository root, so anything in it
+ * that Pages does not itself exclude is served. Its exclusion list is fixed —
+ * _worker.js, _redirects, _headers, _routes.json, functions, .DS_Store,
+ * node_modules, .git, .wrangler — and the uploader reads no ignore file at
+ * all: neither .wranglerignore nor .assetsignore is consulted (verified in the
+ * Wrangler source). The database schema, wrangler.toml with its D1 id,
+ * package-lock.json and the whole test suite were therefore all reachable.
+ *
+ * Blocking them here rather than in _redirects because Pages caps a redirects
+ * file at 100 dynamic rules: four wildcard rules at the top of that file
+ * pushed it past the cap and silently dropped 94 lines of real redirects. This
+ * middleware already runs ahead of every asset request, so the check is free.
+ *
+ * The lasting fix is to stop publishing the repository as the site — that
+ * needs a build step that copies only the site into its own directory, and is
+ * a change of its own.
+ */
+const NOT_PUBLIC = ["/migrations/", "/scripts/", "/tests/", "/workers/", "/.git/", "/backups/"];
+
+const NOT_PUBLIC_FILES = new Set([
+  "/wrangler.toml",
+  "/package.json",
+  "/package-lock.json",
+  "/eslint.config.mjs",
+  "/.gitignore",
+  "/.gitattributes",
+  "/.prettierignore",
+  "/.prettierrc.json",
+  "/.editorconfig",
+]);
+
+export function isPublicPath(pathname) {
+  const p = String(pathname || "").toLowerCase();
+  if (NOT_PUBLIC_FILES.has(p)) return false;
+  return !NOT_PUBLIC.some((prefix) => p.startsWith(prefix));
+}
+
 export async function onRequest(context) {
-  const { next } = context;
+  const { next, request } = context;
+
+  if (!isPublicPath(new URL(request.url).pathname)) {
+    return new Response("Not Found", {
+      status: 404,
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
+    });
+  }
+
   const response = await next();
 
   try {

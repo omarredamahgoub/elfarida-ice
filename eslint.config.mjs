@@ -105,7 +105,10 @@ export default [
     },
   },
   {
-    files: ["functions/**/*.js"],
+    // Pages Functions and the standalone scheduled Worker share one runtime and
+    // one set of globals; workers/ is listed here rather than given its own
+    // block so the two cannot drift into different rules.
+    files: ["functions/**/*.js", "workers/**/*.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",

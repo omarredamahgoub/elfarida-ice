@@ -1,0 +1,33 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# elfarida-digest — the one thing Cloudflare Pages cannot do.
+#
+# Pages Functions have no scheduler, so the daily summary cannot be sent from
+# the site itself. This is a separate Worker bound to the SAME D1 database,
+# whose only job is to run once a morning and email the digest the admin panel
+# already renders. It shares functions/admin/_digest-lib.js, so the message in
+# the inbox and the message in the panel can never drift apart.
+#
+# Deploy (from the repository root):  npm run digest:deploy
+#   Then confirm in the Cloudflare dashboard that the Worker shows a Cron
+#   Trigger and a D1 binding. Without the binding it runs and does nothing.
+#
+# Recipients and the Resend key are read from the `settings` table in D1, the
+# same place /api/quote reads them — no secret is duplicated here, and none is
+# ever committed.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name = "elfarida-digest"
+main = "src/index.js"
+compatibility_date = "2026-06-16"
+workers_dev = false
+
+# 05:00 UTC = 08:00 Asia/Riyadh, year-round (the Kingdom observes no DST).
+# Early enough to be read before the working day, late enough that the previous
+# evening's WhatsApp traffic is already in the table.
+[triggers]
+crons = ["0 5 * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "elfarida-leads"
+database_id = "0637575c-303e-4150-9810-e96ea462ad49"
