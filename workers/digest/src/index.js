@@ -44,14 +44,41 @@ export async function run(env, now) {
 
   const digest = dailyDigest(leads, contacts, now);
 
-  if (!config.apiKey || !config.to.length) return { sent: false, reason: "no-mail-config" };
-
   // Sent every day, including silent ones. A digest that only arrives when
   // something happened makes its absence ambiguous — the owner cannot tell a
   // quiet Tuesday from a cron that stopped firing three weeks ago, and for this
   // business a quiet week is itself the thing worth knowing.
-  const ok = await send(config, digest, dayDisplay(dayKeyBack(now, 0)));
-  return { sent: ok, reason: ok ? "" : "send-failed" };
+  const outcome =
+    !config.apiKey || !config.to.length
+      ? { sent: false, reason: "no-mail-config" }
+      : (await send(config, digest, dayDisplay(dayKeyBack(now, 0))))
+        ? { sent: true, reason: "" }
+        : { sent: false, reason: "send-failed" };
+
+  await recordRun(env, now, outcome);
+  return outcome;
+}
+
+/**
+ * Leaves a trace of what the cron decided, in the settings table the admin
+ * panel already reads.
+ *
+ * A scheduled job whose only output is an email has no way of reporting that
+ * it stopped: the owner would see no digest and have no way to tell a broken
+ * binding from a quiet inbox. Writing the outcome where the panel can show it
+ * turns silence into a visible date that stops advancing.
+ *
+ * Best-effort on purpose — failing to record must never be the reason a digest
+ * that was already sent is treated as failed.
+ */
+async function recordRun(env, now, outcome) {
+  try {
+    await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('digest_last_run', ?)")
+      .bind(JSON.stringify({ at: now.toISOString(), sent: outcome.sent, reason: outcome.reason }))
+      .run();
+  } catch (_) {
+    /* settings table absent, or read-only — the digest itself already went */
+  }
 }
 
 async function readLeads(env, since) {

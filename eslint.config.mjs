@@ -78,7 +78,10 @@ const UNUSED_VARS_RULE = ["warn", { argsIgnorePattern: "^_", caughtErrorsIgnoreP
 
 export default [
   {
-    ignores: ["node_modules/**", "backups/**", ".wrangler/**", "dist/**", ...MINIFIED_JS],
+    // Wrangler writes generated bundles into a .wrangler/ directory beside each
+    // config it builds, so the pattern has to match at any depth — the Worker in
+    // workers/digest/ has one of its own.
+    ignores: ["node_modules/**", "backups/**", "**/.wrangler/**", "dist/**", ...MINIFIED_JS],
   },
   js.configs.recommended,
   prettier,

@@ -291,6 +291,7 @@ async function overviewView(env, url) {
       conversion: tapConversion(quotes, contacts),
       timeline: mergeTimeline(quotes, contacts).slice(0, 12),
       digest: dailyDigest(quotes, contacts, now),
+      digestLastRun: await readDigestLastRun(env),
       refQuery,
       refNormalized: normalizeRef(refQuery),
       refMatches,
@@ -314,6 +315,24 @@ async function overviewView(env, url) {
       locations: breakdownBy(contacts, "location", 8),
     })
   );
+}
+
+/**
+ * The scheduled sender's own trace, written by workers/digest after each cron.
+ *
+ * Returns null for every failure mode — absent row, malformed JSON, missing
+ * table — because "no trace" and "a trace I cannot read" mean the same thing
+ * to the reader: the automatic send has not proven itself.
+ */
+async function readDigestLastRun(env) {
+  try {
+    const row = await env.DB.prepare("SELECT v FROM settings WHERE k = 'digest_last_run'").first();
+    if (!row || !row.v) return null;
+    const parsed = JSON.parse(row.v);
+    return parsed && parsed.at ? parsed : null;
+  } catch (_) {
+    return null;
+  }
 }
 
 /**
@@ -1353,9 +1372,35 @@ function timelinePanelHtml(timeline) {
  * tapping straight through to WhatsApp is fewer steps than any clipboard
  * dance. The textarea beside it covers the desktop case.
  */
-function digestPanelHtml(digest, now) {
+/**
+ * What the scheduled sender last did.
+ *
+ * The cron lives in a separate Worker, so the only way this panel can tell the
+ * owner it is still alive is the trace that Worker leaves behind. A date that
+ * stops advancing is the signal; silence with nothing written would look
+ * exactly like a quiet week.
+ */
+function digestScheduleLine(lastRun) {
+  if (!lastRun) {
+    return `<p class="muted chart-note">الإرسال التلقائي غير مُفعَّل — الملخص يُرسل يدوياً بالزر أدناه. لتفعيله: <code>npm run digest:deploy</code></p>`;
+  }
+  const when = esc(toRiyadhDisplay(lastRun.at));
+  if (lastRun.sent) {
+    return `<p class="muted chart-note">آخر إرسال تلقائي: ${when} — يُرسل كل صباح الساعة 8:00 بتوقيت الرياض.</p>`;
+  }
+  const why =
+    lastRun.reason === "no-mail-config"
+      ? "لا يوجد مفتاح بريد مُهيّأ"
+      : lastRun.reason === "send-failed"
+        ? "رفض مزوّد البريد الإرسال"
+        : lastRun.reason || "سبب غير معروف";
+  return `<p class="err chart-note">آخر محاولة إرسال تلقائي (${when}) لم تنجح: ${esc(why)}.</p>`;
+}
+
+function digestPanelHtml(digest, now, lastRun) {
   return `<div class="panel">
     <div class="panel__head"><h2>الملخص اليومي</h2><span class="muted">${esc(digestStamp(now))}</span></div>
+    ${digestScheduleLine(lastRun)}
     <textarea class="digest" rows="12" readonly aria-label="نص الملخص اليومي">${esc(digest)}</textarea>
     <div class="panel__bar">
       <a class="btn btn-sm" href="${esc("https://wa.me/?text=" + encodeURIComponent(digest))}" target="_blank" rel="noopener">إرساله عبر واتساب</a>
@@ -1500,7 +1545,7 @@ function overviewPage(view) {
   const responsePanel = responsePanelHtml(view.response);
   const conversionPanel = conversionPanelHtml(view.conversion);
   const timelinePanel = timelinePanelHtml(view.timeline);
-  const digestPanel = digestPanelHtml(view.digest, view.now);
+  const digestPanel = digestPanelHtml(view.digest, view.now, view.digestLastRun);
 
   return SHELL(
     "لوحة المراقبة",

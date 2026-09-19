@@ -10,11 +10,19 @@ const NOW = new Date("2026-09-17T05:00:00Z");
  * than by call order, so a change to the order of the Worker's reads does not
  * silently start feeding leads into the contacts slot.
  */
-function fakeDb({ leads = [], contacts = [], settings = {}, missing = [] } = {}) {
+function fakeDb({ leads = [], contacts = [], settings = {}, missing = [], written = [] } = {}) {
   return {
+    written,
     prepare(sql) {
       const stmt = {
-        bind: () => stmt,
+        bind: (...args) => {
+          stmt.args = args;
+          return stmt;
+        },
+        run: async () => {
+          written.push({ sql, args: stmt.args });
+          return {};
+        },
         all: async () => {
           if (sql.includes("FROM contact_events")) {
             if (missing.includes("contact_events")) throw new Error("no such table");
@@ -121,6 +129,57 @@ test("digest worker", async (t) => {
     await run({ DB: fakeDb({ settings: MAIL }) }, NOW);
     const { text, html } = calls[0].body;
     assert.equal(html, htmlWrap(text));
+  });
+
+  await t.test("records a successful run where the admin panel can read it", async () => {
+    captureFetch();
+    const db = fakeDb({ settings: MAIL });
+    await run({ DB: db }, NOW);
+    const write = db.written.find((w) => w.sql.includes("digest_last_run"));
+    assert.ok(
+      write,
+      "nothing was recorded — a silent cron would be indistinguishable from a quiet week"
+    );
+    assert.deepEqual(JSON.parse(write.args[0]), {
+      at: NOW.toISOString(),
+      sent: true,
+      reason: "",
+    });
+  });
+
+  await t.test("records a failure with its reason, not just silence", async () => {
+    globalThis.fetch = async () => ({ ok: false });
+    const db = fakeDb({ settings: MAIL });
+    await run({ DB: db }, NOW);
+    const write = db.written.find((w) => w.sql.includes("digest_last_run"));
+    assert.equal(JSON.parse(write.args[0]).sent, false);
+    assert.equal(JSON.parse(write.args[0]).reason, "send-failed");
+  });
+
+  await t.test("records the missing-configuration case too", async () => {
+    const db = fakeDb({ settings: {} });
+    await run({ DB: db }, NOW);
+    const write = db.written.find((w) => w.sql.includes("digest_last_run"));
+    assert.equal(JSON.parse(write.args[0]).reason, "no-mail-config");
+  });
+
+  await t.test("a failure to record never turns a sent digest into a failed one", async () => {
+    const calls = captureFetch();
+    const db = fakeDb({ settings: MAIL });
+    const prepare = db.prepare.bind(db);
+    db.prepare = (sql) =>
+      sql.includes("digest_last_run")
+        ? {
+            bind: () => ({
+              run: async () => {
+                throw new Error("read-only");
+              },
+            }),
+          }
+        : prepare(sql);
+    const out = await run({ DB: db }, NOW);
+    assert.equal(out.sent, true);
+    assert.equal(calls.length, 1);
   });
 });
 
