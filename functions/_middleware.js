@@ -34,11 +34,25 @@
  * pushed it past the cap and silently dropped 94 lines of real redirects. This
  * middleware already runs ahead of every asset request, so the check is free.
  *
- * The lasting fix is to stop publishing the repository as the site — that
- * needs a build step that copies only the site into its own directory, and is
- * a change of its own.
+ * scripts/build-site.mjs now assembles dist/ from exactly the files this
+ * function calls public, so once pages_build_output_dir points at dist/ the
+ * excluded files are never uploaded at all. This check stays as the second
+ * layer: it is what holds while the switch is being made, and what keeps
+ * holding if a future deploy ever publishes the root again by accident.
  */
-const NOT_PUBLIC = ["/migrations/", "/scripts/", "/tests/", "/workers/", "/.git/", "/backups/"];
+const NOT_PUBLIC = [
+  "/migrations/",
+  "/scripts/",
+  "/tests/",
+  "/workers/",
+  "/.git/",
+  "/backups/",
+  // Build output. Once pages_build_output_dir points at dist/ its contents
+  // ARE the site root and this path cannot occur; until then, a build that
+  // runs while the root is still being published would otherwise serve a
+  // second copy of the whole site under /dist/.
+  "/dist/",
+];
 
 const NOT_PUBLIC_FILES = new Set([
   "/wrangler.toml",

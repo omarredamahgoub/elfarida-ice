@@ -1,6 +1,9 @@
 node_modules/
 .wrangler/
 
+# Build output — assembled by scripts/build-site.mjs on every deploy.
+dist/
+
 # dev-only
 *.ps1
 *.md

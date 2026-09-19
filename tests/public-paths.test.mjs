@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readdirSync, existsSync, statSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -107,13 +107,17 @@ test("every top-level repository entry is accounted for", async (t) => {
     ".wrangler",
   ]);
 
-  const dirs = readdirSync(ROOT).filter((name) => {
-    try {
-      return statSync(join(ROOT, name)).isDirectory();
-    } catch (_) {
-      return false;
-    }
-  });
+  // Derived from what git tracks, not from what is on disk: an untracked
+  // directory (node_modules, dist, .wrangler) is never deployed, so flagging
+  // it would be noise that trains people to ignore this test.
+  const dirs = [
+    ...new Set(
+      execFileSync("git", ["ls-files", "-z"], { cwd: ROOT, encoding: "utf8" })
+        .split("\0")
+        .filter((f) => f.includes("/"))
+        .map((f) => f.split("/")[0])
+    ),
+  ];
 
   for (const name of dirs) {
     if (SITE_DIRS.has(name)) continue;

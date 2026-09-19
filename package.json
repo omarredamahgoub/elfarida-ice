@@ -6,8 +6,9 @@
   "author": "Elfarida Ice",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "wrangler pages dev .",
-    "deploy": "wrangler pages deploy . --project-name elfarida-ice",
+    "build": "node scripts/build-site.mjs",
+    "dev": "npm run build && wrangler pages dev dist",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name elfarida-ice",
     "deploy:full": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1",
     "admin:reset": "node scripts/reset-admin-password.mjs",
     "stamp": "node scripts/stamp-assets.mjs",
