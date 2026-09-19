@@ -25,7 +25,7 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { cpSync, mkdirSync, rmSync, existsSync, statSync } from "node:fs";
+import { cpSync, mkdirSync, rmSync, existsSync, statSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -47,10 +47,43 @@ const REQUIRED = [
   "lib/site.config.json",
 ];
 
-function trackedFiles() {
-  return execFileSync("git", ["ls-files", "-z"], { cwd: ROOT, encoding: "utf8" })
-    .split("\0")
-    .filter(Boolean);
+/**
+ * Directories that are never part of the repository's committed contents.
+ * Used only by the fallback below, where git cannot answer the question.
+ */
+const NON_REPO = new Set(["node_modules", ".git", ".wrangler", "dist", ".github", ".vscode"]);
+
+function walk(dir, base = "") {
+  const out = [];
+  for (const entry of readdirSync(join(ROOT, dir === "" ? "." : dir), { withFileTypes: true })) {
+    if (base === "" && NON_REPO.has(entry.name)) continue;
+    const rel = base ? `${base}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) out.push(...walk(rel, rel));
+    else if (entry.isFile()) out.push(rel);
+  }
+  return out;
+}
+
+/**
+ * The files the repository contains.
+ *
+ * git is the right answer — it publishes exactly what is committed, so no
+ * local scratch file can ride along. But the build runs in a container this
+ * repository does not control, and a build that dies because `git` is absent
+ * takes the site down. The fallback walks the tree instead and leans entirely
+ * on isPublicPath(), which is the rule that actually protects anything; it is
+ * strictly safer than what this replaced, where the whole tree was published.
+ */
+function repositoryFiles() {
+  try {
+    const listed = execFileSync("git", ["ls-files", "-z"], { cwd: ROOT, encoding: "utf8" })
+      .split("\0")
+      .filter(Boolean);
+    if (listed.length) return { files: listed, source: "git" };
+  } catch (_) {
+    /* no git, or not a checkout — fall through */
+  }
+  return { files: walk(""), source: "filesystem" };
 }
 
 export function selectSiteFiles(files) {
@@ -62,7 +95,7 @@ export function selectSiteFiles(files) {
 }
 
 function build() {
-  const tracked = trackedFiles();
+  const { files: tracked, source } = repositoryFiles();
   const publish = selectSiteFiles(tracked);
 
   rmSync(OUT, { recursive: true, force: true });
@@ -89,7 +122,7 @@ function build() {
   const withheld = tracked.length - publish.length;
   process.stdout.write(
     `dist/: ${publish.length} files, ${(bytes / 1048576).toFixed(1)} MB` +
-      ` — ${withheld} committed files withheld from the site\n`
+      ` — ${withheld} withheld from the site (file list from ${source})\n`
   );
 }
 
