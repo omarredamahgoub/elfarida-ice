@@ -4,14 +4,20 @@
 #          D1 binding is not dashboard-only. Cloudflare Pages reads this
 #          during both CLI deploys and GitHub-integration builds.
 #
-# Deploy (from THIS directory):  npx wrangler pages deploy
-#   The functions/ folder is auto-detected and bundled. Always confirm the
-#   output shows "Uploading Functions bundle" — otherwise Functions are NOT
-#   deployed and /api/quote and /admin/leads will return 405.
+# Deploy (from THIS directory):  npm run deploy
+#   That builds dist/ first. Deploying without building publishes a stale or
+#   missing site. The functions/ folder stays HERE, at the project root — Pages
+#   compiles it into the Functions bundle and never serves it as an asset, so it
+#   is not copied into dist/. Always confirm the output shows "Uploading
+#   Functions bundle" — otherwise /api/quote and /admin/leads return 405.
+#
+# The Git-integration build runs the dashboard's build command (`npm run build`)
+# and publishes the directory named below. Those two must agree: a build that
+# writes dist/ while this says "." republishes the whole repository.
 # ═══════════════════════════════════════════════════════════════════
 
 name = "elfarida-ice"
-pages_build_output_dir = "."
+pages_build_output_dir = "dist"
 compatibility_date = "2026-06-16"
 
 # Durable storage for quote/contact leads and runtime settings
