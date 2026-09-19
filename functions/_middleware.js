@@ -52,9 +52,39 @@ const NOT_PUBLIC_FILES = new Set([
   "/.editorconfig",
 ]);
 
+/**
+ * File types the site is never made of.
+ *
+ * Blocking by type rather than by name because the leak that prompted this was
+ * a pricing document sitting in the repository root — internal paperwork lands
+ * next to the site far more often than anyone adds a new tooling directory,
+ * and naming each file would mean noticing each one first.
+ *
+ * .pdf is deliberately absent: assets/gallery holds the company profile, which
+ * is a published document. Every page on this site is .html.
+ */
+const NOT_PUBLIC_EXTENSIONS = [
+  ".docx",
+  ".doc",
+  ".xlsx",
+  ".xls",
+  ".pptx",
+  ".md",
+  ".sql",
+  ".toml",
+  ".ps1",
+  ".sh",
+  ".bak",
+  ".old",
+  ".log",
+  ".lock",
+  ".env",
+];
+
 export function isPublicPath(pathname) {
   const p = String(pathname || "").toLowerCase();
   if (NOT_PUBLIC_FILES.has(p)) return false;
+  if (NOT_PUBLIC_EXTENSIONS.some((ext) => p.endsWith(ext))) return false;
   return !NOT_PUBLIC.some((prefix) => p.startsWith(prefix));
 }
 

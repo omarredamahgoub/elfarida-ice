@@ -6,3 +6,13 @@ node_modules/
 *.md
 
 backups/
+
+# Internal paperwork. This repository is PUBLIC on GitHub and its build output
+# is the live site, so anything committed here is published twice over — a
+# pricing document sitting in the root was downloadable at elfaridaice.com and
+# readable on GitHub at the same time. Business documents belong nowhere in it.
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx

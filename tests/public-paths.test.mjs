@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, existsSync, statSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -29,6 +30,11 @@ const MUST_BLOCK = [
   "/.gitattributes",
   "/.prettierignore",
   "/.prettierrc.json",
+  // Business paperwork that was sitting in the repository root and being
+  // served: the website pricing, a site audit and an O&M guide.
+  "/تسعيرة-موقع-الفريدة-آيس.docx",
+  "/تقرير-فحص-موقع-الفريدة-آيس.md",
+  "/دليل-التشغيل-والصيانة.md",
 ];
 
 /** The site itself, which must keep working. */
@@ -44,6 +50,11 @@ const MUST_SERVE = [
   "/sitemap.xml",
   "/robots.txt",
   "/favicon.ico",
+  "/sw.js",
+  "/manifest.webmanifest",
+  // A published document, unlike the paperwork above — the extension rule must
+  // not take the company profile down with it.
+  "/assets/gallery/AL FARIDA - PROFILE.pdf",
 ];
 
 test("repository tooling is not served as part of the website", async (t) => {
@@ -111,6 +122,61 @@ test("every top-level repository entry is accounted for", async (t) => {
         isPublicPath(`/${name}/x`),
         false,
         `${name}/ is served publicly — add it to NOT_PUBLIC in functions/_middleware.js, or to SITE_DIRS here if it really is part of the site`
+      );
+    });
+  }
+});
+
+test("no committed file of a non-web type is reachable", async (t) => {
+  // The leak this guards against was not a directory anyone forgot to list: it
+  // was a pricing document dropped beside the pages. Walking what git actually
+  // tracks catches the next one on the commit that adds it.
+  const tracked = execFileSync("git", ["ls-files", "-z"], { cwd: ROOT, encoding: "utf8" })
+    .split("\0")
+    .filter(Boolean);
+
+  const WEB = new Set([
+    "html",
+    "css",
+    "js",
+    "json",
+    "webp",
+    "png",
+    "jpg",
+    "jpeg",
+    "svg",
+    "gif",
+    "ico",
+    "woff2",
+    "woff",
+    "ttf",
+    "xml",
+    "txt",
+    "webmanifest",
+    "pdf",
+    "mp4",
+    "webm",
+    "avif",
+  ]);
+
+  // Pages never serves these four, whatever the middleware says.
+  const PAGES_OWNS = new Set(["_headers", "_redirects", "_routes.json", "_worker.js"]);
+
+  const suspects = tracked.filter((f) => {
+    if (PAGES_OWNS.has(f)) return false;
+    const ext = (f.split(".").pop() || "").toLowerCase();
+    // Site data lives in lib/ and is fetched at runtime; only a JSON sitting in
+    // the repository root is configuration rather than content.
+    if (ext === "json") return !f.includes("/");
+    return !WEB.has(ext);
+  });
+
+  for (const file of suspects) {
+    await t.test(`${file} is not served`, () => {
+      assert.equal(
+        isPublicPath("/" + file),
+        false,
+        `${file} is committed and would be served at https://elfaridaice.com/${file} — block it in functions/_middleware.js, or remove it from the repository`
       );
     });
   }
