@@ -2,6 +2,7 @@
   "name": "elfarida-ice-deploy",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Static bilingual marketing site for Elfarida Ice Industrial Refrigeration, deployed on Cloudflare Pages.",
   "author": "Elfarida Ice",
   "license": "UNLICENSED",
