@@ -115,7 +115,7 @@ describe("/api/quote", () => {
     assert.equal(db.leads.length, 0);
   });
 
-  test("owner mail stops at its hourly budget while leads are still stored", async () => {
+  test("owner mail stops at its daily budget while leads are still stored", async () => {
     for (let i = 0; i < 15; i++) db.quota.push("owner_mail_unverified");
     const r = await post({ name: "buyer", phone: "0500000000" });
     assert.equal(r.status, 200);
@@ -123,8 +123,8 @@ describe("/api/quote", () => {
     assert.equal(sent.length, 0);
   });
 
-  test("acknowledgements stop at their hourly budget", async () => {
-    for (let i = 0; i < 30; i++) db.quota.push("confirmation_mail");
+  test("acknowledgements stop at their daily budget", async () => {
+    for (let i = 0; i < 25; i++) db.quota.push("confirmation_mail");
     await post({ name: "Ali", email: "ali@example.com", protected: "1", turnstileToken: "valid" });
     assert.deepEqual(
       sent.map((m) => m.to),

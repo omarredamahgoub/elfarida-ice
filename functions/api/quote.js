@@ -21,8 +21,9 @@
  *     dropped silently, like a honeypot hit.
  *   - Requests without a verified Turnstile token share a site-wide hourly
  *     budget, so rotating IPs no longer defeats the per-IP limit.
- *   - Every class of outbound mail has a site-wide hourly budget, so no volume
- *     of traffic can exhaust the mail account again. Budgets fail closed.
+ *   - Every class of outbound mail has a site-wide daily budget that fits the
+ *     mail plan, so no volume of traffic can exhaust the account again.
+ *     Budgets fail closed.
  *
  * Bindings / secrets (Pages → Settings, or the D1 `settings` table):
  *   DB                D1 database "elfarida-leads"
@@ -47,14 +48,23 @@ const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX_PER_IP = 5;
 const CONFIRMATION_WINDOW_MS = 24 * 60 * 60 * 1000;
 
-/** Site-wide hourly budgets, counted in the `quote_quota` table. */
-const QUOTA_WINDOW_MS = 60 * 60 * 1000;
+/**
+ * Site-wide budgets, counted in the `quote_quota` table.
+ *
+ * Mail budgets are daily and sized to the Resend free plan (100 mails/day,
+ * 3 000/month): 50 + 15 + 25 = 90 a day at most, ≤ 2 700 a month, so even a
+ * sustained flood can no longer exhaust the account — the 2026-09 attack did,
+ * and every real lead notification after it failed with "monthly quota".
+ */
+const HOUR_MS = 60 * 60 * 1000;
+const DAY_MS = 24 * HOUR_MS;
 const QUOTA = Object.freeze({
-  unverifiedLead: { kind: "unverified_lead", cap: 40 },
-  ownerMail: { kind: "owner_mail", cap: 60 },
-  ownerMailUnverified: { kind: "owner_mail_unverified", cap: 15 },
-  confirmationMail: { kind: "confirmation_mail", cap: 30 },
+  unverifiedLead: { kind: "unverified_lead", cap: 40, windowMs: HOUR_MS },
+  ownerMail: { kind: "owner_mail", cap: 50, windowMs: DAY_MS },
+  ownerMailUnverified: { kind: "owner_mail_unverified", cap: 15, windowMs: DAY_MS },
+  confirmationMail: { kind: "confirmation_mail", cap: 25, windowMs: DAY_MS },
 });
+const QUOTA_RETENTION_MS = Math.max(...Object.values(QUOTA).map((q) => q.windowMs));
 
 const HONEYPOT_KEY = "botcheck";
 const TURNSTILE_KEYS = ["cf-turnstile-response", "turnstileToken"];
@@ -359,12 +369,12 @@ async function confirmationRecentlySent(db, email) {
 }
 
 /**
- * Consumes one unit of a site-wide hourly budget. Returns false when the
+ * Consumes one unit of a site-wide budget within its own window. Returns false when the
  * budget is spent — and also on any storage error: an unmetered path is
  * exactly what a flood exploits, so the budget fails closed.
  * Mirrors migrations/0005_quote_quota.sql so a fresh database works at once.
  */
-async function takeQuota(db, { kind, cap }) {
+async function takeQuota(db, { kind, cap, windowMs }) {
   if (!db) return false;
   const now = Date.now();
   try {
@@ -375,11 +385,11 @@ async function takeQuota(db, { kind, cap }) {
       .run();
     await db
       .prepare("DELETE FROM quote_quota WHERE created_at <= ?")
-      .bind(new Date(now - QUOTA_WINDOW_MS).toISOString())
+      .bind(new Date(now - QUOTA_RETENTION_MS).toISOString())
       .run();
     const row = await db
-      .prepare("SELECT COUNT(*) AS n FROM quote_quota WHERE kind = ?")
-      .bind(kind)
+      .prepare("SELECT COUNT(*) AS n FROM quote_quota WHERE kind = ? AND created_at > ?")
+      .bind(kind, new Date(now - windowMs).toISOString())
       .first();
     if (!row || row.n >= cap) return false;
     await db
