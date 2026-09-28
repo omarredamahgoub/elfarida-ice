@@ -14,6 +14,16 @@
  *      at most once per address per day. This endpoint must never become a
  *      relay that sends mail from elfaridaice.com to arbitrary addresses.
  *
+ * Flood containment (added after the 2026-09-25 → 09-28 attack: 17 480 fake
+ * "Coinbase transfer" submissions from 866 IPs, two outbound mails each, which
+ * exhausted the Resend account so real leads stopped arriving):
+ *   - Content that no buyer ever types into a name/phone field (links) is
+ *     dropped silently, like a honeypot hit.
+ *   - Requests without a verified Turnstile token share a site-wide hourly
+ *     budget, so rotating IPs no longer defeats the per-IP limit.
+ *   - Every class of outbound mail has a site-wide hourly budget, so no volume
+ *     of traffic can exhaust the mail account again. Budgets fail closed.
+ *
  * Bindings / secrets (Pages → Settings, or the D1 `settings` table):
  *   DB                D1 database "elfarida-leads"
  *   TURNSTILE_SECRET  Cloudflare Turnstile secret key
@@ -36,6 +46,15 @@ const MAX_EMAIL_LENGTH = 254;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX_PER_IP = 5;
 const CONFIRMATION_WINDOW_MS = 24 * 60 * 60 * 1000;
+
+/** Site-wide hourly budgets, counted in the `quote_quota` table. */
+const QUOTA_WINDOW_MS = 60 * 60 * 1000;
+const QUOTA = Object.freeze({
+  unverifiedLead: { kind: "unverified_lead", cap: 40 },
+  ownerMail: { kind: "owner_mail", cap: 60 },
+  ownerMailUnverified: { kind: "owner_mail_unverified", cap: 15 },
+  confirmationMail: { kind: "confirmation_mail", cap: 30 },
+});
 
 const HONEYPOT_KEY = "botcheck";
 const TURNSTILE_KEYS = ["cf-turnstile-response", "turnstileToken"];
@@ -112,9 +131,24 @@ export async function onRequestPost(context) {
   if (email && !isValidEmail(email))
     return json({ success: false, message: "صيغة البريد غير صحيحة." }, 422);
 
+  // Links in a name or phone field are the signature of the spam run; a real
+  // buyer never types one there. Answer like a honeypot hit so the sender
+  // learns nothing.
+  if (URL_LIKE_RE.test(name) || URL_LIKE_RE.test(phone))
+    return json({ success: true, message: "تمّ الاستلام." });
+
   if (await isRateLimited(env.DB, clientIp))
     return json(
       { success: false, message: "لقد أرسلت عدّة طلبات للتوّ. يرجى المحاولة بعد قليل." },
+      429
+    );
+
+  if (!humanVerified && !(await takeQuota(env.DB, QUOTA.unverifiedLead)))
+    return json(
+      {
+        success: false,
+        message: "تعذّر استلام الطلب الآن. يرجى التواصل معنا عبر واتساب أو الاتّصال مباشرة.",
+      },
       429
     );
 
@@ -132,11 +166,21 @@ export async function onRequestPost(context) {
 
   const cfg = await loadMailConfig(env);
   let emailed = false;
-  if (cfg.apiKey && cfg.to.length) {
+  if (
+    cfg.apiKey &&
+    cfg.to.length &&
+    (await takeQuota(env.DB, humanVerified ? QUOTA.ownerMail : QUOTA.ownerMailUnverified))
+  ) {
     emailed = await sendOwnerNotification(cfg, { name, email, subject, payload });
   }
 
-  if (cfg.apiKey && email && humanVerified && !(await confirmationRecentlySent(env.DB, email))) {
+  if (
+    cfg.apiKey &&
+    email &&
+    humanVerified &&
+    !(await confirmationRecentlySent(env.DB, email)) &&
+    (await takeQuota(env.DB, QUOTA.confirmationMail))
+  ) {
     await sendCustomerConfirmation(cfg, { name, email });
   }
 
@@ -314,6 +358,40 @@ async function confirmationRecentlySent(db, email) {
   }
 }
 
+/**
+ * Consumes one unit of a site-wide hourly budget. Returns false when the
+ * budget is spent — and also on any storage error: an unmetered path is
+ * exactly what a flood exploits, so the budget fails closed.
+ * Mirrors migrations/0005_quote_quota.sql so a fresh database works at once.
+ */
+async function takeQuota(db, { kind, cap }) {
+  if (!db) return false;
+  const now = Date.now();
+  try {
+    await db
+      .prepare(
+        "CREATE TABLE IF NOT EXISTS quote_quota (kind TEXT NOT NULL, created_at TEXT NOT NULL)"
+      )
+      .run();
+    await db
+      .prepare("DELETE FROM quote_quota WHERE created_at <= ?")
+      .bind(new Date(now - QUOTA_WINDOW_MS).toISOString())
+      .run();
+    const row = await db
+      .prepare("SELECT COUNT(*) AS n FROM quote_quota WHERE kind = ?")
+      .bind(kind)
+      .first();
+    if (!row || row.n >= cap) return false;
+    await db
+      .prepare("INSERT INTO quote_quota (kind, created_at) VALUES (?, ?)")
+      .bind(kind, new Date(now).toISOString())
+      .run();
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
 async function getSetting(db, key) {
   if (!db) return "";
   try {
@@ -388,10 +466,9 @@ async function sendOwnerNotification(cfg, { name, email, subject, payload }) {
 }
 
 async function sendCustomerConfirmation(cfg, { name, email }) {
-  // A supplied name is echoed only when it cannot carry a link: the mail is
-  // sent from our domain, and a "name" holding a URL would turn it into a
-  // phishing message bearing our signature.
-  const greetingName = name && !URL_LIKE_RE.test(name) ? " " + esc(name.slice(0, 60)) : "";
+  // Names carrying links never get this far (dropped at intake), so echoing
+  // the escaped name cannot put a third party's link under our signature.
+  const greetingName = name ? " " + esc(name.slice(0, 60)) : "";
   const html = `<div dir="rtl" style="font-family:'Cairo',Tahoma,sans-serif;max-width:600px;margin:auto;color:#1e293b;line-height:1.8">
     <h2 style="color:#1e3a8a;margin:0 0 12px">شكرًا لتواصلك مع شركة الفريدة آيس</h2>
     <p>مرحبًا${greetingName}،</p>

@@ -6,9 +6,11 @@ import { onRequestPost } from "../functions/api/quote.js";
 /** Minimal D1 double covering exactly the statements /api/quote issues. */
 function fakeDb() {
   const leads = [];
+  const quota = [];
   const settings = { turnstile_secret: "ts-secret", resend_api_key: "rk" };
   return {
     leads,
+    quota,
     prepare(sql) {
       return {
         bind(...args) {
@@ -22,11 +24,14 @@ function fakeDb() {
                 return {
                   n: leads.filter((l) => l.email.toLowerCase() === args[0].toLowerCase()).length,
                 };
+              if (sql.includes("FROM quote_quota WHERE kind = ?"))
+                return { n: quota.filter((q) => q === args[0]).length };
               if (sql.includes("WHERE ip = ?"))
                 return { n: leads.filter((l) => l.ip === args[0]).length };
               return null;
             },
             async run() {
+              if (sql.startsWith("INSERT INTO quote_quota")) quota.push(args[0]);
               if (sql.startsWith("INSERT INTO leads")) {
                 const [id, createdAt, name, email, phone, subject, payload, ip] = args;
                 leads.push({ id, createdAt, name, email, phone, subject, payload, ip });
@@ -34,6 +39,7 @@ function fakeDb() {
             },
           };
         },
+        async run() {},
         async all() {
           return { results: Object.entries(settings).map(([k, v]) => ({ k, v })) };
         },
@@ -91,14 +97,39 @@ describe("/api/quote", () => {
     assert.deepEqual((await post(body)).recipients, [["info@elfaridaice.com"]]);
   });
 
-  test("a name carrying a link is not echoed in the acknowledgement", async () => {
-    await post({
-      name: "Win http://evil.example",
-      email: "a@example.com",
-      protected: "1",
-      turnstileToken: "valid",
+  test("a submission with a link in the name is dropped silently", async () => {
+    const r = await post({
+      name: "📌 Transfer from Coinbase. NEXT ->> graph.org/Bitcoin-Mining",
+      email: "victim@example.com",
+      phone: "046039021344",
     });
-    assert.doesNotMatch(sent[1].html, /evil/);
+    assert.equal(r.body.success, true);
+    assert.equal(db.leads.length, 0);
+    assert.equal(sent.length, 0);
+  });
+
+  test("unverified intake shares a site-wide hourly budget across IPs", async () => {
+    for (let i = 0; i < 40; i++) db.quota.push("unverified_lead");
+    const r = await post({ name: "late", phone: "0500000000" });
+    assert.equal(r.status, 429);
+    assert.equal(db.leads.length, 0);
+  });
+
+  test("owner mail stops at its hourly budget while leads are still stored", async () => {
+    for (let i = 0; i < 15; i++) db.quota.push("owner_mail_unverified");
+    const r = await post({ name: "buyer", phone: "0500000000" });
+    assert.equal(r.status, 200);
+    assert.equal(db.leads.length, 1);
+    assert.equal(sent.length, 0);
+  });
+
+  test("acknowledgements stop at their hourly budget", async () => {
+    for (let i = 0; i < 30; i++) db.quota.push("confirmation_mail");
+    await post({ name: "Ali", email: "ali@example.com", protected: "1", turnstileToken: "valid" });
+    assert.deepEqual(
+      sent.map((m) => m.to),
+      [["info@elfaridaice.com"]]
+    );
   });
 
   test("a failed Turnstile token is rejected", async () => {

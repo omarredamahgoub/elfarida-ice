@@ -23,6 +23,9 @@
 (function () {
   "use strict";
 
+  /** Global name every widget's `data-error-callback` attribute points at. */
+  var TURNSTILE_ERROR_CALLBACK = "efiTurnstileError";
+
   if (window.__efiConversionKit) return;
   window.__efiConversionKit = true;
 
@@ -1365,38 +1368,32 @@
   /* ─────────────── 5b. Turnstile failure fallback ─────────────── */
 
   /**
-   * Hides the Turnstile widget when it fails to render.
+   * Hides the Turnstile widget only when Turnstile itself reports a failure.
    *
-   * The widget loads from a third-party origin with `async`. When that request
-   * is blocked or times out — a content blocker, a corporate proxy, a bad
-   * mobile connection — Cloudflare paints a red "can't reach the site /
-   * troubleshoot" box directly above the submit button. A buyer who has just
-   * filled in their name and number sees an error on the company's own form
-   * and leaves. The Worker no longer rejects a request that carries no token,
-   * so nothing is lost by removing the broken box: honeypot, payload cap and
-   * per-IP rate limit still apply.
+   * The widget loads from a third-party origin with `async`. When its challenge
+   * cannot run — a content blocker, a corporate proxy, a bad mobile connection
+   * — Cloudflare paints a red "can't reach the site" box directly above the
+   * submit button, and a buyer who has just filled in the form leaves. The
+   * Worker accepts a request without a token, so removing that box loses
+   * nothing.
    *
-   * A widget that renders normally is untouched, and its token is still sent
-   * and still verified.
+   * Failure is taken from Turnstile's own error callback (wired through each
+   * widget's `data-error-callback`), never inferred from the DOM: the widget
+   * renders its iframe inside a closed shadow root, so a DOM probe finds no
+   * iframe even on success — which previously hid every working widget, sent
+   * every submission unverified, and silently disabled the bot check.
+   *
+   * Returning true tells Turnstile the error is handled, so it stops retrying.
    */
   function guardTurnstile() {
-    var boxes = document.querySelectorAll(".cf-turnstile");
-    if (!boxes.length) return;
-
-    var deadline = Date.now() + 7000;
-    var timer = setInterval(function () {
-      var pending = 0;
+    window[TURNSTILE_ERROR_CALLBACK] = function () {
+      var boxes = document.querySelectorAll(".cf-turnstile");
       for (var i = 0; i < boxes.length; i++) {
-        var box = boxes[i];
-        if (box.hidden) continue;
-        var frame = box.querySelector("iframe");
-        // A rendered widget owns an iframe with a measurable height.
-        if (frame && frame.getBoundingClientRect().height > 20) continue;
-        if (Date.now() >= deadline) box.hidden = true;
-        else pending++;
+        var token = boxes[i].querySelector('input[name="cf-turnstile-response"]');
+        if (!token || !token.value) boxes[i].hidden = true;
       }
-      if (!pending || Date.now() >= deadline) clearInterval(timer);
-    }, 500);
+      return true;
+    };
   }
 
   /* ─────────────── 6. post-submission next steps ─────────────── */
