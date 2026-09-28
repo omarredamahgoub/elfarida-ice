@@ -8,12 +8,13 @@
  *
  * Why a script rather than a manual database edit:
  *
- *   - The password is stored as a SHA-256 hash and is not recoverable by
+ *   - The password is stored as a salted PBKDF2 hash (same format the panel
+ *     writes, via functions/admin/_auth-lib.js) and is not recoverable by
  *     design. The only way back in is to set a new one.
  *
- *   - Deleting the credential rows would make /admin/leads fall back to its
- *     one-time setup page, which is open to whoever loads it first. This script
- *     never leaves that window open: it overwrites both rows in a single step.
+ *   - The panel has no web-based setup: this script is the only way to create
+ *     or replace the credentials. It overwrites them in a single step and
+ *     rotates the session-signing secret, revoking every open session.
  *
  *   - The password is typed here and hashed locally. It is never printed, never
  *     written to a file, never passed as a command-line argument (where it would
@@ -24,12 +25,13 @@
  * "elfarida-leads" D1 database (`npx wrangler login`).
  */
 
-import { createHash, randomUUID } from "node:crypto";
+import { randomUUID } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { createInterface } from "node:readline";
 import { writeFileSync, unlinkSync, mkdtempSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
+import { hashPassword, randomHex } from "../functions/admin/_auth-lib.js";
 
 const DB_NAME = "elfarida-leads";
 const MIN_PASSWORD_LENGTH = 8;
@@ -138,7 +140,7 @@ if (confirm !== password) {
   process.exit(1);
 }
 
-const hash = createHash("sha256").update(password).digest("hex");
+const hash = await hashPassword(password);
 
 console.log("\nجارٍ التحديث على قاعدة البيانات الحيّة…");
 
@@ -148,9 +150,10 @@ try {
       "CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT);",
       `INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_user', ${sqlQuote(username)});`,
       `INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ${sqlQuote(hash)});`,
-      // Any session cookie issued under the old password is signed with the old
-      // hash, so it stops validating the moment the hash changes. Clearing the
-      // login-attempt log as well removes any rate-limit block on your own IP.
+      // A fresh signing secret invalidates every session cookie issued before
+      // this reset. Clearing the login-attempt log removes any rate-limit block.
+      `INSERT OR REPLACE INTO settings (k, v) VALUES ('session_secret', ${sqlQuote(randomHex())});`,
+      "CREATE TABLE IF NOT EXISTS admin_login_attempts (ip TEXT NOT NULL, attempted_at TEXT NOT NULL);",
       "DELETE FROM admin_login_attempts;",
     ].join("\n")
   );

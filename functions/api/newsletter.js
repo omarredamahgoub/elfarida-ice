@@ -18,7 +18,7 @@ const MAX_BODY_BYTES = 2000;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX_SUBSCRIPTIONS = 5;
 
-const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+const EMAIL_RE = /^[^\s@<>()[\]\\,;:"']{1,64}@[^\s@<>()[\]\\,;:"']{1,185}\.[A-Za-z]{2,}$/;
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -111,28 +111,41 @@ async function createTable(env) {
   ).run();
 }
 
+/**
+ * Reads the body under a hard byte cap for every content type, then returns a
+ * null-prototype map of string fields, or null for anything malformed.
+ */
 async function parseBody(request) {
+  if (Number(request.headers.get("content-length") || 0) > MAX_BODY_BYTES) return null;
   const ct = (request.headers.get("content-type") || "").toLowerCase();
   try {
+    const raw = await request.arrayBuffer();
+    if (!raw.byteLength || raw.byteLength > MAX_BODY_BYTES) return null;
+    let entries;
     if (ct.includes("application/json")) {
-      const raw = await request.text();
-      if (!raw || raw.length > MAX_BODY_BYTES) return null;
-      return JSON.parse(raw);
+      const obj = JSON.parse(new TextDecoder().decode(raw));
+      if (obj === null || typeof obj !== "object" || Array.isArray(obj)) return null;
+      entries = Object.entries(obj);
+    } else if (ct.includes("application/x-www-form-urlencoded")) {
+      entries = new URLSearchParams(new TextDecoder().decode(raw)).entries();
+    } else if (ct.includes("multipart/form-data")) {
+      entries = (await new Response(raw, { headers: { "content-type": ct } }).formData()).entries();
+    } else {
+      return null;
     }
-    const fd = await request.formData();
-    const obj = {};
-    for (const [k, v] of fd.entries()) obj[k] = typeof v === "string" ? v : "";
-    return obj;
+    const out = Object.create(null);
+    for (const [k, v] of entries) if (typeof v === "string") out[k] = v;
+    return out;
   } catch (_) {
     return null;
   }
 }
 
 function pick(obj, keys) {
-  const lower = {};
-  for (const k in obj) lower[k.toLowerCase()] = obj[k];
+  const lower = new Map();
+  for (const k of Object.keys(obj)) lower.set(k.toLowerCase(), obj[k]);
   for (const k of keys) {
-    const v = lower[k.toLowerCase()];
+    const v = lower.get(k.toLowerCase());
     if (v != null && String(v).trim() !== "") return String(v).trim();
   }
   return "";

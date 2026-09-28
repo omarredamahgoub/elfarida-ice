@@ -95,6 +95,27 @@ const NOT_PUBLIC_EXTENSIONS = [
   ".env",
 ];
 
+/**
+ * _headers applies only to static assets, never to Pages Functions responses,
+ * so /api/* and /admin/* would otherwise ship without any of these. Applying
+ * them here covers every response; existing values are left untouched.
+ */
+const BASELINE_HEADERS = {
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "SAMEORIGIN",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Cross-Origin-Opener-Policy": "same-origin",
+};
+const ADMIN_PREFIX = "/admin/";
+
+function withBaselineHeaders(response) {
+  const out = new Response(response.body, response);
+  for (const [k, v] of Object.entries(BASELINE_HEADERS))
+    if (!out.headers.has(k)) out.headers.set(k, v);
+  return out;
+}
+
 export function isPublicPath(pathname) {
   const p = String(pathname || "").toLowerCase();
   if (NOT_PUBLIC_FILES.has(p)) return false;
@@ -105,14 +126,19 @@ export function isPublicPath(pathname) {
 export async function onRequest(context) {
   const { next, request } = context;
 
-  if (!isPublicPath(new URL(request.url).pathname)) {
+  const { pathname } = new URL(request.url);
+  if (!isPublicPath(pathname)) {
     return new Response("Not Found", {
       status: 404,
       headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
     });
   }
 
-  const response = await next();
+  const response = withBaselineHeaders(await next());
+  if (pathname.toLowerCase().startsWith(ADMIN_PREFIX)) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    response.headers.set("X-Frame-Options", "DENY");
+  }
 
   try {
     const ct = response.headers.get("content-type") || "";

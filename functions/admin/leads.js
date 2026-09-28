@@ -1,7 +1,9 @@
 /**
  * /admin/leads — protected leads viewer (D1-backed auth, in-page form login).
- * No env secrets, no Basic-Auth popup. Session = cookie signed with HMAC keyed
- * by the stored password hash (stateless). First visit = one-time setup.
+ * No env secrets, no Basic-Auth popup. Passwords are stored as salted PBKDF2
+ * (functions/admin/_auth-lib.js); sessions are stateless cookies signed with a
+ * random server-side secret and bound to the current password hash. There is
+ * no web setup: credentials are created locally with `npm run admin:reset`.
  *
  * Updated 2026-07-05:
  *   - Brute-force protection on login (per-IP sliding-window rate limit).
@@ -101,11 +103,22 @@ import {
   SLA_HOURS,
 } from "./_overview-lib.js";
 import { dailyDigest, digestStamp } from "./_digest-lib.js";
+import {
+  hashPassword,
+  verifyPassword,
+  needsRehash,
+  randomHex,
+  safeEqual,
+  createSessionToken,
+  verifySessionToken,
+} from "./_auth-lib.js";
 
 const COOKIE = "efi_admin";
 const MAXAGE = 28800; // 8h
 const MAX_LOGIN_ATTEMPTS = 5;
 const LOGIN_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+// Across ALL addresses: stops a brute force distributed over many IPs.
+const MAX_GLOBAL_LOGIN_FAILURES = 30;
 
 export async function onRequestGet(context) {
   const { request, env } = context;
@@ -125,7 +138,7 @@ export async function onRequestGet(context) {
   }
 
   const cred = await getCred(env);
-  if (!cred) return htmlResp(setupPage());
+  if (!cred) return htmlResp(setupDisabledPage(), 503);
   if (!(await validSession(request, cred))) return htmlResp(loginPage());
 
   if (url.searchParams.get("settings") === "1") {
@@ -533,6 +546,7 @@ function contactsCsv(rows) {
 export async function onRequestPost(context) {
   const { request, env } = context;
   if (!env.DB) return text("D1 binding (DB) missing.", 500);
+  if (!isSameOrigin(request)) return text("طلب مرفوض.", 403);
   await ensure(env);
   const form = await request.formData();
   const action = (form.get("_action") || "").toString();
@@ -581,54 +595,52 @@ export async function onRequestPost(context) {
     }
     const current = (form.get("current_password") || "").toString();
     const next = (form.get("new_password") || "").toString();
-    if (!safeEq(await sha256(current), cred.hash)) {
+    if (!(await verifyPassword(current, cred.hash))) {
       return htmlResp(securityPage("كلمة المرور الحالية غير صحيحة.", true), 401);
     }
     if (!isValidNewPassword(next)) {
       return htmlResp(securityPage("كلمة المرور الجديدة يجب ألا تقل عن 8 أحرف.", true), 422);
     }
-    const newHash = await sha256(next);
+    const newHash = await hashPassword(next);
     await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ?)")
       .bind(newHash)
       .run();
     return redirectWithSession(
-      await makeSession(cred.user, newHash),
+      await makeSession({ ...cred, hash: newHash }),
       "/admin/leads?settings=1&ok=1"
     );
   }
 
-  // ── login / one-time setup ──
-  const user = (form.get("username") || "").toString().trim();
-  const pass = (form.get("password") || "").toString();
+  // ── login ──
+  // There is deliberately no web-based first-time setup: a setup form is open
+  // to whoever reaches it first. Credentials are created only by the owner,
+  // locally, with `npm run admin:reset`.
   const cred = await getCred(env);
-
-  if (!cred) {
-    // One-time setup — not rate-limited (no credentials exist yet to brute-force).
-    const u = user || "admin";
-    if (!isValidNewPassword(pass))
-      return htmlResp(setupPage("كلمة المرور يجب ألا تقل عن 8 أحرف."), 422);
-    const hash = await sha256(pass);
-    await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_user', ?)")
-      .bind(u)
-      .run();
-    await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ?)")
-      .bind(hash)
-      .run();
-    return redirectWithSession(await makeSession(u, hash));
-  }
+  if (!cred) return htmlResp(setupDisabledPage(), 503);
 
   if (await isLoginRateLimited(env, clientIp)) {
     const minutes = Math.ceil(LOGIN_WINDOW_MS / 60000);
     return htmlResp(
-      loginPage(
-        `محاولات دخول كثيرة وفاشلة من هذا العنوان. يرجى الانتظار ${minutes} دقيقة والمحاولة مجددًا.`
-      ),
+      loginPage(`محاولات دخول كثيرة وفاشلة. يرجى الانتظار ${minutes} دقيقة والمحاولة مجددًا.`),
       429
     );
   }
 
-  if (user === cred.user && safeEq(await sha256(pass), cred.hash)) {
-    return redirectWithSession(await makeSession(cred.user, cred.hash));
+  const user = (form.get("username") || "").toString().trim();
+  const pass = (form.get("password") || "").toString();
+  // The password is always verified, even for a wrong username, so response
+  // time does not reveal whether the username exists.
+  const passwordOk = await verifyPassword(pass, cred.hash);
+  if (passwordOk && safeEqual(user, cred.user)) {
+    await clearLoginAttempts(env, clientIp);
+    if (needsRehash(cred.hash)) {
+      const upgraded = await hashPassword(pass);
+      await env.DB.prepare("INSERT OR REPLACE INTO settings (k, v) VALUES ('admin_pwd_hash', ?)")
+        .bind(upgraded)
+        .run();
+      return redirectWithSession(await makeSession({ ...cred, hash: upgraded }));
+    }
+    return redirectWithSession(await makeSession(cred));
   }
   await recordFailedLoginAttempt(env, clientIp);
   return htmlResp(loginPage("اسم المستخدم أو كلمة المرور غير صحيحة."), 401);
@@ -708,29 +720,56 @@ async function ensure(env) {
 }
 async function getCred(env) {
   const { results } = await env.DB.prepare(
-    "SELECT k, v FROM settings WHERE k IN ('admin_user','admin_pwd_hash')"
+    "SELECT k, v FROM settings WHERE k IN ('admin_user','admin_pwd_hash','session_secret')"
   ).all();
   const m = {};
   for (const r of results || []) m[r.k] = r.v;
-  return m.admin_pwd_hash ? { user: m.admin_user || "admin", hash: m.admin_pwd_hash } : null;
+  if (!m.admin_pwd_hash) return null;
+  return {
+    user: m.admin_user || "admin",
+    hash: m.admin_pwd_hash,
+    secret: m.session_secret || (await createSessionSecret(env)),
+  };
 }
-async function makeSession(user, keyHex) {
-  const exp = Date.now() + MAXAGE * 1000;
-  const payload = `${b64u(user)}.${exp}`;
-  return `${payload}.${await hmac(payload, keyHex)}`;
+/**
+ * Creates the session-signing secret on first use. INSERT OR IGNORE plus a
+ * re-read makes concurrent first requests converge on a single value.
+ */
+async function createSessionSecret(env) {
+  await env.DB.prepare("INSERT OR IGNORE INTO settings (k, v) VALUES ('session_secret', ?)")
+    .bind(randomHex())
+    .run();
+  const row = await env.DB.prepare("SELECT v FROM settings WHERE k = 'session_secret'").first();
+  return row.v;
 }
-async function validSession(request, cred) {
+function makeSession(cred) {
+  return createSessionToken({
+    user: cred.user,
+    passwordHash: cred.hash,
+    secret: cred.secret,
+    maxAgeSeconds: MAXAGE,
+    now: Date.now(),
+  });
+}
+function validSession(request, cred) {
   const cookie = (request.headers.get("Cookie") || "")
     .split(/;\s*/)
     .find((c) => c.startsWith(COOKIE + "="));
   if (!cookie) return false;
-  const val = cookie.slice(COOKIE.length + 1);
-  const parts = val.split(".");
-  if (parts.length !== 3) return false;
-  const [ub, exp, sig] = parts;
-  if (Date.now() > Number(exp)) return false;
-  if (ub64(ub) !== cred.user) return false;
-  return safeEq(sig, await hmac(`${ub}.${exp}`, cred.hash));
+  return verifySessionToken(cookie.slice(COOKIE.length + 1), {
+    user: cred.user,
+    passwordHash: cred.hash,
+    secret: cred.secret,
+    now: Date.now(),
+  });
+}
+/**
+ * CSRF defence in depth (the cookie is already SameSite=Strict): a browser
+ * always sends Origin on a cross-site POST, so a present Origin must be ours.
+ */
+function isSameOrigin(request) {
+  const origin = request.headers.get("Origin");
+  return !origin || origin === new URL(request.url).origin;
 }
 function redirectWithSession(session, location = "/admin/leads") {
   return new Response(null, {
@@ -744,46 +783,6 @@ function redirectWithSession(session, location = "/admin/leads") {
 }
 function clearCookie() {
   return `${COOKIE}=; HttpOnly; Secure; SameSite=Strict; Path=/admin; Max-Age=0`;
-}
-async function sha256(s) {
-  return hex(await crypto.subtle.digest("SHA-256", enc(s)));
-}
-async function hmac(msg, keyHex) {
-  const key = await crypto.subtle.importKey(
-    "raw",
-    enc(keyHex),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"]
-  );
-  return hex(await crypto.subtle.sign("HMAC", key, enc(msg)));
-}
-function enc(s) {
-  return new TextEncoder().encode(s);
-}
-function hex(buf) {
-  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-function b64u(s) {
-  return btoa(unescape(encodeURIComponent(s)))
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
-function ub64(s) {
-  try {
-    return decodeURIComponent(escape(atob(s.replace(/-/g, "+").replace(/_/g, "/"))));
-  } catch {
-    return "";
-  }
-}
-function safeEq(a, b) {
-  a = String(a);
-  b = String(b);
-  if (a.length !== b.length) return false;
-  let r = 0;
-  for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return r === 0;
 }
 
 /* ── brute-force protection ──────────────────────────────── */
@@ -803,7 +802,16 @@ async function isLoginRateLimited(env, ip) {
     .bind(ip, cutoffIso)
     .all();
   const timestamps = (results || []).map((r) => r.attempted_at);
-  return isRateLimited(timestamps, now, LOGIN_WINDOW_MS, MAX_LOGIN_ATTEMPTS);
+  if (isRateLimited(timestamps, now, LOGIN_WINDOW_MS, MAX_LOGIN_ATTEMPTS)) return true;
+  const global = await env.DB.prepare(
+    "SELECT COUNT(*) AS n FROM admin_login_attempts WHERE attempted_at > ?"
+  )
+    .bind(cutoffIso)
+    .first();
+  return Boolean(global && global.n >= MAX_GLOBAL_LOGIN_FAILURES);
+}
+async function clearLoginAttempts(env, ip) {
+  await env.DB.prepare("DELETE FROM admin_login_attempts WHERE ip = ?").bind(ip).run();
 }
 async function recordFailedLoginAttempt(env, ip) {
   await env.DB.prepare("INSERT INTO admin_login_attempts (ip, attempted_at) VALUES (?, ?)")
@@ -1031,15 +1039,12 @@ function loginPage(msg) {
   <div style="margin-top:18px"><button type="submit">دخول</button></div></form></div>`
   );
 }
-function setupPage(err) {
+function setupDisabledPage() {
   return SHELL(
     "تهيئة لوحة الطلبات",
-    `<div class="card"><h1>تهيئة لوحة الطلبات</h1>
-  <p class="muted">أوّل زيارة — اختر اسم مستخدم وكلمة مرور (تُخزَّن مُجزّأة).</p>
-  ${err ? `<p class="err">${esc(err)}</p>` : ""}
-  <form method="POST"><label>اسم المستخدم</label><input name="username" value="admin" autocomplete="username">
-  <label>كلمة المرور (8 أحرف على الأقل)</label><input name="password" type="password" autocomplete="new-password" required>
-  <div style="margin-top:18px"><button type="submit">حفظ وتفعيل</button></div></form></div>`
+    `<div class="card"><h1>اللوحة غير مهيّأة</h1>
+  <p class="muted">لم تُضبط بيانات الدخول بعد. لأسباب أمنية لا تتم التهيئة من المتصفح؛ يضبطها المالك من جهازه بالأمر:</p>
+  <p><code>npm run admin:reset</code></p></div>`
   );
 }
 

@@ -69,8 +69,6 @@ const WORKER_GLOBALS = {
   TextDecoder: "readonly",
   btoa: "readonly",
   atob: "readonly",
-  escape: "readonly",
-  unescape: "readonly",
   console: "readonly",
 };
 
@@ -144,7 +142,13 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
-      globals: { console: "readonly", process: "readonly", URL: "readonly" },
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        URL: "readonly",
+        Request: "readonly",
+        Response: "readonly",
+      },
     },
     rules: {
       "no-unused-vars": UNUSED_VARS_RULE,

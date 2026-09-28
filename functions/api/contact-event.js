@@ -35,6 +35,8 @@ export async function onRequestPost(context) {
 
   if (!env.DB) return done();
 
+  if (Number(request.headers.get("content-length") || 0) > MAX_BODY_BYTES) return done();
+
   let data;
   try {
     const raw = await request.text();
