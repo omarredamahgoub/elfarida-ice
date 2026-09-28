@@ -833,9 +833,7 @@ function htmlResp(h, s = 200) {
 function csv(rows) {
   const cols = ["created_at", "status", "name", "email", "phone", "subject", "ip", "notes"];
   const out = [cols.join(",")]
-    .concat(
-      rows.map((r) => cols.map((c) => `"${String(r[c] ?? "").replace(/"/g, '""')}"`).join(","))
-    )
+    .concat(rows.map((r) => cols.map((c) => csvCell(r[c])).join(",")))
     .join("\n");
   return new Response("﻿" + out, {
     headers: {
@@ -844,6 +842,18 @@ function csv(rows) {
       "Cache-Control": "no-store",
     },
   });
+}
+
+/**
+ * Quotes one CSV cell and neutralises spreadsheet formula injection: a value a
+ * visitor typed into the quote form that starts with = + - @ or a control
+ * character would otherwise execute as a formula when the export is opened in
+ * Excel or Google Sheets.
+ */
+function csvCell(value) {
+  const s = String(value ?? "");
+  const safe = /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+  return `"${safe.replace(/"/g, '""')}"`;
 }
 
 const SHELL = (

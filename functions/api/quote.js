@@ -1,19 +1,23 @@
 /**
  * POST /api/quote — self-hosted quote/contact intake on Cloudflare.
- * Replaces the external web3forms dependency.
  *
  * Pipeline (each stage degrades gracefully if its binding/secret is absent):
- *   1. Parse JSON or form-encoded body.
+ *   1. Read the raw body under a hard byte cap, then parse JSON, urlencoded or
+ *      multipart into a flat, bounded map of string fields.
  *   2. Honeypot ("botcheck") → silently accept & drop.
- *   3. Cloudflare Turnstile verification (if TURNSTILE_SECRET set).
- *   4. Minimal validation.
- *   5. Persist to D1 (binding: DB) — the durable source of truth.
- *   6. Notify by email via Resend (if RESEND_API_KEY set).
+ *   3. Cloudflare Turnstile verification for protected forms.
+ *   4. Validation.
+ *   5. Per-IP rate limit.
+ *   6. Persist to D1 (binding: DB) — the durable source of truth.
+ *   7. Notify the owner by email via Resend.
+ *   8. Customer auto-acknowledgement — ONLY for a request that passed Turnstile,
+ *      at most once per address per day. This endpoint must never become a
+ *      relay that sends mail from elfaridaice.com to arbitrary addresses.
  *
- * Bindings / secrets (Pages → Settings):
+ * Bindings / secrets (Pages → Settings, or the D1 `settings` table):
  *   DB                D1 database "elfarida-leads"
- *   TURNSTILE_SECRET  Cloudflare Turnstile secret key   (optional)
- *   RESEND_API_KEY    Resend API key                    (optional)
+ *   TURNSTILE_SECRET  Cloudflare Turnstile secret key
+ *   RESEND_API_KEY    Resend API key
  *   LEAD_TO           recipient (default info@elfaridaice.com)
  *   LEAD_FROM         sender   (default no-reply@elfaridaice.com)
  */
@@ -21,52 +25,64 @@
 const DEFAULT_TO = "info@elfaridaice.com";
 const DEFAULT_FROM = "Elfarida Ice <no-reply@elfaridaice.com>";
 
+const MAX_BODY_BYTES = 16384;
+const MAX_FIELDS = 40;
+const MAX_KEY_LENGTH = 64;
+const MAX_VALUE_LENGTH = 4000;
+const MAX_SUBJECT_LENGTH = 150;
+const MAX_NAME_LENGTH = 100;
+const MAX_EMAIL_LENGTH = 254;
+
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX_PER_IP = 5;
+const CONFIRMATION_WINDOW_MS = 24 * 60 * 60 * 1000;
+
+const HONEYPOT_KEY = "botcheck";
+const TURNSTILE_KEYS = ["cf-turnstile-response", "turnstileToken"];
+const INTERNAL_KEYS = new Set([
+  HONEYPOT_KEY,
+  "access_key",
+  "contact_ref",
+  "protected",
+  ...TURNSTILE_KEYS,
+]);
+
 /** Same shape /api/contact-event stores, so the two tables join on equal terms. */
 const REF_RE = /^EFI-[0-9A-Z]{4}$/;
-
-function validRef(value) {
-  const s = String(value || "").toUpperCase();
-  return REF_RE.test(s) ? s : "";
-}
+const EMAIL_RE = /^[^\s@<>()[\]\\,;:"']+@[^\s@<>()[\]\\,;:"']+\.[A-Za-z]{2,}$/;
+const URL_LIKE_RE = /(https?:|www\.|:\/\/|[a-z0-9-]+\.[a-z]{2,}\/)/i;
+// eslint-disable-next-line no-control-regex
+const CONTROL_CHARS_RE = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
+const LINE_BREAKS_RE = /[\r\n\u2028\u2029]+/g;
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  const data = await parseBody(request);
-  if (data === null) return json({ success: false, message: "طلب غير صالح." }, 400);
+  const parsed = await parseBody(request);
+  if (parsed.error === "too_large")
+    return json({ success: false, message: "حجم الطلب كبير جدًّا." }, 413);
+  if (parsed.error) return json({ success: false, message: "طلب غير صالح." }, 400);
+  const data = parsed.data;
 
-  // Anti-abuse: reject oversized payloads before any processing.
-  try {
-    if (JSON.stringify(data).length > 8000) {
-      return json({ success: false, message: "حجم الطلب كبير جدًّا." }, 413);
-    }
-  } catch (_) {
-    /* non-serializable → treat as bad request */
-  }
+  // Honeypot — pretend success so bots do not retry.
+  if (data[HONEYPOT_KEY]) return json({ success: true, message: "تمّ الاستلام." });
 
-  // 2) Honeypot — pretend success so bots do not retry.
-  if (data.botcheck) return json({ success: true, message: "تمّ الاستلام." });
+  const clientIp = request.headers.get("CF-Connecting-IP") || "";
 
-  // 3) Turnstile — enforced ONLY for the protected quote forms, which send
-  //    protected="1". The newsletter and any other path skip it (they rely on
-  //    the honeypot + per-IP rate limit). Secret lives in D1 (env not injected).
-  //
-  //    Degradation rule: a MISSING token is never a rejection. The widget is
-  //    loaded from a third-party origin with `async`, so it is absent whenever
-  //    the visitor is on a slow mobile connection, behind a corporate proxy, or
-  //    running a content blocker — exactly the buyers this site exists for.
-  //    Rejecting them turned a completed form into a dead end with no recovery
-  //    path. A token that is PRESENT but fails verification is still rejected:
-  //    that is a forged or replayed challenge, not a loading failure. Requests
-  //    with no token remain covered by the honeypot, the payload-size cap and
-  //    the per-IP rate limit below.
-  if (String(data.protected) === "1") {
-    const token = data["cf-turnstile-response"] || data.turnstileToken || "";
+  // Turnstile. A MISSING token is never a rejection: the widget loads from a
+  // third-party origin and is absent on slow links or behind content blockers,
+  // and those are real buyers. A token that is PRESENT but fails verification
+  // is a forged or replayed challenge and is rejected. An unverified request
+  // is still stored and forwarded to the owner, but earns no outbound mail to
+  // the address it supplied.
+  let humanVerified = false;
+  if (data.protected === "1") {
+    const token = TURNSTILE_KEYS.map((k) => data[k]).find(Boolean) || "";
     if (token) {
-      const tsSecret = (await getSetting(env.DB, "turnstile_secret")) || env.TURNSTILE_SECRET || "";
-      if (tsSecret) {
-        const ok = await verifyTurnstile(tsSecret, token, request.headers.get("CF-Connecting-IP"));
-        if (!ok)
+      const secret = (await getSetting(env.DB, "turnstile_secret")) || env.TURNSTILE_SECRET || "";
+      if (secret) {
+        humanVerified = await verifyTurnstile(secret, token, clientIp);
+        if (!humanVerified)
           return json(
             {
               success: false,
@@ -78,111 +94,53 @@ export async function onRequestPost(context) {
     }
   }
 
-  // 4) Minimal validation.
-  const name = pick(data, ["name", "Name", "الاسم", "full_name"]);
+  const name = singleLine(pick(data, ["name", "Name", "الاسم", "full_name"])).slice(
+    0,
+    MAX_NAME_LENGTH
+  );
   const email = pick(data, ["email", "Email", "البريد", "البريد_الإلكتروني"]);
-  const phone = pick(data, [
-    "phone",
-    "Phone",
-    "Mobile",
-    "mobile",
-    "الهاتف",
-    "الجوال",
-    "رقم_الجوال",
-  ]);
+  const phone = singleLine(
+    pick(data, ["phone", "Phone", "Mobile", "mobile", "الهاتف", "الجوال", "رقم_الجوال"])
+  );
+  const subject = singleLine(pick(data, ["subject", "الموضوع", "service", "Service"])).slice(
+    0,
+    MAX_SUBJECT_LENGTH
+  );
+
   if (!name && !phone && !email)
     return json({ success: false, message: "يرجى إدخال بيانات التواصل." }, 422);
-  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
+  if (email && !isValidEmail(email))
     return json({ success: false, message: "صيغة البريد غير صحيحة." }, 422);
 
-  // 4.5) Lightweight per-IP rate limit (anti-flood) backed by D1.
-  // Real visitors almost never submit >5 times in 10 minutes; bots flooding
-  // the endpoint do. Fails open if the check itself errors.
-  const clientIp = request.headers.get("CF-Connecting-IP") || "";
-  if (env.DB && clientIp) {
-    try {
-      const since = new Date(Date.now() - 10 * 60 * 1000).toISOString();
-      const recent = await env.DB.prepare(
-        "SELECT COUNT(*) AS n FROM leads WHERE ip = ? AND created_at > ?"
-      )
-        .bind(clientIp, since)
-        .first();
-      if (recent && recent.n >= 5) {
-        return json(
-          { success: false, message: "لقد أرسلت عدّة طلبات للتوّ. يرجى المحاولة بعد قليل." },
-          429
-        );
-      }
-    } catch (_) {
-      /* fail open — never block a genuine user on a check error */
-    }
-  }
+  if (await isRateLimited(env.DB, clientIp))
+    return json(
+      { success: false, message: "لقد أرسلت عدّة طلبات للتوّ. يرجى المحاولة بعد قليل." },
+      429
+    );
 
-  // 5) Persist (durable). Never block the user on a storage hiccup.
-  let stored = false;
-  if (env.DB) {
-    try {
-      const id = crypto.randomUUID();
-      await env.DB.prepare(
-        "INSERT INTO leads (id, created_at, name, email, phone, subject, payload, ip, ua) VALUES (?,?,?,?,?,?,?,?,?)"
-      )
-        .bind(
-          id,
-          new Date().toISOString(),
-          name,
-          email,
-          phone,
-          pick(data, ["subject", "الموضوع", "service", "Service"]),
-          JSON.stringify(stripNoise(data)),
-          request.headers.get("CF-Connecting-IP") || "",
-          request.headers.get("user-agent") || ""
-        )
-        .run();
-      stored = true;
+  const payload = publicFields(data);
+  const stored = await storeLead(env.DB, {
+    name,
+    email,
+    phone,
+    subject,
+    payload,
+    ref: validRef(data.contact_ref),
+    ip: clientIp,
+    ua: (request.headers.get("user-agent") || "").slice(0, 300),
+  });
 
-      // The page-view reference, which also travels inside any WhatsApp message
-      // sent from the same view — it is what lets the admin panel say that one
-      // visitor both messaged and submitted.
-      //
-      // Written separately and best-effort on purpose: `leads.ref` is added by
-      // migration 0004, and folding it into the INSERT would mean a deploy that
-      // lands before the migration silently drops every form submission. A
-      // missing attribution is a gap in a report; a dropped lead is lost money.
-      const ref = validRef(pick(data, ["contact_ref"]));
-      if (ref) {
-        try {
-          await env.DB.prepare("UPDATE leads SET ref = ? WHERE id = ?").bind(ref, id).run();
-        } catch (_) {
-          /* column not migrated yet — the lead itself is already safe */
-        }
-      }
-    } catch (_) {
-      /* fall through; email may still deliver */
-    }
-  }
-
-  // 6) Notify (best-effort). Config lives in D1 (env secrets are not injected
-  // into Functions on this project), with env vars as fallback.
-  let emailed = false;
   const cfg = await loadMailConfig(env);
+  let emailed = false;
   if (cfg.apiKey && cfg.to.length) {
-    try {
-      emailed = await sendEmail(cfg, { name, email, data });
-    } catch (_) {
-      /* ignore */
-    }
+    emailed = await sendOwnerNotification(cfg, { name, email, subject, payload });
   }
 
-  // 6b) Customer auto-acknowledgement (best-effort, never blocks the response).
-  if (cfg.apiKey && email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    try {
-      await sendCustomerConfirmation(cfg, { name, email });
-    } catch (_) {
-      /* ignore */
-    }
+  if (cfg.apiKey && email && humanVerified && !(await confirmationRecentlySent(env.DB, email))) {
+    await sendCustomerConfirmation(cfg, { name, email });
   }
 
-  if (!stored && !emailed) {
+  if (!stored && !emailed)
     return json(
       {
         success: false,
@@ -190,7 +148,6 @@ export async function onRequestPost(context) {
       },
       502
     );
-  }
   return json({ success: true, message: "تمّ استلام طلبك بنجاح، وسنتواصل معك في أقرب وقت." });
 }
 
@@ -198,63 +155,163 @@ export async function onRequestOptions() {
   return new Response(null, { status: 204, headers: { Allow: "POST, OPTIONS" } });
 }
 
-/* ── helpers ───────────────────────────────────────────────── */
+/* ── body parsing ──────────────────────────────────────────── */
 
 async function parseBody(request) {
+  const declared = Number(request.headers.get("content-length") || 0);
+  if (declared > MAX_BODY_BYTES) return { error: "too_large" };
+
+  let raw;
+  try {
+    raw = await request.arrayBuffer();
+  } catch (_) {
+    return { error: "invalid" };
+  }
+  if (raw.byteLength > MAX_BODY_BYTES) return { error: "too_large" };
+
   const ct = (request.headers.get("content-type") || "").toLowerCase();
   try {
-    if (ct.includes("application/json")) return await request.json();
-    const fd = await request.formData();
-    const obj = {};
-    for (const [k, v] of fd.entries()) obj[k] = typeof v === "string" ? v : "(file)";
-    return obj;
+    if (ct.includes("application/json")) {
+      const obj = JSON.parse(new TextDecoder().decode(raw));
+      if (obj === null || typeof obj !== "object" || Array.isArray(obj))
+        return { error: "invalid" };
+      return normalizeFields(Object.entries(obj));
+    }
+    if (ct.includes("application/x-www-form-urlencoded")) {
+      return normalizeFields(new URLSearchParams(new TextDecoder().decode(raw)).entries());
+    }
+    if (ct.includes("multipart/form-data")) {
+      const fd = await new Response(raw, { headers: { "content-type": ct } }).formData();
+      return normalizeFields(fd.entries());
+    }
   } catch (_) {
-    return null;
+    return { error: "invalid" };
   }
+  return { error: "invalid" };
+}
+
+/**
+ * Flattens untrusted input into a null-prototype map of bounded strings.
+ * Non-scalar values (objects, arrays, files) are discarded rather than
+ * stringified, so nothing structured reaches storage or the mail template.
+ */
+function normalizeFields(entries) {
+  const out = Object.create(null);
+  let count = 0;
+  for (const [rawKey, rawValue] of entries) {
+    if (
+      typeof rawValue !== "string" &&
+      typeof rawValue !== "number" &&
+      typeof rawValue !== "boolean"
+    )
+      continue;
+    const key = String(rawKey).replace(CONTROL_CHARS_RE, "").trim().slice(0, MAX_KEY_LENGTH);
+    if (!key || key in out) continue;
+    if (++count > MAX_FIELDS) return { error: "too_large" };
+    out[key] = String(rawValue).replace(CONTROL_CHARS_RE, "").trim().slice(0, MAX_VALUE_LENGTH);
+  }
+  return { data: out };
 }
 
 function pick(obj, keys) {
-  // Case-insensitive lookup: form field names vary in casing across pages
-  // (e.g. the homepage hero form sends "Name"/"Phone" while contact.html
-  // sends "الاسم"/"الجوال"), so match keys regardless of case.
-  const lower = {};
-  for (const k in obj) lower[k.toLowerCase()] = obj[k];
+  // Case-insensitive lookup: form field names vary in casing across pages.
+  const lower = new Map();
+  for (const k of Object.keys(obj)) lower.set(k.toLowerCase(), obj[k]);
   for (const k of keys) {
-    const v = lower[k.toLowerCase()];
-    if (v != null && String(v).trim() !== "") return String(v).trim();
+    const v = lower.get(k.toLowerCase());
+    if (v) return v;
   }
   return "";
 }
 
-function stripNoise(data) {
+function publicFields(data) {
   const out = {};
-  for (const [k, v] of Object.entries(data)) {
-    // contact_ref is promoted to its own column; keeping a copy in the payload
-    // blob would give the panel two places to read the same value from.
-    if (
-      k === "botcheck" ||
-      k === "cf-turnstile-response" ||
-      k === "access_key" ||
-      k === "contact_ref"
-    )
-      continue;
-    out[k] = v;
-  }
+  for (const [k, v] of Object.entries(data)) if (!INTERNAL_KEYS.has(k)) out[k] = v;
   return out;
 }
 
-async function verifyTurnstile(secret, token, ip) {
-  if (!token) return false;
-  const body = new FormData();
-  body.append("secret", secret);
-  body.append("response", token);
-  if (ip) body.append("remoteip", ip);
-  const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    body,
-  });
-  const out = await resp.json().catch(() => ({ success: false }));
-  return !!out.success;
+function singleLine(value) {
+  return String(value).replace(LINE_BREAKS_RE, " ").trim();
+}
+
+function isValidEmail(value) {
+  return value.length <= MAX_EMAIL_LENGTH && EMAIL_RE.test(value);
+}
+
+function validRef(value) {
+  const s = String(value || "").toUpperCase();
+  return REF_RE.test(s) ? s : "";
+}
+
+/* ── storage ───────────────────────────────────────────────── */
+
+async function isRateLimited(db, ip) {
+  if (!db || !ip) return false;
+  try {
+    const since = new Date(Date.now() - RATE_WINDOW_MS).toISOString();
+    const row = await db
+      .prepare("SELECT COUNT(*) AS n FROM leads WHERE ip = ? AND created_at > ?")
+      .bind(ip, since)
+      .first();
+    return Boolean(row && row.n >= RATE_MAX_PER_IP);
+  } catch (_) {
+    return false;
+  }
+}
+
+async function storeLead(db, lead) {
+  if (!db) return false;
+  const id = crypto.randomUUID();
+  try {
+    await db
+      .prepare(
+        "INSERT INTO leads (id, created_at, name, email, phone, subject, payload, ip, ua) VALUES (?,?,?,?,?,?,?,?,?)"
+      )
+      .bind(
+        id,
+        new Date().toISOString(),
+        lead.name,
+        lead.email,
+        lead.phone,
+        lead.subject,
+        JSON.stringify(lead.payload),
+        lead.ip,
+        lead.ua
+      )
+      .run();
+  } catch (_) {
+    return false;
+  }
+  // Written separately and best-effort: `leads.ref` comes from migration 0004,
+  // and folding it into the INSERT would drop every lead on a deploy that
+  // lands before the migration.
+  if (lead.ref) {
+    try {
+      await db.prepare("UPDATE leads SET ref = ? WHERE id = ?").bind(lead.ref, id).run();
+    } catch (_) {
+      /* column not migrated yet — the lead itself is already safe */
+    }
+  }
+  return true;
+}
+
+/**
+ * True when this address already has an earlier lead within the window, i.e.
+ * it was already acknowledged. Runs after the current lead is stored, hence
+ * `> 1`. Fails closed: on a query error no acknowledgement is sent.
+ */
+async function confirmationRecentlySent(db, email) {
+  if (!db) return true;
+  try {
+    const since = new Date(Date.now() - CONFIRMATION_WINDOW_MS).toISOString();
+    const row = await db
+      .prepare("SELECT COUNT(*) AS n FROM leads WHERE lower(email) = lower(?) AND created_at > ?")
+      .bind(email, since)
+      .first();
+    return !row || row.n > 1;
+  } catch (_) {
+    return true;
+  }
 }
 
 async function getSetting(db, key) {
@@ -267,8 +324,27 @@ async function getSetting(db, key) {
   }
 }
 
+/* ── mail ──────────────────────────────────────────────────── */
+
+async function verifyTurnstile(secret, token, ip) {
+  const body = new FormData();
+  body.append("secret", secret);
+  body.append("response", token);
+  if (ip) body.append("remoteip", ip);
+  try {
+    const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body,
+    });
+    const out = await resp.json();
+    return out.success === true;
+  } catch (_) {
+    return false;
+  }
+}
+
 async function loadMailConfig(env) {
-  let row = {};
+  const row = {};
   if (env.DB) {
     try {
       const res = await env.DB.prepare(
@@ -290,57 +366,63 @@ async function loadMailConfig(env) {
   };
 }
 
-async function sendEmail(cfg, { name, email, data }) {
-  const rows = Object.entries(stripNoise(data))
+async function sendOwnerNotification(cfg, { name, email, subject, payload }) {
+  const rows = Object.entries(payload)
     .map(
       ([k, v]) =>
-        `<tr><td style="padding:6px 10px;border:1px solid #e2e8f0;font-weight:700">${esc(k)}</td><td style="padding:6px 10px;border:1px solid #e2e8f0">${esc(v)}</td></tr>`
+        `<tr><td style="padding:6px 10px;border:1px solid #e2e8f0;font-weight:700">${esc(k)}</td><td style="padding:6px 10px;border:1px solid #e2e8f0;white-space:pre-wrap">${esc(v)}</td></tr>`
     )
     .join("");
   const html = `<div dir="rtl" style="font-family:sans-serif;max-width:640px;margin:auto">
     <h2 style="color:#1e3a8a">طلب عرض سعر / تواصل جديد</h2>
     <table style="border-collapse:collapse;width:100%">${rows}</table>
     <hr/><small style="color:#64748b">elfaridaice.com — نموذج الموقع</small></div>`;
-  const payload = {
+  const message = {
     from: cfg.from,
     to: cfg.to,
-    subject:
-      pick(data, ["subject", "الموضوع", "service", "Service"]) ||
-      `طلب جديد${name ? " - " + name : ""}`,
+    subject: subject || `طلب جديد${name ? " - " + name : ""}`,
     html,
   };
-  if (email && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) payload.reply_to = email;
-  const resp = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${cfg.apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  return resp.ok;
+  if (email) message.reply_to = email;
+  return sendMail(cfg.apiKey, message);
 }
 
 async function sendCustomerConfirmation(cfg, { name, email }) {
+  // A supplied name is echoed only when it cannot carry a link: the mail is
+  // sent from our domain, and a "name" holding a URL would turn it into a
+  // phishing message bearing our signature.
+  const greetingName = name && !URL_LIKE_RE.test(name) ? " " + esc(name.slice(0, 60)) : "";
   const html = `<div dir="rtl" style="font-family:'Cairo',Tahoma,sans-serif;max-width:600px;margin:auto;color:#1e293b;line-height:1.8">
     <h2 style="color:#1e3a8a;margin:0 0 12px">شكرًا لتواصلك مع شركة الفريدة آيس</h2>
-    <p>مرحبًا${name ? " " + esc(name) : ""}،</p>
+    <p>مرحبًا${greetingName}،</p>
     <p>تسلّمنا طلبك بنجاح، وسيتواصل معك فريقنا في أقرب وقت ممكن لتزويدك بعرض السعر والتفاصيل المطلوبة.</p>
     <p>لأيّ استفسار عاجل تواصل معنا على <a href="mailto:info@elfaridaice.com" style="color:#1e3a8a">info@elfaridaice.com</a> أو هاتفيًّا على ‎+966&nbsp;59&nbsp;836&nbsp;6214‎.</p>
     <hr style="border:none;border-top:1px solid #e2e8f0;margin:16px 0"/>
     <small style="color:#64748b">شركة الفريدة آيس للهندسة والتبريد الصناعيّ — الدمّام، المملكة العربيّة السعوديّة<br/>elfaridaice.com</small>
   </div>`;
-  const payload = {
+  return sendMail(cfg.apiKey, {
     from: cfg.from,
     to: [email],
     subject: "تمّ استلام طلبك — شركة الفريدة آيس",
     html,
     reply_to: "info@elfaridaice.com",
-  };
-  const resp = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${cfg.apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
   });
-  return resp.ok;
 }
+
+async function sendMail(apiKey, message) {
+  try {
+    const resp = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify(message),
+    });
+    return resp.ok;
+  } catch (_) {
+    return false;
+  }
+}
+
+/* ── responses ─────────────────────────────────────────────── */
 
 function json(obj, status = 200) {
   return new Response(JSON.stringify(obj), {
@@ -354,5 +436,6 @@ function esc(s) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
